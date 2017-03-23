@@ -1,0 +1,43 @@
+{% extends 'SosBundle::base.html.twig' %}
+
+{% block body %}
+
+	<div id="classification" class="col-xs-12 sos-form">
+		<h3 class="title-heading">Quelle est votre classification ?</h3>
+		
+
+		{% if data.match_employe.nb == 0 %}
+			<p>Personne ne correspond à vos critères. </p>
+		{% elseif data.match_employe.nb > 1 %}
+			<p>{{ data.match_employe.nb }} personnes correspondent à vos critères. </p>
+		{% elseif data.match_employe.nb == 1 %}
+			<p>{{ data.match_employe.nb }}personne correspond à vos critères.</p>
+		{% endif %}
+		<br>
+
+		<ul class="col-lg-8 col-lg-offset-2">
+			{% for etablissement in etablissements %}
+				<li class="col-sm-6 col-md-3 text-center">
+					<form method="post">
+						<button>
+							<img src="{{ asset('bundles/sos/global/img/rating/' ~ etablissement.id )}}-stars.png" alt="" class="img-responsive form-img">
+							<p>{{ etablissement.libelle | raw }}</p>
+						</button>
+						<input type="hidden" value="{{ etablissement.id }}" name="classification">
+
+						<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+						<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+						<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+
+						<input type="hidden" name="form" value="classification">
+					</form>
+				</li>
+			{% endfor %}
+		</ul>
+		<div class="clearfix spacer"></div>
+	    <form action="{{ path('search')}}" method="post">
+			<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
+		</form>
+	</div>
+
+{% endblock %}

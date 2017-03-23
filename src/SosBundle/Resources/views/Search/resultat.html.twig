@@ -1,0 +1,45 @@
+{% extends 'SosBundle::base.html.twig' %}
+
+{% block body %}
+
+	<div id="poste_hotellerie" class="col-xs-12 sos-form">
+		<h3 class="title-heading">Personnes répondants à vos critères de recherche :</h3>
+		<br>
+		<div class="col-sm-8 col-sm-offset-2">
+			
+				{% for employe in data.employes %}
+					<div class="container col-sm-6">
+					  <div class="panel result-panel">
+					    <div class="panel-heading result-panel-heading">{{ employe.prenom ~ ' ' ~ employe.nom }}</div>
+					    <div class="panel-body">
+					    	<p>{{ employe.email }}</p>
+					    	<p>{{ employe.telephone }}</p>
+					    </div>
+					  </div>
+					</div>
+				{% endfor %}
+
+		</div>
+
+   	<div class="clearfix spacer"></div>
+
+    <form action="{{ path('search')}}" method="post">
+		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+		<input type="hidden" name="classification" value="{{ data.classification }}">
+		<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
+		<input type="hidden" name="contrat" value="{{ data.contrat }}">
+		<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
+		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
+		{# Si on est dans la restauration #}
+		{% if data.service_activite is defined %}
+			<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
+		{% endif %}
+		<input type="hidden" name="form" value="duree">
+
+		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
+	</form>
+</div>
+
+{% endblock %}

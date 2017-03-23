@@ -1,0 +1,65 @@
+{% extends 'SosBundle::base.html.twig' %}
+
+{% block body %}
+
+	<div id="poste_hotellerie" class="col-xs-12 sos-form">
+		<h3 class="title-heading">Quel type de contrat ?</h3>
+
+		{% if data.match_employe.nb == 0 %}
+			<p>Personne ne correspond à vos critères. </p>
+		{% elseif data.match_employe.nb > 1 %}
+			<p>{{ data.match_employe.nb }} personnes correspondent à vos critères. </p>
+		{% elseif data.match_employe.nb == 1 %}
+			<p>{{ data.match_employe.nb }}personne correspond à vos critères.</p>
+		{% endif %}
+		<br>
+
+		<ul class="col-lg-8 col-lg-offset-2">
+
+		{% for contrat in contrats %}
+
+		        <li class="col-sm-2 col-md-2 text-center">
+		            <form method="post">
+		                <button>
+		                    <img src="{{ asset('bundles/sos/global/img/' ~ contrat.id ~ '-stars.png') }}" alt="">
+		                    <p>{{ contrat.libelle }}</p>
+		                </button>
+		                <input type="hidden" value="{{ contrat.id }}" name="contrat">
+						<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+						<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+						<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+						<input type="hidden" name="classification" value="{{ data.classification }}">
+						<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
+						{# Si on est dans la restauration #}
+						{% if data.service_activite is defined %}
+							<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
+						{% endif %}
+						<input type="hidden" name="poste" value="{{ data.poste }}">
+						<input type="hidden" name="form" value="contrat">
+		            </form>
+		        </li>
+
+		{% endfor %}
+
+		</ul>
+	
+
+   	<div class="clearfix spacer"></div>
+
+    <form action="{{ path('search')}}" method="post">
+		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+		<input type="hidden" name="classification" value="{{ data.classification }}">
+		<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
+		{% if data.service_activite is defined %}
+			<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
+			<input type="hidden" name="form" value="service">
+		{% else %}
+			<input type="hidden" name="form" value="secteur">
+		{% endif %}
+		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
+	</form>
+</div>
+
+{% endblock %}

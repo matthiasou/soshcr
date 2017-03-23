@@ -1,0 +1,646 @@
+html{height:100vh;}
+html, body{margin:0;font-family: "Stellar";height: 100vh}
+body{background-color: #fdfdfd!important}
+a{text-decoration: none!important; color:inherit!important;}
+@font-face {
+  font-family: "Crunchy";
+  src: url("../../fonts/Crunchy.ttf");
+  font-weight: 300
+}
+@font-face {
+  font-family: "Stellar";
+  src: url("../../fonts/Stellar.otf");
+  font-weight: 300
+}
+
+/*******************************************************************
+  		                LAYOUT
+*******************************************************************/
+.form-img{width:150px;margin: 0 auto;}
+/***********************************************
+ 					HEADER 					
+/***********************************************/
+ header{clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 100%);-webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 100%);background-color:#394076;background-repeat:no-repeat;background-size:cover;height: 295px;position: relative;}
+ header.header-small{clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 100%);-webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 100%);background-color:#394076;background-repeat:no-repeat;background-size:cover; height: 200px;background-position: center -50px;position: relative;}
+ header.header-small .title{width: 300px}
+ header #login{font-family: "Stellar";text-decoration: underline!important;color: #fff!important;float: right;margin:20px;text-transform: uppercase;display: block;width: 100%;text-align: right;}
+ header .title{margin: 20px auto;width: 500px}
+ header #logo{width:100%;display:block;margin-top: 20px;text-align: left}
+ header #logo img{width: 60px}
+ header #login-icon{font-size: 30px}
+#barre-jaune-header{height:100px;margin-top:-75px;clip-path: polygon(0% 85%, 100% 25%, 100% 40%, 0% 100%);-webkit-clip-path: polygon(0% 85%, 100% 25%, 100% 40%, 0% 100%);background-color:#FFE44B;width: 100% }
+
+#login-overlay{display: none}
+
+@media only screen 
+and (min-device-width: 768px) and (max-device-width: 1024px) 
+and (orientation: portrait);{
+
+   header.header-small, #accueil header{height: 200px;background-position: initial;}
+   #barre-jaune-header {height: 45px;margin-top: -30px;clip-path: polygon(0% 85%, 100% 15%, 100% 30%, 0% 100%);-webkit-clip-path: polygon(0% 85%, 100% 15%, 100% 30%, 0% 100%);}
+   header.header-small .title, #accueil header .title{margin:20px auto;width:300px;}
+   header #login{margin: 20px 20px}
+   header #logo{margin: 20px 0px 0px}
+
+}
+
+@media only screen 
+and (min-device-width: 768px) and (max-device-width: 1024px) 
+and (orientation: landscape) {
+    #barre-jaune-header {height: 100px;clip-path: polygon(0% 90%, 100% 30%, 100% 40%, 0% 100%);-webkit-clip-path: polygon(0% 90%, 100% 30%, 100% 40%, 0% 100%);}
+     header.header-small, #accueil header{height: 200px;background-position: initial;}
+     header.header-small .title, #accueil header .title{margin:20px auto;width:300px;}
+     header #login{margin: 20px auto}
+     header #logo{margin: 20px auto}
+     footer{    -webkit-clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%)!important;clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%)!important;}
+}
+
+@media only screen 
+and (max-width : 767px) {
+  #barre-jaune-header {height: 45px;margin-top: -30px;clip-path: polygon(0% 85%, 100% 15%, 100% 30%, 0% 100%);-webkit-clip-path: polygon(0% 85%, 100% 15%, 100% 30%, 0% 100%);}
+   header.header-small, #accueil header{height: 110px; background-position: initial;}
+   header.header-small .title, #accueil header .title{width:220px;margin: 0 auto}
+   header #login{margin: 20px 0px 0px}
+   header #logo{margin: 20px 0px 0px}
+   footer{    -webkit-clip-path: polygon(0% 70%, 100% 55%, 100% 100%, 0% 100%)!important;clip-path: polygon(0% 70%, 100% 55%, 100% 100%, 0% 100%)!important;}
+
+}
+
+/***********************************************
+ 					CONTAINER 	ACCUEIL				
+/***********************************************/
+ .container{text-align: center;}
+ .container #find-btn{line-height: 50px;width: 250px;display: block;border-radius: 30px;background-color: #fee359;background-image: url(../img/loupe.png);background-repeat: no-repeat;background-position: center right;background-size: 50px;border: none;font-family: "stellar";color: #394173;margin: 0 auto;font-size: 40px;border-right: 10px solid #FEE459;padding: 15px 50px 15px 25px;text-decoration: none;position: absolute;bottom: 60px;height: 70px;left: 0;right: 0;}
+ .container #container-btn{background-image: url(../img/people.png);display: block;margin: 100px auto 0px;position: relative;height: 225px;background-position: center -15px;background-size: 225px;background-repeat: no-repeat;}
+ .container #text-btn{font-family: "Crunchy";position: absolute;z-index: 1;bottom: 0;left: 0;right: 0;font-size: 70px;margin: 0;letter-spacing: 5px;color: #394173;}
+ .container #find-btn:hover{opacity: 0.7}
+
+@media only screen 
+and (min-device-width: 768px) and (max-device-width: 1024px)
+and (orientation: portrait) {
+
+  #accueil .container #container-btn{background-size: 205px!important;background-position: center -5px!important;margin:200px auto;}
+  #accueil .container #find-btn{width: 200px!important;font-size: 30px!important;background-size: 40px!important}
+  #accueil .container #text-btn{bottom: 20px!important;font-size: 50px!important}
+
+}
+
+@media only screen 
+and (min-device-width: 768px) and (max-device-width: 1024px) 
+and (orientation: landscape) {
+
+  #accueil .container #container-btn{background-size: 205px!important;background-position: center -5px!important;margin:140px auto;}
+  #accueil .container #find-btn{width: 200px!important;font-size: 30px!important;background-size: 40px!important}
+  #accueil .container #text-btn{bottom: 20px!important;font-size: 50px!important}
+
+}
+
+@media only screen 
+and (max-width : 767px) {
+  
+  #accueil .container #container-btn{background-size: 205px!important;background-position: center -5px!important;margin:100px auto;}
+  #accueil .container #find-btn{width: 200px!important;font-size: 30px!important;background-size: 40px!important}
+  #accueil .container #text-btn{bottom: 20px!important;font-size: 50px!important}
+
+}
+
+/***********************************************
+ 					FOOTER 					
+/***********************************************/
+footer{text-align: center;position: absolute;bottom: 0;background-color: #9CA1B8;width: 100%;background-repeat: no-repeat;background-size: cover;height: 150px;text-align: center}
+footer ul{margin: 65px auto 0px;transform:rotate(-2.5deg);font-size: 20px}
+footer ul li{display: inline-block;list-style-type: none;margin:0 35px;color: #fff;font-family: "Stellar";}
+
+@media only screen 
+and (max-width : 767px) {
+    #barre-jaune-footer{position:absolute;bottom:40px;height:40px;margin-top:-75px;clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);-webkit-clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);background-color:#FFE44B;width: 0% }
+    footer{-webkit-clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);}
+   footer ul{margin: 95px auto 0px;font-size: 15px;padding: 0}
+   footer ul li{margin:0 9px;}
+
+}
+
+@media only screen 
+and (min-device-width: 768px) and (max-device-width: 1024px) 
+and (orientation: portrait) {
+    #barre-jaune-footer{position:absolute;bottom:40px;height:65px;margin-top:-75px;clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);-webkit-clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);background-color:#FFE44B;width: 0% }
+
+    footer{-webkit-clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);}
+    footer ul{margin: 95px auto 0px;font-size: 20px;padding: 0}
+    footer ul li{margin:0 9px;}
+
+}
+
+@media only screen 
+and (min-device-width: 768px) and (max-device-width: 1024px) 
+and (orientation: landscape) {
+    #barre-jaune-footer{position:absolute;bottom:40px;height:65px;margin-top:-75px;clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);-webkit-clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);background-color:#FFE44B;width: 0% }
+
+  footer{-webkit-clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);}
+  footer ul{margin: 85px auto 0px;font-size: 20px;padding: 0}
+  footer ul li{margin:0 25px;}
+
+}
+
+@media only screen 
+and (min-device-width: 1025px){
+    #barre-jaune-footer{position:absolute;bottom:35px;height:110px;margin-top:-75px;clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);-webkit-clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);background-color:#FFE44B;width: 0% }
+
+  footer{-webkit-clip-path: polygon(0% 70%, 100% 10%, 100% 100%, 0% 100%);clip-path: polygon(0% 70%, 100% 10%, 100% 100%, 0% 100%);}
+}
+
+
+/***********************************************
+ 					FORM 					
+/***********************************************/
+.back{background: none;border: none;}
+.form{text-align: center;margin-top: 110px}
+.title-heading{color: #394076;font-family: "Stellar";text-align: center;margin: 30px auto 5px}
+#seach-btn{background: none;margin-left: -3px}
+.hdpi.pac-logo:after{background:none!important;display: none} /* hide google powered */
+.result-panel-heading{background-color: #394076;color:#fff;}
+.result-panel{background-color: #eee}
+
+@media only screen 
+and (max-width : 767px) {
+
+  .form{margin-top: 150px}
+
+}
+
+@media only screen 
+and (min-device-width: 768px) and (max-device-width: 1024px) 
+and (orientation: portrait){
+
+  .form{margin-top: 150px}
+
+}
+
+@media only screen 
+and (min-device-width: 768px) and (max-device-width: 1024px) 
+and (orientation: landscape){
+
+  .form{margin-top: 100px}
+
+}
+
+
+
+/***********************************************
+ 					VILLE 					
+/***********************************************/
+#country_list_id{display:none;list-style-type: none;text-align: left;border: 1px solid #CCC;border-radius: 2px;padding: 0px;width: calc(100% - 40px);width: -webkit-calc(100% - 40px);width: -moz-calc(100% - 40px);width: -o-calc(100% - 40px);}
+#country_list_id li{padding: 3px 10px}
+#country_list_id li:hover{background-color:#eee;}
+
+@media only screen 
+and (max-width : 767px) {
+  
+  .title-heading{font-size: 20px;text-align: center;}  
+
+}
+
+/***********************************************
+          FORM           
+/***********************************************/
+.sos-form{margin-top:30px;}
+.sos-form ul li{list-style-type: none}
+.sos-form ul li p{font-family: "Stellar";font-size: 15px}
+.sos-form ul li button{background:none;border: none}
+
+
+
+
+
+
+/* ANIMATIONS */
+@media only screen 
+and (max-width : 767px) {
+
+  .step-1{ animation-duration: 3s; animation-name: stepOne; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepOne{
+    from{
+      -webkit-clip-path: polygon(0% 85%, 100% 85%, 100% 85%, 0% 97%);
+      width: 0%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 75%, 100% 70%, 100% 85%, 0% 97%);
+      width: 10%;
+    }
+  }
+
+  .step-2{ animation-duration: 3s; animation-name: stepTwo; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepTwo{
+    from{
+      -webkit-clip-path: polygon(0% 75%, 100% 70%, 100% 85%, 0% 97%);
+      width: 10%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 75%, 100% 65%, 100% 85%, 0% 97%);
+      width: 20%;
+      
+    }
+  }
+
+  .step-3{ animation-duration: 3s; animation-name: stepThree; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepThree{
+    from{
+      -webkit-clip-path: polygon(0% 75%, 100% 65%, 100% 85%, 0% 97%);
+      width: 20%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 75%, 100% 60%, 100% 85%, 0% 97%);
+      width: 30%;
+      
+    }
+  }
+
+  .step-4{ animation-duration: 3s; animation-name: stepFour; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepFour{
+    from{
+      -webkit-clip-path: polygon(0% 75%, 100% 60%, 100% 85%, 0% 97%);
+      width: 30%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 75%, 100% 52%, 100% 85%, 0% 97%);
+      width: 40%;
+      
+    }
+  }
+
+  .step-5{ animation-duration: 3s; animation-name: stepFive; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepFive{
+    from{
+      -webkit-clip-path: polygon(0% 75%, 100% 52%, 100% 85%, 0% 97%);
+      width: 40%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 75%, 100% 47%, 100% 85%, 0% 97%);
+      width: 50%;
+      
+    }
+  }
+
+  .step-6{ animation-duration: 3s; animation-name: stepSix; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepSix{
+    from{
+      -webkit-clip-path: polygon(0% 75%, 100% 47%, 100% 85%, 0% 97%);
+      width: 50%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 75%, 100% 42%, 100% 85%, 0% 97%);
+      width: 60%;
+      
+    }
+  }
+
+  .step-7{ animation-duration: 3s; animation-name: stepSeven; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepSeven{
+    from{
+      -webkit-clip-path: polygon(0% 75%, 100% 42%, 100% 85%, 0% 97%);
+      width: 60%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 75%, 100% 36%, 100% 85%, 0% 97%);
+      width: 70%;
+      
+    }
+  }
+
+  .step-8{ animation-duration: 3s; animation-name: stepHeight; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepHeight{
+    from{
+      -webkit-clip-path: polygon(0% 75%, 100% 36%, 100% 85%, 0% 97%);
+      width: 70%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 75%, 100% 30%, 100% 85%, 0% 97%);
+      width: 80%;
+      
+    }
+  }
+
+  .step-9{ animation-duration: 3s; animation-name: stepNine; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepNine{
+    from{
+      -webkit-clip-path: polygon(0% 75%, 100% 30%, 100% 85%, 0% 97%);
+      width: 80%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 75%, 100% 25%, 100% 85%, 0% 97%);
+      width: 90%;
+      
+    }
+  }
+
+  .step-10{ animation-duration: 3s; animation-name: stepTen; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepTen{
+    from{
+      -webkit-clip-path: polygon(0% 75%, 100% 25%, 100% 85%, 0% 97%);
+      width: 90%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 75%, 100% 20%, 100% 85%, 0% 97%);
+      width: 100%;
+      
+    }
+  }
+}
+
+
+
+@media only screen 
+and (min-device-width: 768px) and (max-device-width: 1024px) 
+and (orientation: portrait){
+
+  .step-1{ animation-duration: 3s; animation-name: stepOne; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepOne{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 85%, 100% 95%, 0% 97%);
+      width: 0%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 78%, 100% 85%, 0% 97%);
+      width: 10%;
+    }
+  }
+
+  .step-2{ animation-duration: 3s; animation-name: stepTwo; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepTwo{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 78%, 100% 85%, 0% 97%);
+      width: 10%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 70%, 100% 85%, 0% 97%);
+      width: 20%;
+      
+    }
+  }
+
+  .step-3{ animation-duration: 3s; animation-name: stepThree; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepThree{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 70%, 100% 85%, 0% 97%);
+      width: 20%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 63%, 100% 85%, 0% 97%);
+      width: 30%;
+      
+    }
+  }
+
+  .step-4{ animation-duration: 3s; animation-name: stepFour; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepFour{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 63%, 100% 85%, 0% 97%);
+      width: 30%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 57%, 100% 85%, 0% 97%);
+      width: 40%;
+      
+    }
+  }
+
+  .step-5{ animation-duration: 3s; animation-name: stepFive; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepFive{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 57%, 100% 85%, 0% 97%);
+      width: 40%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 48%, 100% 85%, 0% 97%);
+      width: 50%;
+      
+    }
+  }
+
+  .step-6{ animation-duration: 3s; animation-name: stepSix; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepSix{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 48%, 100% 85%, 0% 97%);
+      width: 50%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 40%, 100% 85%, 0% 97%);
+      width: 60%;
+      
+    }
+  }
+
+  .step-7{ animation-duration: 3s; animation-name: stepSeven; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepSeven{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 40%, 100% 85%, 0% 97%);
+      width: 60%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 33%, 100% 85%, 0% 97%);
+      width: 70%;
+      
+    }
+  }
+
+  .step-8{ animation-duration: 3s; animation-name: stepHeight; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepHeight{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 33%, 100% 85%, 0% 97%);
+      width: 70%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 24%, 100% 85%, 0% 97%);
+      width: 80%;
+      
+    }
+  }
+
+  .step-9{ animation-duration: 3s; animation-name: stepNine; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepNine{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 24%, 100% 85%, 0% 97%);
+      width: 80%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 18%, 100% 85%, 0% 97%);
+      width: 90%;
+      
+    }
+  }
+
+  .step-10{ animation-duration: 3s; animation-name: stepTen; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepTen{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 18%, 100% 85%, 0% 97%);
+      width: 90%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 11%, 100% 85%, 0% 97%);
+      width: 100%;
+      
+    }
+  }
+}
+
+@media only screen 
+and (min-width : 1024px) {
+
+  .step-1{ animation-duration: 3s; animation-name: stepOne; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepOne{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 85%, 100% 95%, 0% 97%);
+      width: 0%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 76%, 100% 85%, 0% 97%);
+      width: 10%;
+    }
+  }
+
+  .step-2{ animation-duration: 3s; animation-name: stepTwo; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepTwo{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 76%, 100% 85%, 0% 97%);
+      width: 10%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 68%, 100% 75%, 0% 97%);
+      width: 20%;
+      
+    }
+  }
+
+  .step-3{ animation-duration: 3s; animation-name: stepThree; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepThree{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 68%, 100% 85%, 0% 97%);
+      width: 20%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 60%, 100% 85%, 0% 97%);
+      width: 30%;
+      
+    }
+  }
+
+  .step-4{ animation-duration: 3s; animation-name: stepFour; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepFour{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 60%, 100% 85%, 0% 97%);
+      width: 30%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 52%, 100% 85%, 0% 97%);
+      width: 40%;
+      
+    }
+  }
+
+  .step-5{ animation-duration: 3s; animation-name: stepFive; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepFive{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 52%, 100% 85%, 0% 97%);
+      width: 40%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 42%, 100% 85%, 0% 97%);
+      width: 50%;
+    }
+  }
+
+  .step-6{ animation-duration: 3s; animation-name: stepSix; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepSix{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 42%, 100% 85%, 0% 97%);
+      width: 50%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 35%, 100% 85%, 0% 97%);
+      width: 60%;
+      
+    }
+  }
+
+  .step-7{ animation-duration: 3s; animation-name: stepSeven; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepSeven{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 35%, 100% 85%, 0% 97%);
+      width: 60%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 27%, 100% 85%, 0% 97%);
+      width: 70%;
+      
+    }
+  }
+
+  .step-8{ animation-duration: 3s; animation-name: stepHeight; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepHeight{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 27%, 100% 85%, 0% 97%);
+      width: 70%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 18%, 100% 85%, 0% 97%);
+      width: 80%;
+      
+    }
+  }
+
+  .step-9{ animation-duration: 3s; animation-name: stepNine; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepNine{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 18%, 100% 85%, 0% 97%);
+      width: 80%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 10%, 100% 85%, 0% 97%);
+      width: 90%;
+      
+    }
+  }
+
+  .step-10{ animation-duration: 3s; animation-name: stepTen; -webkit-animation-fill-mode: forwards;}
+
+  @keyframes stepTen{
+    from{
+      -webkit-clip-path: polygon(0% 84%, 100% 10%, 100% 85%, 0% 97%);
+      width: 90%;
+    }
+    to{
+      -webkit-clip-path: polygon(0% 84%, 100% 0%, 100% 85%, 0% 97%);
+      width: 100%;
+      
+    }
+  }
+}

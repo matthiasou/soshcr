@@ -1,0 +1,5 @@
+services:
+   sos.matching:
+       class: SosBundle\Service\Matching
+       arguments: ["@doctrine.orm.entity_manager"]
+
