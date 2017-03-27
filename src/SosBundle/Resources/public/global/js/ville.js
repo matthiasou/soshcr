@@ -6,10 +6,9 @@ $(document).ready(function(){
     // Au changement de ville on get la Lat & Lnt
     $('#ville').on('change', function(){ 
         var Geocoder = new google.maps.Geocoder();
-        var address = document.getElementById('ville').value;
+        var address = encode_utf8(document.getElementById('ville').value);
 
         Geocoder.geocode({ 'address': address }, function (results, status) {
-
             if (status == google.maps.GeocoderStatus.OK) {
                 var latitude = results[0].geometry.location.lat();
                 var longitude = results[0].geometry.location.lng();
@@ -29,3 +28,9 @@ function initialize() {
     var autocomplete = new google.maps.places.Autocomplete(input, options);
 
 }
+
+function encode_utf8(s) { 
+
+ return unescape(encodeURIComponent(s)); 
+
+} 
