@@ -23,7 +23,6 @@ $(document).ready(function(){
 
 function initialize() {
     var options = {
-      types: ['(cities)'],
       componentRestrictions: {country: "fr"}
      };
     var input = document.getElementById('ville');

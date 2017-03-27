@@ -31,23 +31,42 @@ class Matching {
 
         $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(v.latitude))*COS(RADIANS(v.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(v.latitude))))";
 
-        $query = "SELECT u.id
-                    FROM utilisateur u
-                    JOIN adresse a
-                    ON u.adresse_id = a.id
-                    JOIN ville v
-                    ON a.ville_id = v.id
-                    JOIN user_critere uc
-                    ON u.id = uc.user_id
-                    JOIN poste_recherche p
-                    ON uc.poste_id = p.id
-                    WHERE ".$formule." < u.rayon_emploi
-                    AND p.secteur_id = ".$data['secteur_activite']."
-                    AND p.id = ".$data['poste']."           
-                    AND uc.contrat_id = ".$data['contrat']."
-                    AND uc.type_contrat_id = ".$data['contrat_duree']."             
-                    AND u.cursus_scolaire_id = ".$data['cursus_scolaire']."             
-                    AND u.niveau_anglais_id = ".$data['niveau_anglais'];    
+        if ($data['cursus_scolaire'] == 5) {
+            $query = "SELECT u.id
+                        FROM utilisateur u
+                        JOIN adresse a
+                        ON u.adresse_id = a.id
+                        JOIN ville v
+                        ON a.ville_id = v.id
+                        JOIN user_critere uc
+                        ON u.id = uc.user_id
+                        JOIN poste_recherche p
+                        ON uc.poste_id = p.id
+                        WHERE ".$formule." < u.rayon_emploi
+                        AND p.secteur_id = ".$data['secteur_activite']."
+                        AND p.id = ".$data['poste']."           
+                        AND uc.contrat_id = ".$data['contrat']."
+                        AND uc.type_contrat_id = ".$data['contrat_duree']."             
+                        AND u.niveau_anglais_id = ".$data['niveau_anglais'];   
+        }else{
+            $query = "SELECT u.id
+                        FROM utilisateur u
+                        JOIN adresse a
+                        ON u.adresse_id = a.id
+                        JOIN ville v
+                        ON a.ville_id = v.id
+                        JOIN user_critere uc
+                        ON u.id = uc.user_id
+                        JOIN poste_recherche p
+                        ON uc.poste_id = p.id
+                        WHERE ".$formule." < u.rayon_emploi
+                        AND p.secteur_id = ".$data['secteur_activite']."
+                        AND p.id = ".$data['poste']."           
+                        AND uc.contrat_id = ".$data['contrat']."
+                        AND uc.type_contrat_id = ".$data['contrat_duree']."             
+                        AND u.cursus_scolaire_id = ".$data['cursus_scolaire']."             
+                        AND u.niveau_anglais_id = ".$data['niveau_anglais'];   
+        } 
         
 
         $stmt = $this->entityManager->getConnection()->prepare($query);
@@ -245,87 +264,178 @@ class Matching {
         }
 
         if ($form == "cursus") {
-            if (isset($data['service_activite'])) {
-                $query = "SELECT COUNT(*) as nb
-                    FROM utilisateur u
-                    JOIN adresse a
-                    ON u.adresse_id = a.id
-                    JOIN ville v
-                    ON a.ville_id = v.id
-                    JOIN user_critere uc
-                    ON u.id = uc.user_id
-                    JOIN poste_recherche p
-                    ON uc.poste_id = p.id
-                    WHERE ".$formule." < u.rayon_emploi
-                    AND uc.etablissement_id = ".$data['classification']."
-                    AND p.secteur_id = ".$data['secteur_activite']."
-                    AND p.service_id = ".$data['service_activite']."
-                    AND p.id = ".$data['poste']."           
-                    AND uc.contrat_id = ".$data['contrat']."            
-                    AND uc.type_contrat_id = ".$data['contrat_duree']."             
-                    AND u.cursus_scolaire_id = ".$data['cursus_scolaire'];              
+
+            // Si c'est "tout cursus"
+            if ($data['cursus_scolaire'] == 5) {
+
+                if (isset($data['service_activite'])) {
+                    $query = "SELECT COUNT(*) as nb
+                        FROM utilisateur u
+                        JOIN adresse a
+                        ON u.adresse_id = a.id
+                        JOIN ville v
+                        ON a.ville_id = v.id
+                        JOIN user_critere uc
+                        ON u.id = uc.user_id
+                        JOIN poste_recherche p
+                        ON uc.poste_id = p.id
+                        WHERE ".$formule." < u.rayon_emploi
+                        AND uc.etablissement_id = ".$data['classification']."
+                        AND p.secteur_id = ".$data['secteur_activite']."
+                        AND p.service_id = ".$data['service_activite']."
+                        AND p.id = ".$data['poste']."           
+                        AND uc.contrat_id = ".$data['contrat']."            
+                        AND uc.type_contrat_id = ".$data['contrat_duree'];             
+
+                }else{
+                    $query = "SELECT COUNT(*) as nb
+                        FROM utilisateur u
+                        JOIN adresse a
+                        ON u.adresse_id = a.id
+                        JOIN ville v
+                        ON a.ville_id = v.id
+                        JOIN user_critere uc
+                        ON u.id = uc.user_id
+                        JOIN poste_recherche p
+                        ON uc.poste_id = p.id
+                        WHERE ".$formule." < u.rayon_emploi
+                        AND uc.etablissement_id = ".$data['classification']."
+                        AND p.secteur_id = ".$data['secteur_activite']."
+                        AND p.id = ".$data['poste']."           
+                        AND uc.contrat_id = ".$data['contrat']."
+                        AND uc.type_contrat_id = ".$data['contrat_duree']; 
+                }
+
             }else{
-                $query = "SELECT COUNT(*) as nb
-                    FROM utilisateur u
-                    JOIN adresse a
-                    ON u.adresse_id = a.id
-                    JOIN ville v
-                    ON a.ville_id = v.id
-                    JOIN user_critere uc
-                    ON u.id = uc.user_id
-                    JOIN poste_recherche p
-                    ON uc.poste_id = p.id
-                    WHERE ".$formule." < u.rayon_emploi
-                    AND uc.etablissement_id = ".$data['classification']."
-                    AND p.secteur_id = ".$data['secteur_activite']."
-                    AND p.id = ".$data['poste']."           
-                    AND uc.contrat_id = ".$data['contrat']."
-                    AND uc.type_contrat_id = ".$data['contrat_duree']."             
-                    AND u.cursus_scolaire_id = ".$data['cursus_scolaire'];  
+
+                if (isset($data['service_activite'])) {
+                    $query = "SELECT COUNT(*) as nb
+                        FROM utilisateur u
+                        JOIN adresse a
+                        ON u.adresse_id = a.id
+                        JOIN ville v
+                        ON a.ville_id = v.id
+                        JOIN user_critere uc
+                        ON u.id = uc.user_id
+                        JOIN poste_recherche p
+                        ON uc.poste_id = p.id
+                        WHERE ".$formule." < u.rayon_emploi
+                        AND uc.etablissement_id = ".$data['classification']."
+                        AND p.secteur_id = ".$data['secteur_activite']."
+                        AND p.service_id = ".$data['service_activite']."
+                        AND p.id = ".$data['poste']."           
+                        AND uc.contrat_id = ".$data['contrat']."            
+                        AND uc.type_contrat_id = ".$data['contrat_duree']."             
+                        AND u.cursus_scolaire_id = ".$data['cursus_scolaire'];              
+                }else{
+                    $query = "SELECT COUNT(*) as nb
+                        FROM utilisateur u
+                        JOIN adresse a
+                        ON u.adresse_id = a.id
+                        JOIN ville v
+                        ON a.ville_id = v.id
+                        JOIN user_critere uc
+                        ON u.id = uc.user_id
+                        JOIN poste_recherche p
+                        ON uc.poste_id = p.id
+                        WHERE ".$formule." < u.rayon_emploi
+                        AND uc.etablissement_id = ".$data['classification']."
+                        AND p.secteur_id = ".$data['secteur_activite']."
+                        AND p.id = ".$data['poste']."           
+                        AND uc.contrat_id = ".$data['contrat']."
+                        AND uc.type_contrat_id = ".$data['contrat_duree']."             
+                        AND u.cursus_scolaire_id = ".$data['cursus_scolaire'];  
+                }
             }
 
         }
 
         if ($form == "anglais") {
-            if (isset($data['service_activite'])) {
-                $query = "SELECT COUNT(*) as nb
-                    FROM utilisateur u
-                    JOIN adresse a
-                    ON u.adresse_id = a.id
-                    JOIN ville v
-                    ON a.ville_id = v.id
-                    JOIN user_critere uc
-                    ON u.id = uc.user_id
-                    JOIN poste_recherche p
-                    ON uc.poste_id = p.id
-                    WHERE ".$formule." < u.rayon_emploi
-                    AND uc.etablissement_id = ".$data['classification']."
-                    AND p.secteur_id = ".$data['secteur_activite']."
-                    AND p.service_id = ".$data['service_activite']."
-                    AND p.id = ".$data['poste']."           
-                    AND uc.contrat_id = ".$data['contrat']."            
-                    AND uc.type_contrat_id = ".$data['contrat_duree']."             
-                    AND u.cursus_scolaire_id = ".$data['cursus_scolaire']."             
-                    AND u.niveau_anglais_id = ".$data['niveau_anglais'];            
+            // Si c'est "tout cursus"
+            if ($data['cursus_scolaire'] == 5) {
+
+                if (isset($data['service_activite'])) {
+                    $query = "SELECT COUNT(*) as nb
+                        FROM utilisateur u
+                        JOIN adresse a
+                        ON u.adresse_id = a.id
+                        JOIN ville v
+                        ON a.ville_id = v.id
+                        JOIN user_critere uc
+                        ON u.id = uc.user_id
+                        JOIN poste_recherche p
+                        ON uc.poste_id = p.id
+                        WHERE ".$formule." < u.rayon_emploi
+                        AND uc.etablissement_id = ".$data['classification']."
+                        AND p.secteur_id = ".$data['secteur_activite']."
+                        AND p.service_id = ".$data['service_activite']."
+                        AND p.id = ".$data['poste']."           
+                        AND uc.contrat_id = ".$data['contrat']."            
+                        AND uc.type_contrat_id = ".$data['contrat_duree']."             
+                        AND u.niveau_anglais_id = ".$data['niveau_anglais'];            
+                }else{
+                    $query = "SELECT COUNT(*) as nb
+                        FROM utilisateur u
+                        JOIN adresse a
+                        ON u.adresse_id = a.id
+                        JOIN ville v
+                        ON a.ville_id = v.id
+                        JOIN user_critere uc
+                        ON u.id = uc.user_id
+                        JOIN poste_recherche p
+                        ON uc.poste_id = p.id
+                        WHERE ".$formule." < u.rayon_emploi
+                        AND uc.etablissement_id = ".$data['classification']."
+                        AND p.secteur_id = ".$data['secteur_activite']."
+                        AND p.id = ".$data['poste']."           
+                        AND uc.contrat_id = ".$data['contrat']."
+                        AND uc.type_contrat_id = ".$data['contrat_duree']."             
+                        AND u.niveau_anglais_id = ".$data['niveau_anglais'];    
+                }
+
             }else{
-                $query = "SELECT COUNT(*) as nb
-                    FROM utilisateur u
-                    JOIN adresse a
-                    ON u.adresse_id = a.id
-                    JOIN ville v
-                    ON a.ville_id = v.id
-                    JOIN user_critere uc
-                    ON u.id = uc.user_id
-                    JOIN poste_recherche p
-                    ON uc.poste_id = p.id
-                    WHERE ".$formule." < u.rayon_emploi
-                    AND uc.etablissement_id = ".$data['classification']."
-                    AND p.secteur_id = ".$data['secteur_activite']."
-                    AND p.id = ".$data['poste']."           
-                    AND uc.contrat_id = ".$data['contrat']."
-                    AND uc.type_contrat_id = ".$data['contrat_duree']."             
-                    AND u.cursus_scolaire_id = ".$data['cursus_scolaire']."             
-                    AND u.niveau_anglais_id = ".$data['niveau_anglais'];    
+
+                if (isset($data['service_activite'])) {
+                    $query = "SELECT COUNT(*) as nb
+                        FROM utilisateur u
+                        JOIN adresse a
+                        ON u.adresse_id = a.id
+                        JOIN ville v
+                        ON a.ville_id = v.id
+                        JOIN user_critere uc
+                        ON u.id = uc.user_id
+                        JOIN poste_recherche p
+                        ON uc.poste_id = p.id
+                        WHERE ".$formule." < u.rayon_emploi
+                        AND uc.etablissement_id = ".$data['classification']."
+                        AND p.secteur_id = ".$data['secteur_activite']."
+                        AND p.service_id = ".$data['service_activite']."
+                        AND p.id = ".$data['poste']."           
+                        AND uc.contrat_id = ".$data['contrat']."            
+                        AND uc.type_contrat_id = ".$data['contrat_duree']."             
+                        AND u.cursus_scolaire_id = ".$data['cursus_scolaire']."             
+                        AND u.niveau_anglais_id = ".$data['niveau_anglais'];            
+                }else{
+                    $query = "SELECT COUNT(*) as nb
+                        FROM utilisateur u
+                        JOIN adresse a
+                        ON u.adresse_id = a.id
+                        JOIN ville v
+                        ON a.ville_id = v.id
+                        JOIN user_critere uc
+                        ON u.id = uc.user_id
+                        JOIN poste_recherche p
+                        ON uc.poste_id = p.id
+                        WHERE ".$formule." < u.rayon_emploi
+                        AND uc.etablissement_id = ".$data['classification']."
+                        AND p.secteur_id = ".$data['secteur_activite']."
+                        AND p.id = ".$data['poste']."           
+                        AND uc.contrat_id = ".$data['contrat']."
+                        AND uc.type_contrat_id = ".$data['contrat_duree']."             
+                        AND u.cursus_scolaire_id = ".$data['cursus_scolaire']."             
+                        AND u.niveau_anglais_id = ".$data['niveau_anglais'];    
+                }
+                
             }
 
         }
