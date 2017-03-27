@@ -18,10 +18,10 @@
 
 		{% for contrat in contrats %}
 
-		        <li class="col-sm-2 col-md-2 text-center">
+		        <li class="col-sm-6 col-md-2 text-center">
 		            <form method="post">
 		                <button>
-		                    <img src="{{ asset('bundles/sos/global/img/' ~ contrat.id ~ '-stars.png') }}" alt="">
+							<img src="{{ asset('bundles/sos/global/img/contrat/' ~ contrat.id ~ '.png') }} " alt="" class="img-responsive form-img">
 		                    <p>{{ contrat.libelle }}</p>
 		                </button>
 		                <input type="hidden" value="{{ contrat.id }}" name="contrat">
