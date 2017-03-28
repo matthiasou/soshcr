@@ -39,24 +39,9 @@ class DefaultController extends Controller
 
 	        // Si google ne trouve pas les coordonnées de la ville écrite on la cherche dans la BDD
     		if ($data['ville']['latitude'] == "" || $data['ville']['longitude'] == "") {
-    			
-    			$qb = $em->createQueryBuilder();
-
-    			$result = $qb->select('v')
-                  ->from('SosBundle:Ville','v')
-                  ->where('v.libelle LIKE :libelle')
-                  ->setParameter('libelle', $data['ville']['libelle'])
-                  ->getQuery()
-                  ->getOneOrNullResult();
-		     
-                if ($result == null) {
-                	return $this->render('SosBundle:Search:ville.html.twig', array('error' => 'La ville ne fait pas partie de notre base de donnée.'));
-                }else{
-                	$data['ville']['libelle'] = $result->getLibelle();
-                	$data['ville']['latitude'] = $result->getLatitude();
-                	$data['ville']['longitude'] = $result->getLongitude();
-                }
-
+            
+            	return $this->render('SosBundle:Search:ville.html.twig', array('error' => 'La ville ne fait pas partie de notre base de donnée.'));
+            
     		}
 
 	        $repo = $em->getRepository("SosBundle:Etablissement");

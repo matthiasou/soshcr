@@ -20,6 +20,13 @@ $(document).ready(function(){
 
 });
 
+
+$(document).keypress(function(e) {
+    if(e.which == 13) {
+        e.preventDefault();
+    }
+});
+
 function initialize() {
     var options = {
       componentRestrictions: {country: "fr"}
@@ -34,3 +41,4 @@ function encode_utf8(s) {
  return unescape(encodeURIComponent(s)); 
 
 } 
+

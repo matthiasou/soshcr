@@ -34,7 +34,7 @@ class Matching {
 
         if (isset($data['ville'])) {
             // Recherche de l'employé
-            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(v.latitude))*COS(RADIANS(v.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(v.latitude))))";
+            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(a.latitude))*COS(RADIANS(a.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(a.latitude))))";
             $ville = "WHERE ".$formule." < u.rayon_emploi";
         }
 
@@ -97,8 +97,6 @@ class Matching {
             FROM utilisateur u
             JOIN adresse a
             ON u.adresse_id = a.id
-            JOIN ville v
-            ON a.ville_id = v.id
             JOIN user_critere uc
             ON u.id = uc.user_id ".
             $secteur_join." ".
@@ -138,6 +136,7 @@ class Matching {
 
     public function getNumberOfEmploye($data, $form){
 
+
         $secteur_join = "";
         $service_join = "";
         $poste_recherche_join = "";
@@ -159,7 +158,7 @@ class Matching {
 
         if (isset($data['ville'])) {
             // Recherche de l'employé
-            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(v.latitude))*COS(RADIANS(v.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(v.latitude))))";
+            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(a.latitude))*COS(RADIANS(a.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(a.latitude))))";
             $ville = "WHERE ".$formule." < u.rayon_emploi";
         }
 
@@ -217,13 +216,10 @@ class Matching {
             $niveau_anglais =  "AND an.classement >= ".$data['niveau_anglais'];
         }
 
-
         $query = "SELECT COUNT(*) as nb
             FROM utilisateur u
             JOIN adresse a
             ON u.adresse_id = a.id
-            JOIN ville v
-            ON a.ville_id = v.id
             JOIN user_critere uc
             ON u.id = uc.user_id ".
             $secteur_join." ".
@@ -244,7 +240,6 @@ class Matching {
             $experience_minimum." ".
             $cursus_scolaire." ".
             $niveau_anglais;
-
 
 
         $stmt = $this->entityManager->getConnection()->prepare($query);
