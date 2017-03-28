@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use SosBundle\Entity\Etablissement;
 use SosBundle\Entity\Secteur;
 use SosBundle\Service\Matching;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class DefaultController extends Controller
 {
@@ -417,6 +418,14 @@ class DefaultController extends Controller
             }
 
 			$data['employes'] = $this->get('sos.matching')->getEmploye($data);
+            
+            foreach ($data['employes']  as $employee){
+                $dateNaisssance = $employee->getDateNaissance();
+                $today = new \DateTime('NOW');
+                  $age= $today->diff($dateNaisssance);
+    
+                  $employee->age=(int)($age->days/365);
+              }
 
 			dump($data);		
     		return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data));	
