@@ -37,6 +37,17 @@ class UserCritere
      * @ORM\ManyToOne(targetEntity="Etablissement")
      */
     private $etablissement;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Secteur")
+     */
+    private $secteur;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Service")
+     */
+    private $service;
 
     /**
      * @ORM\ManyToOne(targetEntity="Contrat")
@@ -47,6 +58,26 @@ class UserCritere
      * @ORM\ManyToOne(targetEntity="TypeContrat")
      */
     private $typeContrat;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Experience")
+     */
+    private $experience;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Formation")
+     */
+    private $formation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CursusScolaire")
+     */
+    private $cursus;
+
+    /**
+     * @ORM\Column(name="date_disponibilite", type="text")
+     */
+    private $dateDisponibilite;
 
     /**
      * Get id

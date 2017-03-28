@@ -1,0 +1,6 @@
+{% extends 'SosBundle::header.html.twig' %}
+
+{% block fos_user_content %}
+	toto
+    {{ include('@SosBundle/Security/login_content.html.twig') }}
+{% endblock fos_user_content %}
