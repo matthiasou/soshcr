@@ -1,4 +1,4 @@
-{% extends 'SosBundle::base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body %}
 
@@ -29,16 +29,31 @@
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 		<input type="hidden" name="classification" value="{{ data.classification }}">
 		<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
-		<input type="hidden" name="poste" value="{{ data.poste }}">
-		<input type="hidden" name="contrat" value="{{ data.contrat }}">
-		<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
-		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
-		{# Si on est dans la restauration #}
+		
 		{% if data.service_activite is defined %}
 			<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
 		{% endif %}
-		<input type="hidden" name="form" value="duree">
+		<input type="hidden" name="poste" value="{{ data.poste }}">
+		<input type="hidden" name="contrat" value="{{ data.contrat }}">
+		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
 
+		{% if data.contrat_duree is defined %}
+			<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
+		{% endif %}	
+
+		{% if data.formation_minimum is defined %}
+			<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
+		{% endif %}
+
+		{% if data.experience_minimum is defined %}
+			<input type="hidden" name="experience_minimum" value="{{ data.experience_minimum }}">
+		{% endif %}
+
+		{% if data.cursus_scolaire is defined %}
+			<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
+		{% endif %}
+
+		<input type="hidden" name="form" value="anglais">
 		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
 	</form>
 </div>

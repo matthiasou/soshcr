@@ -37,6 +37,13 @@ class Experience
 
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="classement", type="integer", length=11)
+     */
+    private $classement;
+
+    /**
      * Get id
      *
      * @return int

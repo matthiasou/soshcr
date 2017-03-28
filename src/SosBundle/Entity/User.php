@@ -42,7 +42,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="date_naissance", type="string", length=255)
+     * @ORM\Column(name="date_naissance", type="date")
      */
     public $dateNaissance;
 

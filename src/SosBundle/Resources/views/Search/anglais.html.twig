@@ -1,4 +1,4 @@
-{% extends 'SosBundle::base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body %}
 
@@ -36,8 +36,24 @@
 						{% endif %}
 						<input type="hidden" name="poste" value="{{ data.poste }}">
 						<input type="hidden" name="contrat" value="{{ data.contrat }}">
-						<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
-						<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
+						{# Si on est en CDD CDI ou STAGE #}
+						{% if data.contrat_duree is defined %}
+							<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
+						{% endif %}						
+						{# Si on est en stage ou apprentissage #}
+						{% if data.cursus_scolaire is defined %}
+							<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
+						{% endif %}
+
+						{# Si on est en stage ou apprentissage #}
+						{% if data.formation_minimum is defined %}
+							<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
+						{% endif %}
+
+						{% if data.experience_minimum is defined %}	
+							<input type="hidden" name="experience_minimum" value="{{ data.experience_minimum }}">
+						{% endif %}
+
 						<input type="hidden" name="form" value="anglais">
 		            </form>
 		        </li>
@@ -61,9 +77,25 @@
 		{% endif %}
 		<input type="hidden" name="poste" value="{{ data.poste }}">
 		<input type="hidden" name="contrat" value="{{ data.contrat }}">
-		<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
 
-		<input type="hidden" name="form" value="duree">
+		{% if data.contrat_duree is defined %}
+			<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
+		{% endif %}	
+
+		{% if data.formation_minimum is defined %}
+			<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
+		{% endif %}
+
+		{# Si on est en Stage #}
+		{% if data.contrat == 4 %}
+			<input type="hidden" name="form" value="duree">
+		{# Si on est en Apprentissage #}
+		{% elseif data.contrat == 5 or data.contrat == 3 %}	
+			<input type="hidden" name="form" value="contrat">
+		{# Si on est en CDI ou CDD #}
+		{% elseif data.contrat == 1 or data.contrat == 2 %}	
+			<input type="hidden" name="form" value="formation">
+		{% endif %}	
 
 		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
 	</form>

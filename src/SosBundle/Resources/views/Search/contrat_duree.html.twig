@@ -1,4 +1,4 @@
-{% extends 'SosBundle::base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body %}
 
@@ -55,11 +55,9 @@
 		<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
 		{# Si on est dans la restauration #}
 		{% if data.service_activite is defined %}
-			<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
-			<input type="hidden" name="form" value="poste_restauration">
-		{% else %}
-			<input type="hidden" name="form" value="poste_hotellerie">
+			<input type="hidden" name="service_activite" value="{{ data.service_activite }}">			
 		{% endif %}
+		<input type="hidden" name="form" value="poste">
 		
 		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
 	

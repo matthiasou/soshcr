@@ -3,7 +3,8 @@
 {% block body %}
 
 	<div id="poste_hotellerie" class="col-xs-12 sos-form">
-		<h3 class="title-heading">Quel cursus ?</h3>
+		<h3 class="title-heading">Quelle expérience minimum ?</h3>
+		<ul class="col-lg-8 col-lg-offset-2">
 
 		{% if data.match_employe.nb == 0 %}
 			<p>Personne ne correspond à vos critères. </p>
@@ -14,35 +15,46 @@
 		{% endif %}
 		<br>
 
-		<ul class="col-lg-8 col-lg-offset-2">
-
-		{% for cursus in cursus_scolaire %}
+		{% for experience in experience_minimum %}
 
 		        <li class="col-sm-2 col-md-2 text-center">
 		            <form method="post">
 		                <button>
-		                    <img src="{{ asset('bundles/sos/global/img/' ~ cursus.id ~ '-stars.png') }}" alt="">
-		                    <p>{{ cursus.libelle }}</p>
+		                    <img src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ experience.id ~ '.png') }}" alt="">
+		                    {% if experience.id == 1 %}
+		                    	<p>0 an</p>
+		                    {% elseif experience.id == 2 %}
+		                    	<p>6 mois</p>
+		                    {% elseif experience.id == 3 %}
+		                    	<p>1 an</p>
+		                    {% elseif experience.id == 4 %}
+		                    	<p>3 ans</p>
+		                    {% elseif experience.id == 5 %}
+		                    	<p>6 ans</p>
+		                    {% endif %}
 		                </button>
-		                <input type="hidden" value="{{ cursus.id }}" name="cursus_scolaire">
+		                <input type="hidden" value="{{ experience.id }}" name="experience_minimum">
 						<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 						<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 						<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 						<input type="hidden" name="classification" value="{{ data.classification }}">
 						<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
+
 						{# Si on est dans la restauration #}
 						{% if data.service_activite is defined %}
-							<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
+							<input type="hidden" name="cervice_activite" value="{{ data.service_activite }}">
 						{% endif %}
-						<input type="hidden" name="poste" value="{{ data.poste }}">
-						<input type="hidden" name="contrat" value="{{ data.contrat }}">
-						{# Si on a choisi un stage #}
+
 						{% if data.contrat_duree is defined %}
 							<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
 						{% endif %}
-
-
-						<input type="hidden" name="form" value="cursus">
+						<input type="hidden" name="poste" value="{{ data.poste }}">
+						<input type="hidden" name="contrat" value="{{ data.contrat }}">
+						{# Si on est CDD ou CDI #}
+						{% if data.formation_minimum is defined %}
+							<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
+						{% endif %}
+						<input type="hidden" name="form" value="experience">
 		            </form>
 		        </li>
 
@@ -58,23 +70,32 @@
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 		<input type="hidden" name="classification" value="{{ data.classification }}">
+		<input type="hidden" name="poste" value="{{ data.poste }}">
 		<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
+		<input type="hidden" name="contrat" value="{{ data.contrat }}">
+		
 		{# Si on est dans la restauration #}
 		{% if data.service_activite is defined %}
 			<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
 		{% endif %}
-		<input type="hidden" name="poste" value="{{ data.poste }}">
-		<input type="hidden" name="contrat" value="{{ data.contrat }}">
-		{# Si on a choisi un stage #}
+
 		{% if data.contrat_duree is defined %}
-			<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
-			<input type="hidden" name="form" value="contrat">
+			<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">			
+		{% endif %}
+		
+		{# Si on est CDD ou CDI #}
+		{% if data.formation_minimum is defined %}
+			<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
+			<input type="hidden" name="form" value="duree">
 		{% else %}
 			<input type="hidden" name="form" value="poste">	
 		{% endif %}
-		
 
+		
+		
+		
 		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
+	
 	</form>
 </div>
 
