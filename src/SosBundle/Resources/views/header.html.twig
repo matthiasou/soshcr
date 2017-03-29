@@ -16,6 +16,15 @@
   </div>
 </div>
 
+{# Gestion des erreurs par la sweetalert #}
+{% block javascript %}
+    {% if app.request.get('error') is defined  %}
+      <script>
+      var error = "{{ app.request.get('error') }}";
+      </script>
+    {% endif %}
+{% endblock %}
+
 {% if app.request.attributes.get('_route') != 'index' %}
     <header class="header-small">
 {% else %}

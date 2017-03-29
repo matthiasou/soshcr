@@ -18,7 +18,12 @@
 		{% for duree in contrat_duree %}
 
 		        <li class="col-sm-2 col-md-2 text-center">
-		            <form method="post">
+		            <form method="post" action="
+		            {% if data.contrat == 1 or data.contrat == 2 %}
+		            	{{ path('formation') }}
+		            {% elseif data.contrat == 4 %}
+		            	{{ path('cursus') }}
+		            {% endif %}">
 		                <button>
 		                    <img src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ duree.id ~ '.png') }}" alt="">
 		                    <p>{{ duree.libelle }}</p>
@@ -46,7 +51,7 @@
 
    	<div class="clearfix spacer"></div>
 
-    <form action="{{ path('search')}}" method="post">
+    <form action="{{ path('contrat')}}" method="post">
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">

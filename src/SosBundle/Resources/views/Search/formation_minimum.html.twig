@@ -18,7 +18,7 @@
 		{% for formation in formation_minimum %}
 
 		        <li class="col-sm-2 col-md-2 text-center">
-		            <form method="post">
+		            <form method="post" action="{{ path('experience') }}">
 		                <button>
 		                    <img src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ formation.id ~ '.png') }}" alt="">
 		                    <p>{{ formation.libelle }}</p>
@@ -31,7 +31,7 @@
 						<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
 						{# Si on est dans la restauration #}
 						{% if data.service_activite is defined %}
-							<input type="hidden" name="cervice_activite" value="{{ data.service_activite }}">
+							<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
 						{% endif %}
 						<input type="hidden" name="poste" value="{{ data.poste }}">
 						<input type="hidden" name="contrat" value="{{ data.contrat }}">
@@ -47,7 +47,7 @@
 
    	<div class="clearfix spacer"></div>
 
-    <form action="{{ path('search')}}" method="post">
+    <form action="{{ path('duree')}}" method="post">
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">

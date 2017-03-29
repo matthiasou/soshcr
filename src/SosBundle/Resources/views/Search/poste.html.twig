@@ -19,7 +19,7 @@
 		{% for poste in postes %}
 
 	        <li class="col-sm-6 col-md-2 text-center">
-	            <form method="post">
+	            <form method="post" action="{{ path('contrat') }}">
 	                <button>
 	                    <img src="{{ asset('bundles/sos/global/img/poste/' ~ poste.id ~ '.png') }} " alt="" class="img-responsive form-img">
 	                    <p>{{ poste.libelle | raw }}</p>
@@ -44,7 +44,11 @@
 
     <div class="clearfix spacer"></div>
 
-    <form action="{{ path('search')}}" method="post">
+    <form action="{% if data.secteur_activite == 1 %}
+    				{{ path('secteur') }}
+    			{% else %}
+    				{{ path('service') }}
+    			{% endif %}" method="post">
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">

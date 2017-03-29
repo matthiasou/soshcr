@@ -18,7 +18,7 @@
 		{% for experience in experience_minimum %}
 
 		        <li class="col-sm-2 col-md-2 text-center">
-		            <form method="post">
+		            <form method="post" action="{{ path('anglais')}}">
 		                <button>
 		                    <img src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ experience.id ~ '.png') }}" alt="">
 		                    {% if experience.id == 1 %}
@@ -42,18 +42,21 @@
 
 						{# Si on est dans la restauration #}
 						{% if data.service_activite is defined %}
-							<input type="hidden" name="cervice_activite" value="{{ data.service_activite }}">
+							<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
 						{% endif %}
 
 						{% if data.contrat_duree is defined %}
 							<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
 						{% endif %}
+
 						<input type="hidden" name="poste" value="{{ data.poste }}">
 						<input type="hidden" name="contrat" value="{{ data.contrat }}">
+						
 						{# Si on est CDD ou CDI #}
 						{% if data.formation_minimum is defined %}
 							<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
 						{% endif %}
+						
 						<input type="hidden" name="form" value="experience">
 		            </form>
 		        </li>
@@ -65,7 +68,7 @@
 
    	<div class="clearfix spacer"></div>
 
-    <form action="{{ path('search')}}" method="post">
+    <form action="{% if data.formation_minimum is defined %}{{ path('formation')}}{% else %}{{ path('contrat')}}{% endif %}" method="post">
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">

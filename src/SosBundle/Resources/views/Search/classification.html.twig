@@ -11,14 +11,14 @@
 		{% elseif data.match_employe.nb > 1 %}
 			<p>{{ data.match_employe.nb }} personnes correspondent à vos critères. </p>
 		{% elseif data.match_employe.nb == 1 %}
-			<p>{{ data.match_employe.nb }}personne correspond à vos critères.</p>
+			<p>{{ data.match_employe.nb }} personne correspond à vos critères.</p>
 		{% endif %}
 		<br>
 
 		<ul class="col-lg-8 col-lg-offset-2">
 			{% for etablissement in etablissements %}
 				<li class="col-sm-6 col-md-3 text-center">
-					<form method="post">
+					<form method="post" action="{{ path('secteur') }}">
 						<button>
 							<img src="{{ asset('bundles/sos/global/img/rating/' ~ etablissement.id )}}-stars.png" alt="" class="img-responsive form-img">
 							<p>{{ etablissement.libelle | raw }}</p>
@@ -35,7 +35,7 @@
 			{% endfor %}
 		</ul>
 		<div class="clearfix spacer"></div>
-	    <form action="{{ path('search')}}" method="post">
+	    <form action="{{ path('ville')}}" method="post">
 			<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
 		</form>
 	</div>

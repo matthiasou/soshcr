@@ -19,7 +19,7 @@
 		{% for secteur in secteurs %}
 
 	        <li class="col-sm-6 col-md-6 text-center">
-	            <form method="post">
+	            <form method="post" action="{% if secteur.id == 1 %}{{ path('poste') }}{% else %}{{ path('service') }}{% endif %}">
 	                <button>
 	                    <img src="{{ asset('bundles/sos/global/img/secteur/'~ secteur.id ~'-secteur.png') }}" alt="" class="img-responsive form-img">
 	                    <p>{{ secteur.libelle }}</p>
@@ -39,7 +39,7 @@
 
     <div class="clearfix spacer"></div>
 
-    <form action="{{ path('search')}}" method="post">
+    <form action="{{ path('classification')}}" method="post">
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
