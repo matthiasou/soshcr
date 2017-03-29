@@ -2,6 +2,54 @@ index:
     path:     /
     defaults: { _controller: SosBundle:Default:index }
 
-search:
-    path:     /search
-    defaults: { _controller: SosBundle:Default:search }
+ville:
+    path:     /search/ville
+    defaults: { _controller: SosBundle:Search:ville }
+
+classification:
+    path:     /search/classification
+    defaults: { _controller: SosBundle:Search:classification }
+
+secteur:
+    path:     /search/secteur
+    defaults: { _controller: SosBundle:Search:secteur }
+
+service:
+    path:     /search/service
+    defaults: { _controller: SosBundle:Search:service }
+
+poste:
+    path:     /search/poste
+    defaults: { _controller: SosBundle:Search:poste }
+
+contrat:
+    path:     /search/contrat
+    defaults: { _controller: SosBundle:Search:contrat }
+
+duree:
+    path:     /search/duree
+    defaults: { _controller: SosBundle:Search:duree }
+
+cursus:
+    path:     /search/cursus
+    defaults: { _controller: SosBundle:Search:cursus }
+
+formation:
+    path:     /search/formation
+    defaults: { _controller: SosBundle:Search:formation }
+
+experience:
+    path:     /search/experience
+    defaults: { _controller: SosBundle:Search:experience }
+
+anglais:
+    path:     /search/anglais
+    defaults: { _controller: SosBundle:Search:anglais }
+
+date:
+    path:     /search/date
+    defaults: { _controller: SosBundle:Search:date }
+
+resultat:
+    path:     /search/resultat
+    defaults: { _controller: SosBundle:Search:resultat }

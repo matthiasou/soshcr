@@ -17,8 +17,8 @@
 		<ul class="col-lg-8 col-lg-offset-2">
 
 		        <li class="col-sm-2 col-md-2 text-center">
-		            <form method="post">
-		            	<input type="date" name="daterange">
+		            <form method="post" action="{{ path('resultat') }}">
+		            	<input type="date" name="date_debut">
 		                <button class="btn btn-primary">Valider</button>
 						<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 						<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
@@ -62,7 +62,7 @@
 
    	<div class="clearfix spacer"></div>
 
-    <form action="{{ path('search')}}" method="post">
+    <form action="{{ path('anglais')}}" method="post">
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">

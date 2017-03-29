@@ -19,7 +19,14 @@
 		{% for contrat in contrats %}
 
 		        <li class="col-sm-6 col-md-2 text-center">
-		            <form method="post">
+		            <form method="post" action="
+		            {% if contrat.libelle == "CDD" or contrat.libelle == "CDI" or contrat.libelle == "Stage" %}
+		            	{{ path('duree') }}
+		            {% elseif contrat.libelle == "Extra" %}
+		            	{{ path('experience') }}
+		            {% elseif contrat.libelle == "Apprentissage" %}
+		            	{{ path('cursus') }}
+		            {% endif %}">
 		                <button>
 							<img src="{{ asset('bundles/sos/global/img/contrat/' ~ contrat.id ~ '.png') }} " alt="" class="img-responsive form-img">
 		                    <p>{{ contrat.libelle }}</p>
@@ -46,7 +53,7 @@
 
    	<div class="clearfix spacer"></div>
 
-    <form action="{{ path('search')}}" method="post">
+    <form action="{{ path('poste')}}" method="post">
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">

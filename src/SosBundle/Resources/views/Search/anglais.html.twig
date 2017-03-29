@@ -19,7 +19,7 @@
 		{% for niveau in niveau_anglais %}
 
 		        <li class="col-sm-2 col-md-2 text-center">
-		            <form method="post">
+		            <form method="post" action="{{ path('date') }}">
 		                <button>
 		                    <img src="{{ asset('bundles/sos/global/img/' ~ niveau.id ~ '-stars.png') }}" alt="">
 		                    <p>{{ niveau.libelle }}</p>
@@ -65,12 +65,18 @@
 
    	<div class="clearfix spacer"></div>
 
-    <form action="{{ path('search')}}" method="post">
+    <form action="{% if data.cursus is defined %}
+				    	{{ path('cursus') }}
+				    {% elseif data.experience_minimum is defined %}
+				    	{{ path('experience') }}
+				    {% endif %}" method="post">
+
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 		<input type="hidden" name="classification" value="{{ data.classification }}">
 		<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
+		
 		{# Si on est dans la restauration #}
 		{% if data.service_activite is defined %}
 			<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
@@ -86,15 +92,13 @@
 			<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
 		{% endif %}
 
-		{# Si on est en Stage #}
-		{% if data.contrat == 4 %}
+		{% if data.cursus is defined %}
 			<input type="hidden" name="form" value="duree">
-		{# Si on est en Apprentissage #}
-		{% elseif data.contrat == 5 or data.contrat == 3 %}	
-			<input type="hidden" name="form" value="contrat">
-		{# Si on est en CDI ou CDD #}
-		{% elseif data.contrat == 1 or data.contrat == 2 %}	
+		{% elseif data.experience_minimum is defined and data.formation_minimum is defined %}
 			<input type="hidden" name="form" value="formation">
+
+		{% elseif data.experience_minimum is defined and data.formation_minimum is not defined %}	
+			<input type="hidden" name="form" value="contrat">
 		{% endif %}	
 
 		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>

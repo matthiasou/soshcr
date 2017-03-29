@@ -19,7 +19,7 @@
 		{% for service in services %}
 
 	        <li class="col-sm-6 col-md-6 text-center">
-	            <form method="post">
+	            <form method="post" action="{{ path('poste') }}">
 	                <button>
 	                    <img src="{{ asset('bundles/sos/global/img/service/'~ service.id ~'-service.png') }}" alt="" class="img-responsive form-img">
 	                    <p>{{ service.libelle }}</p>
@@ -40,7 +40,7 @@
 
     <div class="clearfix spacer"></div>
 
-    <form action="{{ path('search')}}" method="post">
+    <form action="{{ path('secteur')}}" method="post">
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
