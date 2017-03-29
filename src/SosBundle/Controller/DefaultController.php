@@ -20,4 +20,12 @@ class DefaultController extends Controller
         return $this->render('SosBundle:Default:index.html.twig');
     }
 
+    /**
+     * @Route("/profil")
+     */
+    public function profilAction()
+    {
+        return $this->render('SosBundle:Default:profil.html.twig');
+    }
+
 }
