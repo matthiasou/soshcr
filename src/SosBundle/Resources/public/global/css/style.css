@@ -73,7 +73,7 @@ a{text-decoration: none!important; color:inherit!important;}
 @media only screen 
 and (min-device-width: 768px) and (max-device-width: 1024px) 
 and (orientation: portrait);{
-
+  header{-webkit-clip-path:polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%)}
    header.header-small, #accueil header{height: 200px;background-position: initial;}
    #barre-jaune-header {height: 45px;margin-top: -30px;clip-path: polygon(0% 85%, 100% 15%, 100% 30%, 0% 100%);-webkit-clip-path: polygon(0% 85%, 100% 15%, 100% 30%, 0% 100%);}
    header.header-small .title, #accueil header .title{margin:20px auto;width:300px;}
@@ -85,6 +85,7 @@ and (orientation: portrait);{
 @media only screen 
 and (min-device-width: 768px) and (max-device-width: 1024px) 
 and (orientation: landscape) {
+    header{-webkit-clip-path:polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%)}
     #barre-jaune-header {height: 100px;clip-path: polygon(0% 90%, 100% 30%, 100% 40%, 0% 100%);-webkit-clip-path: polygon(0% 90%, 100% 30%, 100% 40%, 0% 100%);}
      header.header-small, #accueil header{height: 200px;background-position: initial;}
      header.header-small .title, #accueil header .title{margin:20px auto;width:300px;}
@@ -95,6 +96,8 @@ and (orientation: landscape) {
 
 @media only screen 
 and (max-width : 767px) {
+    header{-webkit-clip-path:polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%)}
+
   #barre-jaune-header {height: 45px;margin-top: -30px;clip-path: polygon(0% 85%, 100% 15%, 100% 30%, 0% 100%);-webkit-clip-path: polygon(0% 85%, 100% 15%, 100% 30%, 0% 100%);}
    header.header-small, #accueil header{height: 110px; background-position: initial;}
    header.header-small .title, #accueil header .title{width:220px;margin: 0 auto}
