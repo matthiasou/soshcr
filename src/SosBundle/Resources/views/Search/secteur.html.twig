@@ -1,6 +1,6 @@
 {% extends 'SosBundle::layout.html.twig' %}
 
-{% block content %}
+{% block sos_body %}
 
 	<div id="secteur" class="col-xs-12 sos-form">
 	<h3 class="title-heading">Dans quel secteur d’activité recrutez vous ?</h3>
@@ -40,9 +40,7 @@
     <div class="clearfix spacer"></div>
 
     <form action="{{ path('classification')}}" method="post">
-		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
-		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
-		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+		<input type="hidden" name="ville" value="{{ data.ville.libelle }}">
 		<input type="hidden" name="form" value="ville">
 		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
 	</form>

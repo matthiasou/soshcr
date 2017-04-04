@@ -1,0 +1,53 @@
+{# Gestion des erreurs par la sweetalert #}
+{% if app.request.get('error') is defined  %}
+  <script>
+  var error = "{{ app.request.get('error') }}";
+  </script>
+{% endif %}
+
+{% if app.request.attributes.get('_route') != 'index' %}
+    <header class="header-small">
+{% else %}
+    <header>
+{% endif %}
+
+    <div class="col-xs-2">
+        <a href="{{ path('index') }}" id="logo"> <img class="img-responsive" src="{{ asset('bundles/sos/global/img/logo.png') }}" alt=""> </a>
+    </div> 
+    
+    <!-- Title desktop -->
+     <div class="col-xs-8 text-center">
+        <img class="title" src="{{ asset('bundles/sos/global/img/title.png') }}" class="img-responsive">  
+    </div>
+    <!-- Title desktop -->
+
+     <div class="col-xs-2" id="user-nav">
+      {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <a id="user-icon" href="">{{ app.user.prenom }}</a>
+        <a id="notification-icon" href="#"><i class="fa fa-bell" aria-hidden="true"></i></a>
+      {% else %}
+        <a class="launch-modal hidden-xs hidden-sm" id="login" href="#" data-modal-id="modal-login">Espace candidat</a>
+      {% endif %} 
+    </div>  
+
+</header>
+<div id="barre-jaune-header"></div>
+<!-- MODAL -->
+<div class="modal fade" id="modal-login"  role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h3 class="modal-title" id="modal-login-label">Accèder à mon espace ou <a class="link" href="{{path('fos_user_registration_register')}}">S'inscrire</a> </h3>
+        <p>Veuillez entrez votre adresse email et votre mot de passe</p>
+      </div>
+      <div class="modal-body">
+        
+        {{ render(controller("FOSUserBundle:Security:login")) }}
+        
+      </div>
+    </div>
+  </div>
+</div>
