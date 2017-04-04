@@ -2,8 +2,8 @@
 
 namespace SosBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
@@ -49,7 +49,7 @@ class User extends BaseUser
     /**
      * @var int
      *
-     * @ORM\Column(name="score", type="integer", length=11)
+     * @ORM\Column(name="score", type="integer", length=11, nullable=true)
      */
     public $score;
 
@@ -83,13 +83,6 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="UserCritere", mappedBy="user")
      */
     public $criteres;
-
-
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 
     /**
      * Set nom
@@ -339,5 +332,20 @@ class User extends BaseUser
     public function getCriteres()
     {
         return $this->criteres;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setEmail($email){
+        parent::setEmail($email);
+        $this->setUsername($email);
     }
 }

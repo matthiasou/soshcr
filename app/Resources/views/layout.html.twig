@@ -7,12 +7,12 @@
             <link rel="stylesheet" href="{{ asset('bundles/sos/global/css/jquery-ui/jquery-ui.min.css') }}">
             <link rel="stylesheet" href="{{ asset('bundles/sos/global/css/jquery-ui/jquery-ui.structure.min.css') }}">
             <link rel="stylesheet" href="{{ asset('bundles/sos/global/css/jquery-ui/jquery-ui.theme.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/sos/font-awesome/css/font-awesome.css') }}">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="{{ asset('bundles/sos/global/css/style.css') }}">
-            <link rel="stylesheet" href="{{ asset('bundles/sos/bootstrap/css/bootstrap-theme.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('bundles/sos/bootstrap/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/sos/bootstrap/css/bootstrap-theme.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/sos/bootstrap/css/bootstrap.css') }}">
             <link rel="stylesheet" href="{{ asset('bundles/sos/fancybox/css/jquery.fancybox.min.css') }}">
-            <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
-            <link rel="stylesheet" href="{{ asset('bundles/sos/font-awesome/css/font-awesome.min.css') }}">
             <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
             <link rel="stylesheet" type="text/css"  media="print">
             <link rel="stylesheet" href="{{ asset('bundles/sos/login-modal/assets/css/form-elements.css') }}">
@@ -22,16 +22,12 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        
+        {% include('header.html.twig') %}          
+        {% block body %}{% endblock %}
+        {% include('footer.html.twig') %}  
 
-        {% include('@SosBundle/Resources/views/header.html.twig') %}
-        
-        {% block body %}
-            
-        {% endblock %}
-        
-        {% include('@SosBundle/Resources/views/footer.html.twig') %}
-
-        
+        {% block javascripts %}
             <script type="text/javascript" src="{{ asset('bundles/sos/global/js/jquery-1.11.1.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/sos/global/js/jquery-ui.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/sos/sweetalert/sweetalert.min.js') }}"></script>
@@ -45,7 +41,6 @@
             <script type="text/javascript" src="{{ asset('bundles/sos/login-modal/assets/js/scripts.js') }}"></script>
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-        {% block javascripts %}
         {% endblock %}
     </body>
 </html>

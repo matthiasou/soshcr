@@ -10,7 +10,6 @@ $(document).ready(function(){
 
 });
 
-
 //fonction qui coche toutes les checkboxes
 function CocheTout(ref, name) {
     var form = ref;

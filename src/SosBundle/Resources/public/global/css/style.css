@@ -20,7 +20,7 @@ a{text-decoration: none!important; color:inherit!important;}
 /***********************************************
  					HEADER 					
 /***********************************************/
- header{clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 100%);-webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 100%);background-color:#394076;background-repeat:no-repeat;background-size:cover;height: 295px;position: relative;}
+ header{clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%);-webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%);background-color:#394076;background-repeat:no-repeat;background-size:cover;height: 295px;position: relative;}
  header.header-small{clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 100%);-webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 100%);background-color:#394076;background-repeat:no-repeat;background-size:cover; height: 200px;background-position: center -50px;position: relative;}
  header.header-small .title{width: 300px}
  header #login{font-family: "Stellar";text-decoration: underline!important;color: #fff!important;float: right;margin:20px;text-transform: uppercase;display: block;width: 100%;text-align: right;}
@@ -29,6 +29,44 @@ a{text-decoration: none!important; color:inherit!important;}
  header #logo img{width: 60px}
  header #login-icon{font-size: 30px}
 #barre-jaune-header{height:100px;margin-top:-75px;clip-path: polygon(0% 85%, 100% 25%, 100% 40%, 0% 100%);-webkit-clip-path: polygon(0% 85%, 100% 25%, 100% 40%, 0% 100%);background-color:#FFE44B;width: 100% }
+
+#user-nav{
+  color: #fff!important;
+  padding-top:50px;
+}
+
+#user-nav a{
+  margin: 0 10px
+}
+#user-icon i{
+  font-size: 11px
+}
+#notification-icon i{
+  font-size: 15px
+}
+
+.btn-soshcr{
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  height: 50px;background-color: #394076;color: #fff;font-weight: bold}
+.btn-soshcr:hover{color: #fff;opacity: 0.9}
+
 
 #login-overlay{display: none}
 
@@ -644,3 +682,121 @@ and (min-width : 1024px) {
     }
   }
 }
+
+/* NAV MENU AUTHENTICATED */
+
+  nav.sidebar, .main{
+    -webkit-transition: margin 200ms ease-out;
+      -moz-transition: margin 200ms ease-out;
+      -o-transition: margin 200ms ease-out;
+      transition: margin 200ms ease-out;
+  }
+
+  .main{
+    padding: 10px 10px 0 10px;
+  }
+
+ @media (min-width: 765px) {
+
+    .main{
+      position: absolute;
+      width: calc(100% - 40px); 
+      margin-left: 40px;
+      float: right;
+    }
+
+    nav.sidebar:hover + .main{
+      margin-left: 200px;
+    }
+
+    nav.sidebar.navbar.sidebar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+      margin-left: 0px;
+    }
+
+    nav.sidebar .navbar-brand, nav.sidebar .navbar-header{
+      text-align: center;
+      width: 100%;
+      margin-left: 0px;
+    }
+    
+    nav.sidebar a{
+      padding-right: 13px;
+    }
+
+    nav.sidebar .navbar-nav > li:first-child{
+      border-top: 1px #e5e5e5 solid;
+    }
+
+    nav.sidebar .navbar-nav > li{
+      border-bottom: 1px #e5e5e5 solid;
+    }
+
+    nav.sidebar .navbar-nav .open .dropdown-menu {
+      position: static;
+      float: none;
+      width: auto;
+      margin-top: 0;
+      background-color: transparent;
+      border: 0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+    nav.sidebar .navbar-collapse, nav.sidebar .container-fluid{
+      padding: 0 0px 0 0px;
+    }
+
+    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+      color: #777;
+    }
+
+    nav.sidebar{
+      width: 200px;
+      margin-left: -160px;
+      float: left;
+      margin-bottom: 0px;
+    }
+
+    nav.sidebar li {
+      width: 100%;
+    }
+
+    nav.sidebar:hover{
+      margin-left: 0px;
+    }
+
+    .forAnimate{
+      opacity: 0;
+    }
+  }
+   
+  @media (min-width: 1330px) {
+
+    .main{
+      width: calc(100% - 200px);
+      margin-left: 200px;
+    }
+
+    nav.sidebar{
+      margin-left: 0px;
+      float: left;
+    }
+
+    nav.sidebar .forAnimate{
+      opacity: 1;
+    }
+  }
+
+  nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav .open .dropdown-menu>li>a:focus {
+    color: #CCC;
+    background-color: transparent;
+  }
+
+  nav:hover .forAnimate{
+    opacity: 1;
+  }
+  section{
+    padding-left: 15px;
+  }
+  
+ 

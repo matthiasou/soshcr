@@ -19,7 +19,7 @@ class SearchController extends Controller
     public function villeAction(Request $request)
     {	
 
-        return $this->render('SosBundle:Search:ville.html.twig'); 
+        return $this->render('SosBundle:Search:ville.html.twig', array('step' => '1')); 
 
     }
 
@@ -56,7 +56,7 @@ class SearchController extends Controller
     			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
     	        dump($data);
-        		return $this->render('SosBundle:Search:classification.html.twig', array('etablissements' => $etablissements, 'data' => $data));	
+        		return $this->render('SosBundle:Search:classification.html.twig', array('etablissements' => $etablissements, 'data' => $data, 'step' => '2'));	
            }
 
         }else{
@@ -87,7 +87,7 @@ class SearchController extends Controller
 	        $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
     		dump($data);
-    		return $this->render('SosBundle:Search:secteur.html.twig', array('secteurs' => $secteurs, 'data' => $data));	
+    		return $this->render('SosBundle:Search:secteur.html.twig', array('secteurs' => $secteurs, 'data' => $data, 'step' => '3'));	
 
     	}else{
             return $this->redirectToRoute($request->get('form'));
@@ -124,14 +124,14 @@ class SearchController extends Controller
 	              ->getQuery()
 	              ->getResult();
 
-				return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'data' => $data));	  	
+				return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'data' => $data, 'step' => '5'));	  	
 
 			}else if($data['secteur_activite'] == 2){
 
 		        $repo = $em->getRepository("SosBundle:Service");
 		        $services = $repo->findAll();
 
-				return $this->render('SosBundle:Search:service.html.twig', array('services' => $services, 'data' => $data));	  	
+				return $this->render('SosBundle:Search:service.html.twig', array('services' => $services, 'data' => $data, 'step' => '4'));	  	
 
 			}
 
@@ -183,7 +183,7 @@ class SearchController extends Controller
 			
 
     		dump($data);
-			return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'data' => $data));	  	
+			return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'data' => $data, 'step' => '5'));	  	
     	
         }else{
             return $this->redirectToRoute($request->get('form'));
@@ -218,7 +218,7 @@ class SearchController extends Controller
 	        $contrats = $repo->findAll();
 
     		dump($data);
-    		return $this->render('SosBundle:Search:contrat.html.twig', array('contrats' => $contrats, 'data' => $data));	
+    		return $this->render('SosBundle:Search:contrat.html.twig', array('contrats' => $contrats, 'data' => $data, 'step' => '6'));	
     	
         }else{
             return $this->redirectToRoute($request->get('form'));
@@ -255,7 +255,7 @@ class SearchController extends Controller
 
             dump($data);
             $contrat_duree = $contrat->getDuree();
-            return $this->render('SosBundle:Search:contrat_duree.html.twig', array('contrat_duree' => $contrat_duree, 'data' => $data)); 
+            return $this->render('SosBundle:Search:contrat_duree.html.twig', array('contrat_duree' => $contrat_duree, 'data' => $data, 'step' => '7')); 
 
         }else{
             return $this->redirectToRoute($request->get('form'));
@@ -294,7 +294,7 @@ class SearchController extends Controller
             dump($data);
             $cursus_scolaire_repo = $em->getRepository("SosBundle:CursusScolaire");
             $cursus_scolaire = $cursus_scolaire_repo->findAll();
-            return $this->render('SosBundle:Search:cursus_scolaire.html.twig', array('cursus_scolaire' => $cursus_scolaire, 'data' => $data));    
+            return $this->render('SosBundle:Search:cursus_scolaire.html.twig', array('cursus_scolaire' => $cursus_scolaire, 'data' => $data, 'step' => '8'));    
         }else{
             return $this->redirectToRoute($request->get('form'));
         }
@@ -332,7 +332,7 @@ class SearchController extends Controller
 
             $formation_minimum  = $em->getRepository("SosBundle:Formation")->findAll();
             dump($data);            
-            return $this->render('SosBundle:Search:formation_minimum.html.twig', array('formation_minimum' => $formation_minimum, 'data' => $data));  
+            return $this->render('SosBundle:Search:formation_minimum.html.twig', array('formation_minimum' => $formation_minimum, 'data' => $data, 'step' => '8'));  
 
         }else{
             return $this->redirectToRoute($request->get('form'));
@@ -377,7 +377,7 @@ class SearchController extends Controller
             $experience_minimum = $repo->findAll();
 
             dump($data);
-            return $this->render('SosBundle:Search:experience_minimum.html.twig', array('experience_minimum' => $experience_minimum, 'data' => $data));    
+            return $this->render('SosBundle:Search:experience_minimum.html.twig', array('experience_minimum' => $experience_minimum, 'data' => $data, 'step' => '9'));    
 
         }else{
             return $this->redirectToRoute($request->get('form'));
@@ -426,7 +426,7 @@ class SearchController extends Controller
             $niveau_anglais = $repo->findAll();
 
             dump($data);            
-            return $this->render('SosBundle:Search:anglais.html.twig', array('niveau_anglais' => $niveau_anglais, 'data' => $data));    
+            return $this->render('SosBundle:Search:anglais.html.twig', array('niveau_anglais' => $niveau_anglais, 'data' => $data, 'step' => '9'));    
 
         }else{
             return $this->redirectToRoute($request->get('form'));
@@ -475,7 +475,7 @@ class SearchController extends Controller
 			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
 			dump($data);    		
-    		return $this->render('SosBundle:Search:date_debut.hml.twig', array('data' => $data));	
+    		return $this->render('SosBundle:Search:date_debut.hml.twig', array('data' => $data, 'step' => '10'));	
 
 		}else{
             return $this->redirectToRoute($request->get('form'));
