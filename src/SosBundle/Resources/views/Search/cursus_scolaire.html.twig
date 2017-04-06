@@ -6,11 +6,11 @@
 		<h3 class="title-heading">Quel cursus ?</h3>
 
 		{% if data.match_employe.nb == 0 %}
-			<p>Personne ne correspond à vos critères. </p>
+			<p>Aucun candidat ne correspond à vos critères. </p>
 		{% elseif data.match_employe.nb > 1 %}
-			<p>{{ data.match_employe.nb }} personnes correspondent à vos critères. </p>
+			<p>{{ data.match_employe.nb }} candidats correspondent à vos critères. </p>
 		{% elseif data.match_employe.nb == 1 %}
-			<p>{{ data.match_employe.nb }}personne correspond à vos critères.</p>
+			<p>{{ data.match_employe.nb }} candidat correspond à vos critères.</p>
 		{% endif %}
 		<br>
 

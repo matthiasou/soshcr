@@ -5,13 +5,13 @@
 <div id="poste_restauration" class="col-xs-12 sos-form">
 	<h3 class="title-heading">Quel poste ?</h3>
 
-		{% if data.match_employe.nb == 0 %}
-			<p>Personne ne correspond à vos critères. </p>
-		{% elseif data.match_employe.nb > 1 %}
-			<p>{{ data.match_employe.nb }} personnes correspondent à vos critères. </p>
-		{% elseif data.match_employe.nb == 1 %}
-			<p>{{ data.match_employe.nb }}personne correspond à vos critères.</p>
-		{% endif %}
+	{% if data.match_employe.nb == 0 %}
+		<p>Aucun candidat ne correspond à vos critères. </p>
+	{% elseif data.match_employe.nb > 1 %}
+		<p>{{ data.match_employe.nb }} candidats correspondent à vos critères. </p>
+	{% elseif data.match_employe.nb == 1 %}
+		<p>{{ data.match_employe.nb }} candidat correspond à vos critères.</p>
+	{% endif %}
 		<br>
 
 	<ul class="col-lg-8 col-lg-offset-2">

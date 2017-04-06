@@ -53,3 +53,12 @@ date:
 resultat:
     path:     /search/resultat
     defaults: { _controller: SosBundle:Search:resultat }
+
+demandeCv:
+    path:     /search/demandeCv
+    defaults: { _controller: SosBundle:Search:demandeCv }
+
+
+dashboard:
+    path:     /dashboard
+    defaults: { _controller: SosBundle:Default:dashboard }
