@@ -48,7 +48,7 @@ class SearchController extends Controller
                 $data['ville']['libelle'] = $_POST['ville'];
                 $data['ville']['latitude'] = $json->geometry->location->lat;
                 $data['ville']['longitude'] = $json->geometry->location->lng;
-            
+
 
     	        $repo = $em->getRepository("SosBundle:Etablissement");
     	        $etablissements = $repo->findAll();
@@ -56,7 +56,7 @@ class SearchController extends Controller
     			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
     	        dump($data);
-        		return $this->render('SosBundle:Search:classification.html.twig', array('etablissements' => $etablissements, 'data' => $data, 'step' => '2'));	
+        		return $this->render('SosBundle:Search:classification.html.twig', array('etablissements' => $etablissements, 'data' => $data, 'step' => '2'));
            }
 
         }else{
@@ -534,6 +534,63 @@ class SearchController extends Controller
     		return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data));	
 
 		}else{
+            return $this->redirectToRoute($request->get('form'));
+        }
+    }
+
+
+    /**
+     * @Route("/search/demandeCv")
+     */
+    public function demandeCvAction(Request $request)
+    {
+
+        // Demande le Cv au candidat
+        if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "resultat" ) {
+
+            $data['ville'] = $request->get('ville');
+            $data['classification'] = $request->get('classification');
+            $data['secteur_activite'] = $request->get('secteur_activite');
+            $data['poste'] = $request->get('poste');
+            $data['contrat'] = $request->get('contrat');
+            $data['niveau_anglais'] = $request->get('niveau_anglais');
+            $data['date_debut'] = $request->get('date_debut');
+
+            // Si on est dans la restauration : on ajoute le type de restauration
+            if (null !== $request->get('service_activite')) {
+                $data['service_activite'] = $request->get('service_activite');
+            }
+
+            if (null !== $request->get('cursus_scolaire')) {
+                $data['cursus_scolaire'] = $request->get('cursus_scolaire');
+            }
+
+            if (null !== $request->get('contrat_duree')) {
+                $data['contrat_duree'] = $request->get('contrat_duree');
+            }
+
+            if (null !== $request->get('formation_minimum')) {
+                $data['formation_minimum'] = $request->get('formation_minimum');
+            }
+
+            if (null !== $request->get('experience_minimum')) {
+                $data['experience_minimum'] = $request->get('experience_minimum');
+            }
+
+            $data['employes'] = $this->get('sos.matching')->getEmploye($data);
+
+            foreach ($data['employes']  as $employee){
+                $dateNaisssance = $employee->getDateNaissance();
+                $today = new \DateTime('NOW');
+                $age= $today->diff($dateNaisssance);
+
+                $employee->age=(int)($age->days/365);
+            }
+
+            dump($data);
+            return $this->render('SosBundle:Search:demandeCv.html.twig', array('data' => $data));
+
+        }else{
             return $this->redirectToRoute($request->get('form'));
         }
     }

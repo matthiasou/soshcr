@@ -1,0 +1,71 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+
+
+ <div class="col-md-5">
+        <div class="form-area">
+            <form method="post">
+                <br style="clear:both">
+                <h3 style="margin-bottom: 25px; text-align: center;">Demande de CV</h3>
+                <div class="form-group">
+                    <textarea class="form-control" type="textarea" id="textarea2" name="textarea_2" placeholder="Message" maxlength="500" rows="9"><?php
+                        echo "Bonjour,\n".
+                            "Nous recherchons un(e)  à partir du  en .\n".
+                            "Envoyez nous votre curriculum vitae et une lettre de motivation.\n".
+                            "Merci de répondre à [Entrez votre adresse email]\n".
+                            "\n".
+                            "A bientôt,\n".
+                            "[Votre nom]\n".
+                            "[Votre numéro de téléphone]\n"
+                        ;
+                        ?></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary pull-right">Envoyer</button>
+            </form>
+        </div>
+    </div>
+
+
+
+   	<div class="clearfix spacer"></div>
+
+    <form action="{{ path('resultat')}}" method="post">
+		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+		<input type="hidden" name="classification" value="{{ data.classification }}">
+		<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
+		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
+
+		{% if data.service_activite is defined %}
+			<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
+		{% endif %}
+		<input type="hidden" name="poste" value="{{ data.poste }}">
+		<input type="hidden" name="contrat" value="{{ data.contrat }}">
+		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
+
+		{% if data.contrat_duree is defined %}
+			<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
+		{% endif %}	
+
+		{% if data.formation_minimum is defined %}
+			<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
+		{% endif %}
+
+		{% if data.experience_minimum is defined %}
+			<input type="hidden" name="experience_minimum" value="{{ data.experience_minimum }}">
+		{% endif %}
+
+		{% if data.cursus_scolaire is defined %}
+			<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
+		{% endif %}
+
+		<input type="hidden" name="form" value="date">
+		<br><br>
+		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
+	</form>
+</div>
+
+{% endblock %}

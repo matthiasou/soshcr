@@ -23,4 +23,13 @@ class DefaultController extends Controller
         return $this->render('SosBundle:Default:profil.html.twig');
     }
 
+
+    /**
+     * @Route("/dashboard")
+     */
+    public function dashboardAction()
+    {
+        return $this->render('SosBundle:Dashboard:dashboard.html.twig');
+    }
+
 }

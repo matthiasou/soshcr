@@ -2,14 +2,58 @@
 
 {% block sos_body %}
 
+
+	<form method="post" action="{{ path('demandeCv') }}">
+		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+		<input type="hidden" name="classification" value="{{ data.classification }}">
+		<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
+		<input type="hidden" name="poste" value="{{ data.poste }}">
+		<input type="hidden" name="contrat" value="{{ data.contrat }}">
+
+		{% if data.service_activite is defined %}
+			<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
+		{% endif %}
+
+
+		{% if data.contrat_duree is defined %}
+			<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
+		{% endif %}
+
+
+		{% if data.formation_minimum is defined %}
+			<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
+		{% endif %}
+
+
+		{% if data.experience_minimum is defined %}
+			<input type="hidden" name="experience_minimum" value="{{ data.experience_minimum }}">
+		{% endif %}
+
+
+		{% if data.cursus_scolaire is defined %}
+			<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
+		{% endif %}
+
+		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
+		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
+
+
 	<div id="poste_hotellerie" class="col-xs-12 sos-form">
-		<h3 class="title-heading">Personnes répondants à vos critères de recherche :</h3>
+		<h3 class="title-heading">Candidats répondants à vos critères de recherche :</h3>
 		<br>
+		<div class="col-sm-2 hidden-md hidden-lg hidden-sm">
+			<img style="max-width: 35px; float: right;" src="{{ asset('bundles/sos/global/img/repeat.png') }}" alt="" class="img-responsive form-img">
+		</div>
+		<div class="col-sm-2 hidden-md hidden-lg hidden-sm">
+	         <input  style="max-width: 45px; float: right;" type="image" src="{{ asset('bundles/sos/global/img/cv.png') }}" border="0" class="img-responsive" alt="Submit" />
+		</div>
 		<div class="col-sm-2 hidden-md hidden-lg hidden-sm">
 			<img style="max-width: 35px; float: right;" onclick="javascript:imprime_bloc('titre', 'imprime_moi');" src="{{ asset('bundles/sos/global/img/print.png') }}" alt="" class="img-responsive form-img">
 		</div>
+
 		<div class="col-sm-8 col-sm-offset-2">
-			<form method="post">
 				tout sélectionner <input onclick="CocheTout(this, 'mail_demande_utilisateur[]');" type="checkbox">
 
 				<br/><br>
@@ -30,12 +74,26 @@
 					</div>
 				{% endfor %}
 				</div>
-			</form>
+
+
+
 
 		</div>
 		<div class="col-sm-2 hidden-xs">
 			<img style="max-width: 35px; float: right;" onclick="javascript:imprime_bloc('titre', 'imprime_moi');" src="{{ asset('bundles/sos/global/img/print.png') }}" alt="" class="img-responsive form-img">
 		</div>
+		<br><br>
+		<div class="col-sm-2 hidden-xs">
+	         <input  style="max-width: 45px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/cv.png') }}" border="0" class="img-responsive" alt="Submit" />
+		</div>
+		<br><br>
+		<div class="col-sm-2 hidden-xs">
+			<img style="max-width: 35px; float: right;" src="{{ asset('bundles/sos/global/img/repeat.png') }}" alt="" class="img-responsive form-img">
+		</div>
+
+		<input type="hidden" name="form" value="resultat">
+
+	</form>
 
    	<div class="clearfix spacer"></div>
 
@@ -71,6 +129,7 @@
 		{% endif %}
 
 		<input type="hidden" name="form" value="anglais">
+		<br><br>
 		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
 	</form>
 </div>
