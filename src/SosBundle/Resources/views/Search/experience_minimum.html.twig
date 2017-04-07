@@ -4,8 +4,7 @@
 
 	<div id="poste_hotellerie" class="col-xs-12 sos-form">
 		<h3 class="title-heading">Quelle expérience minimum ?</h3>
-		<ul class="col-lg-7 col-lg-offset-3">
-
+		
 			{% if data.match_employe.nb == 0 %}
 				<p>Aucun candidat ne correspond à vos critères. </p>
 			{% elseif data.match_employe.nb > 1 %}
@@ -14,6 +13,8 @@
 				<p>{{ data.match_employe.nb }} candidat correspond à vos critères.</p>
 			{% endif %}
 		<br>
+
+		<ul class="col-lg-7 col-lg-offset-3">
 
 		{% for experience in experience_minimum %}
 

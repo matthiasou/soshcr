@@ -220,7 +220,7 @@ header #login-icon {
     }
 }
 
-@media only screen and (max-width: 767px) {
+@media (max-width: 767px) {
     header {
         -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
         clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%)
@@ -330,6 +330,11 @@ header #login-icon {
         bottom: 20px!important;
         font-size: 50px!important
     }
+
+    .content-container{
+        min-height: 72vh!important;
+    }
+
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
@@ -347,6 +352,11 @@ header #login-icon {
         bottom: 20px!important;
         font-size: 50px!important
     }
+
+    .content-container{
+        min-height: 52vh!important;
+    }
+
 }
 
 @media only screen and (max-width: 767px) {
@@ -380,7 +390,6 @@ footer {
     height: 150px;
     padding-top: 65px;
     text-align: center;
-    /*margin-top: 70px;*/
 }
 
 footer ul {
@@ -399,7 +408,7 @@ footer ul li {
 @media only screen and (max-width: 767px) {
     #barre-jaune-footer {
         position: absolute;
-        bottom: 40px;
+        bottom: 15px;
         height: 40px;
         margin-top: -75px;
         clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);
@@ -424,7 +433,7 @@ footer ul li {
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
     #barre-jaune-footer {
         position: absolute;
-        bottom: 40px;
+        bottom: 15px;
         height: 65px;
         margin-top: -75px;
         clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);
@@ -435,9 +444,9 @@ footer ul li {
     footer {
         -webkit-clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);
         clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);
+        padding-top: 85px
     }
     footer ul {
-        margin: 95px auto 0px;
         font-size: 20px;
         padding: 0
     }
@@ -449,7 +458,7 @@ footer ul li {
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
     #barre-jaune-footer {
         position: absolute;
-        bottom: 40px;
+        bottom: 15px;
         height: 65px;
         margin-top: -75px;
         clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);
@@ -460,9 +469,9 @@ footer ul li {
     footer {
         -webkit-clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);
         clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);
+        padding-top: 85px;
     }
     footer ul {
-        margin: 85px auto 0px;
         font-size: 20px;
         padding: 0
     }
@@ -474,7 +483,7 @@ footer ul li {
 @media only screen and (min-device-width: 1025px) {
     #barre-jaune-footer {
         position: absolute;
-        bottom: 35px;
+        bottom: 15px;
         height: 110px;
         margin-top: -75px;
         clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);
@@ -1278,4 +1287,22 @@ a {
 
 .box .space {
     height: 30px;
+}
+
+
+.box  .icon  .info  ul {
+    list-style-type: none;
+    padding: 0;
+}
+.box > .icon > .info > p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5em;
+    margin: 20px;
+}
+
+@media (min-width: 1800px) {
+    .content-container{
+        min-height: 92vh!important;
+    }
 }
