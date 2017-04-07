@@ -18,7 +18,13 @@
 
 		{% for contrat in contrats %}
 
-		        <li class="col-sm-6 col-md-2 text-center">
+		        <li class="
+		        	{% if contrats|length == 5 %}
+		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+					{% else %}
+						col-sm-{{ 12 / contrats|length }}
+		        	{% endif %} text-center">
+		        	
 		            <form method="post" action="
 		            {% if contrat.libelle == "CDD" or contrat.libelle == "CDI" or contrat.libelle == "Stage" %}
 		            	{{ path('duree') }}
@@ -28,8 +34,8 @@
 		            	{{ path('cursus') }}
 		            {% endif %}">
 		                <button>
-							<img src="{{ asset('bundles/sos/global/img/contrat/' ~ contrat.id ~ '.png') }} " alt="" class="img-responsive form-img">
-		                    <p>{{ contrat.libelle }}</p>
+							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/contrat/' ~ contrat.id ~ '.png') }} " alt="" class="img-responsive form-img">
+		                    {# <p>{{ contrat.libelle }}</p> #}
 		                </button>
 		                <input type="hidden" value="{{ contrat.id }}" name="contrat">
 						<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">

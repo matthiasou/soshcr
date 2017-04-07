@@ -4,7 +4,7 @@
 
 	<div id="poste_hotellerie" class="col-xs-12 sos-form">
 		<h3 class="title-heading">Quelle expérience minimum ?</h3>
-		<ul class="col-lg-8 col-lg-offset-2">
+		<ul class="col-lg-7 col-lg-offset-3">
 
 			{% if data.match_employe.nb == 0 %}
 				<p>Aucun candidat ne correspond à vos critères. </p>
@@ -17,10 +17,16 @@
 
 		{% for experience in experience_minimum %}
 
-		        <li class="col-sm-2 col-md-2 text-center">
+		        <li class="
+		        	{% if experience_minimum|length == 5 %}
+		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+					{% else %}
+						col-sm-{{ 12 / experience_minimum|length }}
+		        	{% endif %} text-center">
+		        	
 		            <form method="post" action="{{ path('anglais')}}">
 		                <button>
-		                    <img src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ experience.id ~ '.png') }}" alt="">
+		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ experience.id ~ '.png') }}" alt="">
 		                    {% if experience.id == 1 %}
 		                    	<p>0 an</p>
 		                    {% elseif experience.id == 2 %}

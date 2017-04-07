@@ -18,10 +18,16 @@
 		
 		{% for service in services %}
 
-	        <li class="col-sm-6 col-md-6 text-center">
+	        <li class="
+	        	{% if services|length == 5 %}
+	        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+				{% else %}
+					col-sm-{{ 12 / services|length }}
+	        	{% endif %} text-center">
+	        	
 	            <form method="post" action="{{ path('poste') }}">
 	                <button>
-	                    <img src="{{ asset('bundles/sos/global/img/service/'~ service.id ~'-service.png') }}" alt="" class="img-responsive form-img">
+	                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/service/'~ service.id ~'-service.png') }}" alt="" class="img-responsive form-img">
 	                    <p>{{ service.libelle }}</p>
 	                </button>
 	                <input type="hidden" value="{{ service.id }}" name="service_activite">

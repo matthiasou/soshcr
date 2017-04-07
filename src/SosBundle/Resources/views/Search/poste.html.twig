@@ -18,10 +18,16 @@
 
 		{% for poste in postes %}
 
-	        <li class="col-sm-6 col-md-2 text-center">
+	        <li class="
+	        	{% if postes|length == 5 %}
+		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+					{% else %}
+						col-sm-{{ 12 / postes|length }}
+		        	{% endif %} text-center">
+		        	
 	            <form method="post" action="{{ path('contrat') }}">
 	                <button>
-	                    <img src="{{ asset('bundles/sos/global/img/poste/' ~ poste.id ~ '.png') }} " alt="" class="img-responsive form-img">
+	                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/poste/' ~ poste.id ~ '.png') }} " alt="" class="img-responsive form-img">
 	                    <p>{{ poste.libelle | raw }}</p>
 	                </button>
 	                <input type="hidden" value="{{ poste.id }}" name="poste">

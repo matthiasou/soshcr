@@ -17,10 +17,15 @@
 
 		<ul class="col-lg-8 col-lg-offset-2">
 			{% for etablissement in etablissements %}
-				<li class="col-sm-6 col-md-3 text-center">
+				<li class="
+					{% if etablissements|length == 5 %}
+		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+					{% else %}
+						col-sm-{{ 12 / etablissements|length }}
+		        	{% endif %} text-center">
 					<form method="post" action="{{ path('secteur') }}">
 						<button>
-							<img src="{{ asset('bundles/sos/global/img/rating/' ~ etablissement.id )}}-stars.png" alt="" class="img-responsive form-img">
+							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/rating/' ~ etablissement.id )}}-stars.png" alt="" class="img-responsive form-img">
 							<p>{{ etablissement.libelle | raw }}</p>
 						</button>
 						<input type="hidden" value="{{ etablissement.id }}" name="classification">

@@ -17,10 +17,16 @@
 
 		{% for formation in formation_minimum %}
 
-		        <li class="col-sm-2 col-md-2 text-center">
+		        <li class="
+		        	{% if formation_minimum|length == 5 %}
+		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+					{% else %}
+						col-sm-{{ 12 / formation_minimum|length }}
+		        	{% endif %} text-center">
+		        	
 		            <form method="post" action="{{ path('experience') }}">
 		                <button>
-		                    <img src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ formation.id ~ '.png') }}" alt="">
+		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ formation.id ~ '.png') }}" alt="">
 		                    <p>{{ formation.libelle }}</p>
 		                </button>
 		                <input type="hidden" value="{{ formation.id }}" name="formation_minimum">
