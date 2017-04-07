@@ -18,10 +18,16 @@
 		
 		{% for secteur in secteurs %}
 
-	        <li class="col-sm-6 col-md-6 text-center">
+	        <li class="
+	        	{% if secteurs|length == 5 %}
+		        	col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+				{% else %}
+					col-sm-{{ 12 / secteurs|length }}
+		        {% endif %} text-center">
+
 	            <form method="post" action="{% if secteur.id == 1 %}{{ path('poste') }}{% else %}{{ path('service') }}{% endif %}">
 	                <button>
-	                    <img src="{{ asset('bundles/sos/global/img/secteur/'~ secteur.id ~'-secteur.png') }}" alt="" class="img-responsive form-img">
+	                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/secteur/'~ secteur.id ~'-secteur.png') }}" alt="" class="img-responsive form-img">
 	                    <p>{{ secteur.libelle }}</p>
 	                </button>
 	                <input type="hidden" value="{{ secteur.id }}" name="secteur_activite">

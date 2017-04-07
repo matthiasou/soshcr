@@ -18,10 +18,16 @@
 
 		{% for niveau in niveau_anglais %}
 
-		        <li class="col-sm-2 col-md-2 text-center">
+		        <li class="
+		        	{% if niveau_anglais|length == 5 %}
+		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+					{% else %}
+						col-sm-{{ 12 / niveau_anglais|length }}
+		        	{% endif %} text-center">
+		        	
 		            <form method="post" action="{{ path('date') }}">
 		                <button>
-		                    <img src="{{ asset('bundles/sos/global/img/' ~ niveau.id ~ '-stars.png') }}" alt="">
+		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/' ~ niveau.id ~ '-stars.png') }}" alt="">
 		                    <p>{{ niveau.libelle }}</p>
 		                </button>
 		                <input type="hidden" value="{{ niveau.id }}" name="niveau_anglais">

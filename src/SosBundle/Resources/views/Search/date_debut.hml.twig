@@ -13,10 +13,10 @@
 			<p>{{ data.match_employe.nb }} candidat correspond à vos critères.</p>
 		{% endif %}
 		<br>
-
 		<ul class="col-lg-8 col-lg-offset-2">
 
-		        <li class="col-sm-2 col-md-2 text-center">
+		        <li class="col-sm-12 text-center">
+		        	
 		            <form method="post" action="{{ path('resultat') }}">
 		            	<input type="date" name="date_debut">
 		                <button class="btn btn-primary">Valider</button>

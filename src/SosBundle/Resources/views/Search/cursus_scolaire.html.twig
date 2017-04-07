@@ -18,10 +18,16 @@
 
 		{% for cursus in cursus_scolaire %}
 
-		        <li class="col-sm-2 col-md-2 text-center">
+		        <li class="
+		        	{% if cursus_scolaire|length == 5 %}
+		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+					{% else %}
+						col-sm-{{ 12 / cursus_scolaire|length }}
+		        	{% endif %} text-center">
+		        	
 		            <form method="post" action="{{ path('anglais') }}">
 		                <button>
-		                    <img src="{{ asset('bundles/sos/global/img/' ~ cursus.id ~ '-stars.png') }}" alt="">
+		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/' ~ cursus.id ~ '-stars.png') }}" alt="">
 		                    <p>{{ cursus.libelle }}</p>
 		                </button>
 		                <input type="hidden" value="{{ cursus.id }}" name="cursus_scolaire">

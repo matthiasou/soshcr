@@ -17,7 +17,13 @@
 
 		{% for duree in contrat_duree %}
 
-		        <li class="col-sm-2 col-md-2 text-center">
+		        <li class="
+		        	{% if contrat_duree|length == 5 %}
+		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+					{% else %}
+						col-sm-{{ 12 / contrat_duree|length }}
+		        	{% endif %} text-center">
+		        	
 		            <form method="post" action="
 		            {% if data.contrat == 1 or data.contrat == 2 %}
 		            	{{ path('formation') }}
@@ -25,7 +31,7 @@
 		            	{{ path('cursus') }}
 		            {% endif %}">
 		                <button>
-		                    <img src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ duree.id ~ '.png') }}" alt="">
+		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ duree.id ~ '.png') }}" alt="">
 		                    <p>{{ duree.libelle }}</p>
 		                </button>
 		                <input type="hidden" value="{{ duree.id }}" name="contrat_duree">
