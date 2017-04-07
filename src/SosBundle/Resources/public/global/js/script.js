@@ -8,6 +8,13 @@ $(document).ready(function(){
         
     }
 
+
+    if (typeof validation != "undefined") {
+
+        sweetAlert("Bravo...", validation, "success");
+
+    }
+
 });
 
 //fonction qui coche toutes les checkboxes
