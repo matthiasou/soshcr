@@ -41,7 +41,7 @@ class SearchController extends Controller
             $result = json_decode(file_get_contents($query));
             if ($result == NULL || $result == "" ||  $result->status == "ZERO_RESULTS" || $result->status == "INVALID_REQUEST"  || $result->status == "REQUEST_DENIED" ){
 
-                 return $this->redirectToRoute('ville', array('error' => 'ville'));
+                 return $this->render('SosBundle:Search:ville.html.twig', array('error' => 'ville'));
 
             }else{
                 $json = $result->results[0];
@@ -545,8 +545,10 @@ class SearchController extends Controller
     public function demandeCvAction(Request $request)
     {
 
+        $em = $this->getDoctrine()->getManager();
+
         // Demande le Cv au candidat
-        if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "resultat" ) {
+        if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "resultat") {
 
             $data['ville'] = $request->get('ville');
             $data['classification'] = $request->get('classification');
@@ -579,19 +581,88 @@ class SearchController extends Controller
 
             $data['employes'] = $this->get('sos.matching')->getEmploye($data);
 
-            foreach ($data['employes']  as $employee){
+            foreach ($data['employes'] as $employee) {
                 $dateNaisssance = $employee->getDateNaissance();
                 $today = new \DateTime('NOW');
-                $age= $today->diff($dateNaisssance);
+                $age = $today->diff($dateNaisssance);
 
-                $employee->age=(int)($age->days/365);
+                $employee->age = (int)($age->days / 365);
             }
+
+            $poste = $em->getRepository("SosBundle:PosteRecherche")->findOneBy(array('id' => $data['poste']));
+            $data['demande_poste'] = $poste;
+            $contrat = $em->getRepository("SosBundle:Contrat")->findOneBy(array('id' => $data['contrat']));
+            $data['demande_contrat'] = $contrat;
+
+            $tab_demande = [];
+            if (isset($_POST['mail_demande_utilisateur'])) {
+                foreach ($_POST['mail_demande_utilisateur'] as $demandeCV) {
+                    $tab_demande[] = $demandeCV;
+                }
+                $data['mail_demande_utilisateur'] = $tab_demande;
+
+            }
+
 
             dump($data);
             return $this->render('SosBundle:Search:demandeCv.html.twig', array('data' => $data));
 
-        }else{
-            return $this->redirectToRoute($request->get('form'));
         }
+        else if(isset($_POST['message'])){
+            $data['ville'] = $request->get('ville');
+            $data['classification'] = $request->get('classification');
+            $data['secteur_activite'] = $request->get('secteur_activite');
+            $data['poste'] = $request->get('poste');
+            $data['contrat'] = $request->get('contrat');
+            $data['niveau_anglais'] = $request->get('niveau_anglais');
+            $data['date_debut'] = $request->get('date_debut');
+
+            // Si on est dans la restauration : on ajoute le type de restauration
+            if (null !== $request->get('service_activite')) {
+                $data['service_activite'] = $request->get('service_activite');
+            }
+
+            if (null !== $request->get('cursus_scolaire')) {
+                $data['cursus_scolaire'] = $request->get('cursus_scolaire');
+            }
+
+            if (null !== $request->get('contrat_duree')) {
+                $data['contrat_duree'] = $request->get('contrat_duree');
+            }
+
+            if (null !== $request->get('formation_minimum')) {
+                $data['formation_minimum'] = $request->get('formation_minimum');
+            }
+
+            if (null !== $request->get('experience_minimum')) {
+                $data['experience_minimum'] = $request->get('experience_minimum');
+            }
+
+            $data['employes'] = $this->get('sos.matching')->getEmploye($data);
+
+            foreach ($data['employes'] as $employee) {
+                $dateNaisssance = $employee->getDateNaissance();
+                $today = new \DateTime('NOW');
+                $age = $today->diff($dateNaisssance);
+
+                $employee->age = (int)($age->days / 365);
+            }
+
+            $poste = $em->getRepository("SosBundle:PosteRecherche")->findOneBy(array('id' => $data['poste']));
+            $data['demande_poste'] = $poste;
+            $contrat = $em->getRepository("SosBundle:Contrat")->findOneBy(array('id' => $data['contrat']));
+            $data['demande_contrat'] = $contrat;
+
+
+            $validation = "Mail envoyé";
+            dump($validation);
+            dump($data);
+            return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data, "validation"=>$validation));
+
+        }
+        else{
+            return $this->redirectToRoute('index');
+        }
+
     }
 }

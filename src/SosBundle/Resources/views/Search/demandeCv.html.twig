@@ -1,35 +1,71 @@
 {% extends 'SosBundle::layout.html.twig' %}
 
+{% block javascript %}
+{% endblock  %}
 {% block sos_body %}
 
+    <div id="poste_hotellerie" class="col-xs-12 sos-form">
+        <h3 class="title-heading">Envoyez vos demandes de CV</h3>
+        <br>
 
- <div class="col-md-5">
-        <div class="form-area">
-            <form method="post">
-                <br style="clear:both">
-                <h3 style="margin-bottom: 25px; text-align: center;">Demande de CV</h3>
-                <div class="form-group">
-                    <textarea class="form-control" type="textarea" id="textarea2" name="textarea_2" placeholder="Message" maxlength="500" rows="9"><?php
-                        echo "Bonjour,\n".
-                            "Nous recherchons un(e)  à partir du  en .\n".
-                            "Envoyez nous votre curriculum vitae et une lettre de motivation.\n".
-                            "Merci de répondre à [Entrez votre adresse email]\n".
-                            "\n".
-                            "A bientôt,\n".
-                            "[Votre nom]\n".
-                            "[Votre numéro de téléphone]\n"
-                        ;
-                        ?></textarea>
-                </div>
+        <ul class="col-lg-8 col-lg-offset-2">
 
-                <button type="submit" class="btn btn-primary pull-right">Envoyer</button>
-            </form>
-        </div>
-    </div>
+
+
+                <li class="col-sm-2 col-md-2 text-center">
+                    <form method="post" action="{{ path('demandeCv') }}">
+						<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+						<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+						<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+						<input type="hidden" name="classification" value="{{ data.classification }}">
+						<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
+						<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
+
+						{% if data.service_activite is defined %}
+							<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
+						{% endif %}
+						<input type="hidden" name="poste" value="{{ data.poste }}">
+						<input type="hidden" name="contrat" value="{{ data.contrat }}">
+						<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
+
+						{% if data.contrat_duree is defined %}
+							<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
+						{% endif %}
+
+						{% if data.formation_minimum is defined %}
+							<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
+						{% endif %}
+
+						{% if data.experience_minimum is defined %}
+							<input type="hidden" name="experience_minimum" value="{{ data.experience_minimum }}">
+						{% endif %}
+
+						{% if data.cursus_scolaire is defined %}
+							<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
+						{% endif %}
+                        <textarea style="width: 500px;" class="form-control" type="textarea" id="message" name="message" placeholder="Message" rows="8">
+Bonjour,
+    Nous recherchons un(e) {{ data.demande_poste.libelle }} à partir du {{ data.date_debut }}  en {{ data.demande_contrat.libelle }} .
+    Envoyez nous votre curriculum vitae et une lettre de motivation.
+    Merci de répondre à [Entrez votre adresse email]
+
+A bientôt,
+[Votre nom]
+[Votre numéro de téléphone]
+
+                    </textarea>
+                        <button type="submit" class="btn btn-primary pull-right">Envoyer</button>
+                    </form>
+                </li>
+
+
+        </ul>
+
 
 
 
    	<div class="clearfix spacer"></div>
+		{% if (js is defined) %}{{ js|raw }}{% endif %}
 
     <form action="{{ path('resultat')}}" method="post">
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">

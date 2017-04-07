@@ -1,8 +1,14 @@
 {# Gestion des erreurs par la sweetalert #}
-{% if app.request.get('error') is defined  %}
+{% if error is defined and error != ""  %}
   <script>
-  var error = "{{ app.request.get('error') }}";
+  var error = "{{ error }}";
   </script>
+{% endif %}
+
+{% if validation is defined and validation != "" %}
+    <script>
+        var validation = "{{ validation }}";
+    </script>
 {% endif %}
 
 {% if app.request.attributes.get('_route') != 'index' %}
