@@ -62,3 +62,7 @@ demandeCv:
 dashboard:
     path:     /dashboard
     defaults: { _controller: SosBundle:Default:dashboard }
+
+demandeRecommandation:
+    path:     /demandeRecommandation
+    defaults: { _controller: SosBundle:Admin:demandeRecommandation }

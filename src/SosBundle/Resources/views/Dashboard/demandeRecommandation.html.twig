@@ -1,0 +1,83 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+
+    <form class="form-horizontal col-xs-12" method="POST" action="insert_recommandation.php">
+        <fieldset>
+
+            <h3> A qui demandes tu une recommandation ? (1 demande par jour) </h3>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="nom_etablissement">Nom de l'établissement</label>
+                <div class="col-md-4">
+                    <input id="nom_etablissement" name="nom_etablissement" type="text" placeholder="" class="form-control input-md">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="email">Email</label>
+                <div class="col-md-4">
+                    <input id="email" name="email" type="text" placeholder="" class="form-control input-md">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="ville">Ville</label>
+                <div class="col-md-4">
+                    <input id="ville" name="ville" type="text" placeholder="" class="form-control input-md">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="nom_responsable">Nom du responsable</label>
+                <div class="col-md-4">
+                    <input id="nom_responsable" name="nom_responsable" type="text" placeholder="" class="form-control input-md">
+
+                </div>
+            </div>
+
+            <!-- Multiple Checkboxes (inline) -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="civilite"></label>
+                <div class="col-md-4">
+                    <label class="checkbox-inline" for="checkboxes-0">
+                        <input type="checkbox" name="civilite" id="checkboxes-0" value="0">
+                        Madame
+                    </label>
+                    <label class="checkbox-inline" for="checkboxes-1">
+                        <input type="checkbox" name="civilite" id="checkboxes-1" value="1">
+                        Monsieur
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="honneur"></label>
+                <div class="col-md-4">
+                    <input type="checkbox" name="honneur" value="honneur"> Je certifie sur l'honneur l'exactitude de ces informations
+                </div>
+            </div>
+
+            <p>
+                Pour faire valider un maximum de recommandations, il est vivement conseillé de prévenir ton destinataire (Il serait dommage que le mail finisse à la poubelle sans être lu !).
+                Il recevra sous 72h un email venant de contact@soshcr.fr avec ce lien de validation :
+            </p>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="valider"></label>
+                <div class="col-md-4">
+                    <input value="OK, j'envoie ma demande" type="submit" name="valider" class="btn btn-primary"></button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+{% endblock %}
