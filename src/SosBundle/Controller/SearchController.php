@@ -600,12 +600,14 @@ class SearchController extends Controller
                     $tab_demande[] = $demandeCV;
                 }
                 $data['mail_demande_utilisateur'] = $tab_demande;
-
+                return $this->render('SosBundle:Search:demandeCv.html.twig', array('data' => $data));
+            }
+            else{
+                return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data));
             }
 
 
-            dump($data);
-            return $this->render('SosBundle:Search:demandeCv.html.twig', array('data' => $data));
+
 
         }
         else if(isset($_POST['message'])){
@@ -655,9 +657,25 @@ class SearchController extends Controller
 
 
             $validation = "Mail envoyé";
-            dump($validation);
-            dump($data);
-            return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data, "validation"=>$validation));
+
+            foreach ($_POST['mail_demande_utilisateur'] as $user){
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Nouvelle demande sur SOSHCR')
+                    ->setFrom('soshcr@contact.fr')
+                    ->setTo($user)
+                    ->setBody(
+                        $this->renderView(
+                            'SosBundle:Search:messageCv.html.twig',
+                            array('message' => $_POST['message'])
+                        ),
+                        'text/html'
+                    );
+                $this->get('mailer')->send($message);
+            }
+
+
+
+            return $this->render('SosBundle:Dashboard:dashboard.html.twig', array('data' => $data, "validation"=>$validation));
 
         }
         else{
@@ -665,4 +683,8 @@ class SearchController extends Controller
         }
 
     }
+
+
+
+
 }

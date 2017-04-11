@@ -58,6 +58,9 @@ demandeCv:
     path:     /search/demandeCv
     defaults: { _controller: SosBundle:Search:demandeCv }
 
+messageCv:
+    path:     /messageCv
+    defaults: { _controller: SosBundle:Search:messageCv }
 
 dashboard:
     path:     /dashboard
