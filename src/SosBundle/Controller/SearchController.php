@@ -168,7 +168,8 @@ class SearchController extends Controller
                   ->where('p.secteur = :secteur_activite')
                   ->andWhere('p.service = :service_activite')
                   ->setParameters(array('secteur_activite' => $data['secteur_activite'], 'service_activite' => $data['service_activite']))
-                  ->getQuery()
+                    ->orderBy('p.id', 'DESC')
+                    ->getQuery()
                   ->getResult();
             }else{
                 $qb = $em->createQueryBuilder();
@@ -176,6 +177,7 @@ class SearchController extends Controller
                   ->from('SosBundle:PosteRecherche','p')
                   ->where('p.secteur = :secteur_activite')
                   ->setParameter('secteur_activite', $data['secteur_activite'])
+                    ->orderBy('p.id', 'DESC')
                   ->getQuery()
                   ->getResult();
             }
@@ -251,7 +253,7 @@ class SearchController extends Controller
 			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
             $repo = $em->getRepository("SosBundle:Contrat");
-            $contrat = $repo->find($data['contrat']);                
+            $contrat = $repo->find($data['contrat']);
 
             dump($data);
             $contrat_duree = $contrat->getDuree();
@@ -293,7 +295,7 @@ class SearchController extends Controller
 
             dump($data);
             $cursus_scolaire_repo = $em->getRepository("SosBundle:CursusScolaire");
-            $cursus_scolaire = $cursus_scolaire_repo->findAll();
+            $cursus_scolaire = $cursus_scolaire_repo->findBy(array(), array('id' => 'desc'));
             return $this->render('SosBundle:Search:cursus_scolaire.html.twig', array('cursus_scolaire' => $cursus_scolaire, 'data' => $data, 'step' => '8'));    
         }else{
             return $this->redirectToRoute($request->get('form'));
@@ -406,9 +408,14 @@ class SearchController extends Controller
             if (null !== $request->get('formation_minimum')) {
                 $data['formation_minimum'] = $request->get('formation_minimum');
             }
+
             
             if (null !== $request->get('experience_minimum')) {
                 $data['experience_minimum'] = $request->get('experience_minimum');
+            }
+            else{
+                $data['cursus_scolaire'] = $request->get('cursus_scolaire');
+
             }
             
             if (null !== $request->get('contrat_duree')) {
@@ -486,7 +493,7 @@ class SearchController extends Controller
      * @Route("/search/resultat")
      */
     public function resultatAction(Request $request)
-    { 
+    { $em = $this->getDoctrine()->getManager();
 
    		// Validation date
     	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "date" ) {
@@ -521,21 +528,28 @@ class SearchController extends Controller
             }
 
 			$data['employes'] = $this->get('sos.matching')->getEmploye($data);
-            
+
             foreach ($data['employes']  as $employee){
                 $dateNaisssance = $employee->getDateNaissance();
                 $today = new \DateTime('NOW');
-                  $age= $today->diff($dateNaisssance);
-    
-                  $employee->age=(int)($age->days/365);
-              }
+                $age= $today->diff($dateNaisssance);
 
-			dump($data);		
+                $employee->age=(int)($age->days/365);
+                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee));
+                $nbRecommandation = count($recommandation);
+                $employee->nbRecommandation = $nbRecommandation;
+
+
+            }
+
+			dump($data);
     		return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data));	
 
 		}else{
             return $this->redirectToRoute($request->get('form'));
         }
+
+
     }
 
 
@@ -544,11 +558,13 @@ class SearchController extends Controller
      */
     public function demandeCvAction(Request $request)
     {
-
         $em = $this->getDoctrine()->getManager();
+
+
 
         // Demande le Cv au candidat
         if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "resultat") {
+
 
             $data['ville'] = $request->get('ville');
             $data['classification'] = $request->get('classification');
@@ -587,6 +603,9 @@ class SearchController extends Controller
                 $age = $today->diff($dateNaisssance);
 
                 $employee->age = (int)($age->days / 365);
+                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee));
+                $nbRecommandation = count($recommandation);
+                $employee->nbRecommandation = $nbRecommandation;
             }
 
             $poste = $em->getRepository("SosBundle:PosteRecherche")->findOneBy(array('id' => $data['poste']));
@@ -595,7 +614,21 @@ class SearchController extends Controller
             $data['demande_contrat'] = $contrat;
 
             $tab_demande = [];
-            if (isset($_POST['mail_demande_utilisateur'])) {
+
+            if ($_POST['action'] == 'imprimer' && (isset($_POST['mail_demande_utilisateur'])) ) {
+                foreach ($_POST['mail_demande_utilisateur'] as $demandeCV) {
+                    $tab_demande[] = $demandeCV;
+                }
+                $data['mail_demande_utilisateur'] = $tab_demande;
+
+                $template = $this->renderView('SosBundle:Search:imprimer.html.twig', array('data' => $data));
+                $html2pdf = $this->get('app.html2pdf');
+                $html2pdf->create('P','A4','fr',true,'UTF-8', array(0,0,10,15));
+                return $html2pdf->generatePdf($template, "ResultatsSOSHCR")->getContent();
+
+
+            }
+            elseif($_POST['action'] == 'demandeCV' && (isset($_POST['mail_demande_utilisateur'])) ){
                 foreach ($_POST['mail_demande_utilisateur'] as $demandeCV) {
                     $tab_demande[] = $demandeCV;
                 }
@@ -605,6 +638,8 @@ class SearchController extends Controller
             else{
                 return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data));
             }
+
+
 
 
 
@@ -648,6 +683,9 @@ class SearchController extends Controller
                 $age = $today->diff($dateNaisssance);
 
                 $employee->age = (int)($age->days / 365);
+                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee));
+                $nbRecommandation = count($recommandation);
+                $employee->nbRecommandation = $nbRecommandation;
             }
 
             $poste = $em->getRepository("SosBundle:PosteRecherche")->findOneBy(array('id' => $data['poste']));
@@ -675,9 +713,11 @@ class SearchController extends Controller
 
 
 
-            return $this->render('SosBundle:Dashboard:dashboard.html.twig', array('data' => $data, "validation"=>$validation));
+            return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data, "validation"=>$validation));
 
         }
+
+
         else{
             return $this->redirectToRoute('index');
         }
