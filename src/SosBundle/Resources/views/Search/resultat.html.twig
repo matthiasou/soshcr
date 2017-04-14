@@ -43,7 +43,7 @@
 		<h3 class="title-heading">Candidats répondants à vos critères de recherche :</h3>
 		<br>
 		<div class="col-sm-2 hidden-md hidden-lg hidden-sm">
-			<img style="max-width: 35px; float: right;" src="{{ asset('bundles/sos/global/img/repeat.png') }}" alt="" class="img-responsive form-img">
+			<a href="{{ path('ville') }}"><img style="max-width: 35px; float: right;" src="{{ asset('bundles/sos/global/img/repeat.png') }}" alt="" class="img-responsive form-img"></a>
 		</div>
 		<div class="col-sm-2 hidden-md hidden-lg hidden-sm">
 	         <input  style="max-width: 45px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/cv.png') }}" border="0" class="img-responsive" alt="Submit" />
@@ -55,13 +55,19 @@
 		Modifier
 		<div class="col-md-12">
                     <ul class="social-network social-circle">
-                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/contrat/' ~ data.contrat ~ '.png') }} " alt="" class="img-responsive form-img"></i></a></li>
-                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/rating/' ~ data.classification )}}-stars.png" alt="" class="img-responsive form-img"></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Secteur d'activité"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/secteur/' ~ data.secteur_activite )}}-secteur.png" alt="" class="img-responsive form-img"></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Classification"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/rating/' ~ data.classification )}}-stars.png" alt="" class="img-responsive form-img"></i></a></li>
+
                         <br><br>
-                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/poste/' ~ data.poste  ~ '.png') }} " alt="" class="img-responsive form-img"></i></a></li>
-                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/secteur/' ~ data.secteur_activite )}}-secteur.png" alt="" class="img-responsive form-img"></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Poste"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/poste/' ~ data.poste  ~ '.png') }} " alt="" class="img-responsive form-img"></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Type de contrat"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/contrat/' ~ data.contrat ~ '.png') }} " alt="" class="img-responsive form-img"></i></a></li>
+
                         <br><br>
-                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ data.contrat_duree  ~ '.png') }} " alt="" class="img-responsive form-img"></i></a></li>
+                        {% if data.contrat_duree is defined %}
+                        <li><a href="#" class="icoTwitter" title="Durée du contrat"><i class="fa fa-twitter" ><img style="width: 70%;" src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ data.contrat_duree  ~ '.png') }} " alt="" class="img-responsive form-img"></i></a></li>
+                       	{% endif %}
+                        <li><a href="#" class="icoTwitter" title="Niveau d'anglais"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/anglais/' ~ data.niveau_anglais  ~ '.png') }} " alt="" class="img-responsive form-img"></i></a></li>
+
                     </ul>
         </div>
 		</div>
@@ -71,7 +77,6 @@
 
 				<br/><br>
 
-				<div id="imprime_moi">
                     {% for employe in data.employes %}
 					<div class="container col-sm-6">
 					  <div class="panel result-panel">
@@ -83,10 +88,10 @@
 					    	<p>{{ employe.email }}</p>
 					    	<p>{{ employe.telephone }}</p>
 					    </div>
+					    <p>{{ employe.nbRecommandation }} recommandation</p>
 					  </div>
 					</div>
 				{% endfor %}
-				</div>
 
 
 
@@ -96,10 +101,10 @@
 		Outils
 		<div class="col-md-12">
                     <ul class="social-network social-circle">
-                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" ><img style="max-width: 35px; float: right;" onclick="javascript:imprime_bloc('titre', 'imprime_moi');" src="{{ asset('bundles/sos/global/img/print.png') }}" alt="" class="img-responsive form-img"></i></a></li>
-                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" ><input  style="max-width: 45px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/cv.png') }}" border="0" class="img-responsive" alt="Submit" /></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" ><input name ="action" value="imprimer" style="max-width: 40px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/print.png') }}" border="0" class="img-responsive"  /></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" ><input name ="action" value="demandeCV"  style="max-width: 45px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/cv.png') }}" border="0" class="img-responsive" alt="Submit" /></i></a></li>
                         <br><br>
-                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" ><img style="max-width: 35px; float: right;" src="{{ asset('bundles/sos/global/img/repeat.png') }}" alt="" class="img-responsive form-img"></i></a></li>
+                        <li><a href="{{ path('ville') }}" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" ><img style="max-width: 35px; float: right;" src="{{ asset('bundles/sos/global/img/repeat.png') }}" alt="" class="img-responsive form-img"></i></a></li>
                     </ul>
         </div>
 

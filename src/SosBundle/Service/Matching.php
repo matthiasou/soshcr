@@ -71,7 +71,9 @@ class Matching {
 
         if (isset($data['formation_minimum'])) {
             $formation_minimum_join = "JOIN formation f ON uc.formation_id = f.id";
-            $formation_minimum =  "AND f.classement >= ".$data['formation_minimum'];
+            if ($data['formation_minimum'] != 0) { // si tout n'est pas sélectionné
+                $formation_minimum =  "AND f.classement >= ".$data['formation_minimum'];
+            }
         }
 
         if (isset($data['experience_minimum'])) {
@@ -195,7 +197,9 @@ class Matching {
 
         if (isset($data['formation_minimum'])) {
             $formation_minimum_join = "JOIN formation f ON uc.formation_id = f.id";
-            $formation_minimum =  "AND f.classement >= ".$data['formation_minimum'];
+            if ($data['formation_minimum'] != 0) { // si tout n'est pas sélectionné
+                $formation_minimum =  "AND f.classement >= ".$data['formation_minimum'];
+            }
         }
 
         if (isset($data['experience_minimum'])) {
