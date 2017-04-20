@@ -27,7 +27,7 @@
 	        	
 	            <form method="post" action="{{ path('poste') }}">
 	                <button>
-	                    <img style="max-width:75px" src="{{ asset('bundles/sos/global/img/service/'~ service.id ~'.png') }}" alt="" class="img-responsive form-img">
+	                    <img style="max-height:75px; width:auto; " src="{{ asset('bundles/sos/global/img/service/'~ service.id ~'.png') }}" alt="" class="img-responsive form-img">
 	                    <p>{{ service.libelle }}</p>
 	                </button>
 	                <input type="hidden" value="{{ service.id }}" name="service_activite">

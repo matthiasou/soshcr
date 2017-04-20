@@ -62,6 +62,10 @@ messageCv:
     path:     /messageCv
     defaults: { _controller: SosBundle:Search:messageCv }
 
+message5J:
+    path:     /message5J
+    defaults: { _controller: SosBundle:Search:message5J }
+
 dashboard:
     path:     /dashboard
     defaults: { _controller: SosBundle:Default:dashboard }

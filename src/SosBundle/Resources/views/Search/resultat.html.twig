@@ -55,19 +55,18 @@
 		Modifier
 		<div class="col-md-12">
                     <ul class="social-network social-circle">
-                        <li><a href="#" class="icoTwitter" title="Secteur d'activité"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/secteur/' ~ data.secteur_activite )}}-secteur.png" alt="" class="img-responsive form-img"></i></a></li>
-                        <li><a href="#" class="icoTwitter" title="Classification"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/rating/' ~ data.classification )}}-stars.png" alt="" class="img-responsive form-img"></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Classification"><i class="fa fa-twitter" ><input name ="action" value="classification" type="image" src="{{ asset('bundles/sos/global/img/rating/' ~ data.classification )}}-stars.png" border="0" class="img-responsive"  /></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Secteur d'activité"><i class="fa fa-twitter" ><input name ="action" value="secteur_activite" type="image" src="{{ asset('bundles/sos/global/img/secteur/' ~ data.secteur_activite )}}-secteur.png" border="0" class="img-responsive"  /></i></a></li>
 
                         <br><br>
-                        <li><a href="#" class="icoTwitter" title="Poste"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/poste/' ~ data.poste  ~ '.png') }} " alt="" class="img-responsive form-img"></i></a></li>
-                        <li><a href="#" class="icoTwitter" title="Type de contrat"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/contrat/' ~ data.contrat ~ '.png') }} " alt="" class="img-responsive form-img"></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Poste"><i class="fa fa-twitter" ><input name ="action" value="poste" type="image" src="{{ asset('bundles/sos/global/img/poste/' ~ data.poste  ~ '.png') }} " border="0" class="img-responsive"  /></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Type de contrat"><i class="fa fa-twitter" ><input name ="action" value="contrat" type="image" src="{{ asset('bundles/sos/global/img/contrat/' ~ data.contrat ~ '.png') }} " border="0" class="img-responsive"  /></i></a></li>
 
                         <br><br>
                         {% if data.contrat_duree is defined %}
-                        <li><a href="#" class="icoTwitter" title="Durée du contrat"><i class="fa fa-twitter" ><img style="width: 70%;" src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ data.contrat_duree  ~ '.png') }} " alt="" class="img-responsive form-img"></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Durée du contrat"><i class="fa fa-twitter" ><input style="width: 75%;" name ="action" value="contrat_duree" type="image"  src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ data.contrat_duree  ~ '.png') }} " border="0" class="img-responsive" /></i></a></li>
                        	{% endif %}
-                        <li><a href="#" class="icoTwitter" title="Niveau d'anglais"><i class="fa fa-twitter" ><img src="{{ asset('bundles/sos/global/img/anglais/' ~ data.niveau_anglais  ~ '.png') }} " alt="" class="img-responsive form-img"></i></a></li>
-
+                        <li><a href="#" class="icoTwitter" title="Niveau d'anglais"><i class="fa fa-twitter" ><input name ="action" value="niveau_anglais" type="image"  src="{{ asset('bundles/sos/global/img/anglais/' ~ data.niveau_anglais  ~ '.png') }} " border="0" class="img-responsive"/></i></a></li>
                     </ul>
         </div>
 		</div>

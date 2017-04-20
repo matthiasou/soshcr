@@ -45,6 +45,14 @@ class PosteRecherche
 
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="coefficient", type="integer")
+     */
+    private $coefficient;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -124,5 +132,29 @@ class PosteRecherche
     public function getService()
     {
         return $this->service;
+    }
+
+    /**
+     * Set coefficient
+     *
+     * @param integer $coefficient
+     *
+     * @return PosteRecherche
+     */
+    public function setCoefficient($coefficient)
+    {
+        $this->coefficient = $coefficient;
+
+        return $this;
+    }
+
+    /**
+     * Get coefficient
+     *
+     * @return integer
+     */
+    public function getCoefficient()
+    {
+        return $this->coefficient;
     }
 }

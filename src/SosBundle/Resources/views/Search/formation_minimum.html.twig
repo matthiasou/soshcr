@@ -26,8 +26,8 @@
 		        	
 		            <form method="post" action="{{ path('experience') }}">
 		                <button>
-		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ formation.id ~ '.png') }}" alt="">
-		                    <p>{{ formation.libelle }}</p>
+		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/formation/' ~ formation.id ~ '.png') }}" alt="">
+		                    <p></p>
 		                </button>
 		                <input type="hidden" value="{{ formation.id }}" name="formation_minimum">
 						<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">

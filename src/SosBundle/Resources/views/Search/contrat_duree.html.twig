@@ -32,7 +32,11 @@
 		            {% endif %}">
 		                <button>
 		                    <img style="max-width:90px" src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ duree.id ~ '.png') }}" alt="">
-		                    <p>{{ duree.libelle }}</p>
+							{% if data.contrat == 1 or data.contrat == 2 %}
+		                    <p>{{ duree.libelle }} </p>
+							{% else %}
+								<p></p>
+							{% endif %}
 		                </button>
 		                <input type="hidden" value="{{ duree.id }}" name="contrat_duree">
 						<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
