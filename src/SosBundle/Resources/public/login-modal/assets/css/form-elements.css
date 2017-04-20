@@ -1,20 +1,20 @@
 
-input[type="text"], 
-input[type="password"], 
+input[type="text"],
+input[type="password"],
 
 
 
 
 
-input[type="text"]:focus, 
-input[type="password"]:focus, 
+input[type="text"]:focus,
+input[type="password"]:focus,
 
 
-input[type="text"]:-moz-placeholder, input[type="password"]:-moz-placeholder, 
+input[type="text"]:-moz-placeholder, input[type="password"]:-moz-placeholder,
 
-input[type="text"]:-ms-input-placeholder, input[type="password"]:-ms-input-placeholder, 
+input[type="text"]:-ms-input-placeholder, input[type="password"]:-ms-input-placeholder,
 
-input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder, 
+input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder,
 
 
 

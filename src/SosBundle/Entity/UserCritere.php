@@ -65,6 +65,118 @@ class UserCritere
     private $experience;
 
     /**
+     * @return mixed
+     */
+    public function getSecteur()
+    {
+        return $this->secteur;
+    }
+
+    /**
+     * @param mixed $secteur
+     */
+    public function setSecteur($secteur)
+    {
+        $this->secteur = $secteur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+
+    /**
+     * @param mixed $service
+     */
+    public function setService($service)
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTypeContrat()
+    {
+        return $this->typeContrat;
+    }
+
+    /**
+     * @param mixed $typeContrat
+     */
+    public function setTypeContrat($typeContrat)
+    {
+        $this->typeContrat = $typeContrat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * @param mixed $experience
+     */
+    public function setExperience($experience)
+    {
+        $this->experience = $experience;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFormation()
+    {
+        return $this->formation;
+    }
+
+    /**
+     * @param mixed $formation
+     */
+    public function setFormation($formation)
+    {
+        $this->formation = $formation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCursus()
+    {
+        return $this->cursus;
+    }
+
+    /**
+     * @param mixed $cursus
+     */
+    public function setCursus($cursus)
+    {
+        $this->cursus = $cursus;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateDisponibilite()
+    {
+        return $this->dateDisponibilite;
+    }
+
+    /**
+     * @param mixed $dateDisponibilite
+     */
+    public function setDateDisponibilite($dateDisponibilite)
+    {
+        $this->dateDisponibilite = $dateDisponibilite;
+    }
+
+    /**
      * @ORM\ManyToOne(targetEntity="Formation")
      */
     private $formation;

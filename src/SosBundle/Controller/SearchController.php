@@ -217,7 +217,7 @@ class SearchController extends Controller
 			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
 	        $repo = $em->getRepository("SosBundle:Contrat");
-	        $contrats = $repo->findAll();
+	        $contrats = $repo->findBy(array(),array('id' => 'desc'));
 
     		dump($data);
     		return $this->render('SosBundle:Search:contrat.html.twig', array('contrats' => $contrats, 'data' => $data, 'step' => '6'));	
@@ -527,6 +527,7 @@ class SearchController extends Controller
                 $data['experience_minimum'] = $request->get('experience_minimum');
             }
 
+            $this->get('sos.matching')->setScoreEmploye($data);
 			$data['employes'] = $this->get('sos.matching')->getEmploye($data);
 
             foreach ($data['employes']  as $employee){
@@ -535,7 +536,7 @@ class SearchController extends Controller
                 $age= $today->diff($dateNaisssance);
 
                 $employee->age=(int)($age->days/365);
-                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee));
+                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee,'valide'=>1));
                 $nbRecommandation = count($recommandation);
                 $employee->nbRecommandation = $nbRecommandation;
 
@@ -603,7 +604,7 @@ class SearchController extends Controller
                 $age = $today->diff($dateNaisssance);
 
                 $employee->age = (int)($age->days / 365);
-                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee));
+                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee,'valide'=> 1));
                 $nbRecommandation = count($recommandation);
                 $employee->nbRecommandation = $nbRecommandation;
             }
@@ -612,6 +613,7 @@ class SearchController extends Controller
             $data['demande_poste'] = $poste;
             $contrat = $em->getRepository("SosBundle:Contrat")->findOneBy(array('id' => $data['contrat']));
             $data['demande_contrat'] = $contrat;
+
 
             $tab_demande = [];
 
@@ -635,10 +637,81 @@ class SearchController extends Controller
                 $data['mail_demande_utilisateur'] = $tab_demande;
                 return $this->render('SosBundle:Search:demandeCv.html.twig', array('data' => $data));
             }
+            elseif($_POST['action'] == 'secteur_activite'){
+                $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
+                $repo = $em->getRepository("SosBundle:Secteur");
+                $secteurs = $repo->findAll();
+                return $this->render('SosBundle:Search:secteur.html.twig', array('data' => $data, 'secteurs'=>$secteurs,'step' => '3'));
+            }
+            elseif($_POST['action'] == 'classification'){
+                $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
+                $repo = $em->getRepository("SosBundle:Etablissement");
+                $etablissements = $repo->findAll();
+                return $this->render('SosBundle:Search:classification.html.twig', array('data' => $data,'etablissements'=>$etablissements,'step' => '2'));
+            }
+            elseif($_POST['action'] == 'poste'){
+                $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
+                if ($data['secteur_activite'] == 1) {
+
+                    if (isset($data['service_activite'])) {
+                        $qb = $em->createQueryBuilder();
+                        $postes = $qb->select('p')
+                            ->from('SosBundle:PosteRecherche','p')
+                            ->where('p.secteur = :secteur_activite')
+                            ->andWhere('p.service = :service_activite')
+                            ->setParameters(array('secteur_activite' => $data['secteur_activite'], 'service_activite' => $data['service_activite']))
+                            ->orderBy('p.id', 'DESC')
+                            ->getQuery()
+                            ->getResult();
+                    }else{
+                        $qb = $em->createQueryBuilder();
+                        $postes = $qb->select('p')
+                            ->from('SosBundle:PosteRecherche','p')
+                            ->where('p.secteur = :secteur_activite')
+                            ->setParameter('secteur_activite', $data['secteur_activite'])
+                            ->orderBy('p.id', 'DESC')
+                            ->getQuery()
+                            ->getResult();
+                    }
+
+                    return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'data' => $data, 'step' => '5'));
+
+                }else if($data['secteur_activite'] == 2){
+
+                    $repo = $em->getRepository("SosBundle:Service");
+                    $services = $repo->findAll();
+
+                    return $this->render('SosBundle:Search:service.html.twig', array('services' => $services, 'data' => $data, 'step' => '4'));
+
+                }
+            }
+            elseif($_POST['action'] == 'contrat'){
+                $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
+                $repo = $em->getRepository("SosBundle:Contrat");
+                $contrats = $repo->findAll();
+                return $this->render('SosBundle:Search:contrat.html.twig', array('data' => $data,'contrats'=>$contrats,'step' => '6'));
+            }
+
+            elseif($_POST['action'] == 'contrat_duree'){
+                $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
+                $repo = $em->getRepository("SosBundle:Contrat");
+                $contrat = $repo->find($data['contrat']);
+
+                $contrat_duree = $contrat->getDuree();
+                return $this->render('SosBundle:Search:contrat_duree.html.twig', array('data' => $data,'contrat_duree'=>$contrat_duree,'step' => '7'));
+            }
+
+            elseif($_POST['action'] == 'niveau_anglais'){
+                $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
+                $repo = $em->getRepository("SosBundle:Anglais");
+                $niveau_anglais = $repo->findAll();
+
+                return $this->render('SosBundle:Search:anglais.html.twig', array('data' => $data,'niveau_anglais'=>$niveau_anglais,'step' => '8'));
+            }
+
             else{
                 return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data));
             }
-
 
 
 
@@ -683,7 +756,7 @@ class SearchController extends Controller
                 $age = $today->diff($dateNaisssance);
 
                 $employee->age = (int)($age->days / 365);
-                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee));
+                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee,'valide'=>1));
                 $nbRecommandation = count($recommandation);
                 $employee->nbRecommandation = $nbRecommandation;
             }

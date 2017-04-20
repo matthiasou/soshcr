@@ -27,7 +27,7 @@
 		        	
 	            <form method="post" action="{{ path('contrat') }}">
 	                <button>
-	                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/poste/' ~ poste.id ~ '.png') }} " alt="" class="img-responsive form-img">
+	                    <img style="max-height:75px; width:auto; " src="{{ asset('bundles/sos/global/img/poste/' ~ poste.id ~ '.png') }} " alt="" class="img-responsive form-img">
 	                    <p>{{ poste.libelle | raw }}</p>
 	                </button>
 	                <input type="hidden" value="{{ poste.id }}" name="poste">

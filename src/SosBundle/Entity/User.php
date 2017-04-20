@@ -84,6 +84,20 @@ class User extends BaseUser
      */
     public $criteres;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date_abonnement", type="date", nullable=true)
+     */
+    public $dateAbonnement;
+
+
+    /**
+     * @ORM\Column(name="message_5J", type="boolean", nullable=true)
+     */
+    private $message5J;
+
     /**
      * Set nom
      *
@@ -347,5 +361,53 @@ class User extends BaseUser
     public function setEmail($email){
         parent::setEmail($email);
         $this->setUsername($email);
+    }
+
+    /**
+     * Set dateAbonnement
+     *
+     * @param \DateTime $dateAbonnement
+     *
+     * @return User
+     */
+    public function setDateAbonnement($dateAbonnement)
+    {
+        $this->dateAbonnement = $dateAbonnement;
+
+        return $this;
+    }
+
+    /**
+     * Get dateAbonnement
+     *
+     * @return \DateTime
+     */
+    public function getDateAbonnement()
+    {
+        return $this->dateAbonnement;
+    }
+
+    /**
+     * Set message5J
+     *
+     * @param boolean $message5J
+     *
+     * @return User
+     */
+    public function setMessage5J($message5J)
+    {
+        $this->message5J = $message5J;
+
+        return $this;
+    }
+
+    /**
+     * Get message5J
+     *
+     * @return boolean
+     */
+    public function getMessage5J()
+    {
+        return $this->message5J;
     }
 }

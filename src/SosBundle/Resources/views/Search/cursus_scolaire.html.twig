@@ -27,8 +27,8 @@
 		        	
 		            <form method="post" action="{{ path('anglais') }}">
 		                <button>
-		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/' ~ cursus.id ~ '-stars.png') }}" alt="">
-		                    <p>{{ cursus.libelle }}</p>
+		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/cursus/' ~ cursus.id ~ '.png') }}" alt="">
+		                    <p></p>
 		                </button>
 		                <input type="hidden" value="{{ cursus.id }}" name="cursus_scolaire">
 						<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
