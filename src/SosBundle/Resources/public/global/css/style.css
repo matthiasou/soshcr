@@ -41,16 +41,6 @@ a {
           HEADER          
 /***********************************************/
 
-header {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%);
-    -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%);
-    background-color: #394076;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 295px;
-    position: relative;
-}
-
 header.header-small {
     clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 100%);
     -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 0% 100%);
@@ -1301,8 +1291,6 @@ a {
     margin: 20px;
 }
 
-@media (min-width: 1800px) {
-    .content-container{
-        min-height: 92vh!important;
-    }
+.link-register{
+    color:#394076;
 }

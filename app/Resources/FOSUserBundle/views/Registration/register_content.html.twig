@@ -1,8 +1,16 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register form'}}) }}
-	    {{ form_widget(form) }}
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register form col-sm-6 col-sm-offset-3 col-xs-12'}}) }}
+      {% for field in form %}
+      		{% if "hidden" not in field.vars.block_prefixes %}
+				<div class="form-group">
+		       		{{ form_label(field) }}
+		       		{{ form_errors(field) }}
+		      		{{ form_widget(field, {'attr':{'class' : 'form-control'}} ) }}
+		    	</div>
+      		{% endif %}
+	   {% endfor %}
     <div>
-        <input type="submit" class="btn" value="{{ 'registration.submit'|trans }}" />
+       <input class="btn-soshcr" type="submit"value="{{ 'registration.submit'|trans }}" />
     </div>
 {{ form_end(form) }}
