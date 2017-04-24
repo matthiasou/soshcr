@@ -4,6 +4,9 @@ namespace SosBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SosBundle\Entity\UserCritere;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+
 
 class DefaultController extends Controller
 {

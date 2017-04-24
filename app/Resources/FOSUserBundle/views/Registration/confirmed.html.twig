@@ -1,10 +1,13 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends "layout.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+{% block body %}
+    <p>{{ 'registration.confirmed'|trans({'%username%': user.prenom}) }}</p>
+
+	<p>Vous pouvez désormais completer votre profil via le lien suivant : <br/> <a href="{{ path('complete_user_profil') }}" >Completer mon profil</a> </p>
+
     {% if targetUrl %}
     <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
     {% endif %}
-{% endblock fos_user_content %}
+{% endblock body %}
