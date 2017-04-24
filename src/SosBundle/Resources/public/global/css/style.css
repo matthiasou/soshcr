@@ -9,7 +9,7 @@ body {
     background-color: #fdfdfd!important
 }
 
-a {
+footer a, header a {
     text-decoration: none!important;
     color: inherit!important;
 }
