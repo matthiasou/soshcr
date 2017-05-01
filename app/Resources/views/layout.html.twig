@@ -18,6 +18,7 @@
             <link rel="stylesheet" href="{{ asset('bundles/sos/login-modal/assets/css/form-elements.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('bundles/sos/sweetalert/sweetalert.css') }}">
             <link rel="stylesheet" href="{{ asset('bundles/sos/login-modal/assets/css/style.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/sos/datepicker/datepicker.min.css') }}">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -39,6 +40,8 @@
             <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
             <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
             <script type="text/javascript" src="{{ asset('bundles/sos/login-modal/assets/js/scripts.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/sos/datepicker/datepicker.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/sos/datepicker/datepicker.fr.js') }}"></script>
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
         {% endblock %}

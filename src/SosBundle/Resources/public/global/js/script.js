@@ -15,6 +15,12 @@ $(document).ready(function(){
 
     }
 
+    $('#datepicker').datepicker({
+        language: 'fr',
+        inline: true,
+        minDate: new Date() // Now can select only dates, which goes after today
+    })
+
 });
 
 //fonction qui coche toutes les checkboxes
