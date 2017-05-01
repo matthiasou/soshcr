@@ -17,9 +17,9 @@
 		        	
 		            <form method="post" action="
 		            {% if data.contrat == 1 or data.contrat == 2 %}
-		            	{{ path('formation') }}
+		            	{{ path('informations_formation') }}
 		            {% elseif data.contrat == 4 %}
-		            	{{ path('cursus') }}
+		            	{{ path('informations_cursus') }}
 		            {% endif %}">
 		                <button>
 		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ duree.id ~ '.png') }}" alt="">
@@ -38,7 +38,7 @@
 
    	<div class="clearfix spacer"></div>
 
-    <form action="{{ path('information_contrat')}}" method="post">
+    <form action="{{ path('informations_contrat')}}" method="post">
 		
 		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
 	

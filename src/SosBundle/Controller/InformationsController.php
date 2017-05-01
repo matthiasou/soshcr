@@ -29,7 +29,7 @@ class InformationsController extends Controller
     }
 
     /**
-     * @Route("/search/duree")
+     * @Route("/informations/duree")
      */
     public function dureeAction(Request $request)
     {
@@ -48,11 +48,31 @@ class InformationsController extends Controller
         $contrat_duree = $contrat->getDuree();
         return $this->render('SosBundle:Informations:contrat_duree.html.twig', array('contrat_duree' => $contrat_duree, 'data' => $data)); 
 
-        }else{
-
-            return $this->redirectToRoute($request->get('form'));
-
         }
+    }
+
+    /**
+     * @Route("/informations/cursus")
+     */
+    public function cursusAction(Request $request)
+    {
+
+      $data = array();
+        $em = $this->getDoctrine()->getManager();
+
+      // Validation ville
+      if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "contrat" || $request->get('form') == "duree" ) {
+
+        $data['contrat'] = $request->get('contrat');
+
+        $repo = $em->getRepository("SosBundle:CursusScolaire");
+        $cursus_scolaire = $repo->findAll();                
+
+        dump($data);
+        return $this->render('SosBundle:Informations:cursus_scolaire.html.twig', array('cursus_scolaire' => $cursus_scolaire, 'data' => $data)); 
+
+      }
+
     }
 
 

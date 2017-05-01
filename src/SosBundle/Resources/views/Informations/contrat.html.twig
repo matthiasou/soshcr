@@ -18,11 +18,11 @@
 		        	
 		            <form method="post" action="
 		            {% if contrat.libelle == "CDD" or contrat.libelle == "CDI" or contrat.libelle == "Stage" %}
-		            	{{ path('information_duree') }}
+		            	{{ path('informations_duree') }}
 		            {% elseif contrat.libelle == "Extra" %}
-		            	{{ path('information_classification') }}
+		            	{{ path('informations_classification') }}
 		            {% elseif contrat.libelle == "Apprentissage" %}
-		            	{{ path('information_cursus') }}
+		            	{{ path('informations_cursus') }}
 		            {% endif %}">
 		                <button>
 							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/contrat/' ~ contrat.id ~ '.png') }} " alt="" class="img-responsive form-img">

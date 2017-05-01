@@ -59,7 +59,7 @@
 	<div class="form-group">
 		{{ form_errors(form.dateNaissance) }}
 		{{ form_label(form.dateNaissance) }}
-		{{ form_widget(form.dateNaissance, { 'attr': {'class': 'form-control'} }) }}
+		{{ form_widget(form.dateNaissance, { 'attr': {'class': 'form-control datepicker-here', 'placeholder' : 'en Km', 'data-position' : 'right top', 'data-language' : 'fr'} }) }}
 	</div>
 
 	{{ form_rest(form) }}

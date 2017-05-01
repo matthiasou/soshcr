@@ -15,11 +15,16 @@ $(document).ready(function(){
 
     }
 
-    $('#datepicker').datepicker({
+    $('.datepicker-here-visible').datepicker({
         language: 'fr',
         inline: true,
         minDate: new Date() // Now can select only dates, which goes after today
-    })
+    });
+
+    $('.datepicker-here').datepicker({
+        language: 'fr',
+        minDate: new Date() // Now can select only dates, which goes after today
+    });
 
 });
 
