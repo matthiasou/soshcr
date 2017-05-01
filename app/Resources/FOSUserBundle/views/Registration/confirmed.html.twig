@@ -1,13 +1,18 @@
-{% extends "layout.html.twig" %}
+{% extends 'SosBundle::layout.html.twig' %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block body %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.prenom}) }}</p>
+{% block sos_body %}
 
-	<p>Vous pouvez désormais completer votre profil via le lien suivant : <br/> <a href="{{ path('complete_user_profil') }}" >Completer mon profil</a> </p>
+	<div class="col-xs-12 sos-form">
 
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
-{% endblock body %}
+	    <p>{{ 'registration.confirmed'|trans({'%username%': user.prenom}) }}</p>
+
+		<p>Vous pouvez désormais completer votre profil via le lien suivant : <br/> <a href="{{ path('informations_contrat') }}" >Completer mon profil</a> </p>
+
+	    {% if targetUrl %}
+	    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+	    {% endif %}
+	</div>
+
+{% endblock sos_body %}

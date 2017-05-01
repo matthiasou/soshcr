@@ -493,7 +493,9 @@ class SearchController extends Controller
      * @Route("/search/resultat")
      */
     public function resultatAction(Request $request)
-    { $em = $this->getDoctrine()->getManager();
+    { 
+
+        $em = $this->getDoctrine()->getManager();
 
    		// Validation date
     	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "date" ) {
@@ -539,8 +541,6 @@ class SearchController extends Controller
                 $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee,'valide'=>1));
                 $nbRecommandation = count($recommandation);
                 $employee->nbRecommandation = $nbRecommandation;
-
-
             }
 
 			dump($data);
