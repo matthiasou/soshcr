@@ -1,0 +1,40 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+
+	<div id="classification" class="col-xs-12 sos-form">
+		<h3 class="title-heading">Dans quel type d'établissement veux tu postuler ?</h3>
+		<br>
+
+		<ul class="col-lg-8 col-lg-offset-2">
+			{% for etablissement in etablissements %}
+				<li class="
+					{% if etablissements|length == 5 %}
+		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+					{% else %}
+						col-sm-{{ 12 / etablissements|length }}
+		        	{% endif %} text-center">
+					<form method="post" action="{{ path('informations_ville') }}">
+						<button>
+							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/rating/' ~ etablissement.id )}}-stars.png" alt="" class="img-responsive form-img">
+							<p>{{ etablissement.libelle | raw }}</p>
+						</button>
+						<input type="hidden" value="{{ etablissement.id }}" name="classification">
+						<input type="hidden" value="{{ data.contrat_duree }}" name="contrat_duree">
+						<input type="hidden" value="{{ data.contrat }}" name="contrat">
+						{% if data.cursus_scolaire is defined %}
+							<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
+						{% endif %}
+
+						<input type="hidden" name="form" value="classification">
+					</form>
+				</li>
+			{% endfor %}
+		</ul>
+		<div class="clearfix spacer"></div>
+	    <form action="{{ path('informations_duree')}}" method="post">
+			<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
+		</form>
+	</div>
+
+{% endblock %}

@@ -128,5 +128,9 @@ informations_date:
     path:     /informations/date
     defaults: { _controller: SosBundle:Informations:date }
 
+informations_recapitulatif:
+    path:     /informations/recapitulatif
+    defaults: { _controller: SosBundle:Informations:recapitulatif }
+
 
 # INFORMATION USER START
