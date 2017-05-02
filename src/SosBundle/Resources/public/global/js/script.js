@@ -26,6 +26,28 @@ $(document).ready(function(){
         minDate: new Date() // Now can select only dates, which goes after today
     });
 
+    $('#user-icon').click(function(){
+
+        if ($(this).children('i').hasClass('fa-chevron-right')) {
+            $(this).children('i').removeClass('fa-chevron-right').addClass('fa-chevron-down');
+        }else{
+            $(this).children('i').removeClass('fa-chevron-down').addClass('fa-chevron-right');
+        }
+
+        $('#user-menu').css({'top': $('#user-icon').offset().top + 25, 'left' : $('#user-icon').offset().left }).slideToggle();
+
+    });
+
+    $('#profil-picture-link').click(function(){
+        $(this).next('input').slideToggle();
+    });
+
+});
+
+$(window).on('resize', function(){
+
+    $('#user-menu').css({'top': $('#user-icon').offset().top + 25, 'left' : $('#user-icon').offset().left });
+
 });
 
 //fonction qui coche toutes les checkboxes
