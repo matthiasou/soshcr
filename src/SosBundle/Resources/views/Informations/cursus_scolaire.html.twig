@@ -4,7 +4,7 @@
 
 	<div id="poste_hotellerie" class="col-xs-12 sos-form">
 		<h3 class="title-heading">Quel cursus ?</h3>
-
+		<br>
 		<ul class="col-lg-8 col-lg-offset-2">
 		{% for cursus in cursus_scolaire %}
 
@@ -15,12 +15,7 @@
 						col-sm-{{ 12 / cursus_scolaire|length }}
 		        	{% endif %} text-center">
 		        	
-		            <form method="post" action="
-		            	{% if data.ville is defined %}
-		            		{{path('informations_classification')}}
-		            	{% else %}
-		            		{{path('informations_poste')}}
-		            	{% endif %}">
+		            <form method="post" action="{{path('informations_classification')}}">
 		                <button>
 		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/cursus/' ~ cursus.id ~ '.png') }}" alt="">
 		                    <p></p>
@@ -43,7 +38,11 @@
 	
 
    	<div class="clearfix spacer"></div>
-
+    <form action="{{ path('informations_contrat')}}" method="post">
+		
+		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
+	
+	</form>
 </div>
 
 {% endblock %}

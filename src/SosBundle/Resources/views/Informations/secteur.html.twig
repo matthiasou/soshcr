@@ -1,0 +1,55 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+
+	<div id="secteur" class="col-xs-12 sos-form">
+	<h3 class="title-heading">Dans quel secteur d’activité recrutez vous ?</h3>
+
+		<br>
+		
+	<ul class="col-lg-8 col-lg-offset-2">
+		
+		{% for secteur in secteurs %}
+
+	        <li class="
+	        	{% if secteurs|length == 5 %}
+		        	col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+				{% else %}
+					col-sm-{{ 12 / secteurs|length }}
+		        {% endif %} text-center">
+
+	            <form method="post" action="{% if secteur.id == 1 %}{{ path('informations_poste') }}{% else %}{{ path('informations_service') }}{% endif %}">
+	                <button>
+	                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/secteur/'~ secteur.id ~'-secteur.png') }}" alt="" class="img-responsive form-img">
+	                    <p>{{ secteur.libelle }}</p>
+	                </button>
+	                <input type="hidden" value="{{ secteur.id }}" name="secteur_activite">
+					<input type="hidden" name="contrat" value="{{ data.contrat }}">
+					<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
+					{% if data.cursus_scolaire is defined %}
+						<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
+					{% endif %}
+					<input type="hidden" name="classification" value="{{ data.classification }}">
+					<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+					<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+					<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+					<input type="hidden" name="rayon_emploi" value="{{ data.rayon_emploi }}">
+					<input type="hidden" name="anglais" value="{{ data.anglais }}">
+					<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
+					<input type="hidden" name="form" value="secteur">
+	            </form>
+	        </li>
+
+	    {% endfor %}
+
+	</ul>
+
+    <div class="clearfix spacer"></div>
+
+    <form action="{{ path('classification')}}" method="post">
+		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
+	</form>
+    
+</div>
+
+{% endblock %}
