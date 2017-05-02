@@ -117,7 +117,7 @@ class Matching {
             $experience_minimum." ".
             $cursus_scolaire." ".
             $niveau_anglais."
-            order by u.score DESC ;";
+            order by uc.score DESC ;";
 
         
 
@@ -360,7 +360,7 @@ class Matching {
             $experience_minimum." ".
             $cursus_scolaire." ".
             $niveau_anglais."
-            order by u.score DESC ;";
+            order by uc.score DESC ;";
 
 
 
