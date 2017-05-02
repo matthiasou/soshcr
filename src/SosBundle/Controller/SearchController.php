@@ -529,7 +529,7 @@ class SearchController extends Controller
                 $data['experience_minimum'] = $request->get('experience_minimum');
             }
 
-            $this->get('sos.matching')->setScoreEmploye($data);
+            // $this->get('sos.matching')->setScoreEmploye($data);
 			$data['employes'] = $this->get('sos.matching')->getEmploye($data);
 
             foreach ($data['employes']  as $employee){
