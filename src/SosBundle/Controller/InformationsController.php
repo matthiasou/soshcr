@@ -582,6 +582,9 @@ class InformationsController extends Controller
             $userCritere->setNiveauAnglais($anglais);
 
             $userCritere->setDateDisponibilite("a:0{'27-12-2015'}");
+            $userCritere->setLatitude($data['ville']['latitude']);
+            $userCritere->setLongitude($data['ville']['longitude']);
+            $userCritere->setVille($data['ville']['libelle']);
 
             $userCritere->setUser($this->getUser());
 
