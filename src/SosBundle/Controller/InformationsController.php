@@ -597,7 +597,7 @@ class InformationsController extends Controller
             $em->flush();
 
             dump($userCritere);
-            return $this->redirectToRoute('profil');   
+            return $this->render('SosBundle:Informations:date.html.twig', array('data' => $data, 'step' => '9'));    
         }
     }
 
