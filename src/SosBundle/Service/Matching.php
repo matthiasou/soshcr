@@ -34,8 +34,8 @@ class Matching {
 
         if (isset($data['ville'])) {
             // Recherche de l'employé
-            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(a.latitude))*COS(RADIANS(a.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(a.latitude))))";
-            $ville = "WHERE ".$formule." < u.rayon_emploi";
+            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(uc.latitude))*COS(RADIANS(uc.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(uc.latitude))))";
+            $ville = "WHERE ".$formule." < uc.rayon_emploi";
         }
 
         if (isset($data['classification'])) {
@@ -97,8 +97,6 @@ class Matching {
 
         $query = "SELECT u.id
             FROM utilisateur u
-            JOIN adresse a
-            ON u.adresse_id = a.id
             JOIN user_critere uc
             ON u.id = uc.user_id ".
             $secteur_join." ".
@@ -108,7 +106,7 @@ class Matching {
             $formation_minimum_join." ".
             $experience_minimum_join." ".
             $niveau_anglais_join."
-            WHERE ".$formule." < u.rayon_emploi ".
+            WHERE ".$formule." < uc.rayon_emploi ".
             $classification." ".
             $secteur_activite." ".
             $service_activite." ".
@@ -162,8 +160,8 @@ class Matching {
 
         if (isset($data['ville'])) {
             // Recherche de l'employé
-            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(a.latitude))*COS(RADIANS(a.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(a.latitude))))";
-            $ville = "WHERE ".$formule." < u.rayon_emploi";
+            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(uc.latitude))*COS(RADIANS(uc.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(uc.latitude))))";
+            $ville = "WHERE ".$formule." < uc.rayon_emploi";
         }
 
         if (isset($data['classification'])) {
@@ -224,8 +222,6 @@ class Matching {
 
         $query = "SELECT COUNT(*) as nb
             FROM utilisateur u
-            JOIN adresse a
-            ON u.adresse_id = a.id
             JOIN user_critere uc
             ON u.id = uc.user_id ".
             $secteur_join." ".
@@ -235,7 +231,7 @@ class Matching {
             $formation_minimum_join." ".
             $experience_minimum_join." ".
             $niveau_anglais_join."
-            WHERE ".$formule." < u.rayon_emploi ".
+            WHERE ".$formule." < uc.rayon_emploi ".
             $classification." ".
             $secteur_activite." ".
             $service_activite." ".
@@ -281,8 +277,8 @@ class Matching {
 
         if (isset($data['ville'])) {
             // Recherche de l'employé
-            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(a.latitude))*COS(RADIANS(a.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(a.latitude))))";
-            $ville = "WHERE ".$formule." < u.rayon_emploi";
+            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(uc.latitude))*COS(RADIANS(uc.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(uc.latitude))))";
+            $ville = "WHERE ".$formule." < uc.rayon_emploi";
         }
 
         if (isset($data['classification'])) {
@@ -344,8 +340,6 @@ class Matching {
 
         $query = "SELECT u.id
             FROM utilisateur u
-            JOIN adresse a
-            ON u.adresse_id = a.id
             JOIN user_critere uc
             ON u.id = uc.user_id ".
             $secteur_join." ".
@@ -355,7 +349,7 @@ class Matching {
             $formation_minimum_join." ".
             $experience_minimum_join." ".
             $niveau_anglais_join."
-            WHERE ".$formule." < u.rayon_emploi ".
+            WHERE ".$formule." < uc.rayon_emploi ".
             $classification." ".
             $secteur_activite." ".
             $service_activite." ".
