@@ -15,6 +15,42 @@ $(document).ready(function(){
 
     }
 
+    $('#add-disponibilite').click(function(){
+        if ($('.datepicker-here').length == 0) 
+        {
+            $(this).parent().parent().prepend(''+
+                '<div class="input-group" style="width:100%">'+
+                    '<input type="text" data-range="true" name="disponibilite[]" data-multiple-dates-separator=" - " class="col-sm-12 datepicker-here">'+
+                    '<div class="input-group-btn" style="width:40px">'+
+                        '<button class="btn btn-default remove-disponibilite" type="button">'+
+                            '<i class="fa fa-minus" ></i>'+
+                        '</button>'+
+                    '</div>'+
+                '</div>');    
+        }
+        else
+        {
+            $('.datepicker-here').last().after(''+
+                '<div class="input-group" style="width:100%">'+
+                    '<input type="text" data-range="true" name="disponibilite[]" data-multiple-dates-separator=" - " class="col-sm-12 datepicker-here">'+
+                    '<div class="input-group-btn" style="width:40px">'+
+                        '<button class="btn btn-default remove-disponibilite" type="button">'+
+                            '<i class="fa fa-minus" ></i>'+
+                        '</button>'+
+                    '</div>'+
+                '</div>');    
+        }
+
+        $('.datepicker-here').datepicker({
+            language: 'fr',
+            minDate: new Date() // Now can select only dates, which goes after today
+        });
+        
+        $('.remove-disponibilite').click(function(){
+            $(this).parent().parent().remove();
+        });
+    });
+
     $('.datepicker-here-visible').datepicker({
         language: 'fr',
         inline: true,
@@ -40,6 +76,107 @@ $(document).ready(function(){
 
     $('#profil-picture-link').click(function(){
         $(this).next('input').slideToggle();
+    });
+
+    // INFORMATIONS FOMULAIRES MULTIPLES
+
+    // Selectionne le main topic si un sous element est selectionné
+    $('.sub-input').click(function (e) {
+        $(this).parent().parent().parent().children('label').children('.main-input').prop('checked', true);
+    });
+
+    // Déselectionne les sous éléments si le main topic est déselectionné
+    $('.main-input').click(function (e) {
+
+        if ($(this).is(':checked') == false)
+        {
+            $(this).parent().parent().children('div').children('label').children('input[type="checkbox"]').each(function(e){
+                $(this).prop('checked', false);
+            })
+        }
+    });
+
+    $('.select-usercritere').click(function(){
+        $(this).parent().parent().children('select').toggle();
+    });
+
+    if ($('.select-usercritere').length != 0) 
+    {
+        $('.select-usercritere:checked').each(function(){
+            $(this).parent().parent().children('select').toggle();
+        });
+    }
+
+    var mainInput = $('.main-input').attr('data-name');
+    var soloInput = $('.solo-input').attr('data-name');
+    var subInput = $('.sub-input').attr('data-name');
+    var subInput1 = $('.sub-input-1').attr('data-name');
+    var subInput2 = $('.sub-input-2').attr('data-name');
+    
+
+    // Effectue les controles sur les selections avant envoie du formulaire
+    $('form.informations').on('submit', function(e){
+
+        if ($('.required-validation').length != 0) 
+        {
+            if ($('.required-validation:checked').length == 0) 
+            {
+                e.preventDefault();
+                sweetAlert("Oups...", "Veuillez cocher la certification sur l'honneur", "error");     
+            }
+        }
+
+        if ($('.select-usercritere').length != 0) 
+        {
+            $('.select-usercritere:checked').each(function(){
+                if ($(this).parent().parent().children('select').val() == "") 
+                {
+                    e.preventDefault();
+                    sweetAlert("Oups...", "Valeur manquante" , "error");     
+                }
+            });
+        }
+
+        if ($('.solo-input').length != 0) 
+        {
+            if ($('input.solo-input:checked').length == 0) 
+            {
+                e.preventDefault();
+                sweetAlert("Oups...", "Selection manquante : " + soloInput, "error");     
+            }
+           
+        }
+        
+        if ($('.main-input').length != 0 && $('.sub-input').length != 0)
+        {
+            if ($('input.main-input:checked').length == 0 && $('input.sub-input:checked').length == 0 )
+            {
+               e.preventDefault();
+               sweetAlert("Oups...", "Selection manquante : " + mainInput + ", " + subInput, "error");
+            }
+            else if ($('input.main-input:checked').length == 0)
+            {
+               e.preventDefault();
+               sweetAlert("Oups...", "Selection manquante : " + mainInput, "error");
+            }
+            else if ($('input.sub-input:checked').length == 0)
+            {
+                e.preventDefault();
+                sweetAlert("Oups...", "Selection manquante : " + subInput, "error");
+            }
+            else if ($('input.sub-input-1:checked').length == 0 && $('input.sub-input-2:checked').length != 0 ) 
+            {
+                e.preventDefault();
+                sweetAlert("Oups...", "Selection manquante : " + subInput1, "error");
+            }
+            else if ($('input.sub-input-1:checked').length != 0 && $('input.sub-input-2:checked').length == 0) 
+            {
+                e.preventDefault();
+                sweetAlert("Oups...", "Selection manquante : " + subInput2, "error");            
+            }
+        }
+
+
     });
 
 });
