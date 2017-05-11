@@ -37,17 +37,6 @@ class UserCritere
      * @ORM\ManyToOne(targetEntity="Etablissement")
      */
     private $etablissement;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Secteur")
-     */
-    private $secteur;
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Service")
-     */
-    private $service;
 
     /**
      * @ORM\ManyToOne(targetEntity="Contrat")
@@ -67,28 +56,42 @@ class UserCritere
     /**
      * @var int
      *
-     * @ORM\Column(name="score", type="integer", length=11, nullable=true)
+     * @ORM\Column(name="score", type="integer", length=11, nullable=false)
      */
-    public $score;
+    private $score;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="latitude", type="float", length=11, nullable=false)
+     */
+    private $latitude;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="longitude", type="float", length=11, nullable=false)
+     */
+    private $longitude;
 
     /**
      *
      * @ORM\ManyToOne(targetEntity="Anglais")
      */
-    public $niveauAnglais;
+    private $niveauAnglais;
 
     /**
      *
      * @ORM\ManyToOne(targetEntity="CursusScolaire")
      */
-    public $cursusScolaire;
+    private $cursusScolaire;
 
     /**
      * @var int
      *
      * @ORM\Column(name="rayon_emploi", type="integer", length=11)
      */
-    public $rayonEmploi;
+    private $rayonEmploi;
 
     /**
      * @return mixed
@@ -323,5 +326,148 @@ class UserCritere
         return $this->contrat;
     }
 
-}
 
+    /**
+     * Set score
+     *
+     * @param integer $score
+     *
+     * @return UserCritere
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param float $latitude
+     *
+     * @return UserCritere
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param float $longitude
+     *
+     * @return UserCritere
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set rayonEmploi
+     *
+     * @param integer $rayonEmploi
+     *
+     * @return UserCritere
+     */
+    public function setRayonEmploi($rayonEmploi)
+    {
+        $this->rayonEmploi = $rayonEmploi;
+
+        return $this;
+    }
+
+    /**
+     * Get rayonEmploi
+     *
+     * @return integer
+     */
+    public function getRayonEmploi()
+    {
+        return $this->rayonEmploi;
+    }
+
+    /**
+     * Set niveauAnglais
+     *
+     * @param \SosBundle\Entity\Anglais $niveauAnglais
+     *
+     * @return UserCritere
+     */
+    public function setNiveauAnglais(\SosBundle\Entity\Anglais $niveauAnglais = null)
+    {
+        $this->niveauAnglais = $niveauAnglais;
+
+        return $this;
+    }
+
+    /**
+     * Get niveauAnglais
+     *
+     * @return \SosBundle\Entity\Anglais
+     */
+    public function getNiveauAnglais()
+    {
+        return $this->niveauAnglais;
+    }
+
+    /**
+     * Set cursusScolaire
+     *
+     * @param \SosBundle\Entity\CursusScolaire $cursusScolaire
+     *
+     * @return UserCritere
+     */
+    public function setCursusScolaire(\SosBundle\Entity\CursusScolaire $cursusScolaire = null)
+    {
+        $this->cursusScolaire = $cursusScolaire;
+
+        return $this;
+    }
+
+    /**
+     * Get cursusScolaire
+     *
+     * @return \SosBundle\Entity\CursusScolaire
+     */
+    public function getCursusScolaire()
+    {
+        return $this->cursusScolaire;
+    }
+}
