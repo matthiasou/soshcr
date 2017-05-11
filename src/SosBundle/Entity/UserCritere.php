@@ -65,32 +65,6 @@ class UserCritere
     private $experience;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="score", type="integer", length=11, nullable=true)
-     */
-    public $score;
-
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="Anglais")
-     */
-    public $niveauAnglais;
-
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="CursusScolaire")
-     */
-    public $cursusScolaire;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="rayon_emploi", type="integer", length=11)
-     */
-    public $rayonEmploi;
-
-    /**
      * @return mixed
      */
     public function getSecteur()
