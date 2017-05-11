@@ -1,10 +1,6 @@
 index:
     path:     /
     defaults: { _controller: SosBundle:Default:index }
-  
-profil:
-    path:     /profil
-    defaults: { _controller: SosBundle:Default:profil }
 
 ville:
     path:     /search/ville
