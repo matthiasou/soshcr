@@ -43,6 +43,7 @@ class UserCritere
      */
     private $secteur;
 
+
     /**
      * @ORM\ManyToOne(targetEntity="Service")
      */
@@ -90,92 +91,103 @@ class UserCritere
     public $rayonEmploi;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Formation")
+     * @return mixed
      */
-    private $formation;
-
-    /**
-     * @ORM\Column(name="date_disponibilite", type="text")
-     */
-    private $dateDisponibilite;
-
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getSecteur()
     {
-        return $this->id;
+        return $this->secteur;
     }
 
     /**
-     * Set score
-     *
-     * @param integer $score
-     *
-     * @return UserCritere
+     * @param mixed $secteur
      */
-    public function setScore($score)
+    public function setSecteur($secteur)
     {
-        $this->score = $score;
-
-        return $this;
+        $this->secteur = $secteur;
     }
 
     /**
-     * Get score
-     *
-     * @return integer
+     * @return mixed
      */
-    public function getScore()
+    public function getService()
     {
-        return $this->score;
+        return $this->service;
     }
 
     /**
-     * Set rayonEmploi
-     *
-     * @param integer $rayonEmploi
-     *
-     * @return UserCritere
+     * @param mixed $service
      */
-    public function setRayonEmploi($rayonEmploi)
+    public function setService($service)
     {
-        $this->rayonEmploi = $rayonEmploi;
-
-        return $this;
+        $this->service = $service;
     }
 
     /**
-     * Get rayonEmploi
-     *
-     * @return integer
+     * @return mixed
      */
-    public function getRayonEmploi()
+    public function getTypeContrat()
     {
-        return $this->rayonEmploi;
+        return $this->typeContrat;
     }
 
     /**
-     * Set dateDisponibilite
-     *
-     * @param string $dateDisponibilite
-     *
-     * @return UserCritere
+     * @param mixed $typeContrat
      */
-    public function setDateDisponibilite($dateDisponibilite)
+    public function setTypeContrat($typeContrat)
     {
-        $this->dateDisponibilite = $dateDisponibilite;
-
-        return $this;
+        $this->typeContrat = $typeContrat;
     }
 
     /**
-     * Get dateDisponibilite
-     *
-     * @return string
+     * @return mixed
+     */
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * @param mixed $experience
+     */
+    public function setExperience($experience)
+    {
+        $this->experience = $experience;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFormation()
+    {
+        return $this->formation;
+    }
+
+    /**
+     * @param mixed $formation
+     */
+    public function setFormation($formation)
+    {
+        $this->formation = $formation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCursus()
+    {
+        return $this->cursus;
+    }
+
+    /**
+     * @param mixed $cursus
+     */
+    public function setCursus($cursus)
+    {
+        $this->cursus = $cursus;
+    }
+
+    /**
+     * @return mixed
      */
     public function getDateDisponibilite()
     {
@@ -183,13 +195,46 @@ class UserCritere
     }
 
     /**
+     * @param mixed $dateDisponibilite
+     */
+    public function setDateDisponibilite($dateDisponibilite)
+    {
+        $this->dateDisponibilite = $dateDisponibilite;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Formation")
+     */
+    private $formation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CursusScolaire")
+     */
+    private $cursus;
+
+    /**
+     * @ORM\Column(name="date_disponibilite", type="text")
+     */
+    private $dateDisponibilite;
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * Set poste
      *
-     * @param \SosBundle\Entity\PosteRecherche $poste
+     * @param string $poste
      *
      * @return UserCritere
      */
-    public function setPoste(\SosBundle\Entity\PosteRecherche $poste = null)
+    public function setPoste($poste)
     {
         $this->poste = $poste;
 
@@ -199,7 +244,7 @@ class UserCritere
     /**
      * Get poste
      *
-     * @return \SosBundle\Entity\PosteRecherche
+     * @return string
      */
     public function getPoste()
     {
@@ -209,11 +254,11 @@ class UserCritere
     /**
      * Set user
      *
-     * @param \SosBundle\Entity\User $user
+     * @param string $user
      *
      * @return UserCritere
      */
-    public function setUser(\SosBundle\Entity\User $user = null)
+    public function setUser($user)
     {
         $this->user = $user;
 
@@ -223,7 +268,7 @@ class UserCritere
     /**
      * Get user
      *
-     * @return \SosBundle\Entity\User
+     * @return string
      */
     public function getUser()
     {
@@ -233,11 +278,11 @@ class UserCritere
     /**
      * Set etablissement
      *
-     * @param \SosBundle\Entity\Etablissement $etablissement
+     * @param string $etablissement
      *
      * @return UserCritere
      */
-    public function setEtablissement(\SosBundle\Entity\Etablissement $etablissement = null)
+    public function setEtablissement($etablissement)
     {
         $this->etablissement = $etablissement;
 
@@ -247,7 +292,7 @@ class UserCritere
     /**
      * Get etablissement
      *
-     * @return \SosBundle\Entity\Etablissement
+     * @return string
      */
     public function getEtablissement()
     {
@@ -255,61 +300,13 @@ class UserCritere
     }
 
     /**
-     * Set secteur
-     *
-     * @param \SosBundle\Entity\Secteur $secteur
-     *
-     * @return UserCritere
-     */
-    public function setSecteur(\SosBundle\Entity\Secteur $secteur = null)
-    {
-        $this->secteur = $secteur;
-
-        return $this;
-    }
-
-    /**
-     * Get secteur
-     *
-     * @return \SosBundle\Entity\Secteur
-     */
-    public function getSecteur()
-    {
-        return $this->secteur;
-    }
-
-    /**
-     * Set service
-     *
-     * @param \SosBundle\Entity\Service $service
-     *
-     * @return UserCritere
-     */
-    public function setService(\SosBundle\Entity\Service $service = null)
-    {
-        $this->service = $service;
-
-        return $this;
-    }
-
-    /**
-     * Get service
-     *
-     * @return \SosBundle\Entity\Service
-     */
-    public function getService()
-    {
-        return $this->service;
-    }
-
-    /**
      * Set contrat
      *
-     * @param \SosBundle\Entity\Contrat $contrat
+     * @param string $contrat
      *
      * @return UserCritere
      */
-    public function setContrat(\SosBundle\Entity\Contrat $contrat = null)
+    public function setContrat($contrat)
     {
         $this->contrat = $contrat;
 
@@ -319,130 +316,12 @@ class UserCritere
     /**
      * Get contrat
      *
-     * @return \SosBundle\Entity\Contrat
+     * @return string
      */
     public function getContrat()
     {
         return $this->contrat;
     }
 
-    /**
-     * Set typeContrat
-     *
-     * @param \SosBundle\Entity\TypeContrat $typeContrat
-     *
-     * @return UserCritere
-     */
-    public function setTypeContrat(\SosBundle\Entity\TypeContrat $typeContrat = null)
-    {
-        $this->typeContrat = $typeContrat;
-
-        return $this;
-    }
-
-    /**
-     * Get typeContrat
-     *
-     * @return \SosBundle\Entity\TypeContrat
-     */
-    public function getTypeContrat()
-    {
-        return $this->typeContrat;
-    }
-
-    /**
-     * Set experience
-     *
-     * @param \SosBundle\Entity\Experience $experience
-     *
-     * @return UserCritere
-     */
-    public function setExperience(\SosBundle\Entity\Experience $experience = null)
-    {
-        $this->experience = $experience;
-
-        return $this;
-    }
-
-    /**
-     * Get experience
-     *
-     * @return \SosBundle\Entity\Experience
-     */
-    public function getExperience()
-    {
-        return $this->experience;
-    }
-
-    /**
-     * Set niveauAnglais
-     *
-     * @param \SosBundle\Entity\Anglais $niveauAnglais
-     *
-     * @return UserCritere
-     */
-    public function setNiveauAnglais(\SosBundle\Entity\Anglais $niveauAnglais = null)
-    {
-        $this->niveauAnglais = $niveauAnglais;
-
-        return $this;
-    }
-
-    /**
-     * Get niveauAnglais
-     *
-     * @return \SosBundle\Entity\Anglais
-     */
-    public function getNiveauAnglais()
-    {
-        return $this->niveauAnglais;
-    }
-
-    /**
-     * Set cursusScolaire
-     *
-     * @param \SosBundle\Entity\CursusScolaire $cursusScolaire
-     *
-     * @return UserCritere
-     */
-    public function setCursusScolaire(\SosBundle\Entity\CursusScolaire $cursusScolaire = null)
-    {
-        $this->cursusScolaire = $cursusScolaire;
-
-        return $this;
-    }
-
-    /**
-     * Get cursusScolaire
-     *
-     * @return \SosBundle\Entity\CursusScolaire
-     */
-    public function getCursusScolaire()
-    {
-        return $this->cursusScolaire;
-    }
-
-    /**
-     * Set formation
-     *
-     * @param \SosBundle\Entity\Formation $formation
-     *
-     * @return UserCritere
-     */
-    public function setFormation(\SosBundle\Entity\Formation $formation = null)
-    {
-        $this->formation = $formation;
-
-        return $this;
-    }
-
-    /**
-     * Get formation
-     *
-     * @return \SosBundle\Entity\Formation
-     */
-    public function getFormation()
-    {
-        return $this->formation;
-    }
 }
+

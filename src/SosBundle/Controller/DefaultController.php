@@ -73,7 +73,6 @@ class DefaultController extends Controller
             $em->persist($user);
             // Étape 2 : On « flush » tout ce qui a été persisté avant
             $em->flush();
-            return $this->render('SosBundle:Default:profil.html.twig', array('validation' => 'Profil bien mis à jour'));
         }
 
         return $this->render('SosBundle:Default:profil.html.twig');
