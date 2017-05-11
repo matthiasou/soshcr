@@ -482,7 +482,7 @@ class SearchController extends Controller
 			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
 			dump($data);    		
-    		return $this->render('SosBundle:Search:date_debut.hml.twig', array('data' => $data, 'step' => '10'));	
+    		return $this->render('SosBundle:Search:date_debut.hml.twig', array('data' => $data, 'step' => '10'));
 
 		}else{
             return $this->redirectToRoute($request->get('form'));
@@ -767,7 +767,7 @@ class SearchController extends Controller
             $data['demande_contrat'] = $contrat;
 
 
-            $validation = "Mail envoyé";
+            $validation = "Votre demande de CV a été envoyé avec succès";
 
             foreach ($_POST['mail_demande_utilisateur'] as $user){
                 $message = \Swift_Message::newInstance()
