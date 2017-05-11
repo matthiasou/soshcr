@@ -99,22 +99,6 @@ class UserCritere
      */
     private $dateDisponibilite;
 
-    /**
-     * @ORM\Column(name="longitude", type="float")
-     */
-    private $latitude;
-
-    /**
-     * @ORM\Column(name="latitude", type="float")
-     */
-    private $longitude;
-
-
-    /**
-     * @ORM\Column(name="ville", type="text")
-     */
-    private $ville;
-
 
     /**
      * Get id
@@ -460,77 +444,5 @@ class UserCritere
     public function getFormation()
     {
         return $this->formation;
-    }
-
-    /**
-     * Set latitude
-     *
-     * @param float $latitude
-     *
-     * @return UserCritere
-     */
-    public function setLatitude($latitude)
-    {
-        $this->latitude = $latitude;
-
-        return $this;
-    }
-
-    /**
-     * Get latitude
-     *
-     * @return float
-     */
-    public function getLatitude()
-    {
-        return $this->latitude;
-    }
-
-    /**
-     * Set longitude
-     *
-     * @param float $longitude
-     *
-     * @return UserCritere
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    /**
-     * Get longitude
-     *
-     * @return float
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
-    }
-
-    /**
-     * Set ville
-     *
-     * @param string $ville
-     *
-     * @return UserCritere
-     */
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    /**
-     * Get ville
-     *
-     * @return string
-     */
-    public function getVille()
-    {
-        return $this->ville;
     }
 }
