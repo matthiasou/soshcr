@@ -1,0 +1,50 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+
+	<div id="service" class="col-xs-12 sos-form">
+	<h3 class="title-heading">Pour quel service ?</h3>
+
+		<br>
+
+	<ul class="col-lg-8 col-lg-offset-2">
+		
+		{% for service in services %}
+
+	        <li class="
+	        	{% if services|length == 5 %}
+	        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
+				{% else %}
+					col-sm-{{ 12 / services|length }}
+	        	{% endif %} text-center">
+	        	
+	            <form method="post" action="{{ path('informations_poste') }}">
+	                <button>
+	                    <img style="max-height:75px; width:auto; " src="{{ asset('bundles/sos/global/img/service/'~ service.id ~'.png') }}" alt="" class="img-responsive form-img">
+	                    <p>{{ service.libelle }}</p>
+	                </button>
+	                <input type="hidden" value="{{ service.id }}" name="service_activite">
+	                <input type="hidden" name="form" value="service">
+					<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+					<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+					<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+					<input type="hidden" name="rayon_emploi" value="{{ data.rayon_emploi }}">
+					<input type="hidden" name="classification" value="{{ data.classification }}">
+					{% if data.cursus_scolaire is defined %}
+						<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
+					{% endif %}
+					<input type="hidden" name="contrat" value="{{ data.contrat }}">
+					<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
+					<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
+	            </form>
+	        </li>
+
+	    {% endfor %}
+
+	</ul>
+
+    <div class="clearfix spacer"></div>
+    
+</div>
+
+{% endblock %}
