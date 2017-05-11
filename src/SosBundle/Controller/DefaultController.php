@@ -6,8 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SosBundle\Entity\UserCritere;
 use SosBundle\Entity\User;
-use SosBundle\Form\UserType;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 
@@ -54,27 +52,8 @@ class DefaultController extends Controller
     /**
      * @Route("/profil")
      */
-    public function profilAction(Request $request)
-    {   
-
-        if ($request->isMethod('post')) {
-
-            $user = $this->getUser();
-            
-            $user->setPrenom($request->get('prenom'));
-            $user->setNom($request->get('nom'));
-            $user->setTelephone($request->get('telephone'));
-      
-            $user->setDateNaissance(new \DateTime($request->get('dateNaissance')));
-            $user->setEmail($request->get('email'));
-
-            $em = $this->getDoctrine()->getManager();
-            // Étape 1 : On « persiste » l'entité
-            $em->persist($user);
-            // Étape 2 : On « flush » tout ce qui a été persisté avant
-            $em->flush();
-        }
-
+    public function profilAction()
+    {
         return $this->render('SosBundle:Default:profil.html.twig');
     }
 
