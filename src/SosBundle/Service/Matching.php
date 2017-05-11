@@ -90,7 +90,7 @@ class Matching {
         }
 
         if (isset($data['niveau_anglais'])) {
-            $niveau_anglais_join = "JOIN anglais an ON uc.niveau_anglais_id = an.id";
+            $niveau_anglais_join = "JOIN anglais an ON u.niveau_anglais_id = an.id";
             $niveau_anglais =  "AND an.classement >= ".$data['niveau_anglais'];
         }
 
@@ -216,7 +216,7 @@ class Matching {
         }
 
         if (isset($data['niveau_anglais'])) {
-            $niveau_anglais_join = "JOIN anglais an ON uc.niveau_anglais_id = an.id";
+            $niveau_anglais_join = "JOIN anglais an ON u.niveau_anglais_id = an.id";
             $niveau_anglais =  "AND an.classement >= ".$data['niveau_anglais'];
         }
 
@@ -333,7 +333,7 @@ class Matching {
         }
 
         if (isset($data['niveau_anglais'])) {
-            $niveau_anglais_join = "JOIN anglais an ON uc.niveau_anglais_id = an.id";
+            $niveau_anglais_join = "JOIN anglais an ON u.niveau_anglais_id = an.id";
             $niveau_anglais =  "AND an.classement >= ".$data['niveau_anglais'];
         }
 
