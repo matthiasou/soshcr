@@ -8,11 +8,11 @@
         <h3 class="title-heading">Envoyez vos demandes de CV</h3>
         <br>
 
-        <ul class="col-lg-8 col-lg-offset-2">
+        <ul style="list-style-type: none;" class="">
 
 
 
-                <li class="col-sm-2 col-md-2 text-center">
+                <li style="list-style-type: none;">
                     <form method="post" action="{{ path('demandeCv') }}">
 						<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 						<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
@@ -46,7 +46,8 @@
 						{% if data.cursus_scolaire is defined %}
 							<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
 						{% endif %}
-                        <textarea style="width: 500px;" class="form-control" type="textarea" id="message" name="message" placeholder="Message" rows="8">
+						<div class="container">
+                        <textarea  class="form-control" type="textarea" id="message" name="message" placeholder="Message" rows="8">
 Bonjour,
     Nous recherchons un(e) {{ data.demande_poste.libelle }} à partir du {{ data.date_debut }}  en {{ data.demande_contrat.libelle }} .
     Envoyez nous votre curriculum vitae et une lettre de motivation.
@@ -57,17 +58,13 @@ A bientôt,
 [Votre numéro de téléphone]
 
                     </textarea>
-                        <button type="submit" class="btn btn-primary pull-right">Envoyer</button>
+							<button type="submit" style="background-color: #394076; border-color: #394076" class="btn btn-block btn-warning">Envoyer</button>
+
+						</div>
                     </form>
                 </li>
-
-
-        </ul>
-
-
-
-
-   	<div class="clearfix spacer"></div>
+		</ul>
+		<div class="clearfix spacer"></div>
 		{% if (js is defined) %}{{ js|raw }}{% endif %}
 
     <form action="{{ path('resultat')}}" method="post">

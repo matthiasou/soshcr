@@ -11,7 +11,7 @@ $(document).ready(function(){
 
     if (typeof validation != "undefined") {
 
-        sweetAlert("Bravo !", validation, "success");
+        sweetAlert("", validation, "success");
 
     }
 
@@ -230,3 +230,8 @@ function imprime_bloc(titre, objet) {
     fen.window.close();
     return true;
 }
+
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});

@@ -6,11 +6,11 @@
 		<h3 class="title-heading">Quel niveau d'anglais minimum ?</h3>
 
 		{% if data.match_employe.nb == 0 %}
-			<p>Aucun candidat ne correspond à vos critères. </p>
+			<p>Aucun candidat autour de vous. </p>
 		{% elseif data.match_employe.nb > 1 %}
-			<p>{{ data.match_employe.nb }} candidats correspondent à vos critères. </p>
+			<p>{{ data.match_employe.nb }} candidats autour de vous. </p>
 		{% elseif data.match_employe.nb == 1 %}
-			<p>{{ data.match_employe.nb }} candidat correspond à vos critères.</p>
+			<p>{{ data.match_employe.nb }} candidat autour de vous.</p>
 		{% endif %}
 		<br>
 
