@@ -4,7 +4,6 @@
 
 	<div id="poste_hotellerie" class="col-xs-12 sos-form">
 		<h3 class="title-heading">Quelle durée ?</h3>
-		<br>
 		<ul class="col-lg-8 col-lg-offset-2">
 
 		{% for duree in contrat_duree %}
@@ -18,7 +17,7 @@
 		        	
 		            <form method="post" action="
 		            {% if data.contrat == 1 or data.contrat == 2 %}
-		            	{{ path('informations_classification') }}
+		            	{{ path('informations_formation') }}
 		            {% elseif data.contrat == 4 %}
 		            	{{ path('informations_cursus') }}
 		            {% endif %}">
