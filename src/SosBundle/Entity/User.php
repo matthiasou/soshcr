@@ -47,43 +47,10 @@ class User extends BaseUser
     public $dateNaissance;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="score", type="integer", length=11, nullable=true)
-     */
-    public $score;
-
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="Anglais")
-     */
-    public $niveauAnglais;
-
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="CursusScolaire")
-     */
-    public $cursusScolaire;
-
-    /**
-     *
-     * @ORM\ManyToOne(targetEntity="Adresse")
-     */
-    public $adresse;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="rayon_emploi", type="integer", length=11)
-     */
-    public $rayonEmploi;
-
-    /**
      *
      * @ORM\OneToMany(targetEntity="UserCritere", mappedBy="user")
      */
     public $criteres;
-
 
     /**
      * @var string

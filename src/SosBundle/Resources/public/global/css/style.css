@@ -26,6 +26,12 @@ footer a, header a {
     font-weight: 300
 }
 
+.alert-soshcr{
+    background-color: #FFE44B;
+    color: #394076;
+    font-weight: bold;
+
+}
 
 /*******************************************************************
                       LAYOUT
@@ -66,6 +72,21 @@ header #login {
     display: block;
     width: 100%;
     text-align: right;
+}
+
+header #user-menu{
+    color: #fff;
+    padding:0px;
+    position: absolute;
+    list-style-type: none;
+    text-align: left;
+    display: inline-block;
+    right: 90px;
+    top: 80px;
+    font-size: 13px;
+    line-height: 25px;
+    display: none;
+    width: 120px
 }
 
 header .title {
