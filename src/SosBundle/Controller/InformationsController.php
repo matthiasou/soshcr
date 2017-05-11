@@ -572,14 +572,9 @@ class InformationsController extends Controller
 
             $experience = $em->getRepository('SosBundle:Experience')->find($data['experience_minimum']);            
             $userCritere->setExperience($experience);
-            
-            if (isset($data['service_activite'])) {
-              $cursus = $em->getRepository('SosBundle:CursusScolaire')->find($data['cursus_scolaire']);            
-              $userCritere->setCursusScolaire($cursus);
-            }
 
-            $formation = $em->getRepository('SosBundle:Formation')->find($data['formation_minimum']);            
-            $userCritere->setFormation($formation);
+            $formation = $em->getRepository('SosBundle:CursusScolaire')->find($data['formation_minimum']);            
+            $userCritere->setCursusScolaire($formation);
 
             $userCritere->setRayonEmploi($data['rayon_emploi']);
 
@@ -596,8 +591,8 @@ class InformationsController extends Controller
             $em->persist($userCritere);
             $em->flush();
 
-            dump($userCritere);
-            return $this->render('SosBundle:Informations:date.html.twig', array('data' => $data, 'step' => '9'));    
+            dump($data);
+            return $this->redirectToRoute('profil', array('validation' => 'Tes critères on bien été enregistrés'));    
         }
     }
 
