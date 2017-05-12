@@ -42,15 +42,15 @@ class Matching {
             $classification =  "AND uc.etablissement_id = ".$data['classification'];
         }
 
-        if (isset($data['secteur_activite'])) {
-            $secteur_join =  "JOIN secteur s ON uc.secteur_id = s.id";
-            $secteur_activite =  "AND uc.secteur_id = ".$data['secteur_activite'];
-        }
+        // if (isset($data['secteur_activite'])) {
+        //     $secteur_join =  "JOIN secteur s ON uc.secteur_id = s.id";
+        //     $secteur_activite =  "AND uc.secteur_id = ".$data['secteur_activite'];
+        // }
 
-        if (isset($data['service_activite'])) {
-            $service_join =  "JOIN service se ON uc.service_id = se.id";
-            $service_activite =  "AND uc.service_id = ".$data['service_activite'];
-        }
+        // if (isset($data['service_activite'])) {
+        //     $service_join =  "JOIN service se ON uc.service_id = se.id";
+        //     $service_activite =  "AND uc.service_id = ".$data['service_activite'];
+        // }
 
         if (isset($data['poste'])) {
             $poste_recherche_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
@@ -99,9 +99,9 @@ class Matching {
             FROM utilisateur u
             JOIN user_critere uc
             ON u.id = uc.user_id ".
+            $poste_recherche_join." ".
             $secteur_join." ".
             $service_join." ".
-            $poste_recherche_join." ".
             $cursus_scolaire_join." ".
             $formation_minimum_join." ".
             $experience_minimum_join." ".
@@ -168,15 +168,15 @@ class Matching {
             $classification =  "AND uc.etablissement_id = ".$data['classification'];
         }
 
-        if (isset($data['secteur_activite'])) {
-            $secteur_join =  "JOIN secteur s ON uc.secteur_id = s.id";
-            $secteur_activite =  "AND uc.secteur_id = ".$data['secteur_activite'];
-        }
+        // if (isset($data['secteur_activite'])) {
+        //     $secteur_join =  "JOIN secteur s ON uc.secteur_id = s.id";
+        //     $secteur_activite =  "AND uc.secteur_id = ".$data['secteur_activite'];
+        // }
 
-        if (isset($data['service_activite'])) {
-            $service_join =  "JOIN service se ON uc.service_id = se.id";
-            $service_activite =  "AND uc.service_id = ".$data['service_activite'];
-        }
+        // if (isset($data['service_activite'])) {
+        //     $service_join =  "JOIN service se ON uc.service_id = se.id";
+        //     $service_activite =  "AND uc.service_id = ".$data['service_activite'];
+        // }
 
         if (isset($data['poste'])) {
             $poste_recherche_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
@@ -224,9 +224,9 @@ class Matching {
             FROM utilisateur u
             JOIN user_critere uc
             ON u.id = uc.user_id ".
+            $poste_recherche_join." ".
             $secteur_join." ".
             $service_join." ".
-            $poste_recherche_join." ".
             $cursus_scolaire_join." ".
             $formation_minimum_join." ".
             $experience_minimum_join." ".
@@ -285,15 +285,15 @@ class Matching {
             $classification =  "AND uc.etablissement_id = ".$data['classification'];
         }
 
-        if (isset($data['secteur_activite'])) {
-            $secteur_join =  "JOIN secteur s ON uc.secteur_id = s.id";
-            $secteur_activite =  "AND uc.secteur_id = ".$data['secteur_activite'];
-        }
+        // if (isset($data['secteur_activite'])) {
+        //     $secteur_join =  "JOIN secteur s ON uc.secteur_id = s.id";
+        //     $secteur_activite =  "AND uc.secteur_id = ".$data['secteur_activite'];
+        // }
 
-        if (isset($data['service_activite'])) {
-            $service_join =  "JOIN service se ON uc.service_id = se.id";
-            $service_activite =  "AND uc.service_id = ".$data['service_activite'];
-        }
+        // if (isset($data['service_activite'])) {
+        //     $service_join =  "JOIN service se ON uc.service_id = se.id";
+        //     $service_activite =  "AND uc.service_id = ".$data['service_activite'];
+        // }
 
         if (isset($data['poste'])) {
             $poste_recherche_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
@@ -342,9 +342,9 @@ class Matching {
             FROM utilisateur u
             JOIN user_critere uc
             ON u.id = uc.user_id ".
+            $poste_recherche_join." ".
             $secteur_join." ".
             $service_join." ".
-            $poste_recherche_join." ".
             $cursus_scolaire_join." ".
             $formation_minimum_join." ".
             $experience_minimum_join." ".
