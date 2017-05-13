@@ -18,15 +18,11 @@
 						<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 						<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 						<input type="hidden" name="classification" value="{{ data.classification }}">
-						<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
 
 						{% for utilisateur in data.mail_demande_utilisateur %}
 							<input type="hidden" name="mail_demande_utilisateur[]" value="{{ utilisateur }}">
 						{% endfor %}
 
-						{% if data.service_activite is defined %}
-							<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
-						{% endif %}
 						<input type="hidden" name="poste" value="{{ data.poste }}">
 						<input type="hidden" name="contrat" value="{{ data.contrat }}">
 						<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
@@ -78,9 +74,6 @@ A bientôt,
 		<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
 		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
 
-		{% if data.service_activite is defined %}
-			<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
-		{% endif %}
 		<input type="hidden" name="poste" value="{{ data.poste }}">
 		<input type="hidden" name="contrat" value="{{ data.contrat }}">
 		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">

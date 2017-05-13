@@ -23,7 +23,7 @@ class UserCritere
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="PosteRecherche")
+     * @ORM\ManyToMany(targetEntity="PosteCritere",cascade={"persist"})
      */
     private $poste;
 
@@ -34,24 +34,16 @@ class UserCritere
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Etablissement")
+     *
+     * @ORM\ManyToMany(targetEntity="Etablissement")
      */
     private $etablissement;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Contrat")
+     *
+     * @ORM\ManyToMany(targetEntity="ContratCritere",cascade={"persist"})
      */
     private $contrat;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="TypeContrat")
-     */
-    private $typeContrat;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Experience")
-     */
-    private $experience;
 
     /**
      * @var int
@@ -61,14 +53,14 @@ class UserCritere
     private $score;
 
     /**
-     * @var int
+     * @var float
      *
      * @ORM\Column(name="latitude", type="float", length=11, nullable=false)
      */
     private $latitude;
 
     /**
-     * @var int
+     * @var float
      *
      * @ORM\Column(name="longitude", type="float", length=11, nullable=false)
      */
@@ -81,12 +73,6 @@ class UserCritere
     private $niveauAnglais;
 
     /**
-     *
-     * @ORM\ManyToOne(targetEntity="CursusScolaire")
-     */
-    private $cursusScolaire;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="rayon_emploi", type="integer", length=11)
@@ -94,238 +80,36 @@ class UserCritere
     private $rayonEmploi;
 
     /**
-     * @return mixed
-     */
-    public function getSecteur()
-    {
-        return $this->secteur;
-    }
-
-    /**
-     * @param mixed $secteur
-     */
-    public function setSecteur($secteur)
-    {
-        $this->secteur = $secteur;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getService()
-    {
-        return $this->service;
-    }
-
-    /**
-     * @param mixed $service
-     */
-    public function setService($service)
-    {
-        $this->service = $service;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTypeContrat()
-    {
-        return $this->typeContrat;
-    }
-
-    /**
-     * @param mixed $typeContrat
-     */
-    public function setTypeContrat($typeContrat)
-    {
-        $this->typeContrat = $typeContrat;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getExperience()
-    {
-        return $this->experience;
-    }
-
-    /**
-     * @param mixed $experience
-     */
-    public function setExperience($experience)
-    {
-        $this->experience = $experience;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFormation()
-    {
-        return $this->formation;
-    }
-
-    /**
-     * @param mixed $formation
-     */
-    public function setFormation($formation)
-    {
-        $this->formation = $formation;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCursus()
-    {
-        return $this->cursus;
-    }
-
-    /**
-     * @param mixed $cursus
-     */
-    public function setCursus($cursus)
-    {
-        $this->cursus = $cursus;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateDisponibilite()
-    {
-        return $this->dateDisponibilite;
-    }
-
-    /**
-     * @param mixed $dateDisponibilite
-     */
-    public function setDateDisponibilite($dateDisponibilite)
-    {
-        $this->dateDisponibilite = $dateDisponibilite;
-    }
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Formation")
+     *
+     * @ORM\ManyToMany(targetEntity="Formation")
      */
     private $formation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CursusScolaire")
+     * @ORM\Column(name="disponibilites", type="text")
      */
-    private $cursus;
+    private $disponibilites;
 
     /**
-     * @ORM\Column(name="date_disponibilite", type="text")
+     * Constructor
      */
-    private $dateDisponibilite;
+    public function __construct()
+    {
+        $this->poste = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contrat = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
-    /**
-     * Set poste
-     *
-     * @param string $poste
-     *
-     * @return UserCritere
-     */
-    public function setPoste($poste)
-    {
-        $this->poste = $poste;
-
-        return $this;
-    }
-
-    /**
-     * Get poste
-     *
-     * @return string
-     */
-    public function getPoste()
-    {
-        return $this->poste;
-    }
-
-    /**
-     * Set user
-     *
-     * @param string $user
-     *
-     * @return UserCritere
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return string
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set etablissement
-     *
-     * @param string $etablissement
-     *
-     * @return UserCritere
-     */
-    public function setEtablissement($etablissement)
-    {
-        $this->etablissement = $etablissement;
-
-        return $this;
-    }
-
-    /**
-     * Get etablissement
-     *
-     * @return string
-     */
-    public function getEtablissement()
-    {
-        return $this->etablissement;
-    }
-
-    /**
-     * Set contrat
-     *
-     * @param string $contrat
-     *
-     * @return UserCritere
-     */
-    public function setContrat($contrat)
-    {
-        $this->contrat = $contrat;
-
-        return $this;
-    }
-
-    /**
-     * Get contrat
-     *
-     * @return string
-     */
-    public function getContrat()
-    {
-        return $this->contrat;
-    }
-
 
     /**
      * Set score
@@ -424,6 +208,156 @@ class UserCritere
     }
 
     /**
+     * Set disponibilites
+     *
+     * @param string $disponibilites
+     *
+     * @return UserCritere
+     */
+    public function setDisponibilites($disponibilites)
+    {
+        $this->disponibilites = $disponibilites;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibilites
+     *
+     * @return string
+     */
+    public function getDisponibilites()
+    {
+        return $this->disponibilites;
+    }
+
+    /**
+     * Add poste
+     *
+     * @param \SosBundle\Entity\PosteCritere $poste
+     *
+     * @return UserCritere
+     */
+    public function addPoste(\SosBundle\Entity\PosteCritere $poste)
+    {
+        $this->poste[] = $poste;
+
+        return $this;
+    }
+
+    /**
+     * Remove poste
+     *
+     * @param \SosBundle\Entity\PosteCritere $poste
+     */
+    public function removePoste(\SosBundle\Entity\PosteCritere $poste)
+    {
+        $this->poste->removeElement($poste);
+    }
+
+    /**
+     * Get poste
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPoste()
+    {
+        return $this->poste;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \SosBundle\Entity\User $user
+     *
+     * @return UserCritere
+     */
+    public function setUser(\SosBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \SosBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add etablissement
+     *
+     * @param \SosBundle\Entity\Etablissement $etablissement
+     *
+     * @return UserCritere
+     */
+    public function addEtablissement(\SosBundle\Entity\Etablissement $etablissement)
+    {
+        $this->etablissement[] = $etablissement;
+
+        return $this;
+    }
+
+    /**
+     * Remove etablissement
+     *
+     * @param \SosBundle\Entity\Etablissement $etablissement
+     */
+    public function removeEtablissement(\SosBundle\Entity\Etablissement $etablissement)
+    {
+        $this->etablissement->removeElement($etablissement);
+    }
+
+    /**
+     * Get etablissement
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEtablissement()
+    {
+        return $this->etablissement;
+    }
+
+    /**
+     * Add contrat
+     *
+     * @param \SosBundle\Entity\ContratCritere $contrat
+     *
+     * @return UserCritere
+     */
+    public function addContrat(\SosBundle\Entity\ContratCritere $contrat)
+    {
+        $this->contrat[] = $contrat;
+
+        return $this;
+    }
+
+    /**
+     * Remove contrat
+     *
+     * @param \SosBundle\Entity\ContratCritere $contrat
+     */
+    public function removeContrat(\SosBundle\Entity\ContratCritere $contrat)
+    {
+        $this->contrat->removeElement($contrat);
+    }
+
+    /**
+     * Get contrat
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContrat()
+    {
+        return $this->contrat;
+    }
+
+    /**
      * Set niveauAnglais
      *
      * @param \SosBundle\Entity\Anglais $niveauAnglais
@@ -448,26 +382,36 @@ class UserCritere
     }
 
     /**
-     * Set cursusScolaire
+     * Add formation
      *
-     * @param \SosBundle\Entity\CursusScolaire $cursusScolaire
+     * @param \SosBundle\Entity\Formation $formation
      *
      * @return UserCritere
      */
-    public function setCursusScolaire(\SosBundle\Entity\CursusScolaire $cursusScolaire = null)
+    public function addFormation(\SosBundle\Entity\Formation $formation)
     {
-        $this->cursusScolaire = $cursusScolaire;
+        $this->formation[] = $formation;
 
         return $this;
     }
 
     /**
-     * Get cursusScolaire
+     * Remove formation
      *
-     * @return \SosBundle\Entity\CursusScolaire
+     * @param \SosBundle\Entity\Formation $formation
      */
-    public function getCursusScolaire()
+    public function removeFormation(\SosBundle\Entity\Formation $formation)
     {
-        return $this->cursusScolaire;
+        $this->formation->removeElement($formation);
+    }
+
+    /**
+     * Get formation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFormation()
+    {
+        return $this->formation;
     }
 }

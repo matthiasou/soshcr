@@ -29,6 +29,11 @@ class Service
     private $libelle;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Secteur", inversedBy="services")
+     */
+    private $secteur;
+
+    /**
      * Get id
      *
      * @return int
