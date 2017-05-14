@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SosBundle\Entity\UserCritere;
 use SosBundle\Entity\User;
+use SosBundle\Entity\PosteCritere;
+use SosBundle\Entity\ContratCritere;
+use SosBundle\Entity\Anglais;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -53,7 +56,6 @@ class UserCriteresController extends Controller
       {
         
         $contrats = $request->get('data');
-
         foreach ($contrats as $key => $value) {
 
           if (isset($value['cursus']) && isset($value['duree']))
@@ -139,11 +141,24 @@ class UserCriteresController extends Controller
       if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "step_3" )
       {
         
-        // store into the session
-        $session = $request->getSession();
-        $session->set('ville', $request->get('ville'));
-        $session->set('rayon_emploi', $request->get('rayon_emploi'));
+        $geocoder = 'http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false';
 
+        $query = sprintf($geocoder, urlencode($_POST['ville']));
+        $result = json_decode(file_get_contents($query));
+        if ($result == NULL || $result == "" ||  $result->status == "ZERO_RESULTS" || $result->status == "INVALID_REQUEST"  || $result->status == "REQUEST_DENIED" ){
+
+             return $this->render('SosBundle:UserCriteres:step3.html.twig', array('error' => 'ville'));
+
+        }else{
+            $json = $result->results[0];
+
+            // store into the session
+            $session = $request->getSession();
+            $session->set('latitude', $json->geometry->location->lat);
+            $session->set('longitude', $json->geometry->location->lng);
+            $session->set('rayon_emploi', $request->get('rayon_emploi'));
+        }
+        
         $repoFormations = $em->getRepository('SosBundle:Formation');
         $formations = $repoFormations->findAll();
 
@@ -152,7 +167,8 @@ class UserCriteresController extends Controller
 
         dump($session->get('contrats'));
         dump($session->get('etablissements'));
-        dump($session->get('ville'));
+        dump($session->get('latitude'));
+        dump($session->get('longitude'));
         dump($session->get('rayon_emploi'));
 
 
@@ -411,17 +427,76 @@ class UserCriteresController extends Controller
         $resultat = array(
           'contrats' => $session->get('contrats'),
           'etablissements' => $session->get('etablissements'),
-          'ville' => $session->get('ville'),
+          'latitude' => $session->get('latitude'),
+          'longitude' => $session->get('longitude'),
           'rayon_emploi' => $session->get('rayon_emploi'),
-          'formation' => $session->get('formation'),
+          'formations' => $session->get('formation'),
           'anglais' => $session->get('anglais'),
+          'score' => 0,
           'postes' => $session->get('postes'),
-          'disponibilite' => $session->get('disponibilite'),
+          'disponibilites' => $session->get('disponibilite'),
           );
+       
 
-        dump($resultat);
+        $repoAnglais = $em->getRepository('SosBundle:Anglais');
+        $repoContrat = $em->getRepository('SosBundle:Contrat');
+        $repoCursus = $em->getRepository('SosBundle:CursusScolaire');
+        $repoDuree = $em->getRepository('SosBundle:TypeContrat');
+        $repoPoste = $em->getRepository('SosBundle:PosteRecherche');
+        $repoExperience = $em->getRepository('SosBundle:Experience');
+        $repoFormation = $em->getRepository('SosBundle:Formation');
+        $repoEtablissement = $em->getRepository('SosBundle:Etablissement');
 
-        return $this->render('SosBundle:UserCriteres:step9.html.twig'); 
+        foreach ($resultat['contrats'] as $key => $contrat) 
+        {
+
+          foreach ($resultat['postes'] as $k => $poste) 
+          {
+            $usercritere = new UserCritere();
+            $usercritere->setUser($this->getUser());
+            $usercritere->setContrat($repoContrat->find($contrat['contrat']));
+            foreach ($contrat['duree'] as $key => $value) 
+            {
+              $duree = $repoDuree->find($value);
+              $usercritere->addDuree($duree);
+            }
+            if (isset($contrat['cursus'])) 
+            {
+              foreach ($contrat['cursus'] as $key => $value) 
+              {
+                $cursus = $repoCursus->find($value);
+                $usercritere->addCursus($cursus);
+              }
+            }
+            $usercritere->setPoste($repoPoste->find($poste['poste']));
+            $usercritere->setExperience($repoExperience->find($poste['experience']));
+            $usercritere->setLatitude($resultat['latitude']);
+            $usercritere->setLatitude($resultat['latitude']);
+            $usercritere->setLongitude($resultat['longitude']);
+            $usercritere->setRayonEmploi($resultat['rayon_emploi']);
+            $usercritere->setNiveauAnglais($repoAnglais->find($resultat['anglais']));
+            $usercritere->setScore($resultat['score']);
+            $usercritere->setDisponibilites(json_encode($resultat['disponibilites']));
+
+            foreach ($resultat['formations'] as $key => $value) 
+            {
+              $formation = $repoFormation->find($value['id']);
+              $usercritere->addFormation($formation);
+            }
+
+            foreach ($resultat['etablissements'] as $key => $value) 
+            {
+              $etablissement = $repoEtablissement->find($value['id']);
+              $usercritere->addEtablissement($etablissement);
+            }
+
+            $em->persist($usercritere);
+            $em->flush($usercritere);
+          }     
+
+        }
+
+        return $this->render('SosBundle:UserCriteres:step9.html.twig', array('contratCritere' => $usercritere)); 
 
       }
       else

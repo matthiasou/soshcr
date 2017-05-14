@@ -1,0 +1,36 @@
+<?php
+
+namespace SosBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ContratCritere
+ *
+ * @ORM\Table(name="contrat_critere")
+ * @ORM\Entity(repositoryClass="SosBundle\Repository\ContratCritereRepository")
+ */
+class ContratCritere
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Contrat")
+     */
+    private $contrat;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="TypeContrat")
+     */
+    private $duree;
+
+}

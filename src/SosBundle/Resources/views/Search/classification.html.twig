@@ -23,7 +23,7 @@
 					{% else %}
 						col-sm-{{ 12 / etablissements|length }}
 		        	{% endif %} text-center">
-					<form method="post" action="{{ path('secteur') }}">
+					<form method="post" action="{{ path('poste') }}">
 						<button>
 							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/rating/' ~ etablissement.id )}}-stars.png" alt="" class="img-responsive form-img">
 							<p>{{ etablissement.libelle | raw }}</p>

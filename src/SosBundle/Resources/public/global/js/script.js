@@ -15,6 +15,21 @@ $(document).ready(function(){
 
     }
 
+    // Afficher les postes recherche en cliquant sur les secteurs
+    $('.secteur-button').click(function(){
+        var ul = $('.'+$(this).attr('data-target'));
+        if (ul.hasClass('expanded'))
+        {
+            ul.slideUp().removeClass('expanded');
+        }
+        else
+        {
+            $('.expanded').slideUp().removeClass('expanded');
+            ul.slideDown().addClass('expanded');
+        }
+        console.log($(this).attr('data-target'));
+    });
+
     $('#add-disponibilite').click(function(){
         if ($('.datepicker-here').length == 0) 
         {

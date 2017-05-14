@@ -28,6 +28,10 @@ class Secteur
      */
     private $libelle;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Service", mappedBy="secteur")
+     */
+    private $services;
 
     /**
      * Get id
@@ -61,5 +65,70 @@ class Secteur
     public function getLibelle()
     {
         return $this->libelle;
+    }
+
+    /**
+     * Set service
+     *
+     * @param \SosBundle\Entity\Service $service
+     *
+     * @return Secteur
+     */
+    public function setService(\SosBundle\Entity\Service $service = null)
+    {
+        $this->service = $service;
+
+        return $this;
+    }
+
+    /**
+     * Get service
+     *
+     * @return \SosBundle\Entity\Service
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->service = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add service
+     *
+     * @param \SosBundle\Entity\Service $service
+     *
+     * @return Secteur
+     */
+    public function addService(\SosBundle\Entity\Service $service)
+    {
+        $this->service[] = $service;
+
+        return $this;
+    }
+
+    /**
+     * Remove service
+     *
+     * @param \SosBundle\Entity\Service $service
+     */
+    public function removeService(\SosBundle\Entity\Service $service)
+    {
+        $this->service->removeElement($service);
+    }
+
+    /**
+     * Get services
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getServices()
+    {
+        return $this->services;
     }
 }
