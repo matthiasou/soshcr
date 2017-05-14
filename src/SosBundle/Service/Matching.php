@@ -15,12 +15,13 @@ class Matching {
 
         $secteur_join = "";
         $service_join = "";
-        $poste_recherche_join = "";
+        $formation = "";
+        $poste_join = "";
         $cursus_scolaire_join = "";
         $formation_minimum_join = "";
         $experience_minimum_join = "";
         $niveau_anglais_join = "";
-
+        $classification_join = "";
         $classification = "";
         $secteur_activite = "";
         $service_activite = "";
@@ -31,29 +32,23 @@ class Matching {
         $experience_minimum = "";
         $cursus_scolaire = "";
         $niveau_anglais = "";
+        $contrat_duree_join = "";
+        $formation_join = "";
 
         if (isset($data['ville'])) {
             // Recherche de l'employé
-            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(uc.latitude))*COS(RADIANS(uc.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(uc.latitude))))";
+            $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians('uc.latitude'))*cos(radians('uc.longitude') -radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians('uc.latitude'))))";
+            dump($formule);
             $ville = "WHERE ".$formule." < uc.rayon_emploi";
         }
 
         if (isset($data['classification'])) {
-            $classification =  "AND uc.etablissement_id = ".$data['classification'];
+            $classification_join = "JOIN user_critere_etablissement uce ON uc.id = uce.user_critere_id";
+            $classification =  "AND uce.etablissement_id = ".$data['classification'];
         }
 
-        // if (isset($data['secteur_activite'])) {
-        //     $secteur_join =  "JOIN secteur s ON uc.secteur_id = s.id";
-        //     $secteur_activite =  "AND uc.secteur_id = ".$data['secteur_activite'];
-        // }
-
-        // if (isset($data['service_activite'])) {
-        //     $service_join =  "JOIN service se ON uc.service_id = se.id";
-        //     $service_activite =  "AND uc.service_id = ".$data['service_activite'];
-        // }
-
         if (isset($data['poste'])) {
-            $poste_recherche_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
+            $poste_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
             $poste =  "AND p.id = ".$data['poste'];
         }
 
@@ -62,7 +57,7 @@ class Matching {
         }
 
         if (isset($data['contrat_duree'])) {
-
+            $contrat_duree_join = "JOIN user_critere_type_contrat uctc ON uc.id = uctc.user_critere_id";
             if ($data['contrat_duree'] != 3) { // si tout n'est pas sélectionné
                 $contrat_duree =  "AND uc.type_contrat_id = ".$data['contrat_duree'];
             }
@@ -70,54 +65,35 @@ class Matching {
         }
 
         if (isset($data['formation_minimum'])) {
-            $formation_minimum_join = "JOIN formation f ON uc.formation_id = f.id";
+            $formation_join = "JOIN user_critere_formation ucf ON uc.id = ucf.user_critere_id";
             if ($data['formation_minimum'] != 0) { // si tout n'est pas sélectionné
-                $formation_minimum =  "AND f.classement >= ".$data['formation_minimum'];
+                $formation =  "AND ucf.formation_id >= ".$data['formation'];
             }
-        }
-
-        if (isset($data['experience_minimum'])) {
-            $experience_minimum_join = "JOIN experience e ON uc.experience_id = e.id";
-            $experience_minimum =  "AND e.classement >= ".$data['experience_minimum'];
         }
 
         if (isset($data['cursus_scolaire'])) {
-            $cursus_scolaire_join = "JOIN cursus_scolaire cs ON uc.cursus_id = cs.id";
+            $cursus_scolaire_join = "JOIN user_critere_cursus_scolaire uccs ON uc.id = uccs.user_critere_id";
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
                 $cursus_scolaire =  "AND uc.cursus_id = ".$data['cursus_scolaire'];
             }
-            
         }
 
-        if (isset($data['niveau_anglais'])) {
-            $niveau_anglais_join = "JOIN anglais an ON u.niveau_anglais_id = an.id";
-            $niveau_anglais =  "AND an.classement >= ".$data['niveau_anglais'];
-        }
-
-
-        $query = "SELECT u.id
+        $query = "SELECT DISTINCT u.id
             FROM utilisateur u
             JOIN user_critere uc
             ON u.id = uc.user_id ".
-            $poste_recherche_join." ".
-            $secteur_join." ".
-            $service_join." ".
-            $cursus_scolaire_join." ".
-            $formation_minimum_join." ".
-            $experience_minimum_join." ".
-            $niveau_anglais_join."
-            WHERE ".$formule." < uc.rayon_emploi ".
+            $classification_join." ".
+            $poste_join." ".
+            $contrat_duree_join." ".
+            $formation_join." ".
+            $cursus_scolaire_join."
+            WHERE ".$formule." <> uc.rayon_emploi ".
             $classification." ".
-            $secteur_activite." ".
-            $service_activite." ".
             $poste." ".
             $contrat." ".
             $contrat_duree." ".
-            $formation_minimum." ".
-            $experience_minimum." ".
-            $cursus_scolaire." ".
-            $niveau_anglais."
-            order by u.score DESC ;";
+            $formation." ".
+            $cursus_scolaire;
 
         
 
@@ -141,12 +117,13 @@ class Matching {
 
         $secteur_join = "";
         $service_join = "";
-        $poste_recherche_join = "";
+        $formation = "";
+        $poste_join = "";
         $cursus_scolaire_join = "";
         $formation_minimum_join = "";
         $experience_minimum_join = "";
         $niveau_anglais_join = "";
-
+        $classification_join = "";
         $classification = "";
         $secteur_activite = "";
         $service_activite = "";
@@ -157,29 +134,23 @@ class Matching {
         $experience_minimum = "";
         $cursus_scolaire = "";
         $niveau_anglais = "";
+        $contrat_duree_join = "";
+        $formation_join = "";
 
         if (isset($data['ville'])) {
             // Recherche de l'employé
-            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(uc.latitude))*COS(RADIANS(uc.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(uc.latitude))))";
+            $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians('uc.latitude'))*cos(radians('uc.longitude') -radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians('uc.latitude'))))";
+            dump($formule);
             $ville = "WHERE ".$formule." < uc.rayon_emploi";
         }
 
         if (isset($data['classification'])) {
-            $classification =  "AND uc.etablissement_id = ".$data['classification'];
+            $classification_join = "JOIN user_critere_etablissement uce ON uc.id = uce.user_critere_id";
+            $classification =  "AND uce.etablissement_id = ".$data['classification'];
         }
 
-        // if (isset($data['secteur_activite'])) {
-        //     $secteur_join =  "JOIN secteur s ON uc.secteur_id = s.id";
-        //     $secteur_activite =  "AND uc.secteur_id = ".$data['secteur_activite'];
-        // }
-
-        // if (isset($data['service_activite'])) {
-        //     $service_join =  "JOIN service se ON uc.service_id = se.id";
-        //     $service_activite =  "AND uc.service_id = ".$data['service_activite'];
-        // }
-
         if (isset($data['poste'])) {
-            $poste_recherche_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
+            $poste_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
             $poste =  "AND p.id = ".$data['poste'];
         }
 
@@ -188,7 +159,7 @@ class Matching {
         }
 
         if (isset($data['contrat_duree'])) {
-
+            $contrat_duree_join = "JOIN user_critere_type_contrat uctc ON uc.id = uctc.user_critere_id";
             if ($data['contrat_duree'] != 3) { // si tout n'est pas sélectionné
                 $contrat_duree =  "AND uc.type_contrat_id = ".$data['contrat_duree'];
             }
@@ -196,58 +167,42 @@ class Matching {
         }
 
         if (isset($data['formation_minimum'])) {
-            $formation_minimum_join = "JOIN formation f ON uc.formation_id = f.id";
+            $formation_join = "JOIN user_critere_formation ucf ON uc.id = ucf.user_critere_id";
             if ($data['formation_minimum'] != 0) { // si tout n'est pas sélectionné
-                $formation_minimum =  "AND f.classement >= ".$data['formation_minimum'];
+                $formation =  "AND ucf.formation_id >= ".$data['formation'];
             }
-        }
-
-        if (isset($data['experience_minimum'])) {
-            $experience_minimum_join = "JOIN experience e ON uc.experience_id = e.id";
-            $experience_minimum =  "AND e.classement >= ".$data['experience_minimum'];
         }
 
         if (isset($data['cursus_scolaire'])) {
-            $cursus_scolaire_join = "JOIN cursus_scolaire cs ON uc.cursus_id = cs.id";
+            $cursus_scolaire_join = "JOIN user_critere_cursus_scolaire uccs ON uc.id = uccs.user_critere_id";
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
                 $cursus_scolaire =  "AND uc.cursus_id = ".$data['cursus_scolaire'];
             }
-            
         }
 
-        if (isset($data['niveau_anglais'])) {
-            $niveau_anglais_join = "JOIN anglais an ON u.niveau_anglais_id = an.id";
-            $niveau_anglais =  "AND an.classement >= ".$data['niveau_anglais'];
-        }
-
-        $query = "SELECT COUNT(*) as nb
+        $query2 = "SELECT COUNT(DISTINCT u.id) as nb
             FROM utilisateur u
             JOIN user_critere uc
             ON u.id = uc.user_id ".
-            $poste_recherche_join." ".
-            $secteur_join." ".
-            $service_join." ".
-            $cursus_scolaire_join." ".
-            $formation_minimum_join." ".
-            $experience_minimum_join." ".
-            $niveau_anglais_join."
-            WHERE ".$formule." < uc.rayon_emploi ".
+            $classification_join." ".
+            $poste_join." ".
+            $contrat_duree_join." ".
+            $formation_join." ".
+            $cursus_scolaire_join."
+            WHERE ".$formule." <> uc.rayon_emploi ".
             $classification." ".
-            $secteur_activite." ".
-            $service_activite." ".
             $poste." ".
             $contrat." ".
             $contrat_duree." ".
-            $formation_minimum." ".
-            $experience_minimum." ".
-            $cursus_scolaire." ".
-            $niveau_anglais;
+            $formation." ".
+            $cursus_scolaire;
 
 
-        $stmt = $this->entityManager->getConnection()->prepare($query);
+        $stmt = $this->entityManager->getConnection()->prepare($query2);
         $stmt->execute();
         
         $match_employe = $stmt->fetchAll();
+
         return $data['match_employe'] = $match_employe[0];
 
     }
@@ -258,12 +213,13 @@ class Matching {
 
         $secteur_join = "";
         $service_join = "";
-        $poste_recherche_join = "";
+        $formation = "";
+        $poste_join = "";
         $cursus_scolaire_join = "";
         $formation_minimum_join = "";
         $experience_minimum_join = "";
         $niveau_anglais_join = "";
-
+        $classification_join = "";
         $classification = "";
         $secteur_activite = "";
         $service_activite = "";
@@ -274,29 +230,23 @@ class Matching {
         $experience_minimum = "";
         $cursus_scolaire = "";
         $niveau_anglais = "";
+        $contrat_duree_join = "";
+        $formation_join = "";
 
         if (isset($data['ville'])) {
             // Recherche de l'employé
-            $formule="(6366*ACOS(COS(RADIANS(".floatval($data['ville']['latitude'])."))*COS(RADIANS(uc.latitude))*COS(RADIANS(uc.longitude)-RADIANS(".floatval($data['ville']['longitude'])."))+SIN(RADIANS(".floatval($data['ville']['latitude'])."))*SIN(RADIANS(uc.latitude))))";
+            $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians('uc.latitude'))*cos(radians('uc.longitude') -radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians('uc.latitude'))))";
+            dump($formule);
             $ville = "WHERE ".$formule." < uc.rayon_emploi";
         }
 
         if (isset($data['classification'])) {
-            $classification =  "AND uc.etablissement_id = ".$data['classification'];
+            $classification_join = "JOIN user_critere_etablissement uce ON uc.id = uce.user_critere_id";
+            $classification =  "AND uce.etablissement_id = ".$data['classification'];
         }
 
-        // if (isset($data['secteur_activite'])) {
-        //     $secteur_join =  "JOIN secteur s ON uc.secteur_id = s.id";
-        //     $secteur_activite =  "AND uc.secteur_id = ".$data['secteur_activite'];
-        // }
-
-        // if (isset($data['service_activite'])) {
-        //     $service_join =  "JOIN service se ON uc.service_id = se.id";
-        //     $service_activite =  "AND uc.service_id = ".$data['service_activite'];
-        // }
-
         if (isset($data['poste'])) {
-            $poste_recherche_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
+            $poste_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
             $poste =  "AND p.id = ".$data['poste'];
         }
 
@@ -305,7 +255,7 @@ class Matching {
         }
 
         if (isset($data['contrat_duree'])) {
-
+            $contrat_duree_join = "JOIN user_critere_type_contrat uctc ON uc.id = uctc.user_critere_id";
             if ($data['contrat_duree'] != 3) { // si tout n'est pas sélectionné
                 $contrat_duree =  "AND uc.type_contrat_id = ".$data['contrat_duree'];
             }
@@ -313,54 +263,35 @@ class Matching {
         }
 
         if (isset($data['formation_minimum'])) {
-            $formation_minimum_join = "JOIN formation f ON uc.formation_id = f.id";
+            $formation_join = "JOIN user_critere_formation ucf ON uc.id = ucf.user_critere_id";
             if ($data['formation_minimum'] != 0) { // si tout n'est pas sélectionné
-                $formation_minimum =  "AND f.classement >= ".$data['formation_minimum'];
+                $formation =  "AND ucf.formation_id >= ".$data['formation'];
             }
-        }
-
-        if (isset($data['experience_minimum'])) {
-            $experience_minimum_join = "JOIN experience e ON uc.experience_id = e.id";
-            $experience_minimum =  "AND e.classement >= ".$data['experience_minimum'];
         }
 
         if (isset($data['cursus_scolaire'])) {
-            $cursus_scolaire_join = "JOIN cursus_scolaire cs ON uc.cursus_id = cs.id";
+            $cursus_scolaire_join = "JOIN user_critere_cursus_scolaire uccs ON uc.id = uccs.user_critere_id";
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
                 $cursus_scolaire =  "AND uc.cursus_id = ".$data['cursus_scolaire'];
             }
-
         }
 
-        if (isset($data['niveau_anglais'])) {
-            $niveau_anglais_join = "JOIN anglais an ON u.niveau_anglais_id = an.id";
-            $niveau_anglais =  "AND an.classement >= ".$data['niveau_anglais'];
-        }
-
-
-        $query = "SELECT u.id
+        $query = "SELECT DISTINCT u.id
             FROM utilisateur u
             JOIN user_critere uc
             ON u.id = uc.user_id ".
-            $poste_recherche_join." ".
-            $secteur_join." ".
-            $service_join." ".
-            $cursus_scolaire_join." ".
-            $formation_minimum_join." ".
-            $experience_minimum_join." ".
-            $niveau_anglais_join."
-            WHERE ".$formule." < uc.rayon_emploi ".
+            $classification_join." ".
+            $poste_join." ".
+            $contrat_duree_join." ".
+            $formation_join." ".
+            $cursus_scolaire_join."
+            WHERE ".$formule." <> uc.rayon_emploi ".
             $classification." ".
-            $secteur_activite." ".
-            $service_activite." ".
             $poste." ".
             $contrat." ".
             $contrat_duree." ".
-            $formation_minimum." ".
-            $experience_minimum." ".
-            $cursus_scolaire." ".
-            $niveau_anglais."
-            order by u.score DESC ;";
+            $formation." ".
+            $cursus_scolaire;
 
 
 

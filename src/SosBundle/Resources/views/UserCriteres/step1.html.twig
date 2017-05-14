@@ -23,26 +23,26 @@
 
 								<h4>Durée</h4>
 								{% for duree in contrat.duree %}
-									<label><input type="checkbox" class="sub-input sub-input-1" data-name="duree" name="data[{{ contrat.id }}][duree]" value="{{ duree.id }}">&nbsp;{{ duree.libelle }}</label> <br>
+									<label><input type="checkbox" class="sub-input sub-input-1" data-name="duree" name="data[{{ contrat.id }}][duree][]" value="{{ duree.id }}">&nbsp;{{ duree.libelle }}</label> <br>
 								{% endfor %}
 
 								<h4>Cursus</h4>
 								{% for cursus in cursusScolaire %}
-									<label><input type="checkbox" class="sub-input sub-input-2" data-name="cursus" name="data[{{ contrat.id }}][cursus]" value="{{ cursus.id }}">&nbsp;{{ cursus.libelle }}</label> <br>
+									<label><input type="checkbox" class="sub-input sub-input-2" data-name="cursus" name="data[{{ contrat.id }}][cursus][]" value="{{ cursus.id }}">&nbsp;{{ cursus.libelle }}</label> <br>
 								{% endfor %}
 
 							{% elseif contrat.id == 5 %}
 
 								<h4>Cursus</h4>
 								{% for cursus in cursusScolaire %}
-									<label><input type="checkbox" class="sub-input" data-name="cursus" name="data[{{ contrat.id }}][cursus]" value="{{ cursus.id }}">&nbsp;{{ cursus.libelle }}</label> <br>
+									<label><input type="checkbox" class="sub-input" data-name="cursus" name="data[{{ contrat.id }}][cursus][]" value="{{ cursus.id }}">&nbsp;{{ cursus.libelle }}</label> <br>
 								{% endfor %}
 
 							{% else %}
 
 								<h4>Durée</h4>
 								{% for duree in contrat.duree %}
-									<label><input type="checkbox" class="sub-input" data-name="duree" name="data[{{ contrat.id }}][duree]" value="{{ duree.id }}">&nbsp;{{ duree.libelle }}</label> <br>
+									<label><input type="checkbox" class="sub-input" data-name="duree" name="data[{{ contrat.id }}][duree][]" value="{{ duree.id }}">&nbsp;{{ duree.libelle }}</label> <br>
 								{% endfor %}
 
 							{% endif %}

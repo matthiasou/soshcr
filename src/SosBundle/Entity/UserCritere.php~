@@ -23,12 +23,6 @@ class UserCritere
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="PosteCritere")
-     */
-    private $poste;
-
-    /**
-     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="criteres")
      */
     private $user;
@@ -41,9 +35,39 @@ class UserCritere
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="ContratCritere")
+     * @ORM\ManyToOne(targetEntity="Contrat")
      */
     private $contrat;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="TypeContrat")
+     */
+    private $duree;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="CursusScolaire")
+     */
+    private $cursus;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Formation")
+     */
+    private $formation;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="PosteRecherche")
+     */
+    private $poste;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Experience")
+     */
+    private $experience;
 
     /**
      * @var int
@@ -80,14 +104,9 @@ class UserCritere
     private $rayonEmploi;
 
     /**
-     *
-     * @ORM\ManyToMany(targetEntity="Formation")
-     */
-    private $formation;
-
-    /**
      * @ORM\Column(name="disponibilites", type="text")
      */
     private $disponibilites;
+
 
 }

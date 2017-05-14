@@ -23,12 +23,6 @@ class UserCritere
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="PosteCritere",cascade={"persist"})
-     */
-    private $poste;
-
-    /**
-     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="criteres")
      */
     private $user;
@@ -41,9 +35,39 @@ class UserCritere
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="ContratCritere",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Contrat")
      */
     private $contrat;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="TypeContrat")
+     */
+    private $duree;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="CursusScolaire")
+     */
+    private $cursus;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Formation")
+     */
+    private $formation;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="PosteRecherche")
+     */
+    private $poste;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Experience")
+     */
+    private $experience;
 
     /**
      * @var int
@@ -80,24 +104,19 @@ class UserCritere
     private $rayonEmploi;
 
     /**
-     *
-     * @ORM\ManyToMany(targetEntity="Formation")
-     */
-    private $formation;
-
-    /**
      * @ORM\Column(name="disponibilites", type="text")
      */
     private $disponibilites;
+
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->poste = new \Doctrine\Common\Collections\ArrayCollection();
         $this->etablissement = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->contrat = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->duree = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->cursus = new \Doctrine\Common\Collections\ArrayCollection();
         $this->formation = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -232,40 +251,6 @@ class UserCritere
     }
 
     /**
-     * Add poste
-     *
-     * @param \SosBundle\Entity\PosteCritere $poste
-     *
-     * @return UserCritere
-     */
-    public function addPoste(\SosBundle\Entity\PosteCritere $poste)
-    {
-        $this->poste[] = $poste;
-
-        return $this;
-    }
-
-    /**
-     * Remove poste
-     *
-     * @param \SosBundle\Entity\PosteCritere $poste
-     */
-    public function removePoste(\SosBundle\Entity\PosteCritere $poste)
-    {
-        $this->poste->removeElement($poste);
-    }
-
-    /**
-     * Get poste
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPoste()
-    {
-        return $this->poste;
-    }
-
-    /**
      * Set user
      *
      * @param \SosBundle\Entity\User $user
@@ -324,33 +309,23 @@ class UserCritere
     }
 
     /**
-     * Add contrat
+     * Set contrat
      *
-     * @param \SosBundle\Entity\ContratCritere $contrat
+     * @param \SosBundle\Entity\Contrat $contrat
      *
      * @return UserCritere
      */
-    public function addContrat(\SosBundle\Entity\ContratCritere $contrat)
+    public function setContrat(\SosBundle\Entity\Contrat $contrat = null)
     {
-        $this->contrat[] = $contrat;
+        $this->contrat = $contrat;
 
         return $this;
     }
 
     /**
-     * Remove contrat
-     *
-     * @param \SosBundle\Entity\ContratCritere $contrat
-     */
-    public function removeContrat(\SosBundle\Entity\ContratCritere $contrat)
-    {
-        $this->contrat->removeElement($contrat);
-    }
-
-    /**
      * Get contrat
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \SosBundle\Entity\Contrat
      */
     public function getContrat()
     {
@@ -358,27 +333,71 @@ class UserCritere
     }
 
     /**
-     * Set niveauAnglais
+     * Add duree
      *
-     * @param \SosBundle\Entity\Anglais $niveauAnglais
+     * @param \SosBundle\Entity\TypeContrat $duree
      *
      * @return UserCritere
      */
-    public function setNiveauAnglais(\SosBundle\Entity\Anglais $niveauAnglais = null)
+    public function addDuree(\SosBundle\Entity\TypeContrat $duree)
     {
-        $this->niveauAnglais = $niveauAnglais;
+        $this->duree[] = $duree;
 
         return $this;
     }
 
     /**
-     * Get niveauAnglais
+     * Remove duree
      *
-     * @return \SosBundle\Entity\Anglais
+     * @param \SosBundle\Entity\TypeContrat $duree
      */
-    public function getNiveauAnglais()
+    public function removeDuree(\SosBundle\Entity\TypeContrat $duree)
     {
-        return $this->niveauAnglais;
+        $this->duree->removeElement($duree);
+    }
+
+    /**
+     * Get duree
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+
+    /**
+     * Add cursus
+     *
+     * @param \SosBundle\Entity\CursusScolaire $cursus
+     *
+     * @return UserCritere
+     */
+    public function addCursus(\SosBundle\Entity\CursusScolaire $cursus)
+    {
+        $this->cursus[] = $cursus;
+
+        return $this;
+    }
+
+    /**
+     * Remove cursus
+     *
+     * @param \SosBundle\Entity\CursusScolaire $cursus
+     */
+    public function removeCursus(\SosBundle\Entity\CursusScolaire $cursus)
+    {
+        $this->cursus->removeElement($cursus);
+    }
+
+    /**
+     * Get cursus
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCursus()
+    {
+        return $this->cursus;
     }
 
     /**
@@ -413,5 +432,77 @@ class UserCritere
     public function getFormation()
     {
         return $this->formation;
+    }
+
+    /**
+     * Set poste
+     *
+     * @param \SosBundle\Entity\PosteRecherche $poste
+     *
+     * @return UserCritere
+     */
+    public function setPoste(\SosBundle\Entity\PosteRecherche $poste = null)
+    {
+        $this->poste = $poste;
+
+        return $this;
+    }
+
+    /**
+     * Get poste
+     *
+     * @return \SosBundle\Entity\PosteRecherche
+     */
+    public function getPoste()
+    {
+        return $this->poste;
+    }
+
+    /**
+     * Set experience
+     *
+     * @param \SosBundle\Entity\Experience $experience
+     *
+     * @return UserCritere
+     */
+    public function setExperience(\SosBundle\Entity\Experience $experience = null)
+    {
+        $this->experience = $experience;
+
+        return $this;
+    }
+
+    /**
+     * Get experience
+     *
+     * @return \SosBundle\Entity\Experience
+     */
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * Set niveauAnglais
+     *
+     * @param \SosBundle\Entity\Anglais $niveauAnglais
+     *
+     * @return UserCritere
+     */
+    public function setNiveauAnglais(\SosBundle\Entity\Anglais $niveauAnglais = null)
+    {
+        $this->niveauAnglais = $niveauAnglais;
+
+        return $this;
+    }
+
+    /**
+     * Get niveauAnglais
+     *
+     * @return \SosBundle\Entity\Anglais
+     */
+    public function getNiveauAnglais()
+    {
+        return $this->niveauAnglais;
     }
 }
