@@ -1,0 +1,51 @@
+{% extends 'SosBundle::layout.html.twig' %}
+{% block sos_body %}
+	<h3>Signalements en attente</h3>
+{% for result in results%}
+<form action="{{ path('signalements') }}" method="POST">
+<div id="containers" class="col-sm-3">
+<!-- Text input-->
+<div class="form-group">
+	<label for="nom_prenom">Nom Prénom</label>  
+	<div>
+		<input id="nom_prenom" name="nom_prenom" value="{{result.signaleurPrenom}}"/>
+	</div>
+</div>
+<!-- Text input-->
+<div class="form-group">
+	<label for="telephone">Téléphone</label>  
+	<div>
+		<input id="telephone" name="telephone" value="{{result.signaleurTelephone}}" />
+	</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+	<label for="email">Email</label>  
+	<div>
+		<input id="email" name="email" value="{{result.signaleurEmail}}" />
+	</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+	<label for="raison">Que s'est il passé</label>  
+	<div>
+		<input id="raison" name="raison" value="{{result.raison}}" />
+	</div>
+</div>
+
+<input type="hidden" name="id_signalement" value="{{result.id}}">
+
+<!-- Button -->
+<div class="form-group">
+	<label for="valider"></label>
+	<div>
+		<input type="submit" name="supprimer" value="Supprimer signalement" class="btn btn-primary">
+	</div>
+</div>
+
+</form>
+</div>
+{% endfor %}
+{% endblock %}

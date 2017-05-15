@@ -1,0 +1,38 @@
+{% extends 'SosBundle::layout.html.twig' %}
+{% block sos_body %}
+	<h3> Recommandations en attente </h3>
+	<form method="post" action="{{ path('recommandations') }}">
+    <div class="table-responsive">
+		<table class="table text-center table-striped">
+			<thead>
+				<tr>
+					<th class="text-center">Nom du candidat</th>
+					<th class="text-center">Email du candidat</th>
+					<th class="text-center">Nom de l'etablissement</th>
+					<th class="text-center">Email de l'etablissement</th>
+					<th class="text-center">Ville de l'etablissement</th>
+					<th class="text-center">Nom du responsable</th>
+					<th class="text-center">Non conforme / Ne pas envoyer</th>
+				</tr>
+			</thead>
+			{% for recommandation in recommandations %}
+			<tbody>
+				<tr>
+					<td>{{recommandation.user.nom}}</td>
+					<td>{{recommandation.user.email}}</td>
+					<td>{{recommandation.nometablissement}}</td>
+					<td>{{recommandation.email}}</td>
+					<td>{{recommandation.ville}}</td>
+					<td>{{recommandation.nomresponsable}}</td>
+					<td>
+						<input type="checkbox" name="id_recommandation[]" value="{{recommandation.id}}" />
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	<input type="submit" name="valider" value="Valider toutes les demandes">
+	<input type="submit" name="supprimer" value="Supprimer les non conforme">
+</form>
+	</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+    <div id="poste_hotellerie" class="col-xs-12 sos-form">
+        <h2 class="title-heading">Que veux tu faire Admin?</h2>
+    </div>
+    <br><br><br><br>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <div class="box">
+                    <div class="icon">
+                        <div class="image"><i class="fa fa-refresh"></i></div>
+                        <div class="info">
+                            <h3 class="title">Mes actions</h3>
+                            <p>
+                                <ul >
+                                    <li><a href="{{ path('validation') }}">Liste des utilisateurs en attente de validation</li></a>
+                                    <li><a href="{{ path('utilisateurs') }}">Liste des utilisateurs</li></a>
+                                    <li><a href="{{ path('recommandations') }}">Recommandations en attente de validation</li></a>
+                                    <li><a href="{{ path('signalements') }}">Signalements en attente</li></a>
+                                    <li><a href="{{ path('statistiques') }}">Statistiques</li></a>
+                                </ul>
+                            </p>
+                            <div class="more">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space"></div>
+                </div>
+            </div>
+
+{% endblock %}

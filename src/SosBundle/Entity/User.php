@@ -80,7 +80,7 @@ class User extends BaseUser
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="UserCritere", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserCritere", mappedBy="user",cascade={"remove"})
      */
     public $criteres;
 
@@ -97,6 +97,7 @@ class User extends BaseUser
      * @ORM\Column(name="message_5J", type="boolean", nullable=true)
      */
     private $message5J;
+
 
     /**
      * Set nom

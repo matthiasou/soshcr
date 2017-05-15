@@ -65,4 +65,11 @@ class DefaultController extends Controller
         return $this->render('SosBundle:Dashboard:dashboard.html.twig');
     }
 
+    /**
+     * @Route("/dashboard_admin")
+     */
+    public function dashboardAdminAction()
+    {
+        return $this->render('SosBundle:Dashboard:dashboard_admin.html.twig');
+    }
 }

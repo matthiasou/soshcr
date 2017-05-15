@@ -70,6 +70,10 @@ dashboard:
     path:     /dashboard
     defaults: { _controller: SosBundle:Default:dashboard }
 
+dashboard_admin:
+    path:     /dashboard_admin
+    defaults: { _controller: SosBundle:Default:dashboardAdmin }
+
 demandeRecommandation:
     path:     /demandeRecommandation
     defaults: { _controller: SosBundle:Admin:demandeRecommandation }
@@ -126,3 +130,25 @@ information_date:
 
 
 # INFORMATION USER START
+
+
+# USER
+mesrecommandations:
+    path:     /mesrecommandations
+    defaults: { _controller: SosBundle:User:mesrecommandations}
+# ADMIN
+recommandations:
+    path:     /admin/recommandations
+    defaults: { _controller: SosBundle:Admin:recommandations }
+utilisateurs:
+    path:     /admin/utilisateurs
+    defaults: { _controller: SosBundle:Admin:utilisateurs }
+statistiques:
+    path:     /admin/statistiques
+    defaults: { _controller: SosBundle:Admin:statistiques }
+signalements:
+    path:     /admin/signalements
+    defaults: { _controller: SosBundle:Admin:signalements }
+validation:
+    path:     /admin/validation
+    defaults: { _controller: SosBundle:Admin:validation }
