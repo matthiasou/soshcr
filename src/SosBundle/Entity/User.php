@@ -64,6 +64,12 @@ class User extends BaseUser
      */
     private $message5J;
 
+
+    public function setEmail($email){
+        parent::setEmail($email);
+        $this->setUsername($email);
+    }
+
     /**
      * Set nom
      *
@@ -144,8 +150,9 @@ class User extends BaseUser
      * @return User
      */
     public function setDateNaissance($dateNaissance)
-    {
-        $this->dateNaissance = $dateNaissance;
+    {      
+        $date = new \DateTime($dateNaissance);
+        $this->dateNaissance = $date;
 
         return $this;
     }
@@ -241,4 +248,5 @@ class User extends BaseUser
     {
         return $this->criteres;
     }
+
 }

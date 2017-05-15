@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use SosBundle\Form\AdresseType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -19,18 +20,7 @@ class RegistrationType extends AbstractType
         $builder->add('prenom');
         $builder->add('nom');
         $builder->add('telephone');
-        $builder->add('niveauAnglais', EntityType::class, array(
-            'class' => 'SosBundle:Anglais',
-            'choice_label' => 'libelle'));
-        $builder->add('cursusScolaire', EntityType::class, array(
-            'class' => 'SosBundle:CursusScolaire',
-            'choice_label' => 'libelle'));
-        $builder->add('rayonEmploi');
-        $builder->add('dateNaissance', DateType::class, array(
-            'widget' => 'single_text',
-        ));
-        $builder->add('score', HiddenType::class, array(
-            'data' => 0));
+        $builder->add('dateNaissance', TextType::class);
         // $builder->add('adresse', AdresseType::class);
         $builder->remove('username');
 
