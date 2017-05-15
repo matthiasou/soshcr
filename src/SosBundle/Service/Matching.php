@@ -39,7 +39,6 @@ class Matching {
             // Recherche de l'employé
             $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians(uc.latitude))*cos(radians(uc.longitude)-radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians(uc.latitude))))";
             dump($formule);
-            $ville = "WHERE ".$formule." < uc.rayon_emploi";
         }
 
         if (isset($data['classification'])) {
@@ -48,8 +47,7 @@ class Matching {
         }
 
         if (isset($data['poste'])) {
-            $poste_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
-            $poste =  "AND p.id = ".$data['poste'];
+            $poste =  "AND uc.poste_id = ".$data['poste'];
         }
 
         if (isset($data['contrat'])) {
@@ -59,7 +57,7 @@ class Matching {
         if (isset($data['contrat_duree'])) {
             $contrat_duree_join = "JOIN user_critere_type_contrat uctc ON uc.id = uctc.user_critere_id";
             if ($data['contrat_duree'] != 3) { // si tout n'est pas sélectionné
-                $contrat_duree =  "AND uc.type_contrat_id = ".$data['contrat_duree'];
+                $contrat_duree =  "AND uctc.type_contrat_id = ".$data['contrat_duree'];
             }
 
         }
@@ -74,7 +72,7 @@ class Matching {
         if (isset($data['cursus_scolaire'])) {
             $cursus_scolaire_join = "JOIN user_critere_cursus_scolaire uccs ON uc.id = uccs.user_critere_id";
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
-                $cursus_scolaire =  "AND uc.cursus_id = ".$data['cursus_scolaire'];
+                $cursus_scolaire =  "AND uccs.cursus_id = ".$data['cursus_scolaire'];
             }
         }
 
@@ -149,8 +147,7 @@ class Matching {
         }
 
         if (isset($data['poste'])) {
-            $poste_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
-            $poste =  "AND p.id = ".$data['poste'];
+            $poste =  "AND uc.poste_id = ".$data['poste'];
         }
 
         if (isset($data['contrat'])) {
@@ -160,7 +157,7 @@ class Matching {
         if (isset($data['contrat_duree'])) {
             $contrat_duree_join = "JOIN user_critere_type_contrat uctc ON uc.id = uctc.user_critere_id";
             if ($data['contrat_duree'] != 3) { // si tout n'est pas sélectionné
-                $contrat_duree =  "AND uc.type_contrat_id = ".$data['contrat_duree'];
+                $contrat_duree =  "AND uctc.type_contrat_id = ".$data['contrat_duree'];
             }
 
         }
@@ -175,7 +172,7 @@ class Matching {
         if (isset($data['cursus_scolaire'])) {
             $cursus_scolaire_join = "JOIN user_critere_cursus_scolaire uccs ON uc.id = uccs.user_critere_id";
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
-                $cursus_scolaire =  "AND uc.cursus_id = ".$data['cursus_scolaire'];
+                $cursus_scolaire =  "AND uccs.cursus_id = ".$data['cursus_scolaire'];
             }
         }
 
@@ -236,7 +233,6 @@ class Matching {
             // Recherche de l'employé
             $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians(uc.latitude))*cos(radians(uc.longitude)-radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians(uc.latitude))))";
             dump($formule);
-            $ville = "WHERE ".$formule." < uc.rayon_emploi";
         }
 
         if (isset($data['classification'])) {
@@ -245,8 +241,7 @@ class Matching {
         }
 
         if (isset($data['poste'])) {
-            $poste_join = "JOIN poste_recherche p ON uc.poste_id = p.id";
-            $poste =  "AND p.id = ".$data['poste'];
+            $poste =  "AND uc.poste_id = ".$data['poste'];
         }
 
         if (isset($data['contrat'])) {
@@ -256,7 +251,7 @@ class Matching {
         if (isset($data['contrat_duree'])) {
             $contrat_duree_join = "JOIN user_critere_type_contrat uctc ON uc.id = uctc.user_critere_id";
             if ($data['contrat_duree'] != 3) { // si tout n'est pas sélectionné
-                $contrat_duree =  "AND uc.type_contrat_id = ".$data['contrat_duree'];
+                $contrat_duree =  "AND uctc.type_contrat_id = ".$data['contrat_duree'];
             }
 
         }
@@ -271,7 +266,7 @@ class Matching {
         if (isset($data['cursus_scolaire'])) {
             $cursus_scolaire_join = "JOIN user_critere_cursus_scolaire uccs ON uc.id = uccs.user_critere_id";
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
-                $cursus_scolaire =  "AND uc.cursus_id = ".$data['cursus_scolaire'];
+                $cursus_scolaire =  "AND uccs.cursus_id = ".$data['cursus_scolaire'];
             }
         }
 
