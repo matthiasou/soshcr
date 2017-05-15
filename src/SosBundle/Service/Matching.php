@@ -72,7 +72,7 @@ class Matching {
         if (isset($data['cursus_scolaire'])) {
             $cursus_scolaire_join = "JOIN user_critere_cursus_scolaire uccs ON uc.id = uccs.user_critere_id";
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
-                $cursus_scolaire =  "AND uccs.cursus_id = ".$data['cursus_scolaire'];
+                $cursus_scolaire =  "AND uccs.cursus_scolaire_id = ".$data['cursus_scolaire'];
             }
         }
 
@@ -172,7 +172,7 @@ class Matching {
         if (isset($data['cursus_scolaire'])) {
             $cursus_scolaire_join = "JOIN user_critere_cursus_scolaire uccs ON uc.id = uccs.user_critere_id";
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
-                $cursus_scolaire =  "AND uccs.cursus_id = ".$data['cursus_scolaire'];
+                $cursus_scolaire =  "AND uccs.cursus_scolaire_id = ".$data['cursus_scolaire'];
             }
         }
 
@@ -266,7 +266,7 @@ class Matching {
         if (isset($data['cursus_scolaire'])) {
             $cursus_scolaire_join = "JOIN user_critere_cursus_scolaire uccs ON uc.id = uccs.user_critere_id";
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
-                $cursus_scolaire =  "AND uccs.cursus_id = ".$data['cursus_scolaire'];
+                $cursus_scolaire =  "AND uccs.cursus_scolaire_id = ".$data['cursus_scolaire'];
             }
         }
 
