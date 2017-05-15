@@ -1,0 +1,87 @@
+{% extends 'SosBundle::layout.html.twig' %}
+{% block sos_body %}
+
+
+	<h3>Recherche de profils</h3>
+<form method="POST" action="{{ path('utilisateurs') }}">
+	Nom : <input type="text" name="nom">
+	Prénom : <input type="text" name="prenom">
+	Téléphone : <input type="text" name="telephone">	
+	<input type="submit" name="rechercher" value="Rechercher">
+	<input type="submit" name="rechercherAll" value="Voir tous les profils">
+</form>
+{% if result1 is defined %}
+<div class="table-responsive">
+		<table id="myTable" class="table text-center table-striped tablesorter">
+			<thead>
+				<tr>
+					<th class="text-center">Nom</th>
+					<th class="text-center">Prenom</th>
+					<th class="text-center">Age</th>
+					<th class="text-center">Telephone</th>
+					<th class="text-center">Email</th>
+					<th class="text-center">Recommandation</th>
+					<th class="text-center">Region</th>
+					<th class="text-center">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for result in result1 %}
+				<tr>
+					<td><a href="">{{result.nom}}</a></td>
+					<td><a href="">{{result.prenom}}</a></td>
+					<td>{{result.date_naissance|date("m/d/Y")}}</td>
+					<td>{{result.telephone}}</td>
+					<td>{{result.email}}</td>
+					<td>Recommandation</td>
+					<td>Region</td>
+					<td>
+						<input type="checkbox" name="id_utilisateur" value="{{result.id}}" />
+					</td>
+				</tr>
+				{% endfor %}	
+				
+			</tbody>
+		</table>
+<input type="submit" name="supprimer" value="Supprimer le profil">			
+	</div>
+{% endif %}
+{% if utilisateurs is defined %}
+<form class="form-horizontal" method="POST" action="{{ path('utilisateurs') }}">
+    <div class="table-responsive">
+		<table id="myTable" class="table text-center table-striped tablesorter">
+			<thead>
+				<tr>
+					<th class="text-center">Nom</th>
+					<th class="text-center">Prenom</th>
+					<th class="text-center">Age</th>
+					<th class="text-center">Telephone</th>
+					<th class="text-center">Email</th>
+					<th class="text-center">Recommandation</th>
+					<th class="text-center">Region</th>
+					<th class="text-center">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for utilisateur in utilisateurs %}
+				<tr>
+					<td><a href="">{{utilisateur.nom}}</a></td>
+					<td><a href="">{{utilisateur.prenom}}</a></td>
+					<td>{{utilisateur.datenaissance|date("m/d/Y")}}</td>
+					<td>{{utilisateur.telephone}}</td>
+					<td>{{utilisateur.email}}</td>
+					<td>Recommandation</td>
+					<td>Region</td>
+					<td>
+						<input type="checkbox" name="id_utilisateur" value="{{utilisateur.id}}" />
+					</td>
+				</tr>
+				{% endfor %}	
+				
+			</tbody>
+		</table>
+<input type="submit" name="supprimer" value="Supprimer le profil">			
+	</div>
+</form>
+{% endif %}
+{% endblock %}

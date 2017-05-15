@@ -1,0 +1,39 @@
+{% extends 'SosBundle::layout.html.twig' %}
+{% block javascript %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+{% endblock %}
+{% block sos_body %}
+	<h3>Recommandations</h3>
+	<hr>
+<div class="container">
+    <div class="row col-md-6 col-md-offset-2 custyle">
+    	<h3>Mes recommandations</h3>
+    <table class="table table-striped custab" border="1">
+    	{% set nb = nbreco %}
+    {% if nbreco < 1 %}
+    Je ne suis pas recommandé :(
+	{% endif %}
+    	{% for recommandation in recommandations %}
+    		<tr>
+                	<td>{{nbreco}}.{{recommandation.nomEtablissement}}, {{recommandation.ville}}</td>
+                	{% set nbreco = nbreco-1 %}
+             </tr>   
+        {% endfor %}
+    </table>
+    <a href="{{ path('demandeRecommandation') }}">Je veux me faire recommander</a>
+
+    </div>
+    <div>
+    	FELICITATIONS
+    	{{nb}}
+    	<div class="fb-share-button" data-href="http://localhost:8888/soshcr2/web/app_dev.php/mesrecommandations" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8888%2Fsoshcr2%2Fweb%2Fapp_dev.php%2Fmesrecommandations&amp;src=sdkpreparse">Partager</a></div>
+    </div>
+</div>
+{% endblock %}
