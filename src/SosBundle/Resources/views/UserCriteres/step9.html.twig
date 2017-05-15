@@ -1,0 +1,16 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+
+		<div id="poste_hotellerie" class="col-xs-12 sos-form">
+		<h3 class="title-heading">Barvo {{ app.user.prenom }}, tu es prêt !</h3>
+		<br>
+		<ul class="col-lg-8 col-lg-offset-2">
+			{{ dump(contratCritere) }}		
+		</ul>
+	
+
+   	<div class="clearfix spacer"></div>
+</div>
+
+{% endblock %}

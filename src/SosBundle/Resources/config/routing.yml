@@ -1,6 +1,10 @@
 index:
     path:     /
     defaults: { _controller: SosBundle:Default:index }
+  
+profil:
+    path:     /profil
+    defaults: { _controller: SosBundle:Default:profil }
 
 ville:
     path:     /search/ville
@@ -80,54 +84,45 @@ demandeRecommandation:
 
 # INFORMATION USER START
 
-information_ville:
-    path:     /informations/ville
-    defaults: { _controller: SosBundle:Informations:ville }
+usercriteres_index:
+    path: /usercriteres
+    defaults: { _controller: SosBundle:UserCriteres:index}
 
-information_classification:
-    path:     /informations/classification
-    defaults: { _controller: SosBundle:Informations:classification }
+usercriteres_step_1:
+    path: /usercriteres/step1
+    defaults: { _controller: SosBundle:UserCriteres:step1}
 
-information_secteur:
-    path:     /informations/secteur
-    defaults: { _controller: SosBundle:Informations:secteur }
+usercriteres_step_2:
+    path: /usercriteres/step2
+    defaults: { _controller: SosBundle:UserCriteres:step2}
 
-information_service:
-    path:     /informations/service
-    defaults: { _controller: SosBundle:Informations:service }
+usercriteres_step_3:
+    path: /usercriteres/step3    
+    defaults: { _controller: SosBundle:UserCriteres:step3}
 
-information_poste:
-    path:     /informations/poste
-    defaults: { _controller: SosBundle:Informations:poste }
+usercriteres_step_4:
+    path: /usercriteres/step4    
+    defaults: { _controller: SosBundle:UserCriteres:step4}
 
-information_contrat:
-    path:     /informations/contrat
-    defaults: { _controller: SosBundle:Informations:contrat }
+usercriteres_step_5:
+    path: /usercriteres/step5    
+    defaults: { _controller: SosBundle:UserCriteres:step5}
 
-information_duree:
-    path:     /informations/duree
-    defaults: { _controller: SosBundle:Informations:duree }
+usercriteres_step_6:
+    path: /usercriteres/step6    
+    defaults: { _controller: SosBundle:UserCriteres:step6}
 
-information_cursus:
-    path:     /informations/cursus
-    defaults: { _controller: SosBundle:Informations:cursus }
-   
-information_formation:
-    path:     /informations/formation
-    defaults: { _controller: SosBundle:Informations:formation }
-  
-information_experience:
-    path:     /informations/experience
-    defaults: { _controller: SosBundle:Informations:experience }
-    
-information_anglais:
-    path:     /informations/anglais
-    defaults: { _controller: SosBundle:Informations:anglais }
-  
-information_date:
-    path:     /informations/date
-    defaults: { _controller: SosBundle:Informations:date }
+usercriteres_step_7:
+    path: /usercriteres/step7  
+    defaults: { _controller: SosBundle:UserCriteres:step7}
 
+usercriteres_step_8:
+    path: /usercriteres/step8  
+    defaults: { _controller: SosBundle:UserCriteres:step8}
+
+usercriteres_step_9:
+    path: /usercriteres/step9  
+    defaults: { _controller: SosBundle:UserCriteres:step9}
 
 # INFORMATION USER START
 

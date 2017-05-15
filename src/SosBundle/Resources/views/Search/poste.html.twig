@@ -2,51 +2,55 @@
 
 {% block sos_body %}
 
-<div id="poste_restauration" class="col-xs-12 sos-form">
+<div id="poste_restauration" class="col-xs-12 col-sm-8 col-sm-offset-2 sos-form">
 	<h3 class="title-heading">Quel poste ?</h3>
 
 	{% if data.match_employe.nb == 0 %}
-		<p>Aucun candidat ne correspond à vos critères. </p>
+		<p>Aucun candidat autour de vous. </p>
 	{% elseif data.match_employe.nb > 1 %}
-		<p>{{ data.match_employe.nb }} candidats correspondent à vos critères. </p>
+		<p>{{ data.match_employe.nb }} candidats autour de vous. </p>
 	{% elseif data.match_employe.nb == 1 %}
-		<p>{{ data.match_employe.nb }} candidat correspond à vos critères.</p>
+		<p>{{ data.match_employe.nb }} candidat autour de vous.</p>
 	{% endif %}
 		<br>
 
-	<ul class="col-lg-8 col-lg-offset-2">
-
-		{% for poste in postes %}
-
-	        <li class="
-	        	{% if postes|length == 5 %}
-		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
-					{% else %}
-						col-sm-{{ 12 / postes|length }}
-		        	{% endif %} text-center">
-		        	
-	            <form method="post" action="{{ path('contrat') }}">
-	                <button>
-	                    <img style="max-height:75px; width:auto; " src="{{ asset('bundles/sos/global/img/poste/' ~ poste.id ~ '.png') }} " alt="" class="img-responsive form-img">
-	                    <p>{{ poste.libelle | raw }}</p>
-	                </button>
-	                <input type="hidden" value="{{ poste.id }}" name="poste">
-					<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
-					<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
-					<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
-					<input type="hidden" name="classification" value="{{ data.classification }}">
-					<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
-					{# Si on est dans la restauration #}
-					{% if data.service_activite is defined %}
-						<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
-					{% endif %}
-					<input type="hidden" name="form" value="poste">
-	            </form>
-	        </li>
-
+		{% for secteur in secteurs %}
+			<div class="col-sm-6">
+				<a href="#" data-target="postes-secteur-{{ secteur.id }}" class="secteur-button">
+					<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/secteur/'~ secteur.id ~'.png') }}" alt="" class="img-responsive form-img">
+					{{ secteur.libelle }}
+				</a> <br>
+			</div>
 		{% endfor %}
+		
+		{% for secteur in secteurs %}
 
-	</ul>
+			<ul class="col-lg-8 col-lg-offset-2 postes-secteur-{{ secteur.id }}" style="display:none">
+				{% for poste in postes %}
+
+					{% if secteur == poste.secteur %}
+						
+				        <li class="col-sm-2 text-center">
+				            <form method="post" action="{{ path('contrat') }}">
+				                <button>
+				                    <img style="max-height:75px; width:auto; " src="{{ asset('bundles/sos/global/img/poste/' ~ poste.id ~ '.png') }} " alt="" class="img-responsive form-img">
+				                    <p>{{ poste.libelle | raw }}</p>
+				                </button>
+				                <input type="hidden" value="{{ poste.id }}" name="poste">
+								<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+								<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+								<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+								<input type="hidden" name="classification" value="{{ data.classification }}">
+								<input type="hidden" name="form" value="poste">
+				            </form>
+				        </li>
+					
+					{% endif %}
+				{% endfor %}
+			</ul>
+		{% endfor %}
+		
+	
 
     <div class="clearfix spacer"></div>
 
@@ -59,14 +63,7 @@
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 		<input type="hidden" name="classification" value="{{ data.classification }}">
-		<input type="hidden" name="secteur_activite" value="{{ data.secteur_activite }}">
-		{# Si on est dans la restauration #}
-		{% if data.service_activite is defined %}
-			<input type="hidden" name="service_activite" value="{{ data.service_activite }}">
-			<input type="hidden" name="form" value="secteur">
-		{% else %}
-			<input type="hidden" name="form" value="classification">
-		{% endif %}
+		<input type="hidden" name="form" value="classification">
 		
 		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
 	</form>

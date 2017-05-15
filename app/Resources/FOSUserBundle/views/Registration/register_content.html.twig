@@ -39,27 +39,9 @@
 	</div>
 
 	<div class="form-group">
-		{{ form_errors(form.niveauAnglais) }}
-		{{ form_label(form.niveauAnglais) }}
-		{{ form_widget(form.niveauAnglais, { 'attr': {'class': 'form-control'} }) }}
-	</div>
-
-	<div class="form-group">
-		{{ form_errors(form.cursusScolaire) }}
-		{{ form_label(form.cursusScolaire) }}
-		{{ form_widget(form.cursusScolaire, { 'attr': {'class': 'form-control'} }) }}
-	</div>
-
-	<div class="form-group">
-		{{ form_errors(form.rayonEmploi) }}
-		{{ form_label(form.rayonEmploi) }}
-		{{ form_widget(form.rayonEmploi, { 'attr': {'class': 'form-control', 'placeholder' : 'en Km'} }) }}
-	</div>
-
-	<div class="form-group">
 		{{ form_errors(form.dateNaissance) }}
 		{{ form_label(form.dateNaissance) }}
-		{{ form_widget(form.dateNaissance, { 'attr': {'class': 'form-control'} }) }}
+		{{ form_widget(form.dateNaissance, { 'attr': {'class': 'form-control datepicker-here-naissance', 'data-view' : 'years','data-position' : 'right top', 'data-language' : 'fr'} }) }}
 	</div>
 
 	{{ form_rest(form) }}

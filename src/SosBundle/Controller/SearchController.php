@@ -150,7 +150,7 @@ class SearchController extends Controller
         $em = $this->getDoctrine()->getManager();
 
    		// Validation service restauration
-    	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "service" || $request->get('form') == "secteur" ) {
+    	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "service" || $request->get('form') == "classification" ) {
 
 			$data['ville'] = $request->get('ville');
     		$data['classification'] = $request->get('classification');
@@ -161,31 +161,18 @@ class SearchController extends Controller
             }
 			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
-            if (isset($data['service_activite'])) {
-                $qb = $em->createQueryBuilder();
-                $postes = $qb->select('p')
-                  ->from('SosBundle:PosteRecherche','p')
-                  ->where('p.secteur = :secteur_activite')
-                  ->andWhere('p.service = :service_activite')
-                  ->setParameters(array('secteur_activite' => $data['secteur_activite'], 'service_activite' => $data['service_activite']))
-                    ->orderBy('p.id', 'DESC')
-                    ->getQuery()
-                  ->getResult();
-            }else{
-                $qb = $em->createQueryBuilder();
-                $postes = $qb->select('p')
-                  ->from('SosBundle:PosteRecherche','p')
-                  ->where('p.secteur = :secteur_activite')
-                  ->setParameter('secteur_activite', $data['secteur_activite'])
-                    ->orderBy('p.id', 'DESC')
-                  ->getQuery()
-                  ->getResult();
-            }
+            $repoPostes = $em->getRepository('SosBundle:PosteRecherche');         
+            $postes = $repoPostes->findAll();
 
-			
+            $repoSecteurs = $em->getRepository('SosBundle:Secteur');         
+            $secteurs = $repoSecteurs->findAll();
+
+            $repoServices = $em->getRepository('SosBundle:Service');			
+            $services = $repoServices->findAll();
+
 
     		dump($data);
-			return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'data' => $data, 'step' => '5'));	  	
+			return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'secteurs' => $secteurs, 'services' => $services, 'data' => $data, 'step' => '5'));	  	
     	
         }else{
             return $this->redirectToRoute($request->get('form'));
@@ -482,7 +469,7 @@ class SearchController extends Controller
 			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
 			dump($data);    		
-    		return $this->render('SosBundle:Search:date_debut.hml.twig', array('data' => $data, 'step' => '10'));	
+    		return $this->render('SosBundle:Search:date_debut.hml.twig', array('data' => $data, 'step' => '10'));
 
 		}else{
             return $this->redirectToRoute($request->get('form'));
@@ -493,7 +480,9 @@ class SearchController extends Controller
      * @Route("/search/resultat")
      */
     public function resultatAction(Request $request)
-    { $em = $this->getDoctrine()->getManager();
+    { 
+
+        $em = $this->getDoctrine()->getManager();
 
    		// Validation date
     	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "date" ) {
@@ -527,7 +516,7 @@ class SearchController extends Controller
                 $data['experience_minimum'] = $request->get('experience_minimum');
             }
 
-            $this->get('sos.matching')->setScoreEmploye($data);
+            // $this->get('sos.matching')->setScoreEmploye($data);
 			$data['employes'] = $this->get('sos.matching')->getEmploye($data);
 
             foreach ($data['employes']  as $employee){
@@ -539,8 +528,6 @@ class SearchController extends Controller
                 $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee,'valide'=>1));
                 $nbRecommandation = count($recommandation);
                 $employee->nbRecommandation = $nbRecommandation;
-
-
             }
 
 			dump($data);
@@ -767,7 +754,7 @@ class SearchController extends Controller
             $data['demande_contrat'] = $contrat;
 
 
-            $validation = "Mail envoyé";
+            $validation = "Votre demande de CV a été envoyé avec succès";
 
             foreach ($_POST['mail_demande_utilisateur'] as $user){
                 $message = \Swift_Message::newInstance()
