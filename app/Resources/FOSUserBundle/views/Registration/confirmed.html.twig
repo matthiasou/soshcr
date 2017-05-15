@@ -8,7 +8,7 @@
 
 	    <p>{{ 'registration.confirmed'|trans({'%username%': user.prenom}) }}</p>
 
-		<p>Vous pouvez désormais completer votre profil via le lien suivant : <br/> <a href="{{ path('informations_contrat') }}" >Completer mon profil</a> </p>
+		<p>Vous pouvez désormais completer votre profil via le lien suivant : <br/> <a href="{{ path('profil') }}" >Completer mon profil</a> </p>
 
 	    {% if targetUrl %}
 	    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>

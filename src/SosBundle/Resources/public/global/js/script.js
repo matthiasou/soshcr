@@ -77,6 +77,10 @@ $(document).ready(function(){
         minDate: new Date() // Now can select only dates, which goes after today
     });
 
+    $('.datepicker-here-naissance').datepicker({
+        language: 'fr'
+    });
+
     $('#user-icon').click(function(){
 
         if ($(this).children('i').hasClass('fa-chevron-right')) {
