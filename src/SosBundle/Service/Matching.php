@@ -37,7 +37,7 @@ class Matching {
 
         if (isset($data['ville'])) {
             // Recherche de l'employé
-            $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians('uc.latitude'))*cos(radians('uc.longitude') -radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians('uc.latitude'))))";
+            $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians(uc.latitude))*cos(radians(uc.longitude)-radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians(uc.latitude))))";
             dump($formule);
             $ville = "WHERE ".$formule." < uc.rayon_emploi";
         }
@@ -139,9 +139,8 @@ class Matching {
 
         if (isset($data['ville'])) {
             // Recherche de l'employé
-            $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians('uc.latitude'))*cos(radians('uc.longitude') -radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians('uc.latitude'))))";
+            $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians(uc.latitude))*cos(radians(uc.longitude)-radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians(uc.latitude))))";
             dump($formule);
-            $ville = "WHERE ".$formule." < uc.rayon_emploi";
         }
 
         if (isset($data['classification'])) {
@@ -189,7 +188,7 @@ class Matching {
             $contrat_duree_join." ".
             $formation_join." ".
             $cursus_scolaire_join."
-            WHERE ".$formule." <> uc.rayon_emploi ".
+            WHERE ".$formule." < uc.rayon_emploi ".
             $classification." ".
             $poste." ".
             $contrat." ".
@@ -235,7 +234,7 @@ class Matching {
 
         if (isset($data['ville'])) {
             // Recherche de l'employé
-            $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians('uc.latitude'))*cos(radians('uc.longitude') -radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians('uc.latitude'))))";
+            $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians(uc.latitude))*cos(radians(uc.longitude)-radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians(uc.latitude))))";
             dump($formule);
             $ville = "WHERE ".$formule." < uc.rayon_emploi";
         }

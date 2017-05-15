@@ -11,19 +11,26 @@
 
       {% if app.user.criteres|length == 0 %}
 
-		<div class="alert alert-soshcr alert-dismissable">
+		  <div class="alert alert-soshcr alert-dismissable">
 	    	<a class="panel-close close" data-dismiss="alert">×</a> 
 			<i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;&nbsp;
-			{{ app.user.prenom }}, tu n'a pas encore rempli tes critères de recherches ! <strong><a href="{{ path('informations_contrat') }}">Clique ici</a></strong> pour commencer. 
+			{{ app.user.prenom }}, tu n'a pas encore rempli tes critères de recherches ! <strong><a href="{{ path('usercriteres_index') }}">Clique ici</a></strong> pour commencer. 
 	    </div>
 
       {% else %}
       
       <h3>Mes critères de recherche</h3>
       
+      <div class="alert alert-soshcr alert-dismissable">
+        <a class="panel-close close" data-dismiss="alert">×</a> 
+     <i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;
+      {{ app.user.prenom }}, tu as bien rempli tes critères de recherches ! 
+      </div>
+  
+      {# 
       {% for userCritere in app.user.criteres %}
         {{ dump(userCritere) }}
-      {% endfor %}
+      {% endfor %} #}
       
       {% endif %}
 
