@@ -17,14 +17,14 @@
 		<ul class="col-lg-8 col-lg-offset-2">
 
 		{% for contrat in contrats %}
-			{{dump(contrat.libelle)}}
+			
 		        <li class="
 		        	{% if contrats|length == 5 %}
 		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
 					{% else %}
 						col-sm-{{ 12 / contrats|length }}
 		        	{% endif %} text-center">
-		        	
+		        	{{dump(contrat.libelle)}}
 		            <form method="post" action="
 		            {% if contrat.libelle == "CDD" or contrat.libelle == "CDI" or contrat.libelle == "Stage" %}
 		            	{{ path('duree') }}
