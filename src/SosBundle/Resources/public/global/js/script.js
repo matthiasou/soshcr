@@ -27,19 +27,24 @@ $(document).ready(function(){
                 if ($(this).hasClass('clicked'))
                 {
                     $(this).children('.secteur-button').children('.secteur-libelle').hide();
-                    $(this).removeClass('col-sm-6').addClass('col-sm-12');
+                    if ($(this).hasClass('first-element'))
+                    {
+                        $(this).removeClass('col-sm-offset-3');
+                    }
+                    $(this).removeClass('col-sm-3').addClass('col-sm-12');
                     $(this).prepend('<a href="#"><i style="position:absolute;top:0;right:15%" class="fa fa-times close-poste" aria-hidden="true"></i></a>');
                     $('.close-poste').click(function(){
                         ul.slideUp().removeClass('expanded');
-                        $('.hidden').removeClass('hidden').addClass('col-sm-6');
-                        $('.poste-logo.col-sm-12').removeClass('col-sm-12').removeClass('clicked').addClass('col-sm-6');
+                        $('.hidden').removeClass('hidden').addClass('col-sm-3');
+                        $('.first-element.col-sm-12').removeClass('col-sm-12').removeClass('clicked').addClass('col-sm-3').addClass('col-sm-offset-3');
+                        $('.poste-logo.col-sm-12').removeClass('col-sm-12').removeClass('clicked').addClass('col-sm-3');
                         $('.secteur-libelle').show();
                         $(this).parent().remove();
                     });
                 }
                 else
                 {
-                    $(this).removeClass('col-sm-6').addClass('hidden');   
+                    $(this).removeClass('col-sm-6 col-sm-3').addClass('hidden');   
                 }
             });
         }        
