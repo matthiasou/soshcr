@@ -23,11 +23,11 @@
 					{% else %}
 						col-sm-{{ 12 / contrat_duree|length }}
 		        	{% endif %} text-center">
-		        	
+
 		            <form method="post" action="
 		            {% if data.contrat == 1 or data.contrat == 2 %}
 		            	{{ path('formation') }}
-		            {% elseif data.contrat == 4 %}
+		            {% elseif data.contrat == 5 %}
 		            	{{ path('cursus') }}
 		            {% endif %}">
 		                <button>
