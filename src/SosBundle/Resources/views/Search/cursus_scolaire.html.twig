@@ -54,9 +54,9 @@
    	<div class="clearfix spacer"></div>
 
     <form action="
-    	{% if data.contrat == 1 or data.contrat == 2 or data.contrat == 4 %}
+    	{% if data.contrat == 1 or data.contrat == 2 or data.contrat == 5 %}
         	{{ path('duree') }}
-        {% elseif data.contrat == 5 %}
+        {% elseif data.contrat == 4 %}
         	{{ path('contrat') }}
         {% endif %}" method="post">
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">

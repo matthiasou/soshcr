@@ -35,29 +35,37 @@ class SearchController extends Controller
     	// Validation ville
     	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "ville" ) {
 
-            $geocoder = 'http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false';
+            $alreadyVille = $request->get('ville');
+            if (empty($alreadyVille['latitude'])) 
+            {
+                $geocoder = 'http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false';
+                $query = sprintf($geocoder, urlencode($_POST['ville']));
+                $result = json_decode(file_get_contents($query));
+                if ($result == NULL || $result == "" ||  $result->status == "ZERO_RESULTS" || $result->status == "INVALID_REQUEST"  || $result->status == "REQUEST_DENIED" )
+                {
+                    return $this->render('SosBundle:Search:ville.html.twig', array('error' => 'ville'));
+                }
+                else
+                {
+                    $json = $result->results[0];
+                    $data['ville']['libelle'] = $_POST['ville'];
+                    $data['ville']['latitude'] = $json->geometry->location->lat;
+                    $data['ville']['longitude'] = $json->geometry->location->lng;
+                }
+            }
+            else
+            {
+                $data['ville'] = $alreadyVille;
+            }
 
-            $query = sprintf($geocoder, urlencode($_POST['ville']));
-            $result = json_decode(file_get_contents($query));
-            if ($result == NULL || $result == "" ||  $result->status == "ZERO_RESULTS" || $result->status == "INVALID_REQUEST"  || $result->status == "REQUEST_DENIED" ){
+            $repo = $em->getRepository("SosBundle:Etablissement");
+            $etablissements = $repo->findAll();
 
-                 return $this->render('SosBundle:Search:ville.html.twig', array('error' => 'ville'));
+            $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
-            }else{
-                $json = $result->results[0];
-                $data['ville']['libelle'] = $_POST['ville'];
-                $data['ville']['latitude'] = $json->geometry->location->lat;
-                $data['ville']['longitude'] = $json->geometry->location->lng;
+            dump($data);
+            return $this->render('SosBundle:Search:classification.html.twig', array('etablissements' => $etablissements, 'data' => $data, 'step' => '2'));
 
-
-    	        $repo = $em->getRepository("SosBundle:Etablissement");
-    	        $etablissements = $repo->findAll();
-
-    			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
-
-    	        dump($data);
-        		return $this->render('SosBundle:Search:classification.html.twig', array('etablissements' => $etablissements, 'data' => $data, 'step' => '2'));
-           }
 
         }else{
 
@@ -66,79 +74,79 @@ class SearchController extends Controller
         }
     }
 
-    /**
-     * @Route("/search/secteur")
-     */
-    public function secteurAction(Request $request)
-    {
+   //  /**
+   //   * @Route("/search/secteur")
+   //   */
+   //  public function secteurAction(Request $request)
+   //  {
 
-        $data = array();
-        $em = $this->getDoctrine()->getManager();
+   //      $data = array();
+   //      $em = $this->getDoctrine()->getManager();
 
-    	// Validation classification
-    	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "classification" ) {
+   //  	// Validation classification
+   //  	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "classification" ) {
 
-			$data['ville'] = $request->get('ville');
-    		$data['classification'] = $request->get('classification');
+			// $data['ville'] = $request->get('ville');
+   //  		$data['classification'] = $request->get('classification');
 
-	        $repo = $em->getRepository("SosBundle:Secteur");
-	        $secteurs = $repo->findAll();
+	  //       $repo = $em->getRepository("SosBundle:Secteur");
+	  //       $secteurs = $repo->findAll();
 
-	        $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
+	  //       $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
-    		dump($data);
-    		return $this->render('SosBundle:Search:secteur.html.twig', array('secteurs' => $secteurs, 'data' => $data, 'step' => '3'));	
+   //  		dump($data);
+   //  		return $this->render('SosBundle:Search:secteur.html.twig', array('secteurs' => $secteurs, 'data' => $data, 'step' => '3'));	
 
-    	}else{
-            return $this->redirectToRoute($request->get('form'));
-        }
-    }
+   //  	}else{
+   //          return $this->redirectToRoute($request->get('form'));
+   //      }
+   //  }
 
-    /**
-     * @Route("/search/service")
-     */
-    public function serviceAction(Request $request)
-    {
+   //  /**
+   //   * @Route("/search/service")
+   //   */
+   //  public function serviceAction(Request $request)
+   //  {
 
-        $data = array();
-        $em = $this->getDoctrine()->getManager();
+   //      $data = array();
+   //      $em = $this->getDoctrine()->getManager();
 
-   		// Validation secteur activité
-    	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "secteur" ) {
+   // 		// Validation secteur activité
+   //  	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "secteur" ) {
 
-			$data['ville'] = $request->get('ville');
-    		$data['classification'] = $request->get('classification');
-    		$data['secteur_activite'] = $request->get('secteur_activite');
+			// $data['ville'] = $request->get('ville');
+   //  		$data['classification'] = $request->get('classification');
+   //  		$data['secteur_activite'] = $request->get('secteur_activite');
 
-    		dump($data);
+   //  		dump($data);
 
-    		$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
+   //  		$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
-			if ($data['secteur_activite'] == 1) {
+			// if ($data['secteur_activite'] == 1) {
 
-				$qb = $em->createQueryBuilder();
-				$postes = $qb->select('p')
-	              ->from('SosBundle:PosteRecherche','p')
-	              ->where('p.secteur = :secteur_activite')
-	              ->setParameter('secteur_activite', $data['secteur_activite'])
-	              ->getQuery()
-	              ->getResult();
+			// 	$qb = $em->createQueryBuilder();
+			// 	$postes = $qb->select('p')
+	  //             ->from('SosBundle:PosteRecherche','p')
+	  //             ->where('p.secteur = :secteur_activite')
+	  //             ->setParameter('secteur_activite', $data['secteur_activite'])
+	  //             ->getQuery()
+	  //             ->getResult();
 
-				return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'data' => $data, 'step' => '5'));	  	
+			// 	return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'data' => $data, 'step' => '5'));	  	
 
-			}else if($data['secteur_activite'] == 2){
+			// }else if($data['secteur_activite'] == 2){
 
-		        $repo = $em->getRepository("SosBundle:Service");
-		        $services = $repo->findAll();
+		 //        $repo = $em->getRepository("SosBundle:Service");
+		 //        $services = $repo->findAll();
 
-				return $this->render('SosBundle:Search:service.html.twig', array('services' => $services, 'data' => $data, 'step' => '4'));	  	
+			// 	return $this->render('SosBundle:Search:service.html.twig', array('services' => $services, 'data' => $data, 'step' => '4'));	  	
 
-			}
+			// }
 
-    	}else{
-            return $this->redirectToRoute($request->get('form'));
-        }
-    }
+   //  	}else{
+   //          return $this->redirectToRoute($request->get('form'));
+   //      }
+   //  }
 
     /**
      * @Route("/search/poste")
@@ -154,11 +162,7 @@ class SearchController extends Controller
 
 			$data['ville'] = $request->get('ville');
     		$data['classification'] = $request->get('classification');
-    		$data['secteur_activite'] = $request->get('secteur_activite');
-            
-            if (null !== $request->get('service_activite')) {
-                $data['service_activite'] = $request->get('service_activite');
-            }
+
 			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
             $repoPostes = $em->getRepository('SosBundle:PosteRecherche');         
@@ -194,12 +198,7 @@ class SearchController extends Controller
 
 			$data['ville'] = $request->get('ville');
     		$data['classification'] = $request->get('classification');
-    		$data['secteur_activite'] = $request->get('secteur_activite');
     		$data['poste'] = $request->get('poste');
-
-    		if (null !== $request->get('service_activite')) {
-    			$data['service_activite'] = $request->get('service_activite');
-    		}
 
 			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
@@ -228,14 +227,8 @@ class SearchController extends Controller
 
 			$data['ville'] = $request->get('ville');
     		$data['classification'] = $request->get('classification');
-    		$data['secteur_activite'] = $request->get('secteur_activite');
     		$data['poste'] = $request->get('poste');
     		$data['contrat'] = $request->get('contrat');
-
-    		// Si on est dans la restauration : on ajoute le type de restauration
-    		if (null !== $request->get('service_activite')) {
-    			$data['service_activite'] = $request->get('service_activite');
-    		}
 
 			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
@@ -258,13 +251,12 @@ class SearchController extends Controller
     {
         $data = array();
         $em = $this->getDoctrine()->getManager();
-
+        
         // Validation contrat
         if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "duree" || $request->get('form') == "contrat" ) {
 
             $data['ville'] = $request->get('ville');
             $data['classification'] = $request->get('classification');
-            $data['secteur_activite'] = $request->get('secteur_activite');
             $data['poste'] = $request->get('poste');
             $data['contrat'] = $request->get('contrat');
             
@@ -272,11 +264,6 @@ class SearchController extends Controller
                 $data['contrat_duree'] = $request->get('contrat_duree');
             }
 
-            // Si on est dans la restauration : on ajoute le type de restauration
-            if (null !== $request->get('service_activite')) {
-                $data['service_activite'] = $request->get('service_activite');
-            }
-            
             $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
 
@@ -302,19 +289,12 @@ class SearchController extends Controller
 
             $data['ville'] = $request->get('ville');
             $data['classification'] = $request->get('classification');
-            $data['secteur_activite'] = $request->get('secteur_activite');
             $data['poste'] = $request->get('poste');
             $data['contrat'] = $request->get('contrat');
             
             if (null !== $request->get('contrat_duree')) {
                 $data['contrat_duree'] = $request->get('contrat_duree');
             }
-
-            // Si on est dans la restauration : on ajoute le type de restauration
-            if (null !== $request->get('service_activite')) {
-                $data['service_activite'] = $request->get('service_activite');
-            }
-            
 
             $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
@@ -342,7 +322,6 @@ class SearchController extends Controller
 
             $data['ville'] = $request->get('ville');
             $data['classification'] = $request->get('classification');
-            $data['secteur_activite'] = $request->get('secteur_activite');
             $data['poste'] = $request->get('poste');
             $data['contrat'] = $request->get('contrat');
             
@@ -355,10 +334,6 @@ class SearchController extends Controller
                 $data['contrat_duree'] = $request->get('contrat_duree');
             }
 
-            // Si on est dans la restauration : on ajoute le type de restauration
-            if (null !== $request->get('service_activite')) {
-                $data['service_activite'] = $request->get('service_activite');
-            }
 
             $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
@@ -387,7 +362,6 @@ class SearchController extends Controller
 
             $data['ville'] = $request->get('ville');
             $data['classification'] = $request->get('classification');
-            $data['secteur_activite'] = $request->get('secteur_activite');
             $data['poste'] = $request->get('poste');
             $data['contrat'] = $request->get('contrat');
 
@@ -407,11 +381,6 @@ class SearchController extends Controller
             
             if (null !== $request->get('contrat_duree')) {
                 $data['contrat_duree'] = $request->get('contrat_duree');
-            }
-
-            // Si on est dans la restauration : on ajoute le type de restauration
-            if (null !== $request->get('service_activite')) {
-                $data['service_activite'] = $request->get('service_activite');
             }
 
             $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
@@ -440,15 +409,9 @@ class SearchController extends Controller
 
 			$data['ville'] = $request->get('ville');
     		$data['classification'] = $request->get('classification');
-    		$data['secteur_activite'] = $request->get('secteur_activite');
     		$data['poste'] = $request->get('poste');
     		$data['contrat'] = $request->get('contrat');
     		$data['niveau_anglais'] = $request->get('niveau_anglais');
-
-    		// Si on est dans la restauration : on ajoute le type de restauration
-    		if (null !== $request->get('service_activite')) {
-    			$data['service_activite'] = $request->get('service_activite');
-    		}
 
             if (null !== $request->get('cursus_scolaire')) {
                 $data['cursus_scolaire'] = $request->get('cursus_scolaire');
@@ -489,16 +452,10 @@ class SearchController extends Controller
 
             $data['ville'] = $request->get('ville');
             $data['classification'] = $request->get('classification');
-            $data['secteur_activite'] = $request->get('secteur_activite');
             $data['poste'] = $request->get('poste');
             $data['contrat'] = $request->get('contrat');
             $data['niveau_anglais'] = $request->get('niveau_anglais');
             $data['date_debut'] = $request->get('date_debut');
-
-            // Si on est dans la restauration : on ajoute le type de restauration
-            if (null !== $request->get('service_activite')) {
-                $data['service_activite'] = $request->get('service_activite');
-            }
 
             if (null !== $request->get('cursus_scolaire')) {
                 $data['cursus_scolaire'] = $request->get('cursus_scolaire');
@@ -556,16 +513,10 @@ class SearchController extends Controller
 
             $data['ville'] = $request->get('ville');
             $data['classification'] = $request->get('classification');
-            $data['secteur_activite'] = $request->get('secteur_activite');
             $data['poste'] = $request->get('poste');
             $data['contrat'] = $request->get('contrat');
             $data['niveau_anglais'] = $request->get('niveau_anglais');
             $data['date_debut'] = $request->get('date_debut');
-
-            // Si on est dans la restauration : on ajoute le type de restauration
-            if (null !== $request->get('service_activite')) {
-                $data['service_activite'] = $request->get('service_activite');
-            }
 
             if (null !== $request->get('cursus_scolaire')) {
                 $data['cursus_scolaire'] = $request->get('cursus_scolaire');
@@ -708,16 +659,10 @@ class SearchController extends Controller
         else if(isset($_POST['message'])){
             $data['ville'] = $request->get('ville');
             $data['classification'] = $request->get('classification');
-            $data['secteur_activite'] = $request->get('secteur_activite');
             $data['poste'] = $request->get('poste');
             $data['contrat'] = $request->get('contrat');
             $data['niveau_anglais'] = $request->get('niveau_anglais');
             $data['date_debut'] = $request->get('date_debut');
-
-            // Si on est dans la restauration : on ajoute le type de restauration
-            if (null !== $request->get('service_activite')) {
-                $data['service_activite'] = $request->get('service_activite');
-            }
 
             if (null !== $request->get('cursus_scolaire')) {
                 $data['cursus_scolaire'] = $request->get('cursus_scolaire');
