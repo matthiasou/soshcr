@@ -15,10 +15,10 @@
 		<br>
 
 		{% for secteur in secteurs %}
-			<div class="col-sm-6">
+			<div class="col-sm-6 poste-logo">
 				<a href="#" data-target="postes-secteur-{{ secteur.id }}" class="secteur-button">
 					<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/secteur/'~ secteur.id ~'.png') }}" alt="" class="img-responsive form-img">
-					{{ secteur.libelle }}
+					<p class='secteur-libelle'>{{ secteur.libelle }}</p>
 				</a> <br>
 			</div>
 		{% endfor %}
@@ -34,7 +34,7 @@
 				            <form method="post" action="{{ path('contrat') }}">
 				                <button>
 				                    <img style="max-height:75px; width:auto; " src="{{ asset('bundles/sos/global/img/poste/' ~ poste.id ~ '.png') }} " alt="" class="img-responsive form-img">
-				                    <p>{{ poste.libelle | raw }}</p>
+				                    <p class="poste-libelle">{{ poste.libelle | raw }}</p>
 				                </button>
 				                <input type="hidden" value="{{ poste.id }}" name="poste">
 								<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
@@ -54,16 +54,12 @@
 
     <div class="clearfix spacer"></div>
 
-    <form action="{% if data.secteur_activite == 1 %}
-    				{{ path('secteur') }}
-    			{% else %}
-    				{{ path('service') }}
-    			{% endif %}" method="post">
+    <form action="{{ path('classification')}}" method="post">
 		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 		<input type="hidden" name="classification" value="{{ data.classification }}">
-		<input type="hidden" name="form" value="classification">
+		<input type="hidden" name="form" value="ville">
 		
 		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
 	</form>
