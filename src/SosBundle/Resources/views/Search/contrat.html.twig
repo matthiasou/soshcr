@@ -24,7 +24,7 @@
 					{% else %}
 						col-sm-{{ 12 / contrats|length }}
 		        	{% endif %} text-center">
-		        	{{dump(contrat.libelle)}}
+		        	
 		            <form method="post" action="
 		            {% if contrat.libelle == "CDD" or contrat.libelle == "CDI" or contrat.libelle == "Stage" %}
 		            	{{ path('duree') }}
