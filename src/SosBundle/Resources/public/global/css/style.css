@@ -160,6 +160,11 @@ header #login-icon {
     font-weight: bold
 }
 
+.poste-libelle{
+    line-height: 15px;
+    margin-top: 15px;
+}
+
 .btn-soshcr:hover {
     color: #fff;
     opacity: 0.9

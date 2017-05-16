@@ -27,7 +27,36 @@ $(document).ready(function(){
             $('.expanded').slideUp().removeClass('expanded');
             ul.slideDown().addClass('expanded');
         }
-        console.log($(this).attr('data-target'));
+
+        $(this).parent().addClass('clicked');
+        $('#poste_restauration .poste-logo').each(function(){
+            if ($(this).hasClass('clicked'))
+            {
+                $(this).children('.secteur-button').children('.secteur-libelle').hide();
+                $(this).removeClass('col-sm-6').addClass('col-sm-12');
+                $(this).prepend('<a href="#"><i style="position:absolute;top:0;right:15%" class="fa fa-times close-poste" aria-hidden="true"></i></a>');
+                $('.close-poste').click(function(){
+                    if (ul.hasClass('expanded'))
+                    {
+                        ul.slideUp().removeClass('expanded');
+                    }
+                    else
+                    {
+                        $('.expanded').slideUp().removeClass('expanded');
+                        ul.slideDown().addClass('expanded');
+                    }
+                    $('.hidden').removeClass('hidden').addClass('col-sm-6');
+                    $('.poste-logo.col-sm-12').removeClass('col-sm-12').removeClass('clicked').addClass('col-sm-6');
+                    $('.secteur-libelle').show();
+                    $(this).parent().remove();
+                });
+            }
+            else
+            {
+                $(this).removeClass('col-sm-6').addClass('hidden');   
+            }
+        });
+        
     });
 
     $('#add-disponibilite').click(function(){
