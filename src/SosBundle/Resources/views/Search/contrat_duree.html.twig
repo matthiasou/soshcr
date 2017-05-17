@@ -3,15 +3,19 @@
 {% block sos_body %}
 
 	<div id="poste_hotellerie" class="col-xs-12 sos-form">
-		<h3 class="title-heading">Pour quelle durée de travail ?</h3>
+		{% if data.contrat == 1 or data.contrat == 2 %}
+			<h3 class="title-heading">Contrat à temps partiel ou temps plein ?</h3>
+		{% elseif data.contrat == 5 %}
+			<h3 class="title-heading">Combien de temps doit durée le stage ?</h3>
+		{% endif %}"
 		<ul class="col-lg-8 col-lg-offset-2">
 
 			{% if data.match_employe.nb == 0 %}
-				<p>Aucun candidat autour de vous. </p>
+				<p>il n'y a aucun candidat autour de vous. </p>
 			{% elseif data.match_employe.nb > 1 %}
-				<p>{{ data.match_employe.nb }} candidats autour de vous. </p>
+				<p>il y a {{ data.match_employe.nb }} candidats autour de vous. </p>
 			{% elseif data.match_employe.nb == 1 %}
-				<p>{{ data.match_employe.nb }} candidat autour de vous.</p>
+				<p>il y a {{ data.match_employe.nb }} candidat autour de vous.</p>
 			{% endif %}
 		<br>
 
