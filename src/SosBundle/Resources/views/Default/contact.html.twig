@@ -1,0 +1,91 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"> </div>
+			<div class="col-md-8">
+				<h1>Formulaire de contact</h1>
+				<p class="lead">Vous avez une question ?</p>
+
+
+				<!-- BEGIN DOWNLOAD PANEL -->
+				<div class="panel panel-default well">
+					<div class="panel-body">
+						<form action="" class="form-horizontal track-event-form bv-form" data-goaltype="”General”" data-formname="”ContactUs”" method="post" id="contact-us-all" novalidate="novalidate">
+
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</div>
+										<input type="text" class="form-control" id="exampleInputFirstName" placeholder="Votre nom" name="C_FirstName" data-bv-field="C_FirstName">
+									</div>
+									<small data-bv-validator="notEmpty" data-bv-validator-for="C_FirstName" class="help-block" style="display: none;">Required</small></div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</div>
+										<input type="text" class="form-control" id="exampleInputLastName" placeholder="Votre prénom" name="C_LastName" data-bv-field="C_LastName"></div>
+									<small data-bv-validator="notEmpty" data-bv-validator-for="C_LastName" class="help-block" style="display: none;">Required</small></div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-envelope"></i>
+										</div>
+										<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Votre E-mail" name="C_EmailAddress" data-bv-field="C_EmailAddress">
+									</div>
+									<small data-bv-validator="notEmpty" data-bv-validator-for="C_EmailAddress" class="help-block" style="display: none;">Required</small></div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-phone"></i>
+										</div>
+										<input type="text" class="form-control" id="exampleInputCompany" placeholder="Votre téléphone" name="C_Company">
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-question-circle"></i>
+										</div>
+										<input type="text" class="form-control" id="C_BusPhone" placeholder="Objet du message" name="C_BusPhone">
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-comment fa-2"></i>
+										</div>
+										<textarea class="form-control" name="Comments" id="Comments" rows="5" style="width:99.9%" placeholder="Ecrivez votre message"></textarea>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12">
+									<button type="submit" style="background-color: #394076; border-color: #394076" class="btn btn-block btn-warning">Envoyer</button>
+								</div>
+							</div>
+							<input type="hidden" value=""></form>
+					</div><!-- end panel-body -->
+				</div><!-- end panel -->
+				<!-- END DOWNLOAD PANEL -->
+			</div><!-- end col-md-8 -->
+			<div class="col-md-2"> </div>
+		</div>
+	</div>
+
+{% endblock %}

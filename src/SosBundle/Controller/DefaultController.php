@@ -81,4 +81,12 @@ class DefaultController extends Controller
     {
         return $this->render('SosBundle:Default:cgv.html.twig');
     }
+
+    /**
+     * @Route("/contact")
+     */
+    public function contactAction()
+    {
+        return $this->render('SosBundle:Default:contact.html.twig');
+    }
 }

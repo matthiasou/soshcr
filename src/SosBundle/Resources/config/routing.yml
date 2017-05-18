@@ -5,6 +5,10 @@ index:
 cgv:
     path:     /cgv
     defaults: { _controller: SosBundle:Default:cgv }
+
+contact:
+    path:     /contact
+    defaults: { _controller: SosBundle:Default:contact }
   
 profil:
     path:     /profil
