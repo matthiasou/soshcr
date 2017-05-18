@@ -151,8 +151,9 @@ class User extends BaseUser
      */
     public function setDateNaissance($dateNaissance)
     {      
-        $date = new \DateTime($dateNaissance);
-        $this->dateNaissance = $date;
+        $date = new \DateTime();
+        $result = $date->createFromFormat('d/m/Y', $dateNaissance);
+        $this->dateNaissance = $result;
 
         return $this;
     }

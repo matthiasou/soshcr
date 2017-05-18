@@ -526,7 +526,7 @@ footer ul li {
 
 .form {
     text-align: center;
-    margin-top: 110px
+    /*margin-top: 110px*/
 }
 
 .title-heading {
@@ -613,11 +613,27 @@ footer ul li {
 /***********************************************
           FORM
 /***********************************************/
-.content-container{
-    min-height: 60vh;
-    display: table;
-    width:100%;
+
+/* ----------- Non-Retina Screens ----------- */
+@media screen 
+  and (max-width: 1499px) { 
+    .content-container{
+        min-height: 58vh;
+        display: table;
+        width:100%;
+    }
 }
+
+/* ----------- Non-Retina Screens ----------- */
+@media screen 
+  and (min-width: 1500px)  { 
+    .content-container{
+        min-height: 71vh;
+        display: table;
+        width:100%;
+    }
+}
+
 
 .content-middle{
     display: table-cell;

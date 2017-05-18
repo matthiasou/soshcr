@@ -5,7 +5,7 @@
 {% block body %}
 	<div class="content-container">
 		<div class="content-middle">
-    		<p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>`
-    	</div>
-    </div>
-{% endblock body %}
+			<p>{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}</p>
+		</div>
+	</div>
+{% endblock %}

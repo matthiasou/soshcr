@@ -78,5 +78,7 @@ fos_user:
         address: "maurayflorian@gmail.com"
         sender_name: "Florian"
     registration:
+        confirmation:
+            enabled: true
         form:
             type: SosBundle\Form\RegistrationType
