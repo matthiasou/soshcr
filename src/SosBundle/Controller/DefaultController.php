@@ -73,4 +73,12 @@ class DefaultController extends Controller
     {
         return $this->render('SosBundle:Dashboard:dashboard_admin.html.twig');
     }
+
+    /**
+     * @Route("/cgv")
+     */
+    public function cgvAction()
+    {
+        return $this->render('SosBundle:Default:cgv.html.twig');
+    }
 }

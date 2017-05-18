@@ -1,6 +1,10 @@
 index:
     path:     /
     defaults: { _controller: SosBundle:Default:index }
+
+cgv:
+    path:     /cgv
+    defaults: { _controller: SosBundle:Default:cgv }
   
 profil:
     path:     /profil
