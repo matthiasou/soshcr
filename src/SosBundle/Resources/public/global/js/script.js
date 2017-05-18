@@ -221,8 +221,10 @@ $(document).ready(function(){
 });
 
 $(window).on('resize', function(){
-
-    $('#user-menu').css({'top': $('#user-icon').offset().top + 25, 'left' : $('#user-icon').offset().left });
+    if ($('#user-menu').length != 0) 
+    {
+        $('#user-menu').css({'top': $('#user-icon').offset().top + 25, 'left' : $('#user-icon').offset().left }); 
+    }
 
 });
 
