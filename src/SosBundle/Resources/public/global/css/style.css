@@ -30,7 +30,11 @@ footer a, header a {
     background-color: #FFE44B;
     color: #394076;
     font-weight: bold;
+}
 
+.btn-yellow{
+    background-color: #FFE44B;
+    color: #394076;
 }
 
 /*******************************************************************
@@ -41,8 +45,11 @@ footer a, header a {
     width: 150px;
     margin: 0 auto;
 }
-
-
+.prim-color{color:#394076}
+.datepicker--cell.datepicker--cell-day.public-profil-cell.-selected-.-disabled-{border-radius: 0!important}
+.-selected-.datepicker--cell-day.-other-month-, .-selected-.datepicker--cell-year.-other-decade-{background-color: #9CA1B8!important}
+.datepicker--button{color:#394076!important}
+.bage-disponible{height: 30px;background-color: #9CA1B8;width: 70px;}
 /***********************************************
           HEADER
 /***********************************************/
@@ -158,6 +165,10 @@ header #login-icon {
     background-color: #394076;
     color: #fff;
     font-weight: bold
+}
+
+.btn-soshcr:hover {
+    color: #fff!important;
 }
 
 .poste-libelle{

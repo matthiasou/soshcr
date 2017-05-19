@@ -1,0 +1,139 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+
+<div class="container" id="imprimer">
+  <a href="javascript:imprime_bloc('titre', 'imprimer')" class='pull-right'><i class="fa fa-print prim-color" aria-hidden="true"></i>&nbsp;Imprimer le profil</a>
+  <h1 class="page-header">{{ user.prenom|upper ~ ' ' ~ user.nom|upper }} ({{ user.dateNaissance|age }} ans)</h1>
+  <div class="row">
+
+    <!-- edit form column -->
+    <div class="personal-info">
+      <div class="col-sm-8 text-left">
+        <a href="mailto:{{ user.email }}"><i class="fa fa-envelope prim-color" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{ user.email }}</a> <br>
+        <a href="tel:{{ user.telephone }}"><i class="fa fa-phone" aria-hidden="true"></i></i>&nbsp;&nbsp;&nbsp;{{ user.telephone }}</a> <br><br>
+
+        {% if userCriteres|length == 0 %}
+
+        <div class="alert alert-soshcr alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;&nbsp;{{ user.prenom }}, n'a pas encore rempli ses critères de recherches.
+        </div>
+
+        {% else %}
+
+          <div class="col-sm-6">
+            <h4>Experience</h4>
+            <ul>
+              {% for poste in userCriteres.postes %}
+                <li>
+                  {{ poste.poste }} ( {{ poste.experience }} )
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="col-sm-6">
+            <h4>Recherche</h4>
+            <ul>
+              {% for contrat in userCriteres.contrats %}
+                <li>
+                  {{ contrat.contrat }}
+                  {% for duree in contrat.duree %}
+                        {% if loop.last == false %}
+                          {{ duree }},
+                        {% else %}
+                          {{ duree }}
+                        {% endif %}
+                  {% endfor %}
+                  
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="col-sm-6">
+            <h4>Formation</h4>
+            <ul>
+              {% for formation in userCriteres.formations %}
+                <li>{{ formation }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="col-sm-6">
+            <h4>Anglais</h4>
+            <ul>
+              <li>{{ userCriteres.anglais}}</li>
+            </ul>
+          </div>
+
+        {% endif %}
+
+      </div>
+      <div class="col-sm-4">
+        <input type='hidden' id="datepicker" name="date_debut" data-language='fr' class="datepicker-public-profil form-control" data-position="left top" /><br>
+        <span class="bage-disponible col-sm-1 col-sm-offset-4"></span><p class="col-sm-4 text-left">Disponible</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+<script>
+
+  var dateArr = [];
+
+  {% for disponibilite in userCriteres.disponibilite %}
+    var str = "{{disponibilite}}";
+    var today = new Date();
+    
+    // Si c'est un range de dates
+    if (/[0-9]{2}\/[0-9]{2}\/[0-9]{4} - [0-9]{2}\/[0-9]{2}\/[0-9]{4}/.test(str))
+    {
+      var startDate = toDate(str.replace(/(.*) - [0-9]{2}\/[0-9]{2}\/[0-9]{4}/, '$1'));
+      var endDate = toDate(str.replace(/[0-9]{2}\/[0-9]{2}\/[0-9]{4} - ([0-9]{2}\/[0-9]{2}\/[0-9]{4})/, '$1'));
+      var arr = [startDate,endDate];
+
+      while (startDate <= endDate) {
+          if (startDate.setHours(0,0,0,0) >= today.setHours(0,0,0,0))
+          {
+            dateArr.push(new Date(startDate));
+          }
+        startDate.setDate(startDate.getDate() + 1);
+      }
+    }
+    else
+    {
+      var date = toDate(str);
+      if (date.setHours(0,0,0,0) >= today.setHours(0,0,0,0))
+      {
+        dateArr.push(date);
+      }
+    }
+  {% endfor %}
+
+  var $picker = $('.datepicker-public-profil');
+  $picker.datepicker({
+      language: 'fr',
+      inline: true,
+      multipleDates: true,
+      showOtherMonths: true,
+      minDate: new Date(),
+      toggleSelected: false,
+      onRenderCell: function(day, cellType){
+        return {
+            classes: 'public-profil-cell',
+            disabled: true
+        }      
+      }
+  });
+  $picker.data('datepicker').selectDate(dateArr);
+   
+
+</script>
+{% endblock %}

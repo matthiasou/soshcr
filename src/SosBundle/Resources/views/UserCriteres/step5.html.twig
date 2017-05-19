@@ -3,7 +3,8 @@
 {% block sos_body %}
 
 		<div id="poste_hotellerie" class="col-xs-12 sos-form">
-		<h3 class="title-heading">{{ app.user.prenom|capitalize }}, quel poste recherches tu et quelle est ton experience ?</h3>
+		<h3 class="title-heading">{{ app.user.prenom|capitalize }}, quel poste recherches tu et quelle est ton experience sur ce poste ?</h3>
+		<p>(Plusieurs choix possibles)</p>
 		<br>
 		<ul class="col-lg-8 col-lg-offset-2">
 			<form class="informations" method="post" action="{{ path('usercriteres_step_6') }}">
@@ -12,13 +13,13 @@
 				{% for poste in postesHotellerie %}
 
 					<li class="col-sm-2 text-center">
-						<label><input type="checkbox" class="main-input select-usercritere" data-name="poste" name="data[{{ poste.id }}][poste]" value="{{ poste.id }}">&nbsp;{{ poste.libelle }}</label>
+						<label><input type="checkbox" class="main-input select-usercritere" data-name="poste" name="data[{{ poste.id }}][poste]" value="{{ poste.id }}">&nbsp;{{ poste.libelle|raw }}</label>
 						<br>
 						<select class="text-center" name="data[{{ poste.id }}][experience]" style="display:none">
 							<option value="">--</option>
 							{% for experience in experiences %}
 								{# <label class="col-sm-12"><input type="radio" class="text-left sub-input" data-name="experience" name="data[{{ experience.id }}][experience]" value="{{ experience.id }}">&nbsp;{{ experience.libelle }}</label> #}
-								<option value="{{ experience.id }}">{{ experience.libelle }}</option>
+								<option value="{{ experience.id }}">{{ experience.libelle|raw }}</option>
 							{% endfor %}
 
 						</select>
