@@ -10,8 +10,3 @@ services:
 
     app.html2pdf:
       class: SosBundle\Service\HTML2PDF
-
-    sos.twig.age_extension:
-      class: SosBundle\Twig\AgeExtension
-      tags:
-          - { name: twig.extension }

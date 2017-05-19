@@ -4,7 +4,7 @@
 
 <div class="container" id="imprimer">
   <a href="javascript:imprime_bloc('titre', 'imprimer')" class='pull-right'><i class="fa fa-print prim-color" aria-hidden="true"></i>&nbsp;Imprimer le profil</a>
-  <h1 class="page-header">{{ user.prenom|upper ~ ' ' ~ user.nom|upper }} ({{ user.dateNaissance|age }} ans)</h1>
+  <h1 class="page-header">{{ user.prenom|upper ~ ' ' ~ user.nom|upper }} ({{ userAge }} ans)</h1>
   <div class="row">
 
     <!-- edit form column -->
@@ -22,7 +22,7 @@
         {% else %}
 
           <div class="col-sm-6">
-            <h4>Experience</h4>
+            <h4 style="color:#555;font-weight:bold">Experience</h4>
             <ul>
               {% for poste in userCriteres.postes %}
                 <li>
@@ -33,7 +33,7 @@
           </div>
 
           <div class="col-sm-6">
-            <h4>Recherche</h4>
+            <h4 style="color:#555;font-weight:bold">Recherche</h4>
             <ul>
               {% for contrat in userCriteres.contrats %}
                 <li>
@@ -54,7 +54,7 @@
           <div class="clearfix"></div>
 
           <div class="col-sm-6">
-            <h4>Formation</h4>
+            <h4 style="color:#555;font-weight:bold">Formation</h4>
             <ul>
               {% for formation in userCriteres.formations %}
                 <li>{{ formation }}</li>
@@ -63,7 +63,7 @@
           </div>
 
           <div class="col-sm-6">
-            <h4>Anglais</h4>
+            <h4 style="color:#555;font-weight:bold">Anglais</h4>
             <ul>
               <li>{{ userCriteres.anglais}}</li>
             </ul>

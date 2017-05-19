@@ -58,6 +58,10 @@ class UserController extends Controller
         $anglaisArr = array_unique($anglaisArr);
         $userCriteres = array('formations' => $formationsArr, 'postes' => $postesArr, 'anglais' => $anglaisArr[0], 'contrats' => $contratsArr, 'disponibilite' => $disponibilitesArr[0]);
 
-        return $this->render('SosBundle:User:publicProfil.html.twig', array("user" => $user, 'userCriteres' => $userCriteres));
+        $now = new \DateTime('now');
+        $age = $user->getDateNaissance();
+        $userAge = $now->diff($age);
+        
+        return $this->render('SosBundle:User:publicProfil.html.twig', array("user" => $user, 'userCriteres' => $userCriteres, 'userAge' => $userAge->y));
     }
 }
