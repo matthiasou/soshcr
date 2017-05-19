@@ -2,15 +2,16 @@
 
 {% block sos_body %}
 
-<div class="container" style="padding-top: 60px;">
+<div class="container" id="imprimer">
+  <a href="javascript:imprime_bloc('titre', 'imprimer')" class='pull-right'><i class="fa fa-print prim-color" aria-hidden="true"></i>&nbsp;Imprimer le profil</a>
   <h1 class="page-header">{{ user.prenom|upper ~ ' ' ~ user.nom|upper }} ({{ user.dateNaissance|age }} ans)</h1>
   <div class="row">
 
     <!-- edit form column -->
     <div class="personal-info">
-      <div class="col-sm-6 text-left">
-        <a href="mailto:{{ user.email }}">{{ user.email }}</a><br>
-        <p>{{ user.telephone }}</p>
+      <div class="col-sm-8 text-left">
+        <a href="mailto:{{ user.email }}"><i class="fa fa-envelope prim-color" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{ user.email }}</a> <br>
+        <a href="tel:{{ user.telephone }}"><i class="fa fa-phone" aria-hidden="true"></i></i>&nbsp;&nbsp;&nbsp;{{ user.telephone }}</a> <br><br>
 
         {% if userCriteres|length == 0 %}
 
@@ -25,10 +26,7 @@
             <ul>
               {% for poste in userCriteres.postes %}
                 <li>
-                  {{ poste.poste }}
-                  <ul>
-                      <li>{{ poste.experience }}</li>  
-                  </ul>
+                  {{ poste.poste }} ( {{ poste.experience }} )
                 </li>
               {% endfor %}
             </ul>
@@ -40,11 +38,14 @@
               {% for contrat in userCriteres.contrats %}
                 <li>
                   {{ contrat.contrat }}
-                  <ul>
-                      {% for duree in contrat.duree %}
-                        <li>{{ duree }}</li>
-                      {% endfor %}
-                  </ul>
+                  {% for duree in contrat.duree %}
+                        {% if loop.last == false %}
+                          {{ duree }},
+                        {% else %}
+                          {{ duree }}
+                        {% endif %}
+                  {% endfor %}
+                  
                 </li>
               {% endfor %}
             </ul>
@@ -71,8 +72,9 @@
         {% endif %}
 
       </div>
-      <div class="col-sm-6">
-        <input type='hidden' id="datepicker" name="date_debut" data-language='fr' class="datepicker-public-profil form-control" data-position="left top" /><br><br>  
+      <div class="col-sm-4">
+        <input type='hidden' id="datepicker" name="date_debut" data-language='fr' class="datepicker-public-profil form-control" data-position="left top" /><br>
+        <span class="bage-disponible col-sm-1 col-sm-offset-4"></span><p class="col-sm-4 text-left">Disponible</p>
       </div>
     </div>
   </div>
@@ -81,7 +83,7 @@
 
 {% block javascripts %}
   {{ parent() }}
-  {{ dump(userCriteres)}}
+
 <script>
 
   var dateArr = [];
@@ -90,7 +92,7 @@
     var str = "{{disponibilite}}";
     var today = new Date();
     
-    // Si range de dates
+    // Si c'est un range de dates
     if (/[0-9]{2}\/[0-9]{2}\/[0-9]{4} - [0-9]{2}\/[0-9]{2}\/[0-9]{4}/.test(str))
     {
       var startDate = toDate(str.replace(/(.*) - [0-9]{2}\/[0-9]{2}\/[0-9]{4}/, '$1'));
@@ -121,10 +123,17 @@
       inline: true,
       multipleDates: true,
       showOtherMonths: true,
-      minDate: new Date()
+      minDate: new Date(),
+      toggleSelected: false,
+      onRenderCell: function(day, cellType){
+        return {
+            classes: 'public-profil-cell',
+            disabled: true
+        }      
+      }
   });
   $picker.data('datepicker').selectDate(dateArr);
- 
+   
 
 </script>
 {% endblock %}
