@@ -4,7 +4,7 @@
 
 	<div id="poste_hotellerie" class="col-xs-12 col-sm-4 col-sm-offset-4 sos-form">
 		<form class="informations" method="post" action="{{ path('usercriteres_step_5') }}">
-			<h3 class="title-heading">{{ app.user.prenom|capitalize }}, quelle formation hotelière as tu ?</h3>
+			<h3 class="title-heading">{{ app.user.prenom|capitalize }}, quelle diplome as tu obtenu hôtelière / restauration ?</h3>
 			<br>
 			<ul>
 				<input type="hidden" name="form" value="step_4">
@@ -22,14 +22,16 @@
 			<ul>
 				{% for anglais in niveauAnglais %}
 					<li class="col-sm-4 text-center">
-						<label><input type="radio" class="solo-input" data-name="anglais" name="anglais" value="{{ anglais.id }}">&nbsp;{{ anglais.libelle }}</label>
+						<label><input required type="radio" class="solo-input" data-name="anglais" name="anglais" value="{{ anglais.id }}">&nbsp;{{ anglais.libelle }}</label>
 						<br>
 					</li>
 				{% endfor %}
 			</ul>
 			<div class="clearfix"></div>
 			<br><br><br>
-			<label><input class="required-validation" type="checkbox">&nbsp;Je certifie sur l’honneur l’exactitude de ces informations</label>
+			<label><input required class="required-validation" type="checkbox">&nbsp;J'accepte les cgu / cgv</label>
+			<br>
+			<label><input required class="required-validation" type="checkbox">&nbsp;Je certifie sur l’honneur l’exactitude de ces informations</label>
 			<br>
 			<button type="submit" class="btn btn-soshcr text-center">Suivant</button>
 		</form>

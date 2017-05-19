@@ -8,9 +8,9 @@
 		<div class="content-middle">
 			<div class="col-xs-12 sos-form">
 
-			    <p>Félicitation {{ user.prenom}}, ton compte est activé.</p>
+			    <p>{{ 'registration.confirmed'|trans({'%username%': user.prenom}) }}</p>
 
-				<a href="{{ path('usercriteres_step_1') }}" class="btn btn-yellow">Complètes ton profil maintenant !</a>
+				<p>Vous pouvez désormais completer votre profil via le lien suivant : <br/> <a href="{{ path('profil') }}" >Completer mon profil</a> </p>
 
 			    {% if targetUrl %}
 			    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>

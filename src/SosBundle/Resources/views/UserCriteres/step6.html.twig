@@ -12,13 +12,13 @@
 				{% for poste in postesRestauration %}
 
 					<li class="col-sm-2 text-center">
-						<label><input type="checkbox" class="main-input select-usercritere" data-name="poste" name="data[{{ poste.id }}][poste]" value="{{ poste.id }}">&nbsp;{{ poste.libelle }}</label>
+						<label><input type="checkbox" class="main-input select-usercritere" data-name="poste" name="data[{{ poste.id }}][poste]" value="{{ poste.id }}">&nbsp;{{ poste.libelle|raw }}</label>
 						<br>
 						<select class="text-center" name="data[{{ poste.id }}][experience]" style="display:none">
 							<option value="">--</option>
 							{% for experience in experiences %}
 								{# <label class="col-sm-12"><input type="radio" class="text-left sub-input" data-name="experience" name="data[{{ experience.id }}][experience]" value="{{ experience.id }}">&nbsp;{{ experience.libelle }}</label> #}
-								<option value="{{ experience.id }}">{{ experience.libelle }}</option>
+								<option value="{{ experience.id }}">{{ experience.libelle|raw }}</option>
 							{% endfor %}
 
 						</select>

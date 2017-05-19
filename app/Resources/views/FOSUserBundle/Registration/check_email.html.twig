@@ -5,7 +5,7 @@
 {% block body %}
 	<div class="content-container">
 		<div class="content-middle">
-    		<p>Un e-mail a été envoyé à l'adresse {{ user.email }}. Il contient un lien d'activation sur lequel il te faudra cliquer afin d'activer ton compte.</p>
+    		<p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>`
     	</div>
     </div>
 {% endblock body %}

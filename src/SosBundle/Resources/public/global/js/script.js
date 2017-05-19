@@ -272,6 +272,10 @@ function imprime_bloc(titre, objet) {
     return true;
 }
 
+function toDate(dateStr) {
+    var parts = dateStr.split("/");
+    return new Date(parts[2], parts[1] - 1, parts[0]);
+}
 
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();

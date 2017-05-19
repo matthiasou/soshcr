@@ -30,7 +30,11 @@ footer a, header a {
     background-color: #FFE44B;
     color: #394076;
     font-weight: bold;
+}
 
+.btn-yellow{
+    background-color: #FFE44B;
+    color: #394076;
 }
 
 /*******************************************************************
@@ -158,6 +162,10 @@ header #login-icon {
     background-color: #394076;
     color: #fff;
     font-weight: bold
+}
+
+.btn-soshcr:hover {
+    color: #fff!important;
 }
 
 .poste-libelle{

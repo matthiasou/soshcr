@@ -136,6 +136,10 @@ usercriteres_step_9:
 
 
 # USER
+public_profil:
+    path: /user/{id}
+    defaults: { _controller: SosBundle:User:publicProfil}
+
 mesrecommandations:
     path:     /mesrecommandations
     defaults: { _controller: SosBundle:User:mesrecommandations}

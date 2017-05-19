@@ -4,11 +4,8 @@
 
 		<div id="poste_hotellerie" class="col-xs-12 sos-form">
 		<h3 class="title-heading">Barvo {{ app.user.prenom }}, tu es prêt !</h3>
-		<br>
-		<ul class="col-lg-8 col-lg-offset-2">
-			{{ dump(contratCritere) }}		
-		</ul>
-	
+		<p>Maintenant pour faire bonne impression et être bien classé,  tu peux facilement demander des recommandations à tes anciens employeurs !</p>
+		<a class='btn btn-yellow' href="{{ path('demandeRecommandation') }}">Je me fais reccommander</a>
 
    	<div class="clearfix spacer"></div>
 </div>
