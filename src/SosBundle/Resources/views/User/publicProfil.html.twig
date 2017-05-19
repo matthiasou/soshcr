@@ -38,13 +38,13 @@
               {% for contrat in userCriteres.contrats %}
                 <li>
                   {{ contrat.contrat }}
-                  {% for duree in contrat.duree %}
+                  ({% for duree in contrat.duree %}
                         {% if loop.last == false %}
                           {{ duree }},
                         {% else %}
                           {{ duree }}
                         {% endif %}
-                  {% endfor %}
+                  {% endfor %})
                   
                 </li>
               {% endfor %}
