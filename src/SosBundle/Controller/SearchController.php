@@ -166,7 +166,7 @@ class SearchController extends Controller
 			$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
             $repoPostes = $em->getRepository('SosBundle:PosteRecherche');         
-            $postes = $repoPostes->findAll();
+            $postes = $repoPostes->findBy(array(), array('id' => 'desc'));
 
             $repoSecteurs = $em->getRepository('SosBundle:Secteur');         
             $secteurs = $repoSecteurs->findAll();
