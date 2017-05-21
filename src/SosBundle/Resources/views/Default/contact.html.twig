@@ -13,7 +13,7 @@
 				<!-- BEGIN DOWNLOAD PANEL -->
 				<div class="panel panel-default well">
 					<div class="panel-body">
-						<form action="" class="form-horizontal track-event-form bv-form" data-goaltype="”General”" data-formname="”ContactUs”" method="post" id="contact-us-all" novalidate="novalidate">
+						<form action="{{ path('contact') }}" class="form-horizontal track-event-form bv-form" data-goaltype="”General”" data-formname="”ContactUs”" method="post" id="contact-us-all" novalidate="novalidate">
 
 							<div class="form-group">
 								<div class="col-sm-6">
@@ -76,7 +76,7 @@
 
 							<div class="form-group">
 								<div class="col-sm-12">
-									<button type="submit" style="background-color: #394076; border-color: #394076" class="btn btn-block btn-warning">Envoyer</button>
+									<button type="submit" name="envoyer" style="background-color: #394076; border-color: #394076" class="btn btn-block btn-warning">Envoyer</button>
 								</div>
 							</div>
 							<input type="hidden" value=""></form>

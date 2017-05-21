@@ -1,0 +1,38 @@
+{% extends 'SosBundle::layout.html.twig' %}
+{% block sos_body %}
+	<h3> Recommandations utilisateurs </h3>
+<form method="POST" action="{{ path('recommandationsutilisateurs') }}">
+<div class="table-responsive">
+		<table id="myTable" class="table text-center table-striped tablesorter">
+			<thead>
+				<tr>
+					<th class="text-center">Nom du candidat</th>
+					<th class="text-center">Email du candidat</th>
+					<th class="text-center">Nom de l'etablissement</th>
+					<th class="text-center">Email de l'etablissement</th>
+					<th class="text-center">Ville de l'etablissement</th>
+					<th class="text-center">Nom du responsable</th>
+					<th class="text-center">Supprimer</th>
+				</tr>
+			</thead>
+			{% for recommandation in recommandations %}
+			<tbody>
+				<tr>
+					<td>{{recommandation.user.nom}}</td>
+					<td>{{recommandation.user.email}}</td>
+					<td>{{recommandation.nometablissement}}</td>
+					<td>{{recommandation.email}}</td>
+					<td>{{recommandation.ville}}</td>
+					<td>{{recommandation.nomresponsable}}</td>
+					<td>
+						<input type="checkbox" name="id_recommandation[]" value="{{recommandation.id}}" />
+					</td>
+				</tr>
+				{% endfor %}	
+				
+			</tbody>
+		</table>
+<input type="submit" name="supprimer" value="Supprimer les recommandations">			
+	</div>
+</form>
+{% endblock %}
