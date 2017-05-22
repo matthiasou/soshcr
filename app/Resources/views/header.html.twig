@@ -33,7 +33,7 @@
 
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
   <ul id="user-menu">
-    <li><a href="{{ path('profil') }}">Profil</a></li>
+    <li><a href="{{ path('public_profil', {'id' : app.user.id}) }}">Profil</a></li>
     <li><a href="{{ path('dashboard') }}">Tableau de bord</a></li>
   </ul>
 {% endif %}
@@ -47,7 +47,7 @@
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
         </button>
-        <h3 class="modal-title" id="modal-login-label">Accèder à ton espace ou <a class="btn btn-yellow" href="{{path('fos_user_registration_register')}}">inscris toi !</a> </h3>
+        <h3 class="modal-title" id="modal-login-label">Accède à ton espace ou <a class="btn btn-yellow" href="{{path('fos_user_registration_register')}}">inscris toi !</a> </h3>
         <p>Entre ton adresse email et ton mot de passe</p>
       </div>
       <div class="modal-body">

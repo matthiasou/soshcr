@@ -155,7 +155,7 @@ header #login-icon {
 }
 
 #user-nav a {
-    margin: 0 10px
+    margin: 0 25px
 }
 
 #user-icon i {
@@ -573,7 +573,6 @@ footer ul li {
 
 #seach-btn {
     background: none;
-    margin-left: -3px
 }
 
 .hdpi.pac-logo:after {
