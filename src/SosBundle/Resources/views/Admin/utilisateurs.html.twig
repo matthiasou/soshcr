@@ -1,7 +1,22 @@
 {% extends 'SosBundle::layout.html.twig' %}
+{% block stylesheets %}
+	{{ parent() }}
+    <link href="{{ asset('bundles/sos/tablesorter/themes/blue/style.css') }}" rel="stylesheet">
+{% endblock %}
+{% block javascripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="{{ asset('bundles/sos/tablesorter/jquery.tablesorter.js') }}"></script>
+    <script>
+	$(document).ready(function() 
+    { 
+        $("#myTable").tablesorter({
+    headers: {7: {sorter: false}}
+}); 
+    } 
+	); 
+</script>
+{% endblock %}
 {% block sos_body %}
-
-
 	<h3>Recherche de profils</h3>
 <form method="POST" action="{{ path('utilisateurs') }}">
 	Nom : <input type="text" name="nom">
@@ -22,7 +37,7 @@
 					<th class="text-center">Email</th>
 					<th class="text-center">Recommandation</th>
 					<th class="text-center">Region</th>
-					<th class="text-center">Supprimer</th>
+					<th class="text-center sorter-false">Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,7 +45,7 @@
 				<tr>
 					<td><a href="">{{result.nom}}</a></td>
 					<td><a href="">{{result.prenom}}</a></td>
-					<td>{{result.date_naissance|date("m/d/Y")}}</td>
+					<td>{{age}}</td>
 					<td>{{result.telephone}}</td>
 					<td>{{result.email}}</td>
 					<td>Recommandation</td>
@@ -67,7 +82,7 @@
 				<tr>
 					<td><a href="">{{utilisateur.nom}}</a></td>
 					<td><a href="">{{utilisateur.prenom}}</a></td>
-					<td>{{utilisateur.datenaissance|date("m/d/Y")}}</td>
+					<td>{{utilisateur.getage()}}</td>
 					<td>{{utilisateur.telephone}}</td>
 					<td>{{utilisateur.email}}</td>
 					<td>Recommandation</td>

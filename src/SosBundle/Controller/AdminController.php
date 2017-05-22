@@ -141,7 +141,15 @@ class AdminController extends Controller
                     $statement = $connection->prepare($requete);
                     $statement->execute();
                     $result1 = $statement->fetchAll();
-                    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1));
+                    foreach ($result1 as $res){
+                        $datenaissance = $res['date_naissance'];
+                        $date = new \DateTime($datenaissance);
+                        $today = new \DateTime('NOW');
+                        $dateInterval = $date->diff($today);
+                        $age = $dateInterval->y;
+                    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age));
+
+                    }
 
             }
         }
@@ -224,6 +232,31 @@ class AdminController extends Controller
             return $this->redirectToRoute('signalements'); 
         }
         return $this->render('SosBundle:Admin:signalements.html.twig', array('results' => $results, 'results2' => $results2));
+    }
+
+    /**
+     * @Route("admin/recommandationsutilisateurs")
+     */
+    public function recommandationsByUserAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('SosBundle:User')->findAll(); 
+        $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => $users), array('user' => 'ASC'));
+
+        if (isset($_POST['supprimer'])){
+            if (is_array($_POST['id_recommandation'])) 
+            {
+                foreach($_POST['id_recommandation'] as $value)
+                {
+                    $recommandation = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('id' => $value));
+                    $em->remove($recommandation);
+                    $em->flush();
+                    return $this->redirectToRoute('recommandationsutilisateurs');
+                }
+            }
+        }
+        return $this->render('SosBundle:Admin:recommandationsutilisateurs.html.twig', array("recommandations" => $recommandations));
+ 
     }
 
 }
