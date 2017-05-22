@@ -11,11 +11,8 @@ $(document).ready(function(){
         
     }
 
-
     if (typeof validation != "undefined") {
-
         sweetAlert("", validation, "success");
-
     }
 
     // Afficher les postes recherche en cliquant sur les secteurs
