@@ -93,7 +93,7 @@ class Matching {
             $contrat_duree_join." ".
             $formation_join." ".
             $cursus_scolaire_join."
-            WHERE ".$formule." <> uc.rayon_emploi ".
+            WHERE ".$formule." < uc.rayon_emploi ".
             $classification." ".
             $poste." ".
             $contrat." ".
@@ -103,13 +103,11 @@ class Matching {
             $experience_minimum." ".
             $cursus_scolaire;
 
-        
 
         $stmt = $this->entityManager->getConnection()->prepare($query);
         $stmt->execute();
         
         $employes = $stmt->fetchAll();
-
 
         $listeEmployes = array();
 
