@@ -88,21 +88,37 @@ class DefaultController extends Controller
      */
     public function contactAction()
     {
-        if (isset($_POST['envoyer'])){
-             $message = \Swift_Message::newInstance()
-                    ->setSubject('Demande de contact SOSHCR')
-                    ->setFrom($_POST['C_EmailAddress'])
-                    ->setTo('contact@soshcr.fr')
-                    ->setBody(
-                        $this->renderView(
-                            'SosBundle:Default:demande_contact.html.twig',
-                            array('message' => $_POST['Comments'])
-                        ),
-                        'text/html'
-                    );
-                $this->get('mailer')->send($message);
+        if(isset($_POST['envoyer'])){
+            if (($_POST['C_FirstName'] != "") && ($_POST['C_LastName'] != "") && ($_POST['C_EmailAddress'] != "") && ($_POST['C_Company'] != "")){
+                $validation = "Votre demande de contact a été envoyé avec succès";
+                $nom = $_POST['C_FirstName'];
+                $prenom = $_POST['C_LastName'];
+                $email = $_POST['C_EmailAddress'];
+                $telephone = $_POST['C_Company'];
+                $message = \Swift_Message::newInstance()
+                        ->setSubject('Demande de contact SOSHCR')
+                        ->setFrom($_POST['C_EmailAddress'])
+                        ->setTo('contact@soshcr.fr')
+                        ->setBody(
+                            $this->renderView(
+                                'SosBundle:Default:demande_contact.html.twig',
+                                array('message' => $_POST['Comments'],
+                                    'nom' => $nom,
+                                    'prenom' => $prenom,
+                                    'email' => $email,
+                                    'telephone' => $telephone)
+                            ),
+                            'text/html'
+                        );
+                    $this->get('mailer')->send($message);
+                    return $this->render('SosBundle:Default:contact.html.twig', array("validation" => $validation));
             }
-        
+        }
+            else {
+                return $this->render('SosBundle:Default:contact.html.twig', array("error" => 'contact'));
+
+            }
         return $this->render('SosBundle:Default:contact.html.twig');
+        
     }
 }

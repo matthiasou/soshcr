@@ -5,6 +5,9 @@ $(document).ready(function(){
         if (error == "ville") {
             sweetAlert("Oups...", "La ville n'existe pas !", "error");    
         }
+        if (error == "contact") {
+            sweetAlert("Erreur :", "Veuillez saisir tous les champs !", "error")
+        }
         
     }
 
