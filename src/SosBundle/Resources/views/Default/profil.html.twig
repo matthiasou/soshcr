@@ -3,7 +3,7 @@
 {% block sos_body %}
 
 <div class="container" style="padding-top: 60px;">
-  <h1 class="page-header">Mon profil</h1>
+  <h1 class="page-header">Mes informations personnelles</h1>
   <div class="row">
 
     <!-- edit form column -->
@@ -19,14 +19,13 @@
 
       {% else %}
       
-      <h3>Mes critères de recherche</h3>
+      <a href="{{ path('public_profil', {'id' : app.user.id}) }}">
+        <div class="col-sm-6 col-sm-offset-3 alert alert-soshcr alert-dismissable">
+          <strong>Voir mon profil</strong>
+        </div>
+      </a>
+      <div class="clearfix"></div>
       
-      <div class="alert alert-soshcr alert-dismissable">
-        <a class="panel-close close" data-dismiss="alert">×</a> 
-     <i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;
-      {{ app.user.prenom }}, tu as bien rempli tes critères de recherches ! Clique <strong><a href="{{ path('public_profil', {'id' : app.user.id}) }}">ici</a></strong> pour voir ton profil public 
-      </div>
-  
       {# 
       {% for userCritere in app.user.criteres %}
         {{ dump(userCritere) }}
