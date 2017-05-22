@@ -113,11 +113,12 @@ class DefaultController extends Controller
                     $this->get('mailer')->send($message);
                     return $this->render('SosBundle:Default:contact.html.twig', array("validation" => $validation));
             }
-        }
             else {
                 return $this->render('SosBundle:Default:contact.html.twig', array("error" => 'contact'));
 
             }
+        }
+            
         return $this->render('SosBundle:Default:contact.html.twig');
         
     }
