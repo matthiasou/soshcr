@@ -38,7 +38,7 @@ class SearchController extends Controller
             $alreadyVille = $request->get('ville');
             if (empty($alreadyVille['latitude'])) 
             {
-                $geocoder = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCs2SKJn7FjYzd1SIBdAZgsVw1DrXtEJno&address=%s&sensor=false';
+                $geocoder = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBzgfrxmpReuCPy7rGePa9B-be2Fj5_qI4&address=%s&sensor=false';
                 $query = sprintf($geocoder, urlencode($_POST['ville']));
                 $result = json_decode(file_get_contents($query));
 
