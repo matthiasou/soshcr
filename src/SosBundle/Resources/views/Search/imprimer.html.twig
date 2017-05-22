@@ -31,7 +31,13 @@ color: #fff;" class="panel-heading result-panel-heading">
 				<div style="padding: 15px;" class="panel-body">
 					<p>{{ employe.email }}</p>
 					<p>{{ employe.telephone }}</p>
-					<p>{{ employe.nbRecommandation }} recommandation</p>
+					{% if employe.nbRecommandation == 0 %}
+						<p>0 recommandation</p>
+					{% elseif employe.nbRecommandation  > 1 %}
+						<p>{{ employe.nbRecommandation  }} recommandations</p>
+					{% elseif employe.nbRecommandation  == 1 %}
+						<p>{{ employe.nbRecommandation  }} recommandation</p>
+					{% endif %}
 				</div>
 
 			</div>
