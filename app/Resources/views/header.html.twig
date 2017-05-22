@@ -33,7 +33,7 @@
 
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
   <ul id="user-menu">
-    <li><a href="{{ path('profil') }}">Profil</a></li>
+    <li><a href="{{ path('public_profil', {'id' : app.user.id}) }}">Profil</a></li>
     <li><a href="{{ path('dashboard') }}">Tableau de bord</a></li>
   </ul>
 {% endif %}
