@@ -32,6 +32,10 @@ footer a, header a {
     font-weight: bold;
 }
 
+img.img-responsive.form-img{
+    margin: 0 auto;
+}
+
 .btn-yellow{
     background-color: #FFE44B;
     color: #394076;
