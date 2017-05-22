@@ -1,0 +1,125 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"> </div>
+			<div class="col-md-8">
+				<h1>Signalement d'un profil</h1>
+				<p class="lead">Avez-vous remarqué un profil suspect ?</p>
+
+				<div class="panel panel-default well">
+					<div class="panel-body">
+						<form action="{{ path('contact') }}" class="form-horizontal track-event-form" method="post" id="contact-us-all">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</div>
+										<input type="text" class="form-control"  placeholder="Un nom ?" name="C_FirstName" required>
+									</div>
+									</div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</div>
+										<input type="text" class="form-control" placeholder="Un prénom ?" name="C_LastName" required></div>
+									</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-envelope"></i>
+										</div>
+										<input type="email" class="form-control" placeholder="Un E-mail ?" name="C_EmailAddress" required>
+									</div>
+									</div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-phone"></i>
+										</div>
+										<input type="text" class="form-control" placeholder="Un numéro de téléphone ?" name="C_Company" required>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="glyphicon glyphicon-question-sign"></i>
+										</div>
+										<textarea class="form-control" name="Comments" id="Comments" rows="5" style="width:99.9%" placeholder="Que s'est-il passé ?" required></textarea>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-comment fa-2"></i>
+										</div>
+										<textarea class="form-control" name="Comments" id="Comments" rows="5" style="width:99.9%" placeholder="Que proposez-vous ?" required></textarea>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+							<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</div>
+										<input type="text" class="form-control"  placeholder="Votre nom" name="C_FirstName2" required>
+									</div>
+									</div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-user"></i>
+										</div>
+										<input type="text" class="form-control" placeholder="Votre prénom" name="C_LastName2" required></div>
+									</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-envelope"></i>
+										</div>
+										<input type="email" class="form-control" placeholder="Votre E-mail" name="C_EmailAddress2" required>
+									</div>
+									</div>
+								<div class="col-sm-6">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-phone"></i>
+										</div>
+										<input type="text" class="form-control" placeholder="Votre numéro de téléphone" name="C_Company2" required>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12">
+									<button type="submit" name="envoyer" style="background-color: #394076; border-color: #394076" class="btn btn-block btn-warning">Envoyer</button>
+								</div>
+							</div>
+							<input type="hidden" value=""></form>
+					</div><!-- end panel-body -->
+				</div><!-- end panel -->
+				<!-- END DOWNLOAD PANEL -->
+			</div><!-- end col-md-8 -->
+			<div class="col-md-2"> </div>
+		</div>
+	</div>
+
+{% endblock %}

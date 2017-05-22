@@ -90,6 +90,10 @@ demandeRecommandation:
     path:     /demandeRecommandation
     defaults: { _controller: SosBundle:Admin:demandeRecommandation }
 
+signalement_profil:
+    path:     /signalement_profil
+    defaults: { _controller: SosBundle:Default:signalementProfil }
+
 # INFORMATION USER START
 
 usercriteres_step_1:
@@ -155,3 +159,6 @@ signalements:
 validation:
     path:     /admin/validation
     defaults: { _controller: SosBundle:Admin:validation }
+recommandationsutilisateurs:
+    path:     /admin/recommandationsutilisateurs
+    defaults: { _controller: SosBundle:Admin:recommandationsByUser }
