@@ -63,7 +63,8 @@ class DefaultController extends Controller
      */
     public function dashboardAction()
     {
-        return $this->render('SosBundle:Dashboard:dashboard.html.twig');
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        return $this->render('SosBundle:Dashboard:dashboard.html.twig', array("user" => $user));
     }
 
     /**
@@ -87,6 +88,21 @@ class DefaultController extends Controller
      */
     public function contactAction()
     {
+        if (isset($_POST['envoyer'])){
+             $message = \Swift_Message::newInstance()
+                    ->setSubject('Demande de contact SOSHCR')
+                    ->setFrom($_POST['C_EmailAddress'])
+                    ->setTo('contact@soshcr.fr')
+                    ->setBody(
+                        $this->renderView(
+                            'SosBundle:Default:demande_contact.html.twig',
+                            array('message' => $_POST['Comments'])
+                        ),
+                        'text/html'
+                    );
+                $this->get('mailer')->send($message);
+            }
+        
         return $this->render('SosBundle:Default:contact.html.twig');
     }
 }
