@@ -36,29 +36,27 @@
 	    <div id="poste_hotellerie" class="col-xs-12 sos-form">
 		<h3 class="title-heading">Voici les candidats correspondants à votre recherche :</h3>
 		<br>
-		<div class="col-sm-2 hidden-md hidden-lg hidden-sm">
-			<a href="{{ path('ville') }}"><img style="max-width: 35px; float: right;" src="{{ asset('bundles/sos/global/img/repeat.png') }}" alt="" class="img-responsive form-img"></a>
-		</div>
-		<div class="col-sm-2 hidden-md hidden-lg hidden-sm">
-	         <input  style="max-width: 45px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/cv.png') }}" border="0" class="img-responsive" alt="Submit" />
-		</div>
-		<div class="col-sm-2 hidden-md hidden-lg hidden-sm">
-			<img style="max-width: 35px; float: right;" onclick="javascript:imprime_bloc('titre', 'imprime_moi');" src="{{ asset('bundles/sos/global/img/print.png') }}" alt="" class="img-responsive form-img">
-		</div>
+
 		<div class="col-sm-2">
 		Modifier
 		<div class="col-md-12">
                     <ul class="social-network social-circle">
-                        <li><a href="#" class="icoTwitter" title="Classification"><i class="fa fa-twitter" ><input name ="action" value="classification" type="image" src="{{ asset('bundles/sos/global/img/rating/' ~ data.classification )}}-stars.png" border="0" class="img-responsive"  /></i></a></li>
-                        <br><br>
-                        <li><a href="#" class="icoTwitter" title="Poste"><i class="fa fa-twitter" ><input name ="action" value="poste" type="image" src="{{ asset('bundles/sos/global/img/poste/' ~ data.poste  ~ '.png') }} " border="0" class="img-responsive"  /></i></a></li>
-                        <li><a href="#" class="icoTwitter" title="Type de contrat"><i class="fa fa-twitter" ><input name ="action" value="contrat" type="image" src="{{ asset('bundles/sos/global/img/contrat/' ~ data.contrat ~ '.png') }} " border="0" class="img-responsive"  /></i></a></li>
-
-                        <br><br>
-                        {% if data.contrat_duree is defined %}
-                        <li><a href="#" class="icoTwitter" title="Durée du contrat"><i class="fa fa-twitter" ><input style="width: 75%;" name ="action" value="contrat_duree" type="image"  src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ data.contrat_duree  ~ '.png') }} " border="0" class="img-responsive" /></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Classification"><i class="" ><input name ="action" value="classification" type="image" src="{{ asset('bundles/sos/global/img/rating/' ~ data.classification )}}-stars.png" border="0" class="img-responsive"  /></i></a></li>
+                        <li><a style="max-width: 40px;" href="#" class="icoTwitter" title="Poste"><i class="" ><input name ="action" value="poste" type="image" src="{{ asset('bundles/sos/global/img/poste/' ~ data.poste  ~ '.png') }} " border="0" class="img-responsive"  /></i></a></li>
+                        <br>
+                        <li><a href="#" class="icoTwitter" title="Type de contrat"><i class="" ><input name ="action" value="contrat" type="image" src="{{ asset('bundles/sos/global/img/contrat/' ~ data.contrat ~ '.png') }} " border="0" class="img-responsive"  /></i></a></li>
+                       	{% if data.cursus_scolaire is defined %}
+                        <li><a href="#" class="icoTwitter" title="Cursus scolaire"><i class="" ><input name ="action" value="cursus_scolaire" type="image"  src="{{ asset('bundles/sos/global/img/cursus/' ~ data.cursus_scolaire  ~ '.png') }} " border="0" class="img-responsive" /></i></a></li>
                        	{% endif %}
-                        <li><a href="#" class="icoTwitter" title="Niveau d'anglais"><i class="fa fa-twitter" ><input name ="action" value="niveau_anglais" type="image"  src="{{ asset('bundles/sos/global/img/anglais/' ~ data.niveau_anglais  ~ '.png') }} " border="0" class="img-responsive"/></i></a></li>
+                       	{% if data.experience_minimum is defined %}
+                        <li><a href="#" class="icoTwitter" title="Expérience"><i class="" ><input name ="action" value="experience_minimum" type="image"  src="{{ asset('bundles/sos/global/img/experience/' ~ data.experience_minimum  ~ '.png') }} " border="0" class="img-responsive" /></i></a></li>
+                       	{% endif %}
+                       	<br>
+                       	{% if data.contrat_duree is defined %}
+                        <li><a href="#" class="icoTwitter" title="Durée du contrat"><i class="" ><input style="width: 75%;" name ="action" value="contrat_duree" type="image"  src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ data.contrat_duree  ~ '.png') }} " border="0" class="img-responsive" /></i></a></li>
+                       	{% endif %}
+                        <li><a href="#" class="icoTwitter" title="Niveau d'anglais"><i class="" ><input name ="action" value="niveau_anglais" type="image"  src="{{ asset('bundles/sos/global/img/anglais/' ~ data.niveau_anglais  ~ '.png') }} " border="0" class="img-responsive"/></i></a></li>
+
                     </ul>
         </div>
 		</div>
@@ -67,6 +65,9 @@
 				tout sélectionner <input onclick="CocheTout(this, 'mail_demande_utilisateur[]');" type="checkbox">
 
 				<br/><br>
+                    {% if data.employes == null %}
+                           AUCUN CANDIDAT :(
+                        {% endif %}
 
                     {% for employe in data.employes %}
 					<div class="container col-sm-6">
@@ -92,18 +93,18 @@
 		Outils
 		<div class="col-md-12">
                     <ul class="social-network social-circle">
-                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Imprimer les resultats" ><i class="fa fa-twitter" ><input name ="action" value="imprimer" style="max-width: 40px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/print.png') }}" border="0" class="img-responsive"  /></i></a></li>
-                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Demander les CV"><i class="fa fa-twitter" ><input name ="action" value="demandeCV"  style="max-width: 45px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/cv.png') }}" border="0" class="img-responsive" alt="Submit" /></i></a></li>
-                        <br><br>
+                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Imprimer les resultats" ><i class="" ><input name ="action" value="imprimer" style="max-width: 40px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/print.png') }}" border="0" class="img-responsive"  /></i></a></li>
+                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Demander les CV"><i class="" ><input name ="action" value="demandeCV"  style="max-width: 45px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/cv.png') }}" border="0" class="img-responsive" alt="Submit" /></i></a></li>
+                        <br>
                        <input type="hidden" name="form" value="resultat">
                        </form>
-                        <form action="{{ path('secteur')}}" method="post">
+                        <form action="{{ path('poste')}}" method="post">
                         <input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
                         <input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
                         <input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
                         <input type="hidden" name="classification" value="{{ data.classification }}">
                         <input type="hidden" name="form" value="classification">
-                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Recommencer une recherche"><i class="fa fa-twitter" ><input name ="action" value=""  style="max-width: 35px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/repeat.png') }}" border="0" class="img-responsive form-img" alt="Submit" /></i></a></li>
+                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Recommencer une recherche"><i class="" ><input name ="action" value=""  style="max-width: 35px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/repeat.png') }}" border="0" class="img-responsive form-img" alt="Submit" /></i></a></li>
                         </form>
 
                     </ul>

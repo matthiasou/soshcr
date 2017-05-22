@@ -1316,14 +1316,14 @@ ul.social-network li {
 .social-circle li a {
   display:inline-block;
   position:relative;
-  margin:0 auto 0 auto;
-  -moz-border-radius:50%;
+    -moz-border-radius:50%;
   -webkit-border-radius:50%;
   border-radius:50%;
   text-align:center;
   width: 50px;
   height: 50px;
   font-size:20px;
+    margin: 10px auto 0;
 }
 
 
