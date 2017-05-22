@@ -74,13 +74,19 @@
 					  <div class="panel result-panel">
 					    <div class="panel-heading result-panel-heading">
 							<input  style="position: absolute; left: 30px; top: 15px;" type="checkbox" value="{{employe.email}}" name="mail_demande_utilisateur[]">
-							{{ employe.prenom ~ ' ' ~ employe.nom ~ ' (' ~ employe.age ~' ans)'}}
+							<a style="color: white;" href="{{ path('public_profil', {'id' : employe.id}) }}">{{ employe.prenom ~ ' ' ~ employe.nom ~ ' (' ~ employe.age ~' ans)'}}</a>
 						</div>
 					    <div class="panel-body">
 					    	<p>{{ employe.email }}</p>
 					    	<p>{{ employe.telephone }}</p>
 					    </div>
-					    <p>{{ employe.nbRecommandation }} recommandation</p>
+					    {% if employe.nbRecommandation == 0 %}
+                            <p>0 recommandation</p>
+                        {% elseif employe.nbRecommandation  > 1 %}
+                            <p>{{ employe.nbRecommandation  }} recommandations</p>
+                        {% elseif employe.nbRecommandation  == 1 %}
+                            <p>{{ employe.nbRecommandation  }} recommandation</p>
+                        {% endif %}
 					  </div>
 					</div>
 				{% endfor %}
