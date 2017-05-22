@@ -42,7 +42,6 @@ class SearchController extends Controller
                 $query = sprintf($geocoder, urlencode($_POST['ville']));
                 $result = json_decode(file_get_contents($query));
 
-		    die(dump($result));
                 if ($result == NULL || $result == "" ||  $result->status == "ZERO_RESULTS" || $result->status == "INVALID_REQUEST"  || $result->status == "REQUEST_DENIED" )
                 {
                     return $this->render('SosBundle:Search:ville.html.twig', array('error' => 'ville'));
