@@ -1,8 +1,13 @@
 {% extends 'SosBundle::layout.html.twig' %}
 
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/sos/global/js/usercriteres.js') }}"></script>
+{% endblock %}
+
 {% block sos_body %}
 
-	<div id="poste_hotellerie" class="col-xs-12 col-sm-4 col-sm-offset-4 sos-form">
+	<div id="usercriteres_step_4" class="col-xs-12 col-sm-6 col-sm-offset-3 sos-form user-critere-form">
 		<form class="informations" method="post" action="{{ path('usercriteres_step_5') }}">
 			<h3 class="title-heading">{{ app.user.prenom|capitalize }}, quelle diplome as tu obtenu hôtelière / restauration ?</h3>
 			<br>
@@ -10,7 +15,11 @@
 				<input type="hidden" name="form" value="step_4">
 				{% for formation in formations %}
 					<li class="col-sm-3 text-center">
-						<label><input type="checkbox" class="solo-input" data-name="formation" name="formation[][id]" value="{{ formation.id }}">&nbsp;{{ formation.libelle }}</label>
+						<label>
+							<i class="fa fa-check validate" aria-hidden="true"></i>
+							<input type="checkbox" class="solo-input hidden" data-name="formation" name="formation[][id]" value="{{ formation.id }}">
+							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/formation/' ~ formation.id ~ '.png') }}" alt="">
+						</label>
 						<br>
 					</li>
 				{% endfor %}
@@ -22,13 +31,16 @@
 			<ul>
 				{% for anglais in niveauAnglais %}
 					<li class="col-sm-4 text-center">
-						<label><input required type="radio" class="solo-input" data-name="anglais" name="anglais" value="{{ anglais.id }}">&nbsp;{{ anglais.libelle }}</label>
+						<label>
+							<i class="fa fa-check validate" aria-hidden="true"></i>
+							<input type="radio" class="solo-input hidden" data-name="anglais" name="anglais" value="{{ anglais.id }}">	<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/anglais/' ~ anglais.id ~ '.png') }}" alt="">
+						</label>
 						<br>
 					</li>
 				{% endfor %}
 			</ul>
 			<div class="clearfix"></div>
-			<br><br><br>
+			<br><br>
 			<label><input required class="required-validation" type="checkbox">&nbsp;J'accepte les cgu / cgv</label>
 			<br>
 			<label><input required class="required-validation" type="checkbox">&nbsp;Je certifie sur l’honneur l’exactitude de ces informations</label>

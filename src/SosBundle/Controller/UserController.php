@@ -53,14 +53,14 @@ class UserController extends Controller
                 $contratsArr[] = array('contrat' => $contrats->getLibelle(), 'duree' => $dureesArr);
                 $anglaisArr[] = $critere->getNiveauAnglais()->getLibelle();
                 $disponibilitesArr[] = json_decode($critere->getDisponibilites());
-            }
 
+            }
             $disponibilitesArr = array_unique($disponibilitesArr, SORT_REGULAR);
             $postesArr = array_unique($postesArr, SORT_REGULAR);
             $contratsArr = array_unique($contratsArr, SORT_REGULAR);
             $formationsArr = array_unique($formationsArr);
             $anglaisArr = array_unique($anglaisArr);
-            $userCriteres = array('formations' => $formationsArr, 'postes' => $postesArr, 'anglais' => $anglaisArr[0], 'contrats' => $contratsArr, 'disponibilite' => $disponibilitesArr[0]);
+            $userCriteres = array('formations' => $formationsArr, 'postes' => $postesArr, 'anglais' => $anglaisArr[0], 'contrats' => $contratsArr, 'disponibilite' => $disponibilitesArr);
 
             $now = new \DateTime('now');
             $age = $user->getDateNaissance();

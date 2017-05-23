@@ -64,7 +64,22 @@ img.img-responsive.form-img{
     border-radius: 5px;
 }
 
-.
+.validate{
+     position:absolute;
+     top:10px;
+     right:0px;
+     color:green;
+     font-size: 40px;
+     display:none;
+}
+
+.validated{
+    opacity: 0.7;
+}
+
+#usercriteres_step_4{
+    margin-top: 50px
+}
 /*******************************************************************
                       LAYOUT
 *******************************************************************/

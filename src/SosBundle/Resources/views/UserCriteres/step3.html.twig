@@ -3,6 +3,7 @@
 
 {% block javascripts %}
 	{{ parent() }}
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKuX3xaOa5tYT7bKs8jyEUL3eSiLgUs6M&libraries=places&region=fr"></script>
 	<script type="text/javascript" src="{{ asset('bundles/sos/global/js/ville.js') }}"></script>
 	
 {% endblock %}
