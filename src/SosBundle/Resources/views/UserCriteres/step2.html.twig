@@ -1,8 +1,14 @@
 {% extends 'SosBundle::layout.html.twig' %}
 
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/sos/global/js/usercriteres.js') }}"></script>
+{% endblock %}
+
+
 {% block sos_body %}
 
-		<div id="poste_hotellerie" class="col-xs-12 sos-form">
+	<div id="poste_hotellerie" class="col-xs-12 sos-form user-critere-form">
 		<h3 class="title-heading">{{ app.user.prenom|capitalize }}, quel etablissements t'interessent ?</h3>
 		<p>(Plusieurs choix possibles)</p>
 		<br>
@@ -17,7 +23,12 @@
 							{% else %}
 								col-sm-{{ 12 / etablissements|length }}
 				        	{% endif %} text-center">
-						<label><input type="checkbox" class="solo-input" data-name="etablissement" name="etablissements[][id]" value="{{ etablissement.id }}">&nbsp;{{ etablissement.libelle|raw }}</label>
+						<label style="cursor:pointer">
+							<i class="fa fa-check validate" aria-hidden="true"></i>
+							<input type="checkbox" class="solo-input hidden" data-name="etablissement" name="etablissements[][id]" value="{{ etablissement.id }}">
+							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/rating/' ~ etablissement.id ~ '-stars.png') }} " alt="" class="img-responsive form-img"><br>
+							{{ etablissement.libelle|raw}}
+						</label>
 						<br>
 					</li>
 

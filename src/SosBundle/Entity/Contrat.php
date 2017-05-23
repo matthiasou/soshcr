@@ -35,6 +35,12 @@ class Contrat
     private $duree;
 
     /**
+     *
+     * @ORM\ManyToMany(targetEntity="CursusScolaire")
+     */
+    private $cursus;
+
+    /**
      * Get id
      *
      * @return int
@@ -107,5 +113,39 @@ class Contrat
     public function getDuree()
     {
         return $this->duree;
+    }
+
+    /**
+     * Add cursus
+     *
+     * @param \SosBundle\Entity\CursusScolaire $cursus
+     *
+     * @return Contrat
+     */
+    public function addCursus(\SosBundle\Entity\CursusScolaire $cursus)
+    {
+        $this->cursus[] = $cursus;
+
+        return $this;
+    }
+
+    /**
+     * Remove cursus
+     *
+     * @param \SosBundle\Entity\CursusScolaire $cursus
+     */
+    public function removeCursus(\SosBundle\Entity\CursusScolaire $cursus)
+    {
+        $this->cursus->removeElement($cursus);
+    }
+
+    /**
+     * Get cursus
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCursus()
+    {
+        return $this->cursus;
     }
 }

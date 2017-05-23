@@ -46,7 +46,6 @@ class AdminController extends Controller
             }
 
             $validation="Demande de recommandation envoyée !";
-            $user = $this->get('security.token_storage')->getToken()->getUser();
             return $this->render('SosBundle:Dashboard:dashboard.html.twig', array("validation"=>$validation, "user"=>$user));
 
 
