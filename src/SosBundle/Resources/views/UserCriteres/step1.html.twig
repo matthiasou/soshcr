@@ -28,14 +28,14 @@
 						</label>
 
 						<div class="text-left hidden sub-element">
+							
 							{% if contrat.getCursus().isEmpty() == false %}
-
 								<h4 class="text-center">Cursus</h4>
 								<div class="sub-element">
 									{% for cursus in contrat.getCursus() %}
 										{% if cursus.id != 5 %}
 											<label style="width:100%">
-												<input type="checkbox" class="sub-input" data-name="cursus" name="data[{{ contrat.id }}][cursus][]" value="{{ cursus.id }}">
+												<input {% if contrat.id == 5 or contrat.id == 4 %}type="radio"{% else %}type="checkbox"{% endif %} class="sub-input" data-name="cursus" name="data[{{ contrat.id }}][cursus][]" value="{{ cursus.id }}">
 												<span>{{ cursus.libelle }}</span>
 											</label>
 										{% endif %}
@@ -49,13 +49,12 @@
 									{% for duree in contrat.getDuree() %}
 										{% if duree.id != 3 %}
 											<label style="width:100%">
-												<input type="checkbox" class="sub-input" data-name="duree" name="data[{{ contrat.id }}][duree][]" value="{{ duree.id }}">
+												<input {% if contrat.id == 5 or contrat.id == 4 %}type="radio"{% else %}type="checkbox"{% endif %} class="sub-input" data-name="duree" name="data[{{ contrat.id }}][duree][]" value="{{ duree.id }}">
 												<span>{{ duree.libelle }}</span>
 											</label>
 										{% endif %}
 									{% endfor %}
 								</div>
-
 							{% endif %}
 							
 						</div>
