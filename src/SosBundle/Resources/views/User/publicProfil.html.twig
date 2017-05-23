@@ -45,13 +45,32 @@
                   {% for contrat in userCriteres.contrats %}
                     <li>
                       {{ contrat.contrat }}
-                      ({% for duree in contrat.duree %}
-                            {% if loop.last == false %}
-                              {{ duree }},
-                            {% else %}
-                              {{ duree }}
-                            {% endif %}
-                      {% endfor %})
+
+                      {% if contrat.duree is empty == false and contrat.cursus is empty %}
+                        ({% for duree in contrat.duree %}
+                              {% if loop.last == false %}
+                                {{ duree }},
+                              {% else %}
+                                {{ duree }}
+                              {% endif %}
+                        {% endfor %})
+                      {% endif %}
+                      {% if contrat.duree is empty == false and contrat.cursus is empty == false %}
+                        ({% for duree in contrat.duree %}
+                              {% if loop.last == false or loop.first %}
+                                {{ duree }},
+                              {% else %}
+                                {{ duree }}
+                              {% endif %}
+                        {% endfor %}
+                        {% for cursus in contrat.cursus %}
+                              {% if loop.last == false %}
+                                {{ cursus }},
+                              {% else %}
+                                {{ cursus }}
+                              {% endif %}
+                        {% endfor %})
+                      {% endif %}                    
                       
                     </li>
                   {% endfor %}
