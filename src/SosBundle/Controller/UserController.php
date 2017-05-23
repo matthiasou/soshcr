@@ -39,6 +39,7 @@ class UserController extends Controller
                 $poste = $critere->getPoste();
                 $experience = $critere->getExperience();
                 $duree = $critere->getDuree();
+                $cursus = $critere->getCursus();
 
                 $formationsArr = array();
                 foreach ($formations as $key => $formation) {
@@ -49,8 +50,14 @@ class UserController extends Controller
                 foreach ($duree as $key => $value) {
                     $dureesArr[] = $value->getLibelle();    
                 }
+
+                $cursusArr = array();
+                foreach ($cursus as $key => $value) {
+                    $cursusArr[] = $value->getLibelle();    
+                }
+
                 $postesArr[] = array('poste' => $poste->getLibelle(), 'experience' => $experience->getLibelle());
-                $contratsArr[] = array('contrat' => $contrats->getLibelle(), 'duree' => $dureesArr);
+                $contratsArr[] = array('contrat' => $contrats->getLibelle(), 'duree' => $dureesArr, 'cursus' => $cursusArr);
                 $anglaisArr[] = $critere->getNiveauAnglais()->getLibelle();
                 $disponibilitesArr[] = json_decode($critere->getDisponibilites());
 

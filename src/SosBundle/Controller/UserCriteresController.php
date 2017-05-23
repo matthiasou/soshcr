@@ -448,10 +448,13 @@ class UserCriteresController extends Controller
             $usercritere = new UserCritere();
             $usercritere->setUser($this->getUser());
             $usercritere->setContrat($repoContrat->find($contrat['contrat']));
-            foreach ($contrat['duree'] as $key => $value) 
+            if (isset($contrat['duree']))
             {
-              $duree = $repoDuree->find($value);
-              $usercritere->addDuree($duree);
+              foreach ($contrat['duree'] as $key => $value) 
+              {
+                $duree = $repoDuree->find($value);
+                $usercritere->addDuree($duree);
+              }
             }
             if (isset($contrat['cursus'])) 
             {
