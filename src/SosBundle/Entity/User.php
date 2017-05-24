@@ -249,5 +249,11 @@ class User extends BaseUser
     {
         return $this->criteres;
     }
+    public function getAge()
+    {
+        $dateInterval = $this->dateNaissance->diff(new \DateTime());
+ 
+        return $dateInterval->y;
+    }
 
 }

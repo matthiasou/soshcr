@@ -90,6 +90,10 @@ demandeRecommandation:
     path:     /demandeRecommandation
     defaults: { _controller: SosBundle:Admin:demandeRecommandation }
 
+signalement_profil:
+    path:     /signalement_profil
+    defaults: { _controller: SosBundle:Default:signalementProfil }
+
 # INFORMATION USER START
 
 usercriteres_step_1:
@@ -152,6 +156,11 @@ delete_user:
 mesrecommandations:
     path:     /mesrecommandations
     defaults: { _controller: SosBundle:User:mesrecommandations}
+
+validationrecommandations:
+    path:    /validation/{code}/{id}
+    defaults: { _controller: SosBundle:User:validation}
+
 # ADMIN
 recommandations:
     path:     /admin/recommandations
@@ -168,3 +177,6 @@ signalements:
 validation:
     path:     /admin/validation
     defaults: { _controller: SosBundle:Admin:validation }
+recommandationsutilisateurs:
+    path:     /admin/recommandationsutilisateurs
+    defaults: { _controller: SosBundle:Admin:recommandationsByUser }

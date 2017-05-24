@@ -14,41 +14,35 @@ class AdminController extends Controller
      */
     public function demandeRecommandationAction()
     {
-
         if (isset($_POST['nom_etablissement'])){
-
             $em = $this->getDoctrine()->getManager();
             $user = $this->get('security.token_storage')->getToken()->getUser();
-            $civilite = $em->getRepository('SosBundle:Civilite')->find($_POST['civilite']);
+            $civ = $_POST['civilite'];
+            $civilite = $em->getRepository('SosBundle:Civilite')->findOneBy(array('id' => $civ));
             if(isset($_POST['valider'])){
-            $newRecommandation = new  Recommandation();
-            $newRecommandation->setNomEtablissement($_POST['nom_etablissement']);
-            $newRecommandation->setEmail($_POST['email']);
-            $newRecommandation->setVille($_POST['ville']);
-            $newRecommandation->setNomResponsable($_POST['nom_responsable']);
-            $newRecommandation->setValide(0);
-            $newRecommandation->setCivilite($civilite);
-            $newRecommandation->setUser($user);
+                $validation="Demande de recommandation envoyée !";
+                $newRecommandation = new  Recommandation();
+                $newRecommandation->setNomEtablissement($_POST['nom_etablissement']);
+                $newRecommandation->setEmail($_POST['email']);
+                $newRecommandation->setVille($_POST['ville']);
+                $newRecommandation->setNomResponsable($_POST['nom_responsable']);
+                $newRecommandation->setValide(0);
+                $newRecommandation->setCivilite($civilite);
+                $newRecommandation->setUser($user);
+                $characts    = 'abcdefghijklmnopqrstuvwxyz';
+                $characts   .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $characts   .= '1234567890';
+                $code_aleatoire      = '';
+                for($i=0;$i < 5;$i++)
+                {
+                    $code_aleatoire .= substr($characts,rand()%(strlen($characts)),1);
+                } 
+                $newRecommandation->setCode($code_aleatoire);
 
-            $em->persist($newRecommandation);
-            $em->flush();
-            $message = \Swift_Message::newInstance()
-                    ->setSubject('Demande de recommandation')
-                    ->setFrom('soshcr@contact.fr')
-                    ->setTo($_POST['email'])
-                    ->setBody(
-                        $this->renderView(
-                            'SosBundle:Admin:mailrecommandations.html.twig'
-                        ),
-                        'text/html'
-                    );
-                $this->get('mailer')->send($message);
+                $em->persist($newRecommandation);
+                $em->flush();
             }
-
-            $validation="Demande de recommandation envoyée !";
-            return $this->render('SosBundle:Dashboard:dashboard.html.twig', array("validation"=>$validation));
-
-
+            return $this->render('SosBundle:Dashboard:dashboard.html.twig', array("validation"=>$validation, "user" => $user));
         }
 
         return $this->render('SosBundle:Dashboard:demandeRecommandation.html.twig');
@@ -64,12 +58,30 @@ class AdminController extends Controller
         $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('valide' => 0));
         if (isset($_POST['valider'])){
             foreach($recommandations as $recommandation){
+                $utilisateur = $recommandation->getUser();
                 $recommandation->setValide(1);
-                $em->flush($recommandation);
-                return $this->redirectToRoute('recommandations');
+                $code = $recommandation->getCode();
+                $em->persist($recommandation);
+                $em->flush();
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Demande de recommandation')
+                    ->setFrom('soshcr@contact.fr')
+                    ->setTo($recommandation->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'SosBundle:Admin:mailrecommandations.html.twig',
+                                array(
+                                    'utilisateur' => $utilisateur,
+                                    'code' => $code)
+                        ),
+                        'text/html'
+                    );
+                $this->get('mailer')->send($message);
+                
             }
+            return $this->redirectToRoute('recommandations');
         }
-        if (isset($_POST['supprimer'])) 
+        if (isset($_POST['supprimerreco'])) 
         {
             if (is_array($_POST['id_recommandation'])) 
             {
@@ -77,9 +89,9 @@ class AdminController extends Controller
                 {
                     $reco = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('id' => $value));
                     $em->remove($reco);
-                    $em->flush();
-                    return $this->redirectToRoute('recommandations');
+                    $em->flush();   
                 }
+                return $this->redirectToRoute('recommandations');
             }
         }
         return $this->render('SosBundle:Admin:recommandations.html.twig', array("recommandations" => $recommandations, "users" => $users));
@@ -92,18 +104,11 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $utilisateurs = $em->getRepository('SosBundle:User')->findAll();
-        foreach ($utilisateurs as $utilisateur){
-            $u = $utilisateur->getId();
-            $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => $u));
-
-        }
         if(isset($_POST['rechercher']) || isset($_POST['rechercherAll']))
         {
             if(isset($_POST['rechercherAll']))
             {
-                $utilisateurs = $em->getRepository('SosBundle:User')->findAll();
                 return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs));
-
             }
             if(isset($_POST['rechercher']) && ((!empty($_POST['nom'])) || !empty($_POST['prenom']) || !empty($_POST['telephone'])))
             {   
@@ -141,7 +146,16 @@ class AdminController extends Controller
                     $statement = $connection->prepare($requete);
                     $statement->execute();
                     $result1 = $statement->fetchAll();
-                    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1));
+                    foreach ($result1 as $res){
+                        $datenaissance = $res['date_naissance'];
+                        $date = new \DateTime($datenaissance);
+                        $today = new \DateTime('NOW');
+                        $dateInterval = $date->diff($today);
+                        $age = $dateInterval->y;
+
+                        $nbRecommandation = 0;
+                    }
+                    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, "nbRecommandation" => $nbRecommandation));
 
             }
         }
@@ -149,11 +163,19 @@ class AdminController extends Controller
         {
             $value = $_POST['id_utilisateur'];
             $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
+            
             $em->remove($user);
             $em->flush();
             return $this->redirectToRoute('utilisateurs'); 
         }
-        return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, "recommandations" => $recommandations));
+        foreach ($utilisateurs as $utilisateur){
+            $u = $utilisateur->getId();
+            $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $utilisateur,'valide'=> 1));
+            $nbRecommandation = count($recommandation);
+            
+            //$recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => $u);
+        }
+    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, "nbRecommandation" => $nbRecommandation));
 
     }
 
@@ -224,6 +246,31 @@ class AdminController extends Controller
             return $this->redirectToRoute('signalements'); 
         }
         return $this->render('SosBundle:Admin:signalements.html.twig', array('results' => $results, 'results2' => $results2));
+    }
+
+    /**
+     * @Route("admin/recommandationsutilisateurs")
+     */
+    public function recommandationsByUserAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('SosBundle:User')->findAll(); 
+        $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => $users), array('user' => 'ASC'));
+
+        if (isset($_POST['supprimer'])){
+            if (is_array($_POST['id_recommandation'])) 
+            {
+                foreach($_POST['id_recommandation'] as $value)
+                {
+                    $recommandation = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('id' => $value));
+                    $em->remove($recommandation);
+                    $em->flush();
+                    return $this->redirectToRoute('recommandationsutilisateurs');
+                }
+            }
+        }
+        return $this->render('SosBundle:Admin:recommandationsutilisateurs.html.twig', array("recommandations" => $recommandations));
+ 
     }
 
 }
