@@ -17,6 +17,21 @@ class UserController extends Controller
         $nbreco = count($recommandations);
         return $this->render('SosBundle:User:mesrecommandations.html.twig', array("recommandations" => $recommandations, "nbreco"=>$nbreco));
     }
+
+ 
+    /**
+     * @Route("/delete")
+     */
+    public function deleteUserAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->geUser();
+        $em->remove($user);
+        $em->flush();
+        
+        return $this->redirectToRoute('index', array('validation' => 'Ton compte à bien été supprimé'));
+
+    }
  
     /**
      * @Route("/user/{id}")
