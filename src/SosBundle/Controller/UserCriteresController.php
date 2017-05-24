@@ -486,8 +486,22 @@ class UserCriteresController extends Controller
               $usercritere->addEtablissement($etablissement);
             }
 
+            $alreadyCriteresRepo = $em->getRepository('SosBundle:UserCritere');
+            $alreadyCriteres = $alreadyCriteresRepo->createQueryBuilder('uc')
+                                          ->where('uc.user = :user')
+                                          ->setParameter('user', $this->getUser()->getId())
+                                          ->getQuery()
+                                          ->getResult();
+
+            if (!empty($alreadyCriteres)) {
+              foreach ($alreadyCriteres as $key => $value) {
+                $em->remove($value);
+                $em->flush();
+              }
+            }
+
             $em->persist($usercritere);
-            $em->flush($usercritere);
+            $em->flush();
           }     
 
         }
