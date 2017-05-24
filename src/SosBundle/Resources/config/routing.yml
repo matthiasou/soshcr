@@ -143,6 +143,11 @@ public_profil:
 mesrecommandations:
     path:     /mesrecommandations
     defaults: { _controller: SosBundle:User:mesrecommandations}
+
+validation:
+    path:    /validation/{code}/{id}
+    defaults: { _controller: SosBundle:User:validation}
+
 # ADMIN
 recommandations:
     path:     /admin/recommandations

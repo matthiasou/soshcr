@@ -18,6 +18,24 @@ class UserController extends Controller
         $nbreco = count($recommandations);
         return $this->render('SosBundle:User:mesrecommandations.html.twig', array("recommandations" => $recommandations, "nbreco"=>$nbreco));
     }
+    /**
+     * @Route("/validation/{code}/{id}")
+     */
+    public function validationAction($code, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $recommandation = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('code' => $code, 'user' => $id));
+        if(isset($_POST['envoyer'])){
+            $reponse = $_POST['reponse'];
+            if($reponse = "oui"){
+                $recommandation->setValide(2);
+                $em->persist($recommandation);
+                $em->flush();
+                return $this->redirectToRoute('index');
+            }
+        }
+        return $this->render('SosBundle:User:validation.html.twig', array("recommandation" => $recommandation));
+    }
  
     /**
      * @Route("/user/{id}")
