@@ -43,12 +43,12 @@
 			<tbody>
 				{% for result in result1 %}
 				<tr>
-					<td><a href="">{{result.nom}}</a></td>
-					<td><a href="">{{result.prenom}}</a></td>
+					<td><a href="{{ path('public_profil', {'id': result.id}) }}">{{result.nom}}</a></td>
+					<td><a href="{{ path('public_profil', {'id': result.id}) }}">{{result.prenom}}</a></td>
 					<td>{{age}}</td>
 					<td>{{result.telephone}}</td>
 					<td>{{result.email}}</td>
-					<td>{{nbRecommandation}}</td>
+					<td></td>
 					<td>Region</td>
 					<td>
 						<input type="checkbox" name="id_utilisateur" value="{{result.id}}" />
@@ -80,12 +80,12 @@
 			<tbody>
 				{% for utilisateur in utilisateurs %}
 				<tr>
-					<td><a href="">{{utilisateur.nom}}</a></td>
-					<td><a href="">{{utilisateur.prenom}}</a></td>
+					<td><a href="{{ path('public_profil', {'id': utilisateur.id}) }}">{{utilisateur.nom}}</a></td>
+					<td><a href="{{ path('public_profil', {'id': utilisateur.id}) }}">{{utilisateur.prenom}}</a></td>
 					<td>{{utilisateur.getage()}}</td>
 					<td>{{utilisateur.telephone}}</td>
 					<td>{{utilisateur.email}}</td>
-					<td>{{nbRecommandation}}</td>
+					<td></td>
 					<td>Region</td>
 					<td>
 						<input type="checkbox" name="id_utilisateur" value="{{utilisateur.id}}" />
