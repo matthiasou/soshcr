@@ -94,6 +94,10 @@ signalement_profil:
     path:     /signalement_profil
     defaults: { _controller: SosBundle:Default:signalementProfil }
 
+cron_user:
+    path:     /cron_user
+    defaults: { _controller: SosBundle:Default:cronuser }
+
 # INFORMATION USER START
 
 usercriteres_step_1:
