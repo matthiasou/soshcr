@@ -14,9 +14,7 @@ class AdminController extends Controller
      */
     public function demandeRecommandationAction()
     {
-
         if (isset($_POST['nom_etablissement'])){
-
             $em = $this->getDoctrine()->getManager();
             $user = $this->get('security.token_storage')->getToken()->getUser();
             $civ = $_POST['civilite'];
@@ -31,6 +29,15 @@ class AdminController extends Controller
                 $newRecommandation->setValide(0);
                 $newRecommandation->setCivilite($civilite);
                 $newRecommandation->setUser($user);
+                $characts    = 'abcdefghijklmnopqrstuvwxyz';
+                $characts   .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $characts   .= '1234567890';
+                $code_aleatoire      = '';
+                for($i=0;$i < 5;$i++)
+                {
+                    $code_aleatoire .= substr($characts,rand()%(strlen($characts)),1);
+                } 
+                $newRecommandation->setCode($code_aleatoire);
 
                 $em->persist($newRecommandation);
                 $em->flush();
@@ -51,21 +58,28 @@ class AdminController extends Controller
         $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('valide' => 0));
         if (isset($_POST['valider'])){
             foreach($recommandations as $recommandation){
+                $utilisateur = $recommandation->getUser();
                 $recommandation->setValide(1);
-                $em->flush($recommandation);
+                $code = $recommandation->getCode();
+                $em->persist($recommandation);
+                $em->flush();
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Demande de recommandation')
                     ->setFrom('soshcr@contact.fr')
                     ->setTo($recommandation->getEmail())
                     ->setBody(
                         $this->renderView(
-                            'SosBundle:Admin:mailrecommandations.html.twig'
+                            'SosBundle:Admin:mailrecommandations.html.twig',
+                                array(
+                                    'utilisateur' => $utilisateur,
+                                    'code' => $code)
                         ),
                         'text/html'
                     );
                 $this->get('mailer')->send($message);
-                return $this->redirectToRoute('recommandations');
+                
             }
+            return $this->redirectToRoute('recommandations');
         }
         if (isset($_POST['supprimerreco'])) 
         {
