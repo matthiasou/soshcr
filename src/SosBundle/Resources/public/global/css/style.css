@@ -32,11 +32,54 @@ footer a, header a {
     font-weight: bold;
 }
 
+img.img-responsive.form-img{
+    margin: 0 auto;
+}
+
 .btn-yellow{
     background-color: #FFE44B;
     color: #394076;
 }
 
+#modal-login-label .btn-yellow{
+    font-size: 22px;
+}
+
+.fos_user_registration_register ul{
+    padding: 0px;
+}
+
+.fos_user_registration_register ul li:before {
+    position: absolute;
+    left: 30px;
+    font-family: 'FontAwesome';
+    content: "\f06a";
+}
+
+.fos_user_registration_register ul li{
+    width: 100%;
+    list-style-type: none;
+    background: rgba(241, 3, 3, 0.7);
+    color: #fff;
+    border-radius: 5px;
+}
+
+.validate{
+     position:absolute;
+     top:10px;
+     right:0px;
+     color:green;
+     font-size: 40px;
+     display:none;
+}
+
+.validated{
+    opacity: 0.7;
+}
+
+#usercriteres_step_4{
+    margin-top: 50px
+}
 /*******************************************************************
                       LAYOUT
 *******************************************************************/
@@ -131,7 +174,7 @@ header #login-icon {
 }
 
 #user-nav a {
-    margin: 0 10px
+    margin: 0 25px
 }
 
 #user-icon i {
@@ -549,7 +592,6 @@ footer ul li {
 
 #seach-btn {
     background: none;
-    margin-left: -3px
 }
 
 .hdpi.pac-logo:after {
@@ -1289,14 +1331,14 @@ ul.social-network li {
 .social-circle li a {
   display:inline-block;
   position:relative;
-  margin:0 auto 0 auto;
-  -moz-border-radius:50%;
+    -moz-border-radius:50%;
   -webkit-border-radius:50%;
   border-radius:50%;
   text-align:center;
   width: 50px;
   height: 50px;
   font-size:20px;
+    margin: 10px auto 0;
 }
 
 

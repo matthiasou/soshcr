@@ -96,10 +96,6 @@ signalement_profil:
 
 # INFORMATION USER START
 
-usercriteres_index:
-    path: /usercriteres
-    defaults: { _controller: SosBundle:UserCriteres:index}
-
 usercriteres_step_1:
     path: /usercriteres/step1
     defaults: { _controller: SosBundle:UserCriteres:step1}

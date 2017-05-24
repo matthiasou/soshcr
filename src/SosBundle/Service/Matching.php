@@ -65,7 +65,7 @@ class Matching {
         if (isset($data['formation_minimum'])) {
             $formation_join = "JOIN user_critere_formation ucf ON uc.id = ucf.user_critere_id";
             if ($data['formation_minimum'] != 0) { // si tout n'est pas sélectionné
-                $formation =  "AND ucf.formation_id >= ".$data['formation'];
+                $formation =  "AND ucf.formation_id >= ".$data['formation_minimum'];
             }
         }
 
@@ -74,6 +74,14 @@ class Matching {
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
                 $cursus_scolaire =  "AND uccs.cursus_scolaire_id = ".$data['cursus_scolaire'];
             }
+        }
+
+        if (isset($data['experience_minimum'])) {
+            $experience_minimum =  "AND uc.experience_id >= ".$data['experience_minimum'];
+        }
+
+        if (isset($data['niveau_anglais'])) {
+            $niveau_anglais =  "AND uc.niveau_anglais_id >= ".$data['niveau_anglais'];
         }
 
         $query = "SELECT DISTINCT u.id
@@ -85,21 +93,21 @@ class Matching {
             $contrat_duree_join." ".
             $formation_join." ".
             $cursus_scolaire_join."
-            WHERE ".$formule." <> uc.rayon_emploi ".
+            WHERE ".$formule." < uc.rayon_emploi ".
             $classification." ".
             $poste." ".
             $contrat." ".
             $contrat_duree." ".
             $formation." ".
+            $niveau_anglais." ".
+            $experience_minimum." ".
             $cursus_scolaire;
 
-        
 
         $stmt = $this->entityManager->getConnection()->prepare($query);
         $stmt->execute();
         
         $employes = $stmt->fetchAll();
-
 
         $listeEmployes = array();
 
@@ -165,7 +173,7 @@ class Matching {
         if (isset($data['formation_minimum'])) {
             $formation_join = "JOIN user_critere_formation ucf ON uc.id = ucf.user_critere_id";
             if ($data['formation_minimum'] != 0) { // si tout n'est pas sélectionné
-                $formation =  "AND ucf.formation_id >= ".$data['formation'];
+                $formation =  "AND ucf.formation_id >= ".$data['formation_minimum'];
             }
         }
 
@@ -174,6 +182,14 @@ class Matching {
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
                 $cursus_scolaire =  "AND uccs.cursus_scolaire_id = ".$data['cursus_scolaire'];
             }
+        }
+
+        if (isset($data['experience_minimum'])) {
+            $experience_minimum =  "AND uc.experience_id >= ".$data['experience_minimum'];
+        }
+
+        if (isset($data['niveau_anglais'])) {
+            $niveau_anglais =  "AND uc.niveau_anglais_id >= ".$data['niveau_anglais'];
         }
 
         $query2 = "SELECT COUNT(DISTINCT u.id) as nb
@@ -191,6 +207,8 @@ class Matching {
             $contrat." ".
             $contrat_duree." ".
             $formation." ".
+            $niveau_anglais." ".
+            $experience_minimum." ".
             $cursus_scolaire;
 
 
@@ -259,7 +277,7 @@ class Matching {
         if (isset($data['formation_minimum'])) {
             $formation_join = "JOIN user_critere_formation ucf ON uc.id = ucf.user_critere_id";
             if ($data['formation_minimum'] != 0) { // si tout n'est pas sélectionné
-                $formation =  "AND ucf.formation_id >= ".$data['formation'];
+                $formation =  "AND ucf.formation_id >= ".$data['formation_minimum'];
             }
         }
 
@@ -268,6 +286,14 @@ class Matching {
             if ($data['cursus_scolaire'] != 5) { // si tout n'est pas sélectionné
                 $cursus_scolaire =  "AND uccs.cursus_scolaire_id = ".$data['cursus_scolaire'];
             }
+        }
+
+        if (isset($data['experience_minimum'])) {
+            $experience_minimum =  "AND uc.experience_id >= ".$data['experience_minimum'];
+        }
+
+        if (isset($data['niveau_anglais'])) {
+            $niveau_anglais =  "AND uc.niveau_anglais_id >= ".$data['niveau_anglais'];
         }
 
         $query = "SELECT DISTINCT u.id
@@ -285,6 +311,8 @@ class Matching {
             $contrat." ".
             $contrat_duree." ".
             $formation." ".
+            $niveau_anglais." ".
+            $experience_minimum." ".
             $cursus_scolaire;
 
 

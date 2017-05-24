@@ -38,9 +38,10 @@ class SearchController extends Controller
             $alreadyVille = $request->get('ville');
             if (empty($alreadyVille['latitude'])) 
             {
-                $geocoder = 'http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false';
+                $geocoder = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBKuX3xaOa5tYT7bKs8jyEUL3eSiLgUs6M&address=%s&sensor=false';
                 $query = sprintf($geocoder, urlencode($_POST['ville']));
                 $result = json_decode(file_get_contents($query));
+
                 if ($result == NULL || $result == "" ||  $result->status == "ZERO_RESULTS" || $result->status == "INVALID_REQUEST"  || $result->status == "REQUEST_DENIED" )
                 {
                     return $this->render('SosBundle:Search:ville.html.twig', array('error' => 'ville'));
@@ -588,45 +589,26 @@ class SearchController extends Controller
                 return $this->render('SosBundle:Search:classification.html.twig', array('data' => $data,'etablissements'=>$etablissements,'step' => '2'));
             }
             elseif($_POST['action'] == 'poste'){
+
                 $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
-                if ($data['secteur_activite'] == 1) {
+                $repoPostes = $em->getRepository('SosBundle:PosteRecherche');
+                $postes = $repoPostes->findBy(array(), array('id' => 'desc'));
 
-                    if (isset($data['service_activite'])) {
-                        $qb = $em->createQueryBuilder();
-                        $postes = $qb->select('p')
-                            ->from('SosBundle:PosteRecherche','p')
-                            ->where('p.secteur = :secteur_activite')
-                            ->andWhere('p.service = :service_activite')
-                            ->setParameters(array('secteur_activite' => $data['secteur_activite'], 'service_activite' => $data['service_activite']))
-                            ->orderBy('p.id', 'DESC')
-                            ->getQuery()
-                            ->getResult();
-                    }else{
-                        $qb = $em->createQueryBuilder();
-                        $postes = $qb->select('p')
-                            ->from('SosBundle:PosteRecherche','p')
-                            ->where('p.secteur = :secteur_activite')
-                            ->setParameter('secteur_activite', $data['secteur_activite'])
-                            ->orderBy('p.id', 'DESC')
-                            ->getQuery()
-                            ->getResult();
-                    }
+                $repoSecteurs = $em->getRepository('SosBundle:Secteur');
+                $secteurs = $repoSecteurs->findAll();
 
-                    return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'data' => $data, 'step' => '5'));
+                $repoServices = $em->getRepository('SosBundle:Service');
+                $services = $repoServices->findAll();
 
-                }else if($data['secteur_activite'] == 2){
 
-                    $repo = $em->getRepository("SosBundle:Service");
-                    $services = $repo->findAll();
+                return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'secteurs' => $secteurs, 'services' => $services, 'data' => $data, 'step' => '5'));
 
-                    return $this->render('SosBundle:Search:service.html.twig', array('services' => $services, 'data' => $data, 'step' => '4'));
 
-                }
             }
             elseif($_POST['action'] == 'contrat'){
                 $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
                 $repo = $em->getRepository("SosBundle:Contrat");
-                $contrats = $repo->findAll();
+                $contrats = $repo->findBy(array(),array('id' => 'desc'));
                 return $this->render('SosBundle:Search:contrat.html.twig', array('data' => $data,'contrats'=>$contrats,'step' => '6'));
             }
 
@@ -647,8 +629,51 @@ class SearchController extends Controller
                 return $this->render('SosBundle:Search:anglais.html.twig', array('data' => $data,'niveau_anglais'=>$niveau_anglais,'step' => '8'));
             }
 
+            elseif($_POST['action'] == 'cursus_scolaire'){
+                $data['ville'] = $request->get('ville');
+                $data['classification'] = $request->get('classification');
+                $data['poste'] = $request->get('poste');
+                $data['contrat'] = $request->get('contrat');
+
+                if (null !== $request->get('contrat_duree')) {
+                    $data['contrat_duree'] = $request->get('contrat_duree');
+                }
+
+                $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
+
+
+                $cursus_scolaire_repo = $em->getRepository("SosBundle:CursusScolaire");
+                $cursus_scolaire = $cursus_scolaire_repo->findBy(array(), array('id' => 'desc'));
+                return $this->render('SosBundle:Search:cursus_scolaire.html.twig', array('cursus_scolaire' => $cursus_scolaire, 'data' => $data, 'step' => '8'));
+            }
+
+            elseif($_POST['action'] == 'experience_minimum'){
+                $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
+                $data['ville'] = $request->get('ville');
+                $data['classification'] = $request->get('classification');
+                $data['poste'] = $request->get('poste');
+                $data['contrat'] = $request->get('contrat');
+
+                // Si on est en CDD CDI
+                if (null !== $request->get('formation_minimum')) {
+                    $data['formation_minimum'] = $request->get('formation_minimum');
+                }
+
+                if (null !== $request->get('contrat_duree')) {
+                    $data['contrat_duree'] = $request->get('contrat_duree');
+                }
+
+
+
+                $repo = $em->getRepository("SosBundle:Experience");
+                $experience_minimum = $repo->findAll();
+
+                return $this->render('SosBundle:Search:experience_minimum.html.twig', array('experience_minimum' => $experience_minimum, 'data' => $data, 'step' => '9'));
+
+            }
+
             else{
-                return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data));
+                return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data, 'error' => 'resultat'));
             }
 
 

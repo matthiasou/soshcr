@@ -48,6 +48,7 @@ class AdminController extends Controller
                 $this->get('mailer')->send($message);
             }
 
+
             return $this->render('SosBundle:Dashboard:dashboard.html.twig', array("validation"=>$validation, "user" => $user));
 
 
