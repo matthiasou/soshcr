@@ -112,7 +112,7 @@ class DefaultController extends Controller
                 $telephonesignaleur = $_POST['C_Company2'];
                 $message = \Swift_Message::newInstance()
                         ->setSubject('Signalement d un profil')
-                        ->setFrom($_POST['C_EmailAddress2'])
+                        ->setFrom('contact@soshcr.fr')
                         ->setTo('contact@soshcr.fr')
                         ->setBody(
                             $this->renderView(
@@ -131,6 +131,29 @@ class DefaultController extends Controller
                             'text/html'
                         );
                     $this->get('mailer')->send($message);
+
+                $message2 = \Swift_Message::newInstance()
+                        ->setSubject('Votre signalement a été pris en compte')
+                        ->setFrom('contact@soshcr.fr')
+                        ->setTo($_POST['C_EmailAddress2'])
+                        ->setBody(
+                            $this->renderView(
+                                'SosBundle:Default:signalement_profil_mail2.html.twig',
+                                array('message' => $_POST['Raison'],
+                                    'nom' => $nom,
+                                    'prenom' => $prenom,
+                                    'email' => $email,
+                                    'telephone' => $telephone,
+                                    'nom2' => $nomsignaleur,
+                                    'prenom2' => $prenomsignaleur,
+                                    'email2' => $emailsignaleur,
+                                    'telephone2' => $telephonesignaleur,
+                                    'proposition' => $contenu
+                            )),
+                            'text/html'
+                        );
+                    $this->get('mailer')->send($message2);
+
                     return $this->render('SosBundle:Default:signalement_profil.html.twig', array("validation" => $validation));
             }
             else {
