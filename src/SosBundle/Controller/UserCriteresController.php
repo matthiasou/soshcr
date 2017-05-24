@@ -501,4 +501,46 @@ class UserCriteresController extends Controller
       }
     }
 
+
+    /**
+     * @Route("/usercriteres/disponibilites")
+     */
+    public function modificationDisponibilitesAction(Request $request)
+    {
+
+      $em = $this->getDoctrine()->getManager();
+      $user = $this->getUser();
+      $criteres = $user->getCriteres();
+
+      if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "modification_disponibilites" )
+      {
+  
+
+        $disponibilites = json_encode($request->get('disponibilite'));
+        
+        foreach ($criteres as $key => $value) {
+          $criteresNew = $em->getRepository('SosBundle:UserCritere')->find($value->getId());
+          $criteresNew->setDisponibilites($disponibilites);
+          $em->persist($criteresNew);
+          $em->flush($criteresNew);
+        }
+
+
+        return $this->redirectToRoute('dashboard', array('validation' => 'Tes modifications on étés prises en compte'));
+
+      }
+
+
+      $disponibilitesArr = array();
+
+      foreach ($criteres as $key => $value) {
+        $disponibilitesArr[] = json_decode($value->getDisponibilites());
+      }
+
+      $disponibilitesArr = array_unique($disponibilitesArr, SORT_REGULAR);
+      dump($disponibilitesArr);
+      return $this->render('SosBundle:UserCriteres:step8.html.twig', array('disponibilites' => $disponibilitesArr)); 
+
+    }
+
 }

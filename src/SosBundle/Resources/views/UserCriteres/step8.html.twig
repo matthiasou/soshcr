@@ -11,9 +11,44 @@
 		<h3 class="title-heading">{{ app.user.prenom|capitalize }}, quand es-tu disponible ?</h3>
 		<p>(Choisis 1 ou plusieures intervalles différentes, tu peux meme selectionner un seul jour !)</p>
 		<br>
-			<form class="informations col-sm-6 col-sm-offset-3" method="post" action="{{ path('usercriteres_step_9') }}">
+			<form class="informations col-sm-4 col-sm-offset-4" method="post" action="
+			{% if disponibilites is defined and disponibilites is empty == false %}
+				{{ path('modification_disponibilites') }}
+			{% else %}
+				{{ path('usercriteres_step_9') }}
+			{% endif %}
+			">
+			{% if disponibilites is defined and disponibilites is empty == false %}
+				<input type="hidden" name="form" value="modification_disponibilites">
+			{% else %}
 				<input type="hidden" name="form" value="step_8">
+			{% endif %}
 				<br>
+
+				{# MODIFICATION DES DISPONIBILITES #}
+				{% if disponibilites is defined and disponibilites is empty == false %}
+					{% for disponibilite in disponibilites %}
+						{% for d in disponibilite %}
+							{% if '-' in d %}
+								<div class="already-disponibilites">
+									Du <span class="prim-color">{{ d|replace({'-' : '</span>au<span class="prim-color">'})|raw }}</span> 
+									<input name="disponibilite[]" type="hidden" value="{{ d }}">
+									<span class="btn-soshcr pull-right disponibilite-delete-btn"><i style="cursor:pointer" class="fa fa-times" aria-hidden="true"></i></span>
+								</div>
+								<br>
+		            		{% elseif d is empty == false %}
+								<div class="already-disponibilites">Le <span class="prim-color">{{ d }}</span>
+									<input name="disponibilite[]" type="hidden" value="{{ d }}">
+									<span class="btn-soshcr pull-right disponibilite-delete-btn"><i style="cursor:pointer" class="fa fa-times" aria-hidden="true"></i></span>
+								</div>
+								<br>
+		            		{% endif %}
+		                {% endfor %}
+					{% endfor %}
+					<br>
+				{% endif %}
+				{# FIN MODIFICATION DES DISPONIBILITES #}
+
 				<div class="input-group-btn">
 				    <button class="btn btn-default" id="add-disponibilite-jour" type="button">
 						Ajouter un jour&nbsp;&nbsp;<i class="fa fa-plus" ></i>
@@ -27,7 +62,13 @@
 
 				<div class="clearfix"></div>
 				<br><br><br>
-				<button type="submit" class="btn btn-soshcr text-center">Suivant</button>
+				{% if disponibilites is defined and disponibilites is empty == false %}
+					<a href="{{ path('dashboard') }}" class="btn btn-soshcr text-center">Annuler</a>
+					<button type="submit" class="btn btn-soshcr text-center">Enregistrer</button>
+				{% else %}
+					<button type="submit" class="btn btn-soshcr text-center">Suivant</button>
+				{% endif %}
+				
 			</form>
 
 

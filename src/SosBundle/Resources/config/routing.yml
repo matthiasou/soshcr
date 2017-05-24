@@ -128,6 +128,11 @@ usercriteres_step_9:
     path: /usercriteres/step9  
     defaults: { _controller: SosBundle:UserCriteres:step9}
 
+
+modification_disponibilites:
+    path: /usercriteres/disponibilites
+    defaults: { _controller: SosBundle:UserCriteres:modificationDisponibilites}
+
 # INFORMATION USER START
 
 

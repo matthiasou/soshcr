@@ -152,6 +152,14 @@ $(document).ready(function(){
         });
     });
 
+    $('.remove-disponibilite').click(function(){
+        $(this).parent().parent().remove();
+    });
+
+    $('.disponibilite-delete-btn').click(function(){
+        $(this).parent().remove();
+    });
+
     $('#add-disponibilite-jour').click(function(){
 
         if ($('.datepicker-here').length == 0) 
