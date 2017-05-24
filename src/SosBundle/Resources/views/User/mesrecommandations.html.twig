@@ -10,6 +10,20 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 {% endblock %}
 {% block sos_body %}
+<head>
+<meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- You can use Open Graph tags to customize link previews.
+    Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+  <meta property="og:url"           content="http://www.soshcr.fr" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Soshcr : Hôtel Café Restaurant" />
+  <meta property="og:description"   content="Je partage mes recommandations" />
+  <meta property="og:image"         content="http://soshcr.fr/img/header.png" />
+</head>
+
+
 	<h3>Recommandations</h3>
 	<hr>
 <div class="container">
@@ -33,7 +47,7 @@
     <div>
     	FELICITATIONS
     	{{nb}}
-    	<div class="fb-share-button" data-href="http://localhost:8888/soshcr2/web/app_dev.php/mesrecommandations" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8888%2Fsoshcr2%2Fweb%2Fapp_dev.php%2Fmesrecommandations&amp;src=sdkpreparse">Partager</a></div>
+    	<div class="fb-share-button" data-href="http://www.soshcr.fr" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.soshcr.fr%2F&amp;src=sdkpreparse">Partager</a></div>
     </div>
 </div>
 {% endblock %}
