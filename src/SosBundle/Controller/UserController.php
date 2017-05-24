@@ -24,10 +24,17 @@ class UserController extends Controller
     public function validationAction($code, $id)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $id));
+        $usercritere = $em->getRepository('SosBundle:userCritere')->findAll(array('user' => $user));
         $recommandation = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('code' => $code, 'user' => $id));
         if(isset($_POST['envoyer'])){
             $reponse = $_POST['reponse'];
             if($reponse = "oui"){
+                foreach ($usercritere as $u){
+                    $score = $u->setScore($u->getScore()+10);
+                    $em->persist($score);
+                    $em->flush();
+                }
                 $recommandation->setValide(2);
                 $em->persist($recommandation);
                 $em->flush();
