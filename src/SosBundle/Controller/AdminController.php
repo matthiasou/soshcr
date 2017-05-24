@@ -41,6 +41,20 @@ class AdminController extends Controller
 
                 $em->persist($newRecommandation);
                 $em->flush();
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Demande de recommandation envoyé')
+                    ->setFrom('soshcr@contact.fr')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'SosBundle:Admin:maildemanderecommandations.html.twig',
+                                array(
+                                    'utilisateur' => $utilisateur)
+                        ),
+                        'text/html'
+                    );
+                $this->get('mailer')->send($message);
             }
             return $this->render('SosBundle:Dashboard:dashboard.html.twig', array("validation"=>$validation, "user" => $user));
         }
