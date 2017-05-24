@@ -10,32 +10,29 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 {% endblock %}
 {% block sos_body %}
-<head>
-<meta charset="utf-8" />
-<meta name="description" content="Je partage mes recommandations" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- You can use Open Graph tags to customize link previews.
-    Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
-
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Je partage mes recommandations" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
 
 
 	<h3>Recommandations</h3>
 	<hr>
 <div class="container">
     <div class="row col-md-6 col-md-offset-2 custyle">
-    	<h3>Mes recommandations</h3>
+    <h3>Mes recommandations</h3>
     <table class="table table-striped custab" border="1">
-    	{% set nb = nbreco %}
-    {% if nbreco < 1 %}
-    Je ne suis pas recommandé :(
-	{% endif %}
+    {% set nb = nbreco %}
+      {% if nbreco < 1 %}
+        Je ne suis pas recommandé :(
+	    {% endif %}
     	{% for recommandation in recommandations %}
     		<tr>
-                	<td>{{nbreco}}.{{recommandation.nomEtablissement}}, {{recommandation.ville}}</td>
-                	{% set nbreco = nbreco-1 %}
-             </tr>   
-        {% endfor %}
+          <td>{{nbreco}}.{{recommandation.nomEtablissement}}, {{recommandation.ville}}</td>
+          {% set nbreco = nbreco-1 %}
+        </tr>   
+      {% endfor %}
     </table>
     <a href="{{ path('demandeRecommandation') }}">Je veux me faire recommander</a>
 

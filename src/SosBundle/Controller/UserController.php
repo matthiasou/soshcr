@@ -13,7 +13,8 @@ class UserController extends Controller
     public function mesrecommandationsAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => 2, 'valide' => 1));
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => $user, 'valide' => 1));
         $nbreco = count($recommandations);
         return $this->render('SosBundle:User:mesrecommandations.html.twig', array("recommandations" => $recommandations, "nbreco"=>$nbreco));
     }

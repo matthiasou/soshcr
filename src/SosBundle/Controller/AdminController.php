@@ -22,36 +22,20 @@ class AdminController extends Controller
             $civ = $_POST['civilite'];
             $civilite = $em->getRepository('SosBundle:Civilite')->findOneBy(array('id' => $civ));
             if(isset($_POST['valider'])){
+                $validation="Demande de recommandation envoyée !";
+                $newRecommandation = new  Recommandation();
+                $newRecommandation->setNomEtablissement($_POST['nom_etablissement']);
+                $newRecommandation->setEmail($_POST['email']);
+                $newRecommandation->setVille($_POST['ville']);
+                $newRecommandation->setNomResponsable($_POST['nom_responsable']);
+                $newRecommandation->setValide(0);
+                $newRecommandation->setCivilite($civilite);
+                $newRecommandation->setUser($user);
 
-            $validation="Demande de recommandation envoyée !";
-            $newRecommandation = new  Recommandation();
-            $newRecommandation->setNomEtablissement($_POST['nom_etablissement']);
-            $newRecommandation->setEmail($_POST['email']);
-            $newRecommandation->setVille($_POST['ville']);
-            $newRecommandation->setNomResponsable($_POST['nom_responsable']);
-            $newRecommandation->setValide(0);
-            $newRecommandation->setCivilite($civilite);
-            $newRecommandation->setUser($user);
-
-            $em->persist($newRecommandation);
-            $em->flush();
-            $message = \Swift_Message::newInstance()
-                    ->setSubject('Demande de recommandation')
-                    ->setFrom('soshcr@contact.fr')
-                    ->setTo($_POST['email'])
-                    ->setBody(
-                        $this->renderView(
-                            'SosBundle:Admin:mailrecommandations.html.twig'
-                        ),
-                        'text/html'
-                    );
-                $this->get('mailer')->send($message);
+                $em->persist($newRecommandation);
+                $em->flush();
             }
-
-
             return $this->render('SosBundle:Dashboard:dashboard.html.twig', array("validation"=>$validation, "user" => $user));
-
-
         }
 
         return $this->render('SosBundle:Dashboard:demandeRecommandation.html.twig');
@@ -69,6 +53,17 @@ class AdminController extends Controller
             foreach($recommandations as $recommandation){
                 $recommandation->setValide(1);
                 $em->flush($recommandation);
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Demande de recommandation')
+                    ->setFrom('soshcr@contact.fr')
+                    ->setTo($recommandation->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'SosBundle:Admin:mailrecommandations.html.twig'
+                        ),
+                        'text/html'
+                    );
+                $this->get('mailer')->send($message);
                 return $this->redirectToRoute('recommandations');
             }
         }
