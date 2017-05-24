@@ -50,7 +50,7 @@ class AdminController extends Controller
                         $this->renderView(
                             'SosBundle:Admin:maildemanderecommandations.html.twig',
                                 array(
-                                    'utilisateur' => $utilisateur)
+                                    'user' => $user)
                         ),
                         'text/html'
                     );
