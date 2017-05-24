@@ -5,10 +5,14 @@ $(document).ready(function(){
         if (error == "ville") {
             sweetAlert("Oups...", "La ville n'existe pas !", "error");    
         }
+
         if (error == "contact") {
             sweetAlert("Erreur :", "Veuillez saisir tous les champs !", "error")
         }
-        
+
+        if (error == "resultat") {
+            sweetAlert("Erreur :", "Veuillez sélectionner au moins un candidat !", "error")
+        }
     }
 
     if (typeof validation != "undefined") {

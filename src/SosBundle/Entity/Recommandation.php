@@ -57,9 +57,14 @@ class Recommandation
     private $nomResponsable;
 
     /**
-     * @ORM\Column(name="valide", type="boolean")
+     * @ORM\Column(name="valide", type="integer")
      */
     private $valide;
+
+    /**
+     * @ORM\Column(name="code", type="string", length=5)
+     */
+    private $code;
 
 
 
@@ -71,6 +76,30 @@ class Recommandation
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return Recommandation
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
     }
 
     /**
@@ -172,7 +201,7 @@ class Recommandation
     /**
      * Set valide
      *
-     * @param boolean $valide
+     * @param integer $valide
      *
      * @return Recommandation
      */
@@ -186,7 +215,7 @@ class Recommandation
     /**
      * Get valide
      *
-     * @return boolean
+     * @return integer
      */
     public function getValide()
     {

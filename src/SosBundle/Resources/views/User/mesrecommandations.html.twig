@@ -10,22 +10,29 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 {% endblock %}
 {% block sos_body %}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Je partage mes recommandations" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+
 	<h3>Recommandations</h3>
 	<hr>
 <div class="container">
     <div class="row col-md-6 col-md-offset-2 custyle">
-    	<h3>Mes recommandations</h3>
+    <h3>Mes recommandations</h3>
     <table class="table table-striped custab" border="1">
-    	{% set nb = nbreco %}
-    {% if nbreco < 1 %}
-    Je ne suis pas recommandé :(
-	{% endif %}
+    {% set nb = nbreco %}
+      {% if nbreco < 1 %}
+        Je ne suis pas recommandé :(
+	    {% endif %}
     	{% for recommandation in recommandations %}
     		<tr>
-                	<td>{{nbreco}}.{{recommandation.nomEtablissement}}, {{recommandation.ville}}</td>
-                	{% set nbreco = nbreco-1 %}
-             </tr>   
-        {% endfor %}
+          <td>{{nbreco}}.{{recommandation.nomEtablissement}}, {{recommandation.ville}}</td>
+          {% set nbreco = nbreco-1 %}
+        </tr>   
+      {% endfor %}
     </table>
     <a href="{{ path('demandeRecommandation') }}">Je veux me faire recommander</a>
 
@@ -33,7 +40,7 @@
     <div>
     	FELICITATIONS
     	{{nb}}
-    	<div class="fb-share-button" data-href="http://localhost:8888/soshcr2/web/app_dev.php/mesrecommandations" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8888%2Fsoshcr2%2Fweb%2Fapp_dev.php%2Fmesrecommandations&amp;src=sdkpreparse">Partager</a></div>
+    	<div class="fb-share-button" data-href="http://soshcr.fr/dev/soshcr2/web/app_dev.php/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsoshcr.fr%2Fdev%2Fsoshcr2%2Fweb%2Fapp_dev.php%2F&amp;src=sdkpreparse">Partager</a></div>
     </div>
 </div>
 {% endblock %}

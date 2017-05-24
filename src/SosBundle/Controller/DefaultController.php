@@ -122,4 +122,52 @@ class DefaultController extends Controller
         return $this->render('SosBundle:Default:contact.html.twig');
         
     }
+    /**
+     * @Route("/signalement_profil")
+     */
+    public function signalementProfilAction()
+    {
+        if(isset($_POST['envoyer'])){
+            if (($_POST['Raison'] != "") && ($_POST['Comments'] != "") && ($_POST['C_FirstName2'] != "") && ($_POST['C_LastName2'] != "")&& ($_POST['C_EmailAddress2'] != "") && ($_POST['C_Company2'] != "")){
+                $validation = "Votre signalement a été envoyé avec succès";
+                $nom = $_POST['C_FirstName'];
+                $prenom = $_POST['C_LastName'];
+                $email = $_POST['C_EmailAddress'];
+                $telephone = $_POST['C_Company'];
+                $raison = $_POST['Raison'];
+                $contenu = $_POST['Comments'];
+                $nomsignaleur = $_POST['C_FirstName2'];
+                $prenomsignaleur = $_POST['C_LastName2'];
+                $emailsignaleur = $_POST['C_EmailAddress2'];
+                $telephonesignaleur = $_POST['C_Company2'];
+                $message = \Swift_Message::newInstance()
+                        ->setSubject('Signalement d un profil')
+                        ->setFrom($_POST['C_EmailAddress2'])
+                        ->setTo('contact@soshcr.fr')
+                        ->setBody(
+                            $this->renderView(
+                                'SosBundle:Default:signalement_profil_mail.html.twig',
+                                array('message' => $_POST['Raison'],
+                                    'nom' => $nom,
+                                    'prenom' => $prenom,
+                                    'email' => $email,
+                                    'telephone' => $telephone,
+                                    'nom2' => $nomsignaleur,
+                                    'prenom2' => $prenomsignaleur,
+                                    'email2' => $emailsignaleur,
+                                    'telephone2' => $telephonesignaleur,
+                                    'proposition' => $contenu
+                            )),
+                            'text/html'
+                        );
+                    $this->get('mailer')->send($message);
+                    return $this->render('SosBundle:Default:signalement_profil.html.twig', array("validation" => $validation));
+            }
+            else {
+                return $this->render('SosBundle:Default:signalement_profil.html.twig', array("error" => 'contact'));
+
+            }
+        }
+        return $this->render('SosBundle:Default:signalement_profil.html.twig');
+    }
 }
