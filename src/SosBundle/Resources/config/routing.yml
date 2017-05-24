@@ -144,7 +144,7 @@ mesrecommandations:
     path:     /mesrecommandations
     defaults: { _controller: SosBundle:User:mesrecommandations}
 
-validation:
+validationrecommandations:
     path:    /validation/{code}/{id}
     defaults: { _controller: SosBundle:User:validation}
 
