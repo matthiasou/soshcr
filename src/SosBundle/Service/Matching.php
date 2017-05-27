@@ -152,7 +152,6 @@ class Matching {
                                 $employesDateMatch[] = $value->getId();
                             }
                         }
-
                     }
                     else
                     {
