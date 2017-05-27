@@ -1,0 +1,11 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+<h3>Acceptation d'une recommandation</h3><hr/>
+<form method="POST">
+  Acceptez-vous la recommandation de {{recommandation.user.nom}}?<br/>
+  Oui<input type="checkbox" name="reponse[]" value="oui">
+  Non<input type="checkbox" name="reponse[]" value="non"><br />
+  <input type="submit" name="envoyer" class="btn btn-soshcr">
+</form>
+{% endblock %}

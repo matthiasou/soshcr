@@ -305,7 +305,7 @@ class Matching {
             $contrat_duree_join." ".
             $formation_join." ".
             $cursus_scolaire_join."
-            WHERE ".$formule." <> uc.rayon_emploi ".
+            WHERE ".$formule." < uc.rayon_emploi ".
             $classification." ".
             $poste." ".
             $contrat." ".
@@ -314,7 +314,6 @@ class Matching {
             $niveau_anglais." ".
             $experience_minimum." ".
             $cursus_scolaire;
-
 
 
         $stmt = $this->entityManager->getConnection()->prepare($query);
@@ -327,14 +326,15 @@ class Matching {
         foreach ($employes as $value) {
             $pointsRecommandation = (count($this->entityManager->getRepository("SosBundle:Recommandation")->findby(array("user"=>$value,'valide'=>1))))*10;
             $user = $this->entityManager->getRepository("SosBundle:User")->find($value);
-            $pointsAnglais = $this->entityManager->getRepository("SosBundle:Anglais")->findOneBy(array("id"=>$user->getNiveauAnglais()))->getPoints();
-            $criters = $this->entityManager->getRepository("SosBundle:UserCritere")->findOneBy(array("poste"=>$data['poste'],"user"=>$value,"etablissement"=>$data['classification']));
-            $pointsExperience = $this->entityManager->getRepository("SosBundle:Experience")->find($criters->getExperience())->getPoints();
-            $pointsPoste = $this->entityManager->getRepository("SosBundle:PosteRecherche")->find($criters->getPoste())->getCoefficient();
+            $pointsAnglais = $this->entityManager->getRepository("SosBundle:UserCritere")->findOneBy(array("user"=>$user->getId()))->getNiveauAnglais()->getPoints();
+            $criters = $this->entityManager->getRepository("SosBundle:UserCritere")->findAll(array("user"=>$user->getId()));
+            dump($criters);
+            //$pointsExperience = $this->entityManager->getRepository("SosBundle:Experience")->find($criters->getExperience())->getPoints();
+            //$pointsPoste = $this->entityManager->getRepository("SosBundle:PosteRecherche")->find($criters->getPoste())->getCoefficient();
 
-            $score = $pointsRecommandation+$pointsAnglais+($pointsExperience*$pointsPoste);
-            $user->setScore($score);
-            $this->entityManager->flush();
+           // $score = $pointsRecommandation+$pointsAnglais+($pointsExperience*$pointsPoste);
+            //$user->setScore($score);
+            //$this->entityManager->flush();
         }
 
     }

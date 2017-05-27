@@ -16,36 +16,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        // //Suppression des comptes avec abonnement expiré
-        // $em = $this->getDoctrine()->getManager();
-        // $users = $em->getRepository("SosBundle:User")->findAll();
-        // $today = new \DateTime('NOW');
-        // foreach($users as $user){   
-        //     $age = $today->diff($user->getDateAbonnement());
-
-        //     if($age->days == 0 || $age->invert == 1){
-        //         $em->remove($user);
-        //         $em->flush();
-        //     }
-        //     if(($age->days <= 5) && ($age->invert == 0) && ($user->getMessage5J() == 0) ){
-        //         $message = \Swift_Message::newInstance()
-        //             ->setSubject('Expiration dans 5 jours !')
-        //             ->setFrom('soshcr@contact.fr')
-        //             ->setTo($user->getEmail())
-        //             ->setBody(
-        //                 $this->renderView(
-        //                     'SosBundle:Search:message5J.html.twig',
-        //                     array('prenom' => $user->getNom())
-        //                 ),
-        //                 'text/html'
-        //             );
-        //         $this->get('mailer')->send($message);
-
-        //         $user->setMessage5J(1);
-        //         $em->flush($user);
-        //     }
-
-        // }
         return $this->render('SosBundle:Default:index.html.twig');
     }
 
@@ -142,7 +112,7 @@ class DefaultController extends Controller
                 $telephonesignaleur = $_POST['C_Company2'];
                 $message = \Swift_Message::newInstance()
                         ->setSubject('Signalement d un profil')
-                        ->setFrom($_POST['C_EmailAddress2'])
+                        ->setFrom('contact@soshcr.fr')
                         ->setTo('contact@soshcr.fr')
                         ->setBody(
                             $this->renderView(
@@ -161,6 +131,29 @@ class DefaultController extends Controller
                             'text/html'
                         );
                     $this->get('mailer')->send($message);
+
+                $message2 = \Swift_Message::newInstance()
+                        ->setSubject('Votre signalement a été pris en compte')
+                        ->setFrom('contact@soshcr.fr')
+                        ->setTo($_POST['C_EmailAddress2'])
+                        ->setBody(
+                            $this->renderView(
+                                'SosBundle:Default:signalement_profil_mail2.html.twig',
+                                array('message' => $_POST['Raison'],
+                                    'nom' => $nom,
+                                    'prenom' => $prenom,
+                                    'email' => $email,
+                                    'telephone' => $telephone,
+                                    'nom2' => $nomsignaleur,
+                                    'prenom2' => $prenomsignaleur,
+                                    'email2' => $emailsignaleur,
+                                    'telephone2' => $telephonesignaleur,
+                                    'proposition' => $contenu
+                            )),
+                            'text/html'
+                        );
+                    $this->get('mailer')->send($message2);
+
                     return $this->render('SosBundle:Default:signalement_profil.html.twig', array("validation" => $validation));
             }
             else {
@@ -169,5 +162,46 @@ class DefaultController extends Controller
             }
         }
         return $this->render('SosBundle:Default:signalement_profil.html.twig');
+    }
+
+    /**
+     * @Route("/cron_user")
+     */
+    public function cronUserAction()
+    {
+        //Suppression des comptes avec abonnement expiré
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository("SosBundle:User")->findAll();
+        $today = new \DateTime('NOW');
+        foreach($users as $user){
+             $age = $today->diff($user->getDateAbonnement());
+             dump($age->days);
+
+             if(($age->days)+1 == 0 || $age->invert == 1){
+                 $em->remove($user);
+                 $em->flush();
+             }
+             if(($age->days <= 5) && ($age->invert == 0) && ($user->getMessage5J() == 0) ){
+                 $message = \Swift_Message::newInstance()
+                     ->setSubject('Expiration dans 5 jours !')
+                     ->setFrom('soshcr@contact.fr')
+                     ->setTo($user->getEmail())
+                     ->setBody(
+                         $this->renderView(
+                             'SosBundle:Search:message5J.html.twig',
+                             array('prenom' => $user->getPrenom())
+                         ),
+                         'text/html'
+                     );
+                 $this->get('mailer')->send($message);
+
+                 $user->setMessage5J(1);
+                 $em->persist($user);
+                 $em->flush($user);
+             }
+
+         }
+        return $this->render('SosBundle:Default:index.html.twig');
+
     }
 }

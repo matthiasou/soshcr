@@ -74,8 +74,8 @@
 					  <div class="panel result-panel">
 					    <div class="panel-heading result-panel-heading">
 							<input  style="position: absolute; left: 30px; top: 15px;" type="checkbox" value="{{employe.email}}" name="mail_demande_utilisateur[]">
-							<a style="color: white;" href="{{ path('public_profil', {'id' : employe.id}) }}">{{ employe.prenom ~ ' ' ~ employe.nom ~ ' (' ~ employe.age ~' ans)'}}</a>
-						</div>
+							<a style="color: white;" href="{{ path('public_profil', {'id' : employe.id}) }}">{{ employe.prenom ~ ' ' ~ employe.nom ~ ' (' ~ employe.age ~' ans)'}} </a>
+						&nbsp &nbsp<i class="fa fa-search" ></i></div>
 					    <div class="panel-body">
 					    	<p>{{ employe.email }}</p>
 					    	<p>{{ employe.telephone }}</p>

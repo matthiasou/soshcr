@@ -13,9 +13,52 @@ class UserController extends Controller
     public function mesrecommandationsAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => 2, 'valide' => 1));
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => $user, 'valide' => 1));
         $nbreco = count($recommandations);
         return $this->render('SosBundle:User:mesrecommandations.html.twig', array("recommandations" => $recommandations, "nbreco"=>$nbreco));
+    }
+
+
+ 
+    /**
+     * @Route("/delete")
+     */
+    public function deleteUserAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->geUser();
+        $em->remove($user);
+        $em->flush();
+        
+        return $this->redirectToRoute('index', array('validation' => 'Ton compte à bien été supprimé'));
+    }
+
+    /**
+     * @Route("/validation/{code}/{id}")
+     */
+    public function validationAction($code, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $id));
+        $usercritere = $em->getRepository('SosBundle:userCritere')->findAll(array('user' => $user));
+        $recommandation = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('code' => $code, 'user' => $id));
+        if(isset($_POST['envoyer'])){
+            $reponse = $_POST['reponse'];
+            if($reponse = "oui"){
+                foreach ($usercritere as $u){
+                    $score = $u->setScore($u->getScore()+10);
+                    $em->persist($score);
+                    $em->flush();
+                }
+                $recommandation->setValide(2);
+                $em->persist($recommandation);
+                $em->flush();
+                return $this->redirectToRoute('index');
+            }
+        }
+        return $this->render('SosBundle:User:validation.html.twig', array("recommandation" => $recommandation));
+
     }
  
     /**

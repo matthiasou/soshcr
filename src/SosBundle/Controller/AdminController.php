@@ -14,44 +14,49 @@ class AdminController extends Controller
      */
     public function demandeRecommandationAction()
     {
-
         if (isset($_POST['nom_etablissement'])){
-
             $em = $this->getDoctrine()->getManager();
             $user = $this->get('security.token_storage')->getToken()->getUser();
             $civ = $_POST['civilite'];
             $civilite = $em->getRepository('SosBundle:Civilite')->findOneBy(array('id' => $civ));
             if(isset($_POST['valider'])){
+                $validation="Demande de recommandation envoyée !";
+                $newRecommandation = new  Recommandation();
+                $newRecommandation->setNomEtablissement($_POST['nom_etablissement']);
+                $newRecommandation->setEmail($_POST['email']);
+                $newRecommandation->setVille($_POST['ville']);
+                $newRecommandation->setNomResponsable($_POST['nom_responsable']);
+                $newRecommandation->setValide(0);
+                $newRecommandation->setCivilite($civilite);
+                $newRecommandation->setUser($user);
+                $characts    = 'abcdefghijklmnopqrstuvwxyz';
+                $characts   .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $characts   .= '1234567890';
+                $code_aleatoire      = '';
+                for($i=0;$i < 5;$i++)
+                {
+                    $code_aleatoire .= substr($characts,rand()%(strlen($characts)),1);
+                } 
+                $newRecommandation->setCode($code_aleatoire);
 
-            $validation="Demande de recommandation envoyée !";
-            $newRecommandation = new  Recommandation();
-            $newRecommandation->setNomEtablissement($_POST['nom_etablissement']);
-            $newRecommandation->setEmail($_POST['email']);
-            $newRecommandation->setVille($_POST['ville']);
-            $newRecommandation->setNomResponsable($_POST['nom_responsable']);
-            $newRecommandation->setValide(0);
-            $newRecommandation->setCivilite($civilite);
-            $newRecommandation->setUser($user);
+                $em->persist($newRecommandation);
+                $em->flush();
 
-            $em->persist($newRecommandation);
-            $em->flush();
-            $message = \Swift_Message::newInstance()
-                    ->setSubject('Demande de recommandation')
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Demande de recommandation envoyé')
                     ->setFrom('soshcr@contact.fr')
-                    ->setTo($_POST['email'])
+                    ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(
-                            'SosBundle:Admin:mailrecommandations.html.twig'
+                            'SosBundle:Admin:maildemanderecommandations.html.twig',
+                                array(
+                                    'user' => $user)
                         ),
                         'text/html'
                     );
                 $this->get('mailer')->send($message);
             }
-
-
             return $this->render('SosBundle:Dashboard:dashboard.html.twig', array("validation"=>$validation, "user" => $user));
-
-
         }
 
         return $this->render('SosBundle:Dashboard:demandeRecommandation.html.twig');
@@ -67,10 +72,28 @@ class AdminController extends Controller
         $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('valide' => 0));
         if (isset($_POST['valider'])){
             foreach($recommandations as $recommandation){
+                $utilisateur = $recommandation->getUser();
                 $recommandation->setValide(1);
-                $em->flush($recommandation);
-                return $this->redirectToRoute('recommandations');
+                $code = $recommandation->getCode();
+                $em->persist($recommandation);
+                $em->flush();
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Demande de recommandation')
+                    ->setFrom('soshcr@contact.fr')
+                    ->setTo($recommandation->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'SosBundle:Admin:mailrecommandations.html.twig',
+                                array(
+                                    'utilisateur' => $utilisateur,
+                                    'code' => $code)
+                        ),
+                        'text/html'
+                    );
+                $this->get('mailer')->send($message);
+                
             }
+            return $this->redirectToRoute('recommandations');
         }
         if (isset($_POST['supprimerreco'])) 
         {

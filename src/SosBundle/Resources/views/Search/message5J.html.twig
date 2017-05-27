@@ -1,82 +1,325 @@
-<!DOCTYPE html>
-<html>
-<head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Le recrutement en hotellerie restauration !{% endblock %}</title>
-        {% block stylesheets %}
-                <link rel="stylesheet" href="{{ asset('bundles/sos/global/css/jquery-ui/jquery-ui.min.css') }}">
-                <link rel="stylesheet" href="{{ asset('bundles/sos/global/css/jquery-ui/jquery-ui.structure.min.css') }}">
-                <link rel="stylesheet" href="{{ asset('bundles/sos/global/css/jquery-ui/jquery-ui.theme.min.css') }}">
-                <link rel="stylesheet" href="{{ asset('bundles/sos/font-awesome/css/font-awesome.css') }}">
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-                <link rel="stylesheet" href="{{ asset('bundles/sos/global/css/style.css') }}">
-                <link rel="stylesheet" href="{{ asset('bundles/sos/bootstrap/css/bootstrap-theme.css') }}">
-                <link rel="stylesheet" href="{{ asset('bundles/sos/bootstrap/css/bootstrap.css') }}">
-                <link rel="stylesheet" href="{{ asset('bundles/sos/fancybox/css/jquery.fancybox.min.css') }}">
-                <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-                <link rel="stylesheet" type="text/css"  media="print">
-                <link rel="stylesheet" href="{{ asset('bundles/sos/login-modal/assets/css/form-elements.css') }}">
-                <link rel="stylesheet" type="text/css" href="{{ asset('bundles/sos/sweetalert/sweetalert.css') }}">
-                <link rel="stylesheet" href="{{ asset('bundles/sos/login-modal/assets/css/style.css') }}">
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
-<body>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="Generator" content="Made with Mail Designer from equinux">
+        <meta name="Viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css" id="Mail Designer General Style Sheet">
+                a { word-break: break-word; }
+                a img { border:none; }
+                img { outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; }
+                body { width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+                .ExternalClass { width: 100%; }
+                .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }
+                #page-wrap { margin: 0; padding: 0; width: 100% !important; line-height: 100% !important; }
+                #outlook a { padding: 0; }
+                .preheader { display:none !important; }
+                a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; font-size: inherit !important; font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important; }
+                .a5q { display: none !important; }
+                .Apple-web-attachment { vertical-align: initial !important; }
+                .Apple-edge-to-edge-visual-media { margin: initial !important; max-width: initial !important; width: 100%; }
+        </style>
+        <style type="text/css" id="Mail Designer Mobile Style Sheet">
+                @media only screen and (max-width: 580px) {
+                        table.email-body-wrap {
+                                width: 320px !important;
+                        }
+                        td.page-bg-show-thru {
+                                display: none !important;
+                        }
+                        table.layout-block-wrapping-table {
+                                width: 320px !important;
+                        }
+                        table.mso-fixed-width-wrapping-table {
+                                width: 320px !important;
+                        }
+                        .layout-block-full-width {
+                                width: 320px !important;
+                        }
+                        table.layout-block-column, table.layout-block-padded-column {
+                                width: 100% !important;
+                        }
+                        table.layout-block-box-padding {
+                                width: 100% !important;
+                                padding: 5px !important;
+                        }
+                        table.layout-block-horizontal-spacer {
+                                display: none !important;
+                        }
+                        tr.layout-block-vertical-spacer {
+                                display: block !important;
+                                height: 8px !important;
+                        }
+                        td.container-padding {
+                                display: none !important;
+                        }
 
+                        table {
+                                min-width: initial !important;
+                        }
+                        td {
+                                min-width: initial !important;
+                        }
 
+                        .desktop-only { display: none !important; }
+                        .mobile-only { display: block !important; }
 
-{% block javascripts %}
-        <script type="text/javascript" src="{{ asset('bundles/sos/global/js/jquery-1.11.1.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/sos/global/js/jquery-ui.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/sos/sweetalert/sweetalert.min.js') }}"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAZUgAv7tkerkL2y5D1jwcvux9gGZ2NCE&libraries=places&region=fr"></script>
-        <script type="text/javascript" src="{{ asset('bundles/sos/global/js/script.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/sos/bootstrap/js/bootstrap.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/sos/fancybox/js/jquery.fancybox.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/sos/login-modal/assets/js/placeholder.js') }}"></script>
-        <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-        <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-        <script type="text/javascript" src="{{ asset('bundles/sos/login-modal/assets/js/scripts.js') }}"></script>
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-{% endblock %}
-</body>
-</html>
+                        .hide {
+                                max-height: none !important;
+                                display: block !important;
+                                overflow: visible !important;
+                        }
 
-<header class="header-small">
-        <div class="col-xs-2">
-                <a href="{{ path('index') }}" id="logo"> <img class="img-responsive" src="{{ asset('bundles/sos/global/img/logo.png') }}" alt=""> </a>
-        </div>
+                        .EQ-00 { width: 12px !important; }
+                        .EQ-01 { width: 12px !important; }
+                        .EQ-02 { width: 296px !important; }
 
-        <!-- Title desktop -->
-        <div class="col-xs-8 text-center">
-                <img class="title" src="{{ asset('bundles/sos/global/img/title.png') }}" class="img-responsive">
-        </div>
-        <!-- Title desktop -->
+                        .EQ-03 { width: 12px !important; }
+                        .EQ-04 { width: 12px !important; }
+                        .EQ-05 { width: 296px !important; }
+                }
+        </style>
+        <!--[if gte mso 9]>
+        <style type="text/css" id="Mail Designer Outlook Style Sheet">
+                table.layout-block-horizontal-spacer {
+                        display: none !important;
+                }
+                table {
+                        border-collapse:collapse;
+                        mso-table-lspace:0pt;
+                        mso-table-rspace:0pt;
+                        mso-table-bspace:0pt;
+                        mso-table-tspace:0pt;
+                        mso-padding-alt:0;
+                        mso-table-top:0;
+                        mso-table-wrap:around;
+                }
+                td {
+                        border-collapse:collapse;
+                        mso-cellspacing:0;
+                }
+        </style>
+        <![endif]-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<body style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; " background="http://soshcr.fr/img/page-bg.jpg"><!--[if gte mso 9]>
+<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+        <v:fill type="tile" src="http://soshcr.fr/img/page-bg.jpg" />
+</v:background>
+<![endif]-->
 
+<table width="100%" cellspacing="0" cellpadding="0" id="page-wrap" align="center" background="http://soshcr.fr/img/page-bg.jpg">
+        <tbody><tr>
+                <td>
 
-</header>
-<div id="barre-jaune-header"></div>
-<!-- MODAL -->
+                        <table class="email-body-wrap" width="964" cellspacing="0" cellpadding="0" id="email-body" align="center">
+                                <tbody><tr>
+                                        <td width="30" class="page-bg-show-thru">&nbsp;<!--Left page bg show-thru --></td>
+                                        <td width="904" id="page-body" background="http://soshcr.fr/img/background.jpg" bgcolor="#ffffff">
 
+                                                <!--Begin of layout container -->
+                                                <div id="eqLayoutContainer">
 
-        <h3 class="title-heading">Être recommandé est essentiel dans un monde professionnel concurrentiel</h3>
-        <br>
-        Salut {{ prenom }},
-        Souhaites tu conserver ton compte ? Si ton compte expire, ton profil sera supprimé.
+                                                        <div class="desktop-only" width="100%">
+                                                                <!--[if !mso 15]><!--><table width="904" cellspacing="0" cellpadding="0" class="layout-block-wrapping-table" style="mso-hide:all; min-width: 904px; ">
+                                                                        <tbody><tr>
+                                                                                <td valign="top" class="layout-block-full-width" width="904" style="min-width: 904px; ">
+                                                                                        <table cellspacing="0" cellpadding="0" class="layout-block-full-width" width="904" style="min-width: 904px; ">
+                                                                                                <tbody><tr>
+                                                                                                        <td width="904" style="min-width: 904px; ">
+                                                                                                                <div class="layout-block-image">
+                                                                                                                        <a href="http://www.soshcr.fr"><img width="904" height="157" alt="" src="http://soshcr.fr/img/header.png" border="0" style="line-height: 1px; display: block; width: 904px; height: 157px; "></a>
+                                                                                                                </div>
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                                </tbody></table>
+                                                                                </td>
+                                                                        </tr>
+                                                                        </tbody></table>
+                                                                <!--<![endif]--><!--[if gte mso 9]><table width="904" cellspacing="0" cellpadding="0" class="mso-fixed-width-wrapping-table">
+                                                                        <tr><td valign="top" class="layout-block-full-width"><div class="layout-block-image"><a href="http://www.soshcr.fr"><img height="157" alt="" src="http://soshcr.fr/img/header.png" border="0" style="line-height: 1px; display: block;" class="img-EQMST-A3DFEC46-51FA-451A-ACDD-D6ABFF7CCE7F" width="904"></img><div style="width:0px;height:0px;max-height:0;max-width:0;overflow:hidden;display:none;visibility:hidden;mso-hide:all;"></div></a></div></td>
+                                                                        </tr></table><![endif]--></div>
 
-        <button href="">Oui, je veux conserver mon compte</button>
+                                                        <!--[if !mso ]><!-->
 
-        Soshcrement,
-        Christophe
-        www.soshcr.fr
+                                                        <div style="display: none; max-height: 0px; overflow: hidden; " class="mobile-only hide" width="100%">
+                                                                <table width="320" cellspacing="0" cellpadding="0" class="layout-block-wrapping-table hide" style="display: none; max-height: 0px; overflow: hidden; min-width: 320px; ">
+                                                                        <tbody><tr>
+                                                                                <td valign="top" class="layout-block-full-width" width="320" style="min-width: 320px; ">
+                                                                                        <table cellspacing="0" cellpadding="0" class="layout-block-full-width hide" width="320" style="display: none; max-height: 0px; overflow: hidden; min-width: 320px; ">
+                                                                                                <tbody><tr>
+                                                                                                        <td width="320" style="min-width: 320px; ">
+                                                                                                                <div class="layout-block-image hide" style="display: none; max-height: 0px; overflow: hidden; ">
+                                                                                                                        <a href="https://www.soshcr.fr"><img width="320" height="116" alt="" src="http://soshcr.fr/img/header2.png" border="0" style="line-height: 1px; display: none; max-height: 0px; overflow: hidden; width: 320px; height: 116px; " class="hide"></a>
+                                                                                                                </div>
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                                </tbody></table>
+                                                                                </td>
+                                                                        </tr>
+                                                                        </tbody></table>
+                                                        </div><!--<![endif]-->
 
+                                                        <div width="100%" class="desktop-only">
+                                                                <!--[if !mso 15]><!--><table width="904" cellspacing="0" cellpadding="0" class="layout-block-wrapping-table" style="mso-hide:all; min-width: 904px; ">
+                                                                        <tbody><tr>
+                                                                                <td width="33" style="min-width: 33px; ">&nbsp;</td>
+                                                                                <td width="838" style="min-width: 838px; ">
+                                                                                        <table cellspacing="0" cellpadding="0" align="left" class="layout-block-column" width="838" style="min-width: 838px; ">
+                                                                                                <tbody><tr>
+                                                                                                        <td width="818" valign="top" align="left" background="http://soshcr.fr/img/box-bg-5.jpg" style="padding-left: 10px; padding-right: 10px; min-width: 818px; " bgcolor="#ffffff">
+                                                                                                                <table cellspacing="0" cellpadding="0" class="layout-block-box-padding" width="818" style="min-width: 818px; ">
+                                                                                                                        <tbody><tr>
+                                                                                                                                <td align="left" class="layout-block-column" width="818" style="min-width: 818px; ">
+                                                                                                                                        <div class="text" style="font-size: 16px; font-family: 'Lucida Grande'; "><br><div><div style="text-align: center; line-height: 1.2; "><span style="font-size: 15px; "><b><font face="Helvetica"><br></font></b></span></div><div style="text-align: center; line-height: 1.2; "><font face="Helvetica"><span style="font-size: 15px; "><b>Être recommandé est essentiel dans un monde professionnel concurrentiel !</b></span></font></div><div style="font-size: 16px; text-align: center; line-height: 1.2; "><font face="Times" style="font-size: 14px; "><br></font></div><div style="color: rgb(0, 0, 0); font-family: Times; font-size: 15px; font-style: normal; font-weight: normal; line-height: 21px; text-align: left; text-decoration: none; "><p>Salut {{prenom}},</p><p>&nbsp;       Souhaites-tu conserver ton compte ? Si ton compte expire, ton profil sera supprimé.</p></div><div style="color: rgb(0, 0, 0); font-family: Helvetica; font-size: 15px; font-style: normal; font-weight: bold; line-height: 1.2; text-align: center; text-decoration: none; "><br></div><div style="text-align: center; "><div style="line-height: 12px; "><u><b style="font-size: 15px; "><font color="#a4a5ae" face="Helvetica"><br></font></b></u></div><div></div><div></div></div></div></div>
+                                                                                                                                </td>
+                                                                                                                        </tr>
+                                                                                                                        </tbody></table>
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                                </tbody></table>
+                                                                                </td>
+                                                                                <td width="33" style="min-width: 33px; ">&nbsp;</td>
+                                                                        </tr>
+                                                                        </tbody></table>
+                                                                <!--<![endif]--><!--[if gte mso 9]><table cellspacing="0" cellpadding="0" class="layout-block-wrapping-table" width="904">
+                                                                        <tr><td width="33" class="layout-block-padding-left">&nbsp; </td><td width="838" class="layout-block-content-cell" valign="top" align="left"><v:rect style="width:838px;" stroke="f"><v:fill type="tile" src="http://soshcr.fr/img/box-bg-5.jpg" color="#ffffff"></v:fill><v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0"><div><div style="font-size:0"><table cellspacing="0" cellpadding="0" class="layout-block-box-padding" style="padding-left:10px; padding-right:10px;">
+                                                                                <tr><td align="left" class="layout-block-column" width="818"><div class="text"><br></br><div><div style="text-align: center; line-height: 120%;"><span style="font-size: 15px;"><b><font face="sans-serif"><br></br></font></b></span></div><div style="text-align: center; line-height: 120%;"><font face="sans-serif"><span style="font-size: 15px;"><b>Être recommandé est essentiel dans un monde professionnel concurrentiel !</b></span></font></div><div style="font-size: 16px; text-align: center; line-height: 120%;"><font face="sans-serif" style="font-size: 14px;"><br></br></font></div><div style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: 15px; font-style: normal; font-weight: normal; line-height: 21px; text-align: left; text-decoration: none;"><p>Salut {{prenom}},</p><p>        Souhaites-tu conserver ton compte ? Si ton compte expire, ton profil sera supprimé.</p></div><div style="color: rgb(0, 0, 0); font-family: sans-serif; font-size: 15px; font-style: normal; font-weight: bold; line-height: 120%; text-align: center; text-decoration: none;"><br></br></div><div style="text-align: center;"><div style="line-height: 12px;"><u><b style="font-size: 15px;"><font color="#a4a5ae" face="sans-serif"><br></br></font></b></u></div><div></div><div></div></div></div></div></td>
+                                                                                </tr></table></div></div></v:textbox></v:rect></td><td width="33" class="layout-block-padding-right">&nbsp; </td>
+                                                                        </tr></table><![endif]--></div>
 
-<footer>
-        <ul>
-                <li><a href="contact.html" >Contact</a></li>
-                <li><a href="#" >Facebook</a></li>
-                <li><a href="legal.html" >Légal / CGV</a></li>
-                <li><a href="signaler.html" >Signaler un profil</a></li>
-        </ul>
-</footer>
+                                                        <!--[if !mso ]><!-->
+
+                                                        <div width="100%" style="display: none; max-height: 0px; overflow: hidden; " class="mobile-only hide">
+                                                                <table width="320" cellspacing="0" cellpadding="0" class="layout-block-wrapping-table hide" style="display: none; max-height: 0px; overflow: hidden; min-width: 320px; ">
+                                                                        <tbody><tr>
+                                                                                <td width="15" style="min-width: 15px; ">&nbsp;</td>
+                                                                                <td width="290" style="min-width: 290px; ">
+                                                                                        <table cellspacing="0" cellpadding="0" align="left" class="layout-block-column hide" width="290" style="display: none; max-height: 0px; overflow: hidden; min-width: 290px; ">
+                                                                                                <tbody><tr>
+                                                                                                        <td width="270" valign="top" align="left" background="http://soshcr.fr/img/box-bg-1.jpg" style="padding-left: 10px; padding-right: 10px; min-width: 270px; " bgcolor="#ffffff">
+                                                                                                                <table cellspacing="0" cellpadding="0" class="layout-block-box-padding hide" width="270" style="display: none; max-height: 0px; overflow: hidden; min-width: 270px; ">
+                                                                                                                        <tbody><tr>
+                                                                                                                                <td align="left" class="layout-block-column" width="270" style="min-width: 270px; ">
+                                                                                                                                        <div class="text" style="font-size: 16px; font-family: 'Lucida Grande'; "><br><div><div style="text-align: center; line-height: 1.2; "><span style="font-size: 15px; "><b><font face="Helvetica"><br></font></b></span></div><div style="text-align: center; line-height: 1.2; "><font face="Helvetica"><span style="font-size: 15px; "><b>Être recommandé est essentiel dans un monde professionnel concurrentiel !</b></span></font></div><div style="font-size: 16px; text-align: center; line-height: 1.2; "><font face="Times" style="font-size: 14px; "><br></font></div><div style="color: rgb(0, 0, 0); font-family: Times; font-size: 15px; font-style: normal; font-weight: normal; line-height: 21px; text-align: left; text-decoration: none; "><p>Salut {{prenom}},</p><p>&nbsp;Souhaites tu conserver ton compte ? Si ton compte expire, ton profil sera supprimé.</p></div><div style="text-align: center; "><div style="line-height: 12px; "><u><b style="font-size: 15px; "><font color="#a4a5ae" face="Helvetica"><br></font></b></u></div><div></div><div></div></div></div></div>
+                                                                                                                                </td>
+                                                                                                                        </tr>
+                                                                                                                        </tbody></table>
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                                </tbody></table>
+                                                                                </td>
+                                                                                <td width="15" style="min-width: 15px; ">&nbsp;</td>
+                                                                        </tr>
+                                                                        </tbody></table>
+                                                        </div><!--<![endif]-->
+
+                                                        <div class="desktop-only" width="100%">
+                                                                <!--[if !mso 15]><!--><table width="904" cellspacing="0" cellpadding="0" class="layout-block-wrapping-table" style="mso-hide:all; min-width: 904px; ">
+                                                                        <tbody><tr>
+                                                                                <td width="33" style="min-width: 33px; ">&nbsp;</td>
+                                                                                <td background="http://soshcr.fr/img/box-bg-5.jpg" bgcolor="#ffffff" width="838" style="min-width: 838px; ">
+                                                                                        <table cellspacing="0" cellpadding="0" align="left" style="padding-left: 10px; padding-right: 10px; min-width: 838px; " class="layout-block-box-padding" width="838">
+                                                                                                <tbody><tr>
+                                                                                                        <td valign="top" class="layout-block-padded-column" align="center" width="818" style="min-width: 818px; ">
+                                                                                                                <div class="layout-block-image">
+                                                                                                                        <a href="http://www.soshcr.fr"><img width="818" height="52" alt="" src="http://soshcr.fr/img/image-3.png" border="0" style="line-height: 1px; display: block; width: 818px; height: 52px; "></a>
+                                                                                                                </div>
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                                </tbody></table>
+                                                                                </td>
+                                                                                <td width="33" style="min-width: 33px; ">&nbsp;</td>
+                                                                        </tr>
+                                                                        </tbody></table>
+                                                                <!--<![endif]--><!--[if gte mso 9]><table cellspacing="0" cellpadding="0" class="layout-block-wrapping-table" width="904">
+                                                                        <tr><td width="33" class="layout-block-padding-left">&nbsp; </td><td class="layout-block-content-cell" width="838"><v:rect style="width:838px;" stroke="f"><v:fill type="tile" src="http://soshcr.fr/img/box-bg-5.jpg" color="#ffffff"></v:fill><v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0"><div><div style="font-size:0"><table cellspacing="0" cellpadding="0" align="left" style="padding-left:10px; padding-right:10px;" class="layout-block-box-padding">
+                                                                                <tr><td valign="top" class="layout-block-padded-column" align="center"><div class="layout-block-image"><a href="http://www.soshcr.fr"><img height="52" alt="" src="http://soshcr.fr/img/image-3.png" border="0" style="line-height: 1px; display: block;" class="img-EQMST-3EF7C5B6-9A93-44F3-BD93-15BD6F62656D" width="818"></img><div style="width:0px;height:0px;max-height:0;max-width:0;overflow:hidden;display:none;visibility:hidden;mso-hide:all;"></div></a></div></td>
+                                                                                </tr></table></div></div></v:textbox></v:rect></td><td width="33" class="layout-block-padding-right">&nbsp; </td>
+                                                                        </tr></table><![endif]--></div>
+
+                                                        <!--[if !mso ]><!-->
+
+                                                        <div class="mobile-only hide" style="display: none; max-height: 0px; overflow: hidden; " width="100%">
+                                                                <table width="320" cellspacing="0" cellpadding="0" class="mso-fixed-width-wrapping-table hide" style="display: none; max-height: 0px; overflow: hidden; min-width: 320px; ">
+                                                                        <tbody><tr>
+                                                                                <td valign="top" class="layout-block-full-width" width="320" style="min-width: 320px; ">
+                                                                                        <table cellspacing="0" cellpadding="0" class="layout-block-full-width hide" width="320" style="display: none; max-height: 0px; overflow: hidden; min-width: 320px; ">
+                                                                                                <tbody><tr>
+                                                                                                        <td width="320" style="min-width: 320px; ">
+                                                                                                                <div class="layout-block-image">
+                                                                                                                        <a href="https://www.soshcr.fr"><img width="320" height="100" alt="" src="http://soshcr.fr/img/image-4.png" border="0" style="display: none; max-height: 0px; overflow: hidden; width: 320px; height: 100px; " class="hide"></a>
+                                                                                                                </div>
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                                </tbody></table>
+                                                                                </td>
+                                                                        </tr>
+                                                                        </tbody></table>
+                                                        </div><!--<![endif]-->
+
+                                                        <div width="100%">
+                                                                <!--[if !mso 15]><!--><table width="904" cellspacing="0" cellpadding="0" class="layout-block-wrapping-table" style="mso-hide:all; min-width: 904px; ">
+                                                                        <tbody><tr>
+                                                                                <td width="33" class="EQ-00" style="min-width: 33px; ">&nbsp;</td>
+                                                                                <td width="838" class="EQ-02" style="min-width: 838px; ">
+                                                                                        <table cellspacing="0" cellpadding="0" align="left" class="layout-block-column" width="838" style="min-width: 838px; ">
+                                                                                                <tbody><tr>
+                                                                                                        <td width="818" valign="top" align="left" background="http://soshcr.fr/img/box-bg.jpg" style="padding-left: 10px; padding-right: 10px; min-width: 818px; " bgcolor="#ffffff">
+                                                                                                                <table cellspacing="0" cellpadding="0" class="layout-block-box-padding" width="818" style="min-width: 818px; ">
+                                                                                                                        <tbody><tr>
+                                                                                                                                <td align="left" class="layout-block-column" width="818" style="min-width: 818px; ">
+                                                                                                                                        <div class="text" style="font-size: 16px; font-family: 'Lucida Grande'; "><span style="font-family: Times; font-size: 15px; ">Sincèrement,</span><br style="font-family: Times; font-size: 15px; "><span style="font-family: Times; font-size: 15px; ">Christophe</span><br style="font-family: Times; font-size: 15px; "><font face="Times"><span style="font-size: 15px; "><a href="http://www.soshcr.fr">www.soshcr.fr</a></span></font><div><br></div><div><br></div><div><br></div><div><br></div></div>
+                                                                                                                                </td>
+                                                                                                                        </tr>
+                                                                                                                        </tbody></table>
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                                </tbody></table>
+                                                                                </td>
+                                                                                <td width="33" class="EQ-01" style="min-width: 33px; ">&nbsp;</td>
+                                                                        </tr>
+                                                                        </tbody></table>
+                                                                <!--<![endif]--><!--[if gte mso 9]><table cellspacing="0" cellpadding="0" class="layout-block-wrapping-table" width="904">
+                                                                        <tr><td width="33" class="layout-block-padding-left">&nbsp; </td><td width="838" class="layout-block-content-cell" valign="top" align="left"><v:rect style="width:838px;" stroke="f"><v:fill type="tile" src="http://soshcr.fr/img/box-bg.jpg" color="#ffffff"></v:fill><v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0"><div><div style="font-size:0"><table cellspacing="0" cellpadding="0" class="layout-block-box-padding" style="padding-left:10px; padding-right:10px;">
+                                                                                <tr><td align="left" class="layout-block-column" width="818"><div class="text"><span style="font-family: sans-serif; font-size: 15px;">Sincèrement,</span><br style="font-family: sans-serif; font-size: 15px;"></br><span style="font-family: sans-serif; font-size: 15px;">Christophe</span><br style="font-family: sans-serif; font-size: 15px;"></br><font face="sans-serif"><span style="font-size: 15px;"><a href="http://www.soshcr.fr">www.soshcr.fr</a></span></font><div><br></br></div><div><br></br></div><div><br></br></div><div><br></br></div></div></td>
+                                                                                </tr></table></div></div></v:textbox></v:rect></td><td width="33" class="layout-block-padding-right">&nbsp; </td>
+                                                                        </tr></table><![endif]--></div>
+
+                                                        <div style="background-image:url(http://soshcr.fr/img/background-3.jpg); background-position: left top; " width="100%">
+                                                                <!--[if !mso 15]><!--><table width="904" cellspacing="0" cellpadding="0" class="layout-block-wrapping-table" background="http://soshcr.fr/img/background-3.jpg" bgcolor="#898da8" style="mso-hide:all; min-width: 904px; ">
+                                                                        <tbody><tr>
+                                                                                <td width="33" class="EQ-03" style="min-width: 33px; ">&nbsp;</td>
+                                                                                <td class="EQ-05" width="838" style="min-width: 838px; ">
+                                                                                        <table cellspacing="0" cellpadding="0" align="left" class="layout-block-column" width="838" style="min-width: 838px; ">
+                                                                                                <tbody><tr>
+                                                                                                        <td width="818" valign="top" align="left" background="http://soshcr.fr/img/background-3.jpg" style="padding-left: 10px; padding-right: 10px; min-width: 818px; " bgcolor="#898da8">
+                                                                                                                <table cellspacing="0" cellpadding="0" class="layout-block-box-padding" width="818" style="min-width: 818px; ">
+                                                                                                                        <tbody><tr>
+                                                                                                                                <td align="left" class="layout-block-column" width="818" style="min-width: 818px; ">
+                                                                                                                                        <div class="text" style="font-size: 16px; font-family: 'Lucida Grande'; text-align: center; "><font color="#ffffff" face="Times, serif"><a href="https://soshcr.fr" style="text-decoration: none; color: rgb(255, 255, 255); ">www.soshcr.fr</a></font></div>
+                                                                                                                                </td>
+                                                                                                                        </tr>
+                                                                                                                        </tbody></table>
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                                </tbody></table>
+                                                                                </td>
+                                                                                <td width="33" class="EQ-04" style="min-width: 33px; ">&nbsp;</td>
+                                                                        </tr>
+                                                                        </tbody></table>
+                                                                <!--<![endif]--><!--[if gte mso 9]><table cellspacing="0" cellpadding="0" class="layout-block-wrapping-table" width="904">
+                                                                        <tr><td width="33" class="layout-block-padding-left" bgcolor="#9b9fb8">&nbsp; </td><td width="838" class="layout-block-content-cell" valign="top" align="left"><v:rect style="width:838px;" stroke="f"><v:fill type="tile" src="http://soshcr.fr/img/background-3.jpg" color="#9b9fb8"></v:fill><v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0"><div><div style="font-size:0"><table cellspacing="0" cellpadding="0" class="layout-block-box-padding" style="padding-left:10px; padding-right:10px;">
+                                                                                <tr><td align="left" class="layout-block-column" width="818"><div class="text"><div style="text-align: center;"><font color="#ffffff" face="serif"><a href="https://soshcr.fr" style="text-decoration: none; color: rgb(255, 255, 255);">www.soshcr.fr</a></font></div></div></td>
+                                                                                </tr></table></div></div></v:textbox></v:rect></td><td width="33" class="layout-block-padding-right" bgcolor="#9b9fb8">&nbsp; </td>
+                                                                        </tr></table><![endif]--></div>
+
+                                                </div>
+                                                <!--End of layout container -->
+
+                                        </td>
+                                        <td width="30" class="page-bg-show-thru">&nbsp;<!--Right page bg show-thru --></td>
+                                </tr>
+                                </tbody></table><!--email-body -->
+
+                </td>
+        </tr>
+        </tbody></table><!--page-wrap -->
+
+</body></html>
