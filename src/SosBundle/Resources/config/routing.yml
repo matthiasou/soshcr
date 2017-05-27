@@ -70,6 +70,10 @@ demandeCv:
     path:     /search/demandeCv
     defaults: { _controller: SosBundle:Search:demandeCv }
 
+imprimer:
+    path:     /search/imprimer
+    defaults: { _controller: SosBundle:Search:imprimer }
+
 messageCv:
     path:     /messageCv
     defaults: { _controller: SosBundle:Search:messageCv }
@@ -184,3 +188,5 @@ validation:
 recommandationsutilisateurs:
     path:     /admin/recommandationsutilisateurs
     defaults: { _controller: SosBundle:Admin:recommandationsByUser }
+
+
