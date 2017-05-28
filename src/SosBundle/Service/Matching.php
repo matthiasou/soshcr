@@ -134,6 +134,7 @@ class Matching {
                         $dateFin = preg_replace('/[0-9]{2}\-[0-9]{2}\-[0-9]{4} - ([0-9]{2}\-[0-9]{2}\-[0-9]{4})/', '$1', str_replace('/', '-', $dispo));
                         $dispo1 = new \DateTime($dateDebut);
                         $dispo2 = new \DateTime($dateFin);
+                        $dispo2->modify('+1 day'); // permet d'inclure la derniere date de disponibilité
                         $period = new \DatePeriod(
                              $dispo1,
                              new \DateInterval('P1D'),
@@ -145,8 +146,9 @@ class Matching {
                             $range[] = $p;
                         }
 
-                        $dateCheck = new \DateTime(strtotime($data['date_debut']));
+                        $dateCheck = new \DateTime(str_replace('/', '-', $data['date_debut']));
                         foreach ($range as $dateRange) {
+
                             if ($dateRange >= $dateCheck)
                             {
                                 $employesDateMatch[] = $value->getId();
@@ -156,8 +158,9 @@ class Matching {
                     }
                     else
                     {
-                        $dateCheck = new \DateTime(strtotime($data['date_debut']));
+                        $dateCheck = new \DateTime(str_replace('/', '-', $data['date_debut']));
                         $date = new \DateTime(preg_replace('/([0-9]{2}\-[0-9]{2}\-[0-9]{4}\/).*/', '$1', str_replace('/', '-', $dispo)));
+                        
                         if ($date >= $dateCheck)
                         {
                             $employesDateMatch[] = $value->getId();
@@ -167,12 +170,13 @@ class Matching {
                 }
             }
         }
+
         $employesDateMatch = array_unique($employesDateMatch);
         $finalList = array();
         foreach ($employesDateMatch as $key => $value) {
             $finalList[] = $this->entityManager->getRepository("SosBundle:User")->find($value);
         }
-
+        
         return $finalList;
 
     }
