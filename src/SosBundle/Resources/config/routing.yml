@@ -193,4 +193,3 @@ recommandationsutilisateurs:
 medaille:
     path:     /medaille/{id}
     defaults: { _controller: SosBundle:Admin:medaille}
-
