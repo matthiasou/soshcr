@@ -16,6 +16,8 @@ class UserController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => $user, 'valide' => 1));
         $nbreco = count($recommandations);
+        //$this->getResponse()->setSlot("nbreco", $nbreco);
+        $nbrecos = $this->container->getParameter($nbreco);
         return $this->render('SosBundle:User:mesrecommandations.html.twig', array("recommandations" => $recommandations, "nbreco"=>$nbreco));
     }
 

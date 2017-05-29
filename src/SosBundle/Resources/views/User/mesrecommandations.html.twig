@@ -38,9 +38,10 @@
 
     </div>
     <div>
-    	FELICITATIONS
-    	{{nb}}
-    	<div class="fb-share-button" data-href="http://www.soshcr.fr" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.soshcr.fr%2F&amp;src=sdkpreparse">Partager</a></div>
-    </div>
+      {% if nbreco = 6 %}
+      	FELICITATIONS
+      	{{nb}}
+      	<div class="fb-share-button" data-href="http://www.soshcr.fr/medaille/1" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.soshcr.fr%2Fmedaille%2F1&amp;src=sdkpreparse">Partager</a></div>
+      {% endif %}
 </div>
 {% endblock %}
