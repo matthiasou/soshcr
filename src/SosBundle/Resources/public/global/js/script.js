@@ -19,6 +19,22 @@ $(document).ready(function(){
         sweetAlert("", validation, "success");
     }
 
+    $('.delete-user').click(function(){
+        swal({
+                  title: "Es-tu sur ?",
+                  text: "Tu ne pourra plus utiliser ton compte",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "Supprimer mon compte",
+                  cancelButtonText: "Non", 
+                  closeOnConfirm: false
+                },
+                function(){
+                  swal("A bientôt !", "Nous te remercions d’avoir participé à l’aventure Soshcr et te souhaitons une très bonne continuation", "success");
+                });
+    });
+
     // Afficher les postes recherche en cliquant sur les secteurs
     $('.secteur-button').click(function(){
         var ul = $('.'+$(this).attr('data-target'));

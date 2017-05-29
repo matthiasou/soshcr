@@ -413,6 +413,20 @@ class UserCriteresController extends Controller
       // Validation contrat
       if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "step_8" )
       {
+        
+        $alreadyCriteresRepo = $em->getRepository('SosBundle:UserCritere');
+        $alreadyCriteres = $alreadyCriteresRepo->createQueryBuilder('uc')
+                                      ->where('uc.user = :user')
+                                      ->setParameter('user', $this->getUser()->getId())
+                                      ->getQuery()
+                                      ->getResult();
+
+        if (!empty($alreadyCriteres)) {
+          foreach ($alreadyCriteres as $key => $value) {
+            $em->remove($value);
+            $em->flush();
+          }
+        }
 
         $session = $request->getSession();
         $session->set('disponibilite', $request->get('disponibilite'));
@@ -487,7 +501,7 @@ class UserCriteresController extends Controller
             }
 
             $em->persist($usercritere);
-            $em->flush($usercritere);
+            $em->flush();
           }     
 
         }

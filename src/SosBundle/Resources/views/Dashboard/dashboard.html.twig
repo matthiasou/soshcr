@@ -41,15 +41,14 @@
                             <h3 class="title">Mettre à jour</h3>
                             <p>
                                 <ul >
+                                
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <li><a href="{{ path('dashboard_admin') }}">Administration</a></li>
                                     {% endif %}
-                                    <li>tes disponibilités</li>
-                                    <li>tes recherches</li>
-                                    <li>tes compétences</li>
-                                    <li><a href="{{ path('mesrecommandations') }}">tes recommandations</a></li>
-                                    <li>tes coordonées</li>
-                                    <li>supprimer ton compte</li>
+                                    <li><a href="{{ path('usercriteres_step_1') }}">Tes critères de recherche</a></li>
+                                    <li><a href="{{ path('mesrecommandations') }}">Tes recommandations</a></li>
+                                    <li><a href="{{ path('profil') }}">Tes coordonées</a></li>
+                                    <li><a href="#" class="delete-user">Supprimer ton compte</a></li>
 
                                 </ul>
                             </p>

@@ -70,6 +70,10 @@ demandeCv:
     path:     /search/demandeCv
     defaults: { _controller: SosBundle:Search:demandeCv }
 
+imprimer:
+    path:     /search/imprimer
+    defaults: { _controller: SosBundle:Search:imprimer }
+
 messageCv:
     path:     /messageCv
     defaults: { _controller: SosBundle:Search:messageCv }
@@ -93,6 +97,10 @@ demandeRecommandation:
 signalement_profil:
     path:     /signalement_profil
     defaults: { _controller: SosBundle:Default:signalementProfil }
+
+cron_user:
+    path:     /cron_user
+    defaults: { _controller: SosBundle:Default:cronuser }
 
 # INFORMATION USER START
 
@@ -132,6 +140,15 @@ usercriteres_step_9:
     path: /usercriteres/step9  
     defaults: { _controller: SosBundle:UserCriteres:step9}
 
+
+modification_disponibilites:
+    path: /usercriteres/disponibilites
+    defaults: { _controller: SosBundle:UserCriteres:modificationDisponibilites}
+
+modification_contrat:
+    path: /usercriteres/contrats
+    defaults: { _controller: SosBundle:UserCriteres:modificationContrats}
+
 # INFORMATION USER START
 
 
@@ -139,6 +156,10 @@ usercriteres_step_9:
 public_profil:
     path: /user/{id}
     defaults: { _controller: SosBundle:User:publicProfil}
+
+delete_user:
+    path: /delete
+    defaults: { _controller: SosBundle:User:deleteUser}
 
 mesrecommandations:
     path:     /mesrecommandations
