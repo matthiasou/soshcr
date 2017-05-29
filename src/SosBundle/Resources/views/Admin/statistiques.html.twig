@@ -9,17 +9,17 @@
 	<ol>
 		<li>Total Global : 
 {% for result in results %}
-{{result.nb}}
+	{{result.nb}}
 {% endfor %}
 </li>
 <li>Mois en cours 
 {% for result in result1 %}
-{{result.nb}}
+	{{result.nb}}
 {% endfor %}
 </li>
 <li>Le mois dernier 
 {% for result in result2 %}
-{{result.nb}}
+	{{result.nb}}
 {% endfor %}
 </li>
 </ol>
@@ -27,10 +27,72 @@
 	<ol>
 		<li>Total Global : 
 {% for result in result3 %}
-{{result.nb}}
+	{{result.nb}}
 {% endfor %}
 </li>
 <li>Mois en cours 
- 0 
+ 
+</li>
+<li>Profil supprimé
+	<ol>
+		<li>Travail trouvé avec SOSHCR : 
+{% for result in result14 %}
+	{{result.nb}}
+{% endfor %}
+</li>
+<li>Mois en cours 
+ {% for result in result4 %}
+	{{result.nb}}
+{% endfor %}
+</li>
+<li> Le mois dernier
+	{% for result in result5 %}
+	{{result.nb}}
+{% endfor %}
+</li>
+<li>Travail trouvé sans SOSHCR : 
+{% for result in result15 %}
+	{{result.nb}}
+{% endfor %}
+</li>
+<li>Mois en cours 
+ {% for result in result6 %}
+	{{result.nb}}
+{% endfor %}
+</li>
+<li> Le mois dernier
+	{% for result in result7 %}
+	{{result.nb}}
+{% endfor %}
+</li>
+<li>Création d'un compte gratuit : 
+ {% for result in result16 %}
+	{{result.nb}}
+{% endfor %}
+</li>
+<li>Mois en cours 
+ {% for result in result8 %}
+	{{result.nb}}
+{% endfor %}
+</li>
+<li> Le mois dernier
+	{% for result in result9 %}
+	{{result.nb}}
+{% endfor %}
+</li>
+<li>Autres raisons : 
+{% for result in result17 %}
+	{{result.nb}}
+{% endfor %}
+</li>
+<li>Mois en cours 
+ {% for result in result10 %}
+	{{result.nb}}
+{% endfor %}
+</li>
+<li> Le mois dernier
+	{% for result in result11 %}
+	{{result.nb}}
+{% endfor %}
 </li>
 {% endblock %}
