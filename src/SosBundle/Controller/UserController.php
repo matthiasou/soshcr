@@ -20,6 +20,22 @@ class UserController extends Controller
         $nbrecos = $this->container->getParameter($nbreco);
         return $this->render('SosBundle:User:mesrecommandations.html.twig', array("recommandations" => $recommandations, "nbreco"=>$nbreco));
     }
+
+
+ 
+    /**
+     * @Route("/delete")
+     */
+    public function deleteUserAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->geUser();
+        $em->remove($user);
+        $em->flush();
+        
+        return $this->redirectToRoute('index', array('validation' => 'Ton compte à bien été supprimé'));
+    }
+
     /**
      * @Route("/validation/{code}/{id}")
      */
@@ -44,6 +60,7 @@ class UserController extends Controller
             }
         }
         return $this->render('SosBundle:User:validation.html.twig', array("recommandation" => $recommandation));
+
     }
  
     /**

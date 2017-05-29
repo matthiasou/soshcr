@@ -1,11 +1,9 @@
 $(document).ready(function(){
-    
-// STEP1
-    
+        
     // Check a la validation du formulaire si tout est checké
     $('.user-critere-form').submit(function(event){
 
-        if ($('input[type="checkbox"]').length > 0)
+        if ($('input[type="checkbox"]').parent().parent().parent().is(':visible') && $('input[type="checkbox"]').length > 0)
         {
             // vérifie les checkbox 
             var checkboxChecked = 0;
@@ -17,7 +15,7 @@ $(document).ready(function(){
             });
         }
 
-        if ($('input[type="radio"]').length > 0)
+        if ($('input[type="radio"]').parent().parent().parent().is(':visible') && $('input[type="radio"]').length > 0)
         {
             var radioChecked = 0;
             $('input[type="radio"]').each(function(e){
@@ -27,14 +25,15 @@ $(document).ready(function(){
                 }
             });  
         }
-        
+
+
         if (typeof checkboxChecked != "undefined" &&  checkboxChecked == 0 || typeof radioChecked != "undefined" && radioChecked == 0)
         {
-           sweetAlert("Erreur :", "Veuillez sélectionner au moins un champ", "error");
+           sweetAlert("Erreur :", "Sélectionne au moins un champ", "error");
            event.preventDefault();
         }
 
-        // vérifie les checkbox avec sous elements
+        // vérifie les inputs avec sous elements
         $('input[type="checkbox"]:checked').each(function(e){
             
             var attributes = $(this).parent().parent().find('.sub-element');
@@ -42,14 +41,16 @@ $(document).ready(function(){
             {
                 if (attributes.find('input').length > 0 && attributes.find('input:checked').length == 0 || attributes.find('option:selected').text() == "--")
                 {
-                   sweetAlert("Erreur :", "Veuillez sélectionner un sous élélent", "error");
+                   sweetAlert("Erreur :", "Sélectionne un sous élément", "error");
                    event.preventDefault();
                 }     
             }
+
         });
 
     });
 
+    // cache ou affiche les elements au chargement
     if ($('input[type="checkbox"]:checked').length > 0)
     {
         $('input[type="checkbox"]:checked').parent().find('.validate').show();
@@ -61,6 +62,7 @@ $(document).ready(function(){
         }
     }
 
+    // cache ou affiche les elements au click
     $('input[type="checkbox"]').on('change',function(e){
         var attributes = $(this).parent().parent().children('.sub-element');
         if ($(this).is(':checked'))
@@ -83,6 +85,10 @@ $(document).ready(function(){
                     attributes.val('0');
                 }
                 if (attributes.find('input').is('input:checkbox'))
+                {
+                    attributes.find('input').prop('checked', false);
+                }
+                if (attributes.find('input').is('input:radio'))
                 {
                     attributes.find('input').prop('checked', false);
                 }
@@ -147,6 +153,14 @@ $(document).ready(function(){
         $('.remove-disponibilite').click(function(){
             $(this).parent().parent().remove();
         });
+    });
+
+    $('.remove-disponibilite').click(function(){
+        $(this).parent().parent().remove();
+    });
+
+    $('.disponibilite-delete-btn').click(function(){
+        $(this).parent().remove();
     });
 
     $('#add-disponibilite-jour').click(function(){

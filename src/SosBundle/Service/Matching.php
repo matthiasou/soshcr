@@ -1,6 +1,7 @@
 <?php 
 
 namespace SosBundle\Service;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class Matching {
 
@@ -84,6 +85,10 @@ class Matching {
             $niveau_anglais =  "AND uc.niveau_anglais_id >= ".$data['niveau_anglais'];
         }
 
+        if (isset($data['date'])) {
+            $date =  "AND uc.disponibilite >= ".$data['niveau_anglais'];
+        }
+
         $query = "SELECT DISTINCT u.id
             FROM utilisateur u
             JOIN user_critere uc
@@ -114,7 +119,65 @@ class Matching {
         foreach ($employes as $value) {
             $listeEmployes[] = $this->entityManager->getRepository("SosBundle:User")->find($value);
         }
-        return $listeEmployes;
+
+        $employesDateMatch = array();
+        foreach ($listeEmployes as $key => $value) {
+            $criteres = $value->getCriteres();
+            foreach ($criteres as $k => $v) {
+                $disponibilites = json_decode($v->getDisponibilites());
+                foreach ($disponibilites as $cle => $dispo) {
+
+                    // Si range de dates
+                    if (preg_match('/([0-9]{2}\/[0-9]{2}\/[0-9]{4}) - ([0-9]{2}\/[0-9]{2}\/[0-9]{4})/', $dispo))
+                    {
+                        $dateDebut = preg_replace('/([0-9]{2}\-[0-9]{2}\-[0-9]{4}) - [0-9]{2}\-[0-9]{2}\-[0-9]{4}/', '$1', str_replace('/', '-', $dispo));
+                        $dateFin = preg_replace('/[0-9]{2}\-[0-9]{2}\-[0-9]{4} - ([0-9]{2}\-[0-9]{2}\-[0-9]{4})/', '$1', str_replace('/', '-', $dispo));
+                        $dispo1 = new \DateTime($dateDebut);
+                        $dispo2 = new \DateTime($dateFin);
+                        $dispo2->modify('+1 day'); // permet d'inclure la derniere date de disponibilité
+                        $period = new \DatePeriod(
+                             $dispo1,
+                             new \DateInterval('P1D'),
+                             $dispo2
+                        );
+
+                        $range = array();
+                        foreach ($period as $p) {
+                            $range[] = $p;
+                        }
+
+                        $dateCheck = new \DateTime(str_replace('/', '-', $data['date_debut']));
+                        foreach ($range as $dateRange) {
+
+                            if ($dateRange >= $dateCheck)
+                            {
+                                $employesDateMatch[] = $value->getId();
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        $dateCheck = new \DateTime(str_replace('/', '-', $data['date_debut']));
+                        $date = new \DateTime(preg_replace('/([0-9]{2}\-[0-9]{2}\-[0-9]{4}\/).*/', '$1', str_replace('/', '-', $dispo)));
+                        
+                        if ($date >= $dateCheck)
+                        {
+                            $employesDateMatch[] = $value->getId();
+                        }
+                    }
+
+                }
+            }
+        }
+
+        $employesDateMatch = array_unique($employesDateMatch);
+        $finalList = array();
+        foreach ($employesDateMatch as $key => $value) {
+            $finalList[] = $this->entityManager->getRepository("SosBundle:User")->find($value);
+        }
+        
+        return $finalList;
 
     }
 
@@ -305,7 +368,7 @@ class Matching {
             $contrat_duree_join." ".
             $formation_join." ".
             $cursus_scolaire_join."
-            WHERE ".$formule." <> uc.rayon_emploi ".
+            WHERE ".$formule." < uc.rayon_emploi ".
             $classification." ".
             $poste." ".
             $contrat." ".
@@ -314,7 +377,6 @@ class Matching {
             $niveau_anglais." ".
             $experience_minimum." ".
             $cursus_scolaire;
-
 
 
         $stmt = $this->entityManager->getConnection()->prepare($query);
@@ -327,14 +389,15 @@ class Matching {
         foreach ($employes as $value) {
             $pointsRecommandation = (count($this->entityManager->getRepository("SosBundle:Recommandation")->findby(array("user"=>$value,'valide'=>1))))*10;
             $user = $this->entityManager->getRepository("SosBundle:User")->find($value);
-            $pointsAnglais = $this->entityManager->getRepository("SosBundle:Anglais")->findOneBy(array("id"=>$user->getNiveauAnglais()))->getPoints();
-            $criters = $this->entityManager->getRepository("SosBundle:UserCritere")->findOneBy(array("poste"=>$data['poste'],"user"=>$value,"etablissement"=>$data['classification']));
-            $pointsExperience = $this->entityManager->getRepository("SosBundle:Experience")->find($criters->getExperience())->getPoints();
-            $pointsPoste = $this->entityManager->getRepository("SosBundle:PosteRecherche")->find($criters->getPoste())->getCoefficient();
+            $pointsAnglais = $this->entityManager->getRepository("SosBundle:UserCritere")->findOneBy(array("user"=>$user->getId()))->getNiveauAnglais()->getPoints();
+            $criters = $this->entityManager->getRepository("SosBundle:UserCritere")->findAll(array("user"=>$user->getId()));
+            dump($criters);
+            //$pointsExperience = $this->entityManager->getRepository("SosBundle:Experience")->find($criters->getExperience())->getPoints();
+            //$pointsPoste = $this->entityManager->getRepository("SosBundle:PosteRecherche")->find($criters->getPoste())->getCoefficient();
 
-            $score = $pointsRecommandation+$pointsAnglais+($pointsExperience*$pointsPoste);
-            $user->setScore($score);
-            $this->entityManager->flush();
+           // $score = $pointsRecommandation+$pointsAnglais+($pointsExperience*$pointsPoste);
+            //$user->setScore($score);
+            //$this->entityManager->flush();
         }
 
     }
