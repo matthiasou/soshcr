@@ -43,7 +43,7 @@ class AdminController extends Controller
                 $em->flush();
 
                 $message = \Swift_Message::newInstance()
-                    ->setSubject('Demande de recommandation envoyé')
+                    ->setSubject('Demande de recommandation envoyée')
                     ->setFrom('soshcr@contact.fr')
                     ->setTo($user->getEmail())
                     ->setBody(
@@ -102,9 +102,21 @@ class AdminController extends Controller
                 foreach($_POST['id_recommandation'] as $value)
                 {
                     $reco = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('id' => $value));
+                    $message = \Swift_Message::newInstance()
+                    ->setSubject('Suppression de votre recommandation')
+                    ->setFrom('soshcr@contact.fr')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'SosBundle:Admin:suppression_recommandation.html.twig'
+                        ),
+                        'text/html'
+                    );
+                    $this->get('mailer')->send($message);
                     $em->remove($reco);
-                    $em->flush();   
+                       
                 }
+                $em->flush();
                 return $this->redirectToRoute('recommandations');
             }
         }
@@ -175,13 +187,30 @@ class AdminController extends Controller
         }
         if (isset($_POST['supprimer'])) 
         {
-            $value = $_POST['id_utilisateur'];
-            $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
-            
-            $em->remove($user);
-            $em->flush();
+            if (is_array($_POST['id_utilisateur'])) 
+            {
+                foreach($_POST['id_utilisateur'] as $value)
+                {   
+                    $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
+                    $message = \Swift_Message::newInstance()
+                    ->setSubject('Suppression de votre compte')
+                    ->setFrom('soshcr@contact.fr')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'SosBundle:Admin:suppression_compte.html.twig'
+                        ),
+                        'text/html'
+                    );
+                    $this->get('mailer')->send($message);
+                    $em->remove($user);
+                    $em->flush();
+                    
+                }
+            }
             return $this->redirectToRoute('utilisateurs'); 
         }
+
         foreach ($utilisateurs as $utilisateur){
             $u = $utilisateur->getId();
             $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $utilisateur,'valide'=> 1));
@@ -232,11 +261,53 @@ class AdminController extends Controller
         $statement = $connection->prepare("SELECT COUNT(*) as nb FROM paiement WHERE YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()- INTERVAL 1 MONTH)");
         $statement->execute();
         $result2 = $statement->fetchAll();
-        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM utilisateur");
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM utilisateur ");
         $statement->execute();
         $result3 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM utilisateur");
+        $statement->execute();
+        $result12 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM utilisateur");
+        $statement->execute();
+        $result13 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 1 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()) ");
+        $statement->execute();
+        $result4 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 1");
+        $statement->execute();
+        $result14 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 1 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()- INTERVAL 1 MONTH) ");
+        $statement->execute();
+        $result5 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 2 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()) ");
+        $statement->execute();
+        $result6 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 2");
+        $statement->execute();
+        $result15 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 2 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()- INTERVAL 1 MONTH) ");
+        $statement->execute();
+        $result7 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 3 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()) ");
+        $statement->execute();
+        $result8 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 3");
+        $statement->execute();
+        $result16 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 3 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()- INTERVAL 1 MONTH) ");
+        $statement->execute();
+        $result9 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 4 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()) ");
+        $statement->execute();
+        $result10 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 4");
+        $statement->execute();
+        $result17 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 4 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()- INTERVAL 1 MONTH) ");
+        $statement->execute();
+        $result11 = $statement->fetchAll();
        
-        return $this->render('SosBundle:Admin:statistiques.html.twig', array('results' => $results, 'result1' => $result1, 'result2' => $result2, 'result3' => $result3));
+        return $this->render('SosBundle:Admin:statistiques.html.twig', array('results' => $results, 'result1' => $result1, 'result2' => $result2, 'result3' => $result3, 'result4' => $result4, 'result5' => $result5, 'result6' => $result6, 'result7' => $result7, 'result8' => $result8, 'result9' => $result9, 'result10' => $result10, 'result11' => $result11, 'result12' => $result12, 'result13' => $result13, 'result14' => $result14, 'result15' => $result15, 'result16' => $result16, 'result17' => $result17));
     }
     /**
      * @Route("admin/signalements")
@@ -285,6 +356,13 @@ class AdminController extends Controller
         }
         return $this->render('SosBundle:Admin:recommandationsutilisateurs.html.twig', array("recommandations" => $recommandations));
  
+    }
+    /**
+     * @Route("medaille/{id}")
+     */
+    public function medailleAction()
+    {
+        return $this->render('SosBundle:Admin:medaille1.html.twig');
     }
 
 }

@@ -2,7 +2,7 @@
 
 {% block sos_body %}
     <div id="poste_hotellerie" class="col-xs-12 sos-form">
-        <h2 class="title-heading">Que veux tu faire {{user.nom}} ?</h2>
+        <h2 class="title-heading">Que veux tu faire {{user.prenom}} ?</h2>
     </div>
     <br><br><br><br>
 
@@ -65,7 +65,7 @@
                     <div class="icon">
                         <div class="image"><i class="fa fa-desktop"></i></div>
                         <div class="info">
-                            <h3 class="title">Date d’expiration du compte {{user.dateAbonnement|date("m/d/Y")}}</h3>
+                            <h3 class="title">Date d’expiration du compte {{user.dateAbonnement|date("d/m/Y")}}</h3>
                             <p>
                             Les comptes sont automatiquement supprimés 6 mois après leurs création
                             </p>

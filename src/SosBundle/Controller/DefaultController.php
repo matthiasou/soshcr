@@ -42,7 +42,8 @@ class DefaultController extends Controller
      */
     public function dashboardAdminAction()
     {
-        return $this->render('SosBundle:Dashboard:dashboard_admin.html.twig');
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        return $this->render('SosBundle:Dashboard:dashboard_admin.html.twig', array("user" => $user));
     }
 
     /**
