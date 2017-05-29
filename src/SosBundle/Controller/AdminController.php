@@ -360,9 +360,20 @@ class AdminController extends Controller
     /**
      * @Route("medaille/{id}")
      */
-    public function medailleAction()
+    public function medailleAction($id)
     {
+        if ($id == 1){
         return $this->render('SosBundle:Admin:medaille1.html.twig');
+        }
+        if ($id == 3){
+        return $this->render('SosBundle:Admin:medaille3.html.twig');
+        }
+        if ($id == 10){
+        return $this->render('SosBundle:Admin:medaille10.html.twig');
+        }
+        if ($id == 20){
+        return $this->render('SosBundle:Admin:medaille20.html.twig');
+        }
     }
 
 }
