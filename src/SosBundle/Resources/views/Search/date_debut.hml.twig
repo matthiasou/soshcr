@@ -3,7 +3,7 @@
 {% block sos_body %}
 
 	<div id="poste_hotellerie" class="col-xs-12">
-		<h3 class="title-heading">À quelle date doit commencer le contrat ?</h3>
+		<h3 class="title-heading">À quelle date le contrat débute-t-il ?</h3>
 
 		{% if data.match_employe.nb == 0 %}
 			<p>il n'y a aucun candidat autour de vous. </p>
@@ -13,10 +13,42 @@
 			<p>il y a {{ data.match_employe.nb }} candidat autour de vous.</p>
 		{% endif %}
 		<br>
-		        	
+
+		<form method="post" action="{{ path('resultat') }}" class="col-sm-offset-4 col-sm-4 col-xs-12">
+			<button class="btn-soshcr">Pas de date précise</button>
+			<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+			<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+			<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+			<input type="hidden" name="classification" value="{{ data.classification }}">
+			<input type="hidden" name="poste" value="{{ data.poste }}">
+			<input type="hidden" name="contrat" value="{{ data.contrat }}">
+
+			{% if data.contrat_duree is defined %}
+				<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
+			{% endif %}
+
+
+			{% if data.formation_minimum is defined %}
+				<input type="hidden" name="formation_minimum" value="{{ data.formation_minimum }}">
+			{% endif %}
+
+
+			{% if data.experience_minimum is defined %}
+				<input type="hidden" name="experience_minimum" value="{{ data.experience_minimum }}">
+			{% endif %}
+
+
+			{% if data.cursus_scolaire is defined %}
+				<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
+			{% endif %}
+
+			<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
+			<input type="hidden" name="form" value="date">
+		</form>
+		<br><br><br>
         <form method="post" action="{{ path('resultat') }}" class="col-sm-offset-4 col-sm-4 col-xs-12">
 			
-			<input type='hidden' id="datepicker" name="date_debut" data-language='fr' class="datepicker-here-visible form-control" data-position="left top" /><br><br>	
+			<input type='hidden' id="datepicker" name="date_debut" data-language='fr' class="datepicker-here-visible form-control" data-position="left top" /><br><br>
             <button class="btn-soshcr">Voir les résultats</button>
 			<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 			<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
