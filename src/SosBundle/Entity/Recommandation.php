@@ -24,7 +24,7 @@ class Recommandation
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="User", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="User")
      */
     private $user;
 
