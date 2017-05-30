@@ -476,9 +476,10 @@ class SearchController extends Controller
                 $age = $today->diff($dateNaisssance);
 
                 $employee->age = (int)($age->days / 365);
-                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee, 'valide' => 1));
+                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee, 'valide' => 2));
                 $nbRecommandation = count($recommandation);
                 $employee->nbRecommandation = $nbRecommandation;
+                $data['recommandations'] = $recommandation;
             }
 
             dump($data);
@@ -535,7 +536,7 @@ class SearchController extends Controller
                 $age = $today->diff($dateNaisssance);
 
                 $employee->age = (int)($age->days / 365);
-                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee, 'valide' => 1));
+                $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee, 'valide' => 2));
                 $nbRecommandation = count($recommandation);
                 $employee->nbRecommandation = $nbRecommandation;
             }
