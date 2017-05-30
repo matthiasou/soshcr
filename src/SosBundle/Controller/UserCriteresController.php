@@ -407,8 +407,8 @@ class UserCriteresController extends Controller
     public function step9Action(Request $request)
     {
 
-        $data = array();
-        $em = $this->getDoctrine()->getManager();
+      $data = array();
+      $em = $this->getDoctrine()->getManager();
 
       // Validation contrat
       if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "step_8" )
@@ -454,6 +454,20 @@ class UserCriteresController extends Controller
         $repoFormation = $em->getRepository('SosBundle:Formation');
         $repoEtablissement = $em->getRepository('SosBundle:Etablissement');
 
+        //****SCORE*****
+        $session = $request->getSession();
+        $session->get('anglais');
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $pointsAnglais = $em->getRepository("SosBundle:UserCritere")->findOneBy(array("user"=>$user->getId()))->getNiveauAnglais()->getPoints();
+        $pointsTotal=0;
+        foreach ($resultat['postes'] as $k => $poste) {
+          $pointsExperience = $repoExperience->find(($poste['experience']))->getPoints();
+          $pointsPoste = $repoPoste->find($poste['poste'])->getCoefficient();
+          $pointsTotal = $pointsTotal+($pointsExperience*$pointsPoste);
+        }
+        $pointsTotal = $pointsTotal + $pointsAnglais;
+        //*********************
+
         foreach ($resultat['contrats'] as $key => $contrat) 
         {
 
@@ -485,8 +499,9 @@ class UserCriteresController extends Controller
             $usercritere->setLongitude($resultat['longitude']);
             $usercritere->setRayonEmploi($resultat['rayon_emploi']);
             $usercritere->setNiveauAnglais($repoAnglais->find($resultat['anglais']));
-            $usercritere->setScore($resultat['score']);
+            $usercritere->setScore($pointsTotal);
             $usercritere->setDisponibilites(json_encode($resultat['disponibilites']));
+
 
             foreach ($resultat['formations'] as $key => $value) 
             {
@@ -502,7 +517,7 @@ class UserCriteresController extends Controller
 
             $em->persist($usercritere);
             $em->flush();
-          }     
+          }
 
         }
 
