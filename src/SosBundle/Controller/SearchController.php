@@ -479,6 +479,7 @@ class SearchController extends Controller
                 $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee, 'valide' => 1));
                 $nbRecommandation = count($recommandation);
                 $employee->nbRecommandation = $nbRecommandation;
+                $data['recommandations'] = $recommandation;
             }
 
             dump($data);
