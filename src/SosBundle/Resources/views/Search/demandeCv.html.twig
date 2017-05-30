@@ -6,6 +6,7 @@
 
     <div id="poste_hotellerie" class="col-xs-12">
         <h3 class="title-heading">Envoyez vos demandes de CV</h3>
+		<p>Complétez ou modifiez le texte selon vos besoins</p>
         <br>
 
         <ul style="list-style-type: none;" class="">
@@ -18,6 +19,7 @@
 						<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 						<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 						<input type="hidden" name="classification" value="{{ data.classification }}">
+						<input type="hidden" name="date_debut" value="{{ data.date_debut }}">
 
 						{% for utilisateur in data.mail_demande_utilisateur %}
 							<input type="hidden" name="mail_demande_utilisateur[]" value="{{ utilisateur }}">
@@ -45,8 +47,8 @@
 						<div class="container">
                         <textarea  class="form-control" type="textarea" id="message" name="message" placeholder="Message" rows="8">
 Bonjour,
-    Nous recherchons un(e) {{ data.demande_poste.libelle }} à partir du {{ data.date_debut }}  en {{ data.demande_contrat.libelle }} .
-    Pourriez-vous envoyer votre curriculum vitae et une lettre de motivation à [Entrez votre adresse email]
+    Nous recherchons un(e) {{ data.demande_poste.libelle }} en {{ data.demande_contrat.libelle }} à partir du {{ data.date_debut }} .
+    Si vous êtes intéressé(e), envoyez votre curriculum vitae et une lettre de motivation à [Entrez votre adresse email]
 
 Cordialement,
 [Votre nom]
@@ -69,6 +71,7 @@ Cordialement,
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 		<input type="hidden" name="classification" value="{{ data.classification }}">
 		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
+		<input type="hidden" name="date_debut" value="{{ data.date_debut }}">
 
 		<input type="hidden" name="poste" value="{{ data.poste }}">
 		<input type="hidden" name="contrat" value="{{ data.contrat }}">

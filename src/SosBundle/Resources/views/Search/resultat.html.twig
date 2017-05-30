@@ -10,6 +10,7 @@
 		<input type="hidden" name="classification" value="{{ data.classification }}">
 		<input type="hidden" name="poste" value="{{ data.poste }}">
 		<input type="hidden" name="contrat" value="{{ data.contrat }}">
+		<input type="hidden" name="date_debut" value="{{ data.date_debut }}">
 
 		{% if data.contrat_duree is defined %}
 			<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
@@ -81,7 +82,7 @@
 					    	<p>{{ employe.telephone }}</p>
 					    </div>
 					    {% if employe.nbRecommandation == 0 %}
-                            <p><a href="#" class="icoTwitter" data-toggle="tooltip" title='{% for reco in data.recommandations %} {{ reco.nomEtablissement }}{% endfor %}'>0 recommandation</p>
+                            <p>0 recommandation</p>
                         {% elseif employe.nbRecommandation  > 1 %}
                             <p><a href="#" class="icoTwitter" data-toggle="tooltip" title='{% for reco in data.recommandations %} {{ reco.nomEtablissement }}; {% endfor %}' >{{ employe.nbRecommandation  }} recommandations</p>
                         {% elseif employe.nbRecommandation  == 1 %}
