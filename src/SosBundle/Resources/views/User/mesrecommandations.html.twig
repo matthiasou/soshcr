@@ -1,4 +1,51 @@
 {% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Je partage mes recommandations" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+
+	<h3 class="title-heading">Recommandations</h3>
+	<hr>
+<div class="container">
+    <div class="row col-md-6">
+    <h3 >Mes recommandations</h3>
+    {% set nb = nbreco %}
+      {% if nbreco < 1 %}
+        Je ne suis pas recommandé :(
+	    {% endif %}
+    	{% for recommandation in recommandations %}
+    		{{nbreco}}.{{recommandation.nomEtablissement}}, {{recommandation.ville}}
+          {% set nbreco = nbreco-1 %}  
+      {% endfor %}
+
+    <div><a href="{{ path('demandeRecommandation') }}">Je veux me faire recommander</a></div>
+
+    </div>
+    <div class="row col-md-6">
+      	FELICITATIONS
+        {% if nb > 0 and nb < 3 %}
+        <div><img style="max-width:110px" src="{{ asset('bundles/sos/global/img/medailles/1_medal.png') }}" alt=""></div>
+      	<div class="fb-share-button" data-href="http://soshcr.fr/dev/soshcr2/web/app_dev.php/medaille/1" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsoshcr.fr%2Fdev%2Fsoshcr2%2Fweb%2Fapp_dev.php%2Fmedaille%2F1&amp;src=sdkpreparse">Partager</a></div>
+        {% endif %}
+        {% if nb > 2 and nb < 10 %}
+        <div><img style="max-width:110px" src="{{ asset('bundles/sos/global/img/medailles/3_medal.png') }}" alt=""></div>
+        <div class="fb-share-button" data-href="http://soshcr.fr/dev/soshcr2/web/app_dev.php/medaille/3" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsoshcr.fr%2Fdev%2Fsoshcr2%2Fweb%2Fapp_dev.php%2Fmedaille%2F3&amp;src=sdkpreparse">Partager</a></div>
+        {% endif %}
+        {% if nb > 9 and nb < 20 %}
+        <div><img style="max-width:110px" src="{{ asset('bundles/sos/global/img/medailles/10_medal.png') }}" alt=""></div>
+        <div class="fb-share-button" data-href="http://soshcr.fr/dev/soshcr2/web/app_dev.php/medaille/10" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsoshcr.fr%2Fdev%2Fsoshcr2%2Fweb%2Fapp_dev.php%2Fmedaille%2F10&amp;src=sdkpreparse">Partager</a></div>
+        {% endif %}
+        {% if nb > 19 %}
+        <div><img style="max-width:110px" src="{{ asset('bundles/sos/global/img/medailles/20_medal.png') }}" alt=""></div>
+        <div class="fb-share-button" data-href="http://soshcr.fr/dev/soshcr2/web/app_dev.php/medaille/20" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsoshcr.fr%2Fdev%2Fsoshcr2%2Fweb%2Fapp_dev.php%2Fmedaille%2F20&amp;src=sdkpreparse">Partager</a></div>
+        {% endif %}
+  </div>
+</div>
+{% endblock %}
 {% block javascript %}
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -8,55 +55,4 @@
   js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-{% endblock %}
-{% block sos_body %}
-  <head>
-    <meta charset="utf-8" />
-    <meta name="description" content="Je partage mes recommandations" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
-
-
-	<h3>Recommandations</h3>
-	<hr>
-<div class="container">
-    <div class="row col-md-6 col-md-offset-2 custyle">
-    <h3>Mes recommandations</h3>
-    <table class="table table-striped custab" border="1">
-    {% set nb = nbreco %}
-      {% if nbreco < 1 %}
-        Je ne suis pas recommandé :(
-	    {% endif %}
-    	{% for recommandation in recommandations %}
-    		<tr>
-          <td>{{nbreco}}.{{recommandation.nomEtablissement}}, {{recommandation.ville}}</td>
-          {% set nbreco = nbreco-1 %}
-        </tr>   
-      {% endfor %}
-    </table>
-    <a href="{{ path('demandeRecommandation') }}">Je veux me faire recommander</a>
-
-    </div>
-    <div>
-      	FELICITATIONS
-      	{{nb}}
-        Test 0
-        {% if nb > 0 and nb < 3 %}
-          Test 0 3 
-      	<div class="fb-share-button" data-href="http://soshcr.fr/dev/soshcr2/web/app_dev.php/medaille/1" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsoshcr.fr%2Fdev%2Fsoshcr2%2Fweb%2Fapp_dev.php%2Fmedaille%2F1&amp;src=sdkpreparse">Partager</a></div>
-        {% endif %}
-        {% if nb > 2 and nb < 10 %}
-          test 2 10 
-        <div class="fb-share-button" data-href="http://soshcr.fr/dev/soshcr2/web/app_dev.php/medaille/3" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsoshcr.fr%2Fdev%2Fsoshcr2%2Fweb%2Fapp_dev.php%2Fmedaille%2F3&amp;src=sdkpreparse">Partager</a></div>
-        {% endif %}
-        {% if nb > 9 and nb < 20 %}
-          test 9 20 
-        <div class="fb-share-button" data-href="http://soshcr.fr/dev/soshcr2/web/app_dev.php/medaille/10" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsoshcr.fr%2Fdev%2Fsoshcr2%2Fweb%2Fapp_dev.php%2Fmedaille%2F10&amp;src=sdkpreparse">Partager</a></div>
-        {% endif %}
-        {% if nb > 19 %}
-          test 20
-        <div class="fb-share-button" data-href="http://soshcr.fr/dev/soshcr2/web/app_dev.php/medaille/20" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsoshcr.fr%2Fdev%2Fsoshcr2%2Fweb%2Fapp_dev.php%2Fmedaille%2F20&amp;src=sdkpreparse">Partager</a></div>
-        {% endif %}
-  </div>
-</div>
 {% endblock %}
