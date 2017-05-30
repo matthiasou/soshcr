@@ -101,7 +101,7 @@ class Matching {
             $formation." ".
             $niveau_anglais." ".
             $experience_minimum." ".
-            $cursus_scolaire;
+            $cursus_scolaire." ORDER BY uc.score DESC";
 
 
         $stmt = $this->entityManager->getConnection()->prepare($query);
