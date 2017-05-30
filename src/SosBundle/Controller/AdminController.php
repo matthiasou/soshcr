@@ -14,12 +14,14 @@ class AdminController extends Controller
      */
     public function demandeRecommandationAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $today = new \DateTime('NOW');
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => $user, 'date' => $today));
         if (isset($_POST['nom_etablissement'])){
-            $em = $this->getDoctrine()->getManager();
-            $user = $this->get('security.token_storage')->getToken()->getUser();
             $civ = $_POST['civilite'];
             $civilite = $em->getRepository('SosBundle:Civilite')->findOneBy(array('id' => $civ));
-            if(isset($_POST['valider'])){
+            if(isset($_POST['valider']) && $recommandations == null){
                 $validation="Demande de recommandation envoyée !";
                 $newRecommandation = new  Recommandation();
                 $newRecommandation->setNomEtablissement($_POST['nom_etablissement']);
@@ -29,6 +31,7 @@ class AdminController extends Controller
                 $newRecommandation->setValide(0);
                 $newRecommandation->setCivilite($civilite);
                 $newRecommandation->setUser($user);
+                $newRecommandation->setDate($today);
                 $characts    = 'abcdefghijklmnopqrstuvwxyz';
                 $characts   .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $characts   .= '1234567890';
@@ -55,8 +58,11 @@ class AdminController extends Controller
                         'text/html'
                     );
                 $this->get('mailer')->send($message);
+                return $this->render('SosBundle:Dashboard:dashboard.html.twig', array("validation"=>$validation, "user" => $user));
             }
-            return $this->render('SosBundle:Dashboard:dashboard.html.twig', array("validation"=>$validation, "user" => $user));
+            else {
+            echo "Une recommandation a déjà été envoyée ajr";
+            }
         }
 
         return $this->render('SosBundle:Dashboard:demandeRecommandation.html.twig');
@@ -113,8 +119,7 @@ class AdminController extends Controller
                         'text/html'
                     );
                     $this->get('mailer')->send($message);
-                    $em->remove($reco);
-                       
+                    $em->remove($reco);  
                 }
                 $em->flush();
                 return $this->redirectToRoute('recommandations');

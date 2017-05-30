@@ -24,7 +24,7 @@ class Recommandation
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="User", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
      */
     private $user;
 
@@ -65,6 +65,13 @@ class Recommandation
      * @ORM\Column(name="code", type="string", length=5)
      */
     private $code;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date")
+     */
+    private $date;
 
 
 
@@ -268,5 +275,28 @@ class Recommandation
     public function getCivilite()
     {
         return $this->civilite;
+    }
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return SuppressionCompte
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 }
