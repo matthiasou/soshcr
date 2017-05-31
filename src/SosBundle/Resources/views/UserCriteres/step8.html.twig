@@ -8,20 +8,20 @@
 {% block sos_body %}
 
 	<div id="poste_hotellerie" class="col-xs-12 sos-form">
-		<h3 class="title-heading">{{ app.user.prenom|capitalize }}, quand es-tu disponible ?</h3>
-		<p>(Choisis 1 ou plusieures intervalles différentes, tu peux meme selectionner un seul jour !)</p>
+		<h3 class="title-heading">Quand es-tu disponible ?</h3>
+		<p>(Choisis 1 ou plusieures intervalles différentes, tu peux même sélectionner un seul jour !)</p>
 		<br>
 			<form class="informations col-sm-6 col-sm-offset-3" method="post" action="{{ path('usercriteres_step_9') }}">
 				<input type="hidden" name="form" value="step_8">
 				<br>
 				<div class="input-group-btn">
-				    <button class="btn btn-default" id="add-disponibilite-jour" type="button">
-						Ajouter un jour&nbsp;&nbsp;<i class="fa fa-plus" ></i>
+				    <button class="btn btn-default" id="add-disponibilite-periode" type="button">
+						Ajouter une période&nbsp;&nbsp;<i class="fa fa-plus" ></i>
 					</button>	
 			  	</div>
 				<div class="input-group-btn">
-				    <button class="btn btn-default" id="add-disponibilite-periode" type="button">
-						Ajouter une période&nbsp;&nbsp;<i class="fa fa-plus" ></i>
+				    <button class="btn btn-default" id="add-disponibilite-jour" type="button">
+						Ajouter un jour&nbsp;&nbsp;<i class="fa fa-plus" ></i>
 					</button>	
 			  	</div>
 

@@ -105,18 +105,20 @@ class UserController extends Controller
                 $disponibilitesArr[] = json_decode($critere->getDisponibilites());
 
             }
+            
             $disponibilitesArr = array_unique($disponibilitesArr, SORT_REGULAR);
             $postesArr = array_unique($postesArr, SORT_REGULAR);
             $contratsArr = array_unique($contratsArr, SORT_REGULAR);
             $formationsArr = array_unique($formationsArr);
             $anglaisArr = array_unique($anglaisArr);
             $userCriteres = array('formations' => $formationsArr, 'postes' => $postesArr, 'anglais' => $anglaisArr[0], 'contrats' => $contratsArr, 'disponibilite' => $disponibilitesArr);
-
+            
+            $recommandations = $user->getRecommandations();
             $now = new \DateTime('now');
             $age = $user->getDateNaissance();
             $userAge = $now->diff($age);
             
-            return $this->render('SosBundle:User:publicProfil.html.twig', array("user" => $user, 'userCriteres' => $userCriteres, 'userAge' => $userAge->y));  
+            return $this->render('SosBundle:User:publicProfil.html.twig', array("user" => $user, 'userCriteres' => $userCriteres, 'userAge' => $userAge->y, 'recommandations' => $recommandations));  
         }
         else
         {

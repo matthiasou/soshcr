@@ -3,74 +3,33 @@
 {% block sos_body %}
 
 <div class="container" style="padding-top: 60px;">
-  <h1 class="page-header">Mes informations personnelles</h1>
   <div class="row">
 
     <!-- edit form column -->
     <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3 col-xs-12 personal-info">
-
-      {% if app.user.criteres|length == 0 %}
-
-		  <div class="alert alert-soshcr alert-dismissable">
-	    	<a class="panel-close close" data-dismiss="alert">×</a> 
-			<i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;&nbsp;
-			{{ app.user.prenom }}, tu n'a pas encore rempli tes critères de recherches ! <strong><a href="{{ path('usercriteres_step_1') }}">Clique ici</a></strong> pour commencer. 
-	    </div>
-
-      {% else %}
-      
-      <a href="{{ path('public_profil', {'id' : app.user.id}) }}">
-        <div class="col-sm-6 col-sm-offset-3 alert alert-soshcr alert-dismissable">
-          <strong>Voir mon profil</strong>
-        </div>
-      </a>
-      <div class="clearfix"></div>
-      
-      {# 
-      {% for userCritere in app.user.criteres %}
-        {{ dump(userCritere) }}
-      {% endfor %} #}
-      
-      {% endif %}
-
-      <h3>Informations Personnelles</h3>
+      <h1 class="page-header">Informations Personnelles</h1>
       <form class="form-horizontal" name="profil-update" method="post" action="{{ path('profil') }}" role="form">
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Prénom :</label>
-          <div class="col-lg-8">
-            <input class="form-control" name="prenom" placeholder="{{ app.user.prenom }}" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Nom :</label>
-          <div class="col-lg-8">
-            <input class="form-control" name="nom" placeholder="{{ app.user.nom }}" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Téléphone :</label>
-          <div class="col-lg-8">
-            <input class="form-control" name="telephone" placeholder="{{ app.user.telephone }}" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Email :</label>
-          <div class="col-lg-8">
-            <input class="form-control" name="email" placeholder="{{ app.user.email }}" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Date de naissance:</label>
-          <div class="col-md-8">
-            <input class="form-control" name="dateNaissance" value="{{ app.user.dateNaissance|date('Y-m-d') }}" type="date">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label"></label>
-          <div class="col-md-8">
-            <input class="btn-soshcr" value="Enregistrer les modifications" type="submit">
-          </div>
-        </div>
+        
+          <p class="col-sm-6 text-right prim-color"><strong>Prénom :</strong></p>
+          <p class="col-sm-6 text-left">{{ app.user.prenom|capitalize }}</p>
+        <br>
+        
+          <p class="col-sm-6 text-right prim-color"><strong>Nom :</strong></p>
+          <p class="col-sm-6 text-left">{{ app.user.nom|capitalize }}</p>
+        <br>
+        
+          <p class="col-sm-6 text-right prim-color"><strong>Téléphone :</strong></p>
+          <p class="col-sm-6 text-left">{{ app.user.telephone }}</p>
+        <br>
+        
+          <p class="col-sm-6 text-right prim-color"><strong>Email :</strong></p>
+          <p class="col-sm-6 text-left">{{ app.user.email }}</p>
+        <br>
+        
+          <p class="col-sm-6 text-right prim-color"><strong>Date de naissance:</strong></p>
+          <p class="col-sm-6 text-left">{{ app.user.dateNaissance|date('Y-m-d') }}</p>
+        <br>
+
       </form>
     </div>
   </div>

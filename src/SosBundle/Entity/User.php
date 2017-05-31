@@ -53,6 +53,12 @@ class User extends BaseUser
     public $criteres;
 
     /**
+     *
+     * @ORM\OneToMany(targetEntity="Recommandation", mappedBy="user",cascade={"remove"})
+     */
+    public $recommandations;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="date_abonnement", type="date", nullable=true)
@@ -256,4 +262,38 @@ class User extends BaseUser
         return $dateInterval->y;
     }
 
+
+    /**
+     * Add recommandation
+     *
+     * @param \SosBundle\Entity\Recommandation $recommandation
+     *
+     * @return User
+     */
+    public function addRecommandation(\SosBundle\Entity\Recommandation $recommandation)
+    {
+        $this->recommandations[] = $recommandation;
+
+        return $this;
+    }
+
+    /**
+     * Remove recommandation
+     *
+     * @param \SosBundle\Entity\Recommandation $recommandation
+     */
+    public function removeRecommandation(\SosBundle\Entity\Recommandation $recommandation)
+    {
+        $this->recommandations->removeElement($recommandation);
+    }
+
+    /**
+     * Get recommandations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRecommandations()
+    {
+        return $this->recommandations;
+    }
 }
