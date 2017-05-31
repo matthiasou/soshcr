@@ -13,11 +13,9 @@ $(document).ready(function(){
 });
 
 function initialize() {
-    var options = {
-      componentRestrictions: {country: "fr"}
-     };
+
     var input = document.getElementById('ville');
-    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    var autocomplete = new google.maps.places.Autocomplete(input);
 
 }
 
