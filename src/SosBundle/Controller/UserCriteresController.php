@@ -420,5 +420,6 @@ class UserCriteresController extends Controller
         {
             return $this->redirectToRoute('usercriteres_'.$request->get('form'));
         }
+        //test
     }
 }
