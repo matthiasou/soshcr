@@ -524,7 +524,6 @@ class UserCriteresController extends Controller
         }
         else
         {
-            die(dump($request));
             return $this->redirectToRoute('usercriteres_'.$request->get('form'));
         }
     }
