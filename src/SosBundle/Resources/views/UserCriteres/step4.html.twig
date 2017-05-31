@@ -9,7 +9,7 @@
 
 	<div id="usercriteres_step_4" class="col-xs-12 col-sm-6 col-sm-offset-3 sos-form user-critere-form">
 		<form class="informations" method="post" action="{{ path('usercriteres_step_5') }}">
-			<h3 class="title-heading">{{ app.user.prenom|capitalize }}, quelle diplome as tu obtenu hôtelière / restauration ?</h3>
+			<h3 class="title-heading">Quels sont tes diplômes en hôtellerie-restauration ?</h3>
 			<br>
 			<ul>
 				<input type="hidden" name="form" value="step_4">
@@ -26,7 +26,7 @@
 			</ul>
 			<div class="clearfix"></div>
 			<br><br><br>
-			<h3 class="title-heading">Quel niveau d'anglais as tu ?</h3>
+			<h3 class="title-heading">Quel niveau d'anglais as-tu ?</h3>
 			<br>
 			<ul>
 				{% for anglais in niveauAnglais %}
@@ -34,6 +34,8 @@
 						<label>
 							<i class="fa fa-check validate" aria-hidden="true"></i>
 							<input type="radio" class="solo-input hidden" data-name="anglais" name="anglais" value="{{ anglais.id }}">	<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/anglais/' ~ anglais.id ~ '.png') }}" alt="">
+							<br>
+							{{anglais.libelle}}
 						</label>
 						<br>
 					</li>
@@ -41,7 +43,7 @@
 			</ul>
 			<div class="clearfix"></div>
 			<br><br>
-			<label><input required class="required-validation" type="checkbox">&nbsp;J'accepte les cgu / cgv</label>
+			<label><input required class="required-validation" type="checkbox">&nbsp;J'accepte les conditions générales d'utilisations</label>
 			<br>
 			<label><input required class="required-validation" type="checkbox">&nbsp;Je certifie sur l’honneur l’exactitude de ces informations</label>
 			<br>

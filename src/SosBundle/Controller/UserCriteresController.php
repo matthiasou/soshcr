@@ -370,7 +370,10 @@ class UserCriteresController extends Controller
             $repoEtablissement = $em->getRepository('SosBundle:Etablissement');
 
             //****SCORE*****
-            $pointsAnglais = $em->getRepository("SosBundle:Anglais")->findOneBy(array("id"=>$session->get('anglais')))->getPoints();
+
+            $anglais = $em->getRepository('SosBundle:Anglais')->find($resultat['anglais']);
+            $pointsAnglais = $anglais->getPoints();
+
             $pointsTotal=0;
             foreach ($resultat['postes'] as $k => $poste) {
                 $pointsExperience = $repoExperience->find(($poste['experience']))->getPoints();

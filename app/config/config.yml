@@ -79,6 +79,8 @@ fos_user:
         sender_name: "Soshcr"
     registration:
         confirmation:
+            template:   SosBundle:Registration:email.txt.twig
             enabled: true
+
         form:
             type: SosBundle\Form\RegistrationType

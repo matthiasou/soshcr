@@ -24,7 +24,7 @@ class Recommandation
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="recommandations")
      */
     private $user;
 
@@ -33,8 +33,6 @@ class Recommandation
      * @ORM\ManyToOne(targetEntity="Civilite")
      */
     private $civilite;
-
-
 
     /**
      * @ORM\Column(name="nom_etablissement", type="string", length=255)
