@@ -12,7 +12,7 @@
 					<th class="text-center">Email de l'etablissement</th>
 					<th class="text-center">Ville de l'etablissement</th>
 					<th class="text-center">Nom du responsable</th>
-					<th class="text-center">Non conforme / Ne pas envoyer</th>
+					<th class="text-center"></th>
 				</tr>
 			</thead>
 			{% for recommandation in recommandations %}
@@ -31,8 +31,8 @@
 			{% endfor %}
 			</tbody>
 		</table>
-	<input type="submit" name="valider" value="Valider toutes les demandes">
-	<input type="submit" name="supprimerreco" value="Supprimer les non conforme">
+	<input type="submit" name="valider" value="Valider les recommandations">
+	<input type="submit" name="supprimerreco" value="Supprimer les recommandations">
 </form>
 	</div>
 {% endblock %}

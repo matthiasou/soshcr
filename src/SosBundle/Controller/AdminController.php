@@ -76,34 +76,41 @@ class AdminController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $users = $em->getRepository('SosBundle:User')->findAll();
         $recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('valide' => 0));
-        if (isset($_POST['valider'])){
-            foreach($recommandations as $recommandation){
-                $utilisateur = $recommandation->getUser();
-                $recommandation->setValide(1);
-                $code = $recommandation->getCode();
-                $em->persist($recommandation);
-                $em->flush();
-                $message = \Swift_Message::newInstance()
-                    ->setSubject('Demande de recommandation')
-                    ->setFrom('soshcr@contact.fr')
-                    ->setTo($recommandation->getEmail())
-                    ->setBody(
-                        $this->renderView(
-                            'SosBundle:Admin:mailrecommandations.html.twig',
-                                array(
-                                    'utilisateur' => $utilisateur,
-                                    'code' => $code)
-                        ),
-                        'text/html'
-                    );
-                $this->get('mailer')->send($message);
-                
+        if (isset($_POST['valider']))
+        {
+            if (isset($_POST['id_recommandation']) && is_array($_POST['id_recommandation'])) 
+            {
+                foreach($_POST['id_recommandation'] as $reco)
+                {
+                    $recommandation = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('id' => $reco));
+                    $utilisateur = $recommandation->getUser();
+                    $recommandation->setValide(1);
+                    $code = $recommandation->getCode();
+                    $em->persist($recommandation);
+                    $em->flush();
+                    $message = \Swift_Message::newInstance()
+                        ->setSubject('Demande de recommandation')
+                        ->setFrom('soshcr@contact.fr')
+                        ->setTo($recommandation->getEmail())
+                        ->setBody(
+                            $this->renderView(
+                                'SosBundle:Admin:mailrecommandations.html.twig',
+                                    array(
+                                        'utilisateur' => $utilisateur,
+                                        'code' => $code)
+                            ),
+                            'text/html'
+                        );
+                    $this->get('mailer')->send($message);
+                }
             }
             return $this->redirectToRoute('recommandations');
         }
+            
+        
         if (isset($_POST['supprimerreco'])) 
         {
-            if (is_array($_POST['id_recommandation'])) 
+            if (isset($_POST['id_recommandation']) && is_array($_POST['id_recommandation'])) 
             {
                 foreach($_POST['id_recommandation'] as $value)
                 {
@@ -234,14 +241,22 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('SosBundle:User')->findBy(array('enabled' => 1));
-
         if (isset($_POST['valider'])){
+                foreach($users as $value)
+                {
+                    $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
+                    $user->setEnabled(1);
+                    $em->flush();
+                    return $this->redirectToRoute('validation');
+                }
+        }
+        if (isset($_POST['supprimerprofil'])){
             if (is_array($_POST['id_utilisateur'])) 
             {
                 foreach($_POST['id_utilisateur'] as $value)
                 {
                     $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
-                    $em->setEnabled(1);
+                    $em->remove($user);
                     $em->flush();
                     return $this->redirectToRoute('validation');
                 }
