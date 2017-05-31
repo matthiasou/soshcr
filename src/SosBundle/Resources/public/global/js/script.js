@@ -22,7 +22,7 @@ $(document).ready(function(){
     $('.delete-user').click(function(){
         swal({
                   title: "Es-tu sur ?",
-                  text: "Tu ne pourra plus utiliser ton compte",
+                  text: "Tu ne pourras plus utiliser ton compte",
                   type: "warning",
                   showCancelButton: true,
                   confirmButtonColor: "#DD6B55",
