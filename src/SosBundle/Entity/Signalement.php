@@ -31,43 +31,74 @@ class Signalement
     /**
      * @var string
      *
-     * @ORM\Column(name="signaleurPrenom", type="string", length=255)
+     * @ORM\Column(name="proposition", type="text")
      */
-    private $signaleurPrenom;
+    private $proposition;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="signaleurNom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255)
      */
-    private $signaleurNom;
+    private $prenom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="signaleurEmail", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $signaleurEmail;
+    private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="signaleurTelephone", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255)
      */
-    private $signaleurTelephone;
+    private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="signale", type="string", length=255)
+     * @ORM\Column(name="telephone", type="string", length=255)
      */
-    private $signale;
+    private $telephone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenomsignaleur", type="string", length=255)
+     */
+    private $prenomsignaleur;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomsignaleur", type="string", length=255)
+     */
+    private $nomsignaleur;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="emailsignaleur", type="string", length=255)
+     */
+    private $emailsignaleur;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telephonesignaleur", type="string", length=255)
+     */
+    private $telephonesignaleur;
+
+
+
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -99,122 +130,218 @@ class Signalement
     }
 
     /**
-     * Set signaleurPrenom
+     * Set proposition
      *
-     * @param string $signaleurPrenom
+     * @param string $proposition
      *
      * @return Signalement
      */
-    public function setSignaleurPrenom($signaleurPrenom)
+    public function setProposition($proposition)
     {
-        $this->signaleurPrenom = $signaleurPrenom;
+        $this->proposition = $proposition;
 
         return $this;
     }
 
     /**
-     * Get signaleurPrenom
+     * Get proposition
      *
      * @return string
      */
-    public function getSignaleurPrenom()
+    public function getProposition()
     {
-        return $this->signaleurPrenom;
+        return $this->proposition;
     }
 
     /**
-     * Set signaleurNom
+     * Set prenom
      *
-     * @param string $signaleurNom
+     * @param string $prenom
      *
      * @return Signalement
      */
-    public function setSignaleurNom($signaleurNom)
+    public function setPrenom($prenom)
     {
-        $this->signaleurNom = $signaleurNom;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
     /**
-     * Get signaleurNom
+     * Get prenom
      *
      * @return string
      */
-    public function getSignaleurNom()
+    public function getPrenom()
     {
-        return $this->signaleurNom;
+        return $this->prenom;
     }
 
     /**
-     * Set signaleurEmail
+     * Set nom
      *
-     * @param string $signaleurEmail
+     * @param string $nom
      *
      * @return Signalement
      */
-    public function setSignaleurEmail($signaleurEmail)
+    public function setNom($nom)
     {
-        $this->signaleurEmail = $signaleurEmail;
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * Get signaleurEmail
+     * Get nom
      *
      * @return string
      */
-    public function getSignaleurEmail()
+    public function getNom()
     {
-        return $this->signaleurEmail;
+        return $this->nom;
     }
 
     /**
-     * Set signaleurTelephone
+     * Set email
      *
-     * @param string $signaleurTelephone
+     * @param string $email
      *
      * @return Signalement
      */
-    public function setSignaleurTelephone($signaleurTelephone)
+    public function setEmail($email)
     {
-        $this->signaleurTelephone = $signaleurTelephone;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Get signaleurTelephone
+     * Get email
      *
      * @return string
      */
-    public function getSignaleurTelephone()
+    public function getEmail()
     {
-        return $this->signaleurTelephone;
+        return $this->email;
     }
 
     /**
-     * Set signale
+     * Set telephone
      *
-     * @param string $signale
+     * @param string $telephone
      *
      * @return Signalement
      */
-    public function setSignale($signale)
+    public function setTelephone($telephone)
     {
-        $this->signale = $signale;
+        $this->telephone = $telephone;
 
         return $this;
     }
 
     /**
-     * Get signale
+     * Get telephone
      *
      * @return string
      */
-    public function getSignale()
+    public function getTelephone()
     {
-        return $this->signale;
+        return $this->telephone;
+    }
+
+    /**
+     * Set prenomsignaleur
+     *
+     * @param string $prenomsignaleur
+     *
+     * @return Signalement
+     */
+    public function setPrenomsignaleur($prenomsignaleur)
+    {
+        $this->prenomsignaleur = $prenomsignaleur;
+
+        return $this;
+    }
+
+    /**
+     * Get prenomsignaleur
+     *
+     * @return string
+     */
+    public function getPrenomsignaleur()
+    {
+        return $this->prenomsignaleur;
+    }
+
+    /**
+     * Set nomsignaleur
+     *
+     * @param string $nomsignaleur
+     *
+     * @return Signalement
+     */
+    public function setNomsignaleur($nomsignaleur)
+    {
+        $this->nomsignaleur = $nomsignaleur;
+
+        return $this;
+    }
+
+    /**
+     * Get nomsignaleur
+     *
+     * @return string
+     */
+    public function getNomsignaleur()
+    {
+        return $this->nomsignaleur;
+    }
+
+    /**
+     * Set emailsignaleur
+     *
+     * @param string $emailsignaleur
+     *
+     * @return Signalement
+     */
+    public function setEmailsignaleur($emailsignaleur)
+    {
+        $this->emailsignaleur = $emailsignaleur;
+
+        return $this;
+    }
+
+    /**
+     * Get emailsignaleur
+     *
+     * @return string
+     */
+    public function getEmailsignaleur()
+    {
+        return $this->emailsignaleur;
+    }
+
+    /**
+     * Set telephonesignaleur
+     *
+     * @param string $telephonesignaleur
+     *
+     * @return Signalement
+     */
+    public function setTelephonesignaleur($telephonesignaleur)
+    {
+        $this->telephonesignaleur = $telephonesignaleur;
+
+        return $this;
+    }
+
+    /**
+     * Get telephonesignaleur
+     *
+     * @return string
+     */
+    public function getTelephonesignaleur()
+    {
+        return $this->telephonesignaleur;
     }
 }

@@ -6,16 +6,24 @@
 <div id="containers" class="col-sm-3">
 <!-- Text input-->
 <div class="form-group">
-	<label for="nom_prenom">Nom Prénom</label>  
+	<label for="nom_prenom">Nom</label>  
 	<div>
-		<input id="nom_prenom" name="nom_prenom" value="{{result.signaleurPrenom}}"/>
+		<input id="nom" name="nom" value="{{result.nom}}"/>
+	</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+	<label for="nom_prenom">Prénom</label>  
+	<div>
+		<input id="prenom" name="prenom" value="{{result.prenom}}"/>
 	</div>
 </div>
 <!-- Text input-->
 <div class="form-group">
 	<label for="telephone">Téléphone</label>  
 	<div>
-		<input id="telephone" name="telephone" value="{{result.signaleurTelephone}}" />
+		<input id="telephone" name="telephone" value="{{result.telephone}}" />
 	</div>
 </div>
 
@@ -23,7 +31,7 @@
 <div class="form-group">
 	<label for="email">Email</label>  
 	<div>
-		<input id="email" name="email" value="{{result.signaleurEmail}}" />
+		<input id="email" name="email" value="{{result.email}}" />
 	</div>
 </div>
 
@@ -32,6 +40,46 @@
 	<label for="raison">Que s'est il passé</label>  
 	<div>
 		<input id="raison" name="raison" value="{{result.raison}}" />
+	</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+	<label for="propostion">Proposition</label>  
+	<div>
+		<input id="propostion" name="propostion" value="{{result.proposition}}" />
+	</div>
+</div>
+
+<h3>Coordonnées du signaleur</h3>
+<!-- Text input-->
+<div class="form-group">
+	<label for="nomsignaleur">Nom</label>  
+	<div>
+		<input id="nomsignaleur" name="nomsignaleur" value="{{result.nomsignaleur}}"/>
+	</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+	<label for="prenomsignaleur">Prénom</label>  
+	<div>
+		<input id="prenomsignaleur" name="prenomsignaleur" value="{{result.prenomsignaleur}}"/>
+	</div>
+</div>
+<!-- Text input-->
+<div class="form-group">
+	<label for="telephonesignaleur">Téléphone</label>  
+	<div>
+		<input id="telephonesignaleur" name="telephonesignaleur" value="{{result.telephonesignaleur}}" />
+	</div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+	<label for="emailsignaleur">Email</label>  
+	<div>
+		<input id="emailsignaleur" name="emailsignaleur" value="{{result.emailsignaleur}}" />
 	</div>
 </div>
 
