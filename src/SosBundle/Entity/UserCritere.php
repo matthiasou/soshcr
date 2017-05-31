@@ -23,7 +23,7 @@ class UserCritere
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="criteres", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="criteres")
      */
     private $user;
 
