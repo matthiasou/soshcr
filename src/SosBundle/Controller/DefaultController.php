@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SosBundle\Entity\UserCritere;
 use SosBundle\Entity\User;
+use SosBundle\Entity\Signalement;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 
@@ -98,6 +99,7 @@ class DefaultController extends Controller
      */
     public function signalementProfilAction()
     {
+        $em = $this->getDoctrine()->getManager();
         if(isset($_POST['envoyer'])){
             if (($_POST['Raison'] != "") && ($_POST['Comments'] != "") && ($_POST['C_FirstName2'] != "") && ($_POST['C_LastName2'] != "")&& ($_POST['C_EmailAddress2'] != "") && ($_POST['C_Company2'] != "")){
                 $validation = "Votre signalement a été envoyé avec succès";
@@ -111,6 +113,20 @@ class DefaultController extends Controller
                 $prenomsignaleur = $_POST['C_LastName2'];
                 $emailsignaleur = $_POST['C_EmailAddress2'];
                 $telephonesignaleur = $_POST['C_Company2'];
+
+                $signalement = new Signalement();
+                $signalement->setNom($nom);
+                $signalement->setPrenom($prenom);
+                $signalement->setEmail($email);
+                $signalement->setTelephone($telephone);
+                $signalement->setRaison($raison);
+                $signalement->setProposition($contenu);
+                $signalement->setNomsignaleur($nomsignaleur);
+                $signalement->setPrenomsignaleur($prenomsignaleur);
+                $signalement->setEmailsignaleur($emailsignaleur);
+                $signalement->setTelephonesignaleur($telephonesignaleur);
+                $em->persist($signalement);
+                $em->flush();
                 $message = \Swift_Message::newInstance()
                         ->setSubject('Signalement d un profil')
                         ->setFrom('contact@soshcr.fr')
