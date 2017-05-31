@@ -441,8 +441,6 @@ class UserCriteresController extends Controller
             $repoEtablissement = $em->getRepository('SosBundle:Etablissement');
 
             //****SCORE*****
-            $session = $request->getSession();
-            $session->get('anglais');
             $user = $this->get('security.token_storage')->getToken()->getUser();
             $pointsAnglais = $em->getRepository("SosBundle:UserCritere")->findOneBy(array("user"=>$user->getId()))->getNiveauAnglais()->getPoints();
             $pointsTotal=0;
