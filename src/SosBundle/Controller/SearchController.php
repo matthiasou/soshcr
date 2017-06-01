@@ -504,6 +504,7 @@ class SearchController extends Controller
         // Demande le Cv au candidat
         if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "resultat") {
 
+            $action = $_POST['action'];
 
             $data['ville'] = $request->get('ville');
             $data['classification'] = $request->get('classification');
@@ -549,7 +550,7 @@ class SearchController extends Controller
 
             $tab_demande = [];
 
-            if ($_POST['action'] == 'imprimer' && (isset($_POST['mail_demande_utilisateur']))) {
+            if ($action == 'imprimer' && (isset($_POST['mail_demande_utilisateur']))) {
                 foreach ($_POST['mail_demande_utilisateur'] as $demandeCV) {
                     $tab_demande[] = $demandeCV;
                 }
@@ -561,23 +562,23 @@ class SearchController extends Controller
                 return $html2pdf->generatePdf($template, "ResultatsSOSHCR")->getContent();
 
 
-            } elseif ($_POST['action'] == 'demandeCV' && (isset($_POST['mail_demande_utilisateur']))) {
+            } elseif ($action == 'demandeCV' && (isset($_POST['mail_demande_utilisateur']))) {
                 foreach ($_POST['mail_demande_utilisateur'] as $demandeCV) {
                     $tab_demande[] = $demandeCV;
                 }
                 $data['mail_demande_utilisateur'] = $tab_demande;
                 return $this->render('SosBundle:Search:demandeCv.html.twig', array('data' => $data));
-            } elseif ($_POST['action'] == 'secteur_activite') {
+            } elseif ($action == 'secteur_activite') {
                 $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
                 $repo = $em->getRepository("SosBundle:Secteur");
                 $secteurs = $repo->findAll();
                 return $this->render('SosBundle:Search:secteur.html.twig', array('data' => $data, 'secteurs' => $secteurs, 'step' => '3'));
-            } elseif ($_POST['action'] == 'classification') {
+            } elseif ($action == 'classification') {
                 $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
                 $repo = $em->getRepository("SosBundle:Etablissement");
                 $etablissements = $repo->findAll();
                 return $this->render('SosBundle:Search:classification.html.twig', array('data' => $data, 'etablissements' => $etablissements, 'step' => '2'));
-            } elseif ($_POST['action'] == 'poste') {
+            } elseif ($action == 'poste') {
 
                 $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
                 $repoPostes = $em->getRepository('SosBundle:PosteRecherche');
@@ -593,25 +594,25 @@ class SearchController extends Controller
                 return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'secteurs' => $secteurs, 'services' => $services, 'data' => $data, 'step' => '5'));
 
 
-            } elseif ($_POST['action'] == 'contrat') {
+            } elseif ($action == 'contrat') {
                 $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
                 $repo = $em->getRepository("SosBundle:Contrat");
                 $contrats = $repo->findBy(array(), array('id' => 'desc'));
                 return $this->render('SosBundle:Search:contrat.html.twig', array('data' => $data, 'contrats' => $contrats, 'step' => '6'));
-            } elseif ($_POST['action'] == 'contrat_duree') {
+            } elseif ($action == 'contrat_duree') {
                 $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
                 $repo = $em->getRepository("SosBundle:Contrat");
                 $contrat = $repo->find($data['contrat']);
 
                 $contrat_duree = $contrat->getDuree();
                 return $this->render('SosBundle:Search:contrat_duree.html.twig', array('data' => $data, 'contrat_duree' => $contrat_duree, 'step' => '7'));
-            } elseif ($_POST['action'] == 'niveau_anglais') {
+            } elseif ($action == 'niveau_anglais') {
                 $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
                 $repo = $em->getRepository("SosBundle:Anglais");
                 $niveau_anglais = $repo->findAll();
 
                 return $this->render('SosBundle:Search:anglais.html.twig', array('data' => $data, 'niveau_anglais' => $niveau_anglais, 'step' => '8'));
-            } elseif ($_POST['action'] == 'cursus_scolaire') {
+            } elseif ($action == 'cursus_scolaire') {
                 $data['ville'] = $request->get('ville');
                 $data['classification'] = $request->get('classification');
                 $data['poste'] = $request->get('poste');
@@ -627,7 +628,7 @@ class SearchController extends Controller
                 $cursus_scolaire_repo = $em->getRepository("SosBundle:CursusScolaire");
                 $cursus_scolaire = $cursus_scolaire_repo->findBy(array(), array('id' => 'desc'));
                 return $this->render('SosBundle:Search:cursus_scolaire.html.twig', array('cursus_scolaire' => $cursus_scolaire, 'data' => $data, 'step' => '8'));
-            } elseif ($_POST['action'] == 'experience_minimum') {
+            } elseif ($action == 'experience_minimum') {
                 $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
                 $data['ville'] = $request->get('ville');
                 $data['classification'] = $request->get('classification');
@@ -642,6 +643,7 @@ class SearchController extends Controller
                 if (null !== $request->get('contrat_duree')) {
                     $data['contrat_duree'] = $request->get('contrat_duree');
                 }
+
 
 
                 $repo = $em->getRepository("SosBundle:Experience");
