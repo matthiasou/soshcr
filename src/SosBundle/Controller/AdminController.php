@@ -60,11 +60,10 @@ class AdminController extends Controller
                 $this->get('mailer')->send($message);
                 return $this->render('SosBundle:Dashboard:dashboard.html.twig', array("validation"=>$validation, "user" => $user));
             }
-            else {
-            echo "Une recommandation a déjà été envoyée ajr";
+            elseif(isset($_POST['valider']) && $recommandations != null){ 
+                return $this->render('SosBundle:Dashboard:demandeRecommandation.html.twig', array("error" => 'recommandation'));
             }
         }
-
         return $this->render('SosBundle:Dashboard:demandeRecommandation.html.twig');
     }
     /**
