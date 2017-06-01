@@ -20,7 +20,7 @@ class RegistrationType extends AbstractType
         $builder->add('prenom', null, array('label' => 'Prénom'));
         $builder->add('nom');
         $builder->add('telephone', null, array('label' => 'Téléphone'));
-        $builder->add('dateNaissance', TextType::class, array('label' => 'Âge'));
+        $builder->add('dateNaissance', TextType::class, array('label' => 'Date de naissance'));
         // $builder->add('adresse', AdresseType::class);
         $builder->remove('username');
 

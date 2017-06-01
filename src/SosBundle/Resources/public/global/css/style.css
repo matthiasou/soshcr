@@ -379,6 +379,7 @@ header #login-icon {
     margin: 0;
     letter-spacing: 5px;
     color: #394173;
+    margin-bottom: 30px;
 }
 
 .container #find-btn:hover {
