@@ -42,25 +42,25 @@
 		Modifier
 		<div class="col-md-12">
                     <ul class="social-network social-circle">
-                        <li><a href="#" class="icoTwitter" title="Classification"><i class="" ><input name ="action" value="classification" type="image" src="{{ asset('bundles/sos/global/img/rating/' ~ data.classification )}}-stars.png" border="0" class="img-responsive"  /></i></a></li>
-                        <li><a style="max-width: 40px;" href="#" class="icoTwitter" title="Poste"><i class="" ><input name ="action" value="poste" type="image" src="{{ asset('bundles/sos/global/img/poste/' ~ data.poste  ~ '.png') }} " border="0" class="img-responsive"  /></i></a></li>
+                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Classification" ><i class="" ><input name ="action" value="classification" style=" height:50px; background-image: url({{ asset('bundles/sos/global/img/rating/' ~ data.classification )}}-stars.png); color: transparent; float: right; border:none; background-color: transparent; background-repeat:no-repeat;background-size:contain;" class="img-responsive" type="submit" border="0"   /></i></a></li>
+                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Poste" ><i class="" ><input name ="action" value="poste" style=" height:50px; background-image: url({{ asset('bundles/sos/global/img/poste/' ~ data.poste  ~ '.png') }}); color: transparent; float: right; border:none; background-color: transparent; background-repeat:no-repeat;background-size:contain;" class="img-responsive" type="submit" border="0"   /></i></a></li>
                         <br>
-                        <li><a href="#" class="icoTwitter" title="Type de contrat"><i class="" ><input name ="action" value="contrat" type="image" src="{{ asset('bundles/sos/global/img/contrat/' ~ data.contrat ~ '.png') }} " border="0" class="img-responsive"  /></i></a></li>
+                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Type de contrat" ><i class="" ><input name ="action" value="contrat" style=" height:50px; background-image: url({{ asset('bundles/sos/global/img/contrat/' ~ data.contrat ~ '.png') }}); color: transparent; float: right; border:none; background-color: transparent; background-repeat:no-repeat;background-size:contain;" class="img-responsive" type="submit" border="0"   /></i></a></li>
                        	{% if data.cursus_scolaire is defined %}
-                        <li><a href="#" class="icoTwitter" title="Cursus scolaire"><i class="" ><input name ="action" value="cursus_scolaire" type="image"  src="{{ asset('bundles/sos/global/img/cursus/' ~ data.cursus_scolaire  ~ '.png') }} " border="0" class="img-responsive" /></i></a></li>
+                       	<li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Cursus scolaire" ><i class="" ><input name ="action" value="cursus_scolaire" style=" height:50px; background-image: url({{ asset('bundles/sos/global/img/cursus/' ~ data.cursus_scolaire  ~ '.png') }}); color: transparent; float: right; border:none; background-color: transparent; background-repeat:no-repeat;background-size:contain;" class="img-responsive" type="submit" border="0"   /></i></a></li>
                        	{% endif %}
                        	{% if data.experience_minimum is defined %}
-                        <li><a href="#" class="icoTwitter" title="Expérience"><i class="" ><input name ="action" value="experience_minimum" type="image"  src="{{ asset('bundles/sos/global/img/experience/' ~ data.experience_minimum  ~ '.png') }} " border="0" class="img-responsive" /></i></a></li>
+                       	<li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Expérience" ><i class="" ><input name ="action" value="experience_minimum" style=" height:50px; background-image: url({{ asset('bundles/sos/global/img/experience/' ~ data.experience_minimum  ~ '.png') }}); margin-top: 6px; width: 100%; color: transparent; float: right; border:none; background-color: transparent; background-repeat:no-repeat;background-size:contain;" class="img-responsive" type="submit" border="0"   /></i></a></li>
                        	{% endif %}
                        	<br>
                        	{% if data.contrat_duree is defined %}
-                        <li><a href="#" class="icoTwitter" title="Durée du contrat"><i class="" ><input style="width: 75%;" name ="action" value="contrat_duree" type="image"  src="{{ asset('bundles/sos/global/img/duree_contrat/' ~ data.contrat_duree  ~ '.png') }} " border="0" class="img-responsive" /></i></a></li>
+                       	<li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Durée du contrat" ><i class="" ><input name ="action" value="contrat_duree" style=" height:50px; background-image: url({{ asset('bundles/sos/global/img/duree_contrat/' ~ data.contrat_duree  ~ '.png') }}); width: 90%; color: transparent; float: right; border:none; background-color: transparent; background-repeat:no-repeat;background-size:contain;" class="img-responsive" type="submit" border="0"   /></i></a></li>
                        	{% endif %}
-                        <li><a href="#" class="icoTwitter" title="Niveau d'anglais"><i class="" ><input name ="action" value="niveau_anglais" type="image"  src="{{ asset('bundles/sos/global/img/anglais/' ~ data.niveau_anglais  ~ '.png') }} " border="0" class="img-responsive"/></i></a></li>
+                       	<li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Niveau d'anglais" ><i class="" ><input name ="action" value="niveau_anglais" style=" height:50px; background-image: url({{ asset('bundles/sos/global/img/anglais/' ~ data.niveau_anglais  ~ '.png') }}); color: transparent; float: right; border:none; background-color: transparent; background-repeat:no-repeat;background-size:contain;" class="img-responsive" type="submit" border="0"   /></i></a></li>
 
                     </ul>
         </div>
-		</div>
+		</div>     //tet
 
 		<div class="col-sm-8">
 				tout sélectionner <input onclick="CocheTout(this, 'mail_demande_utilisateur[]');" type="checkbox">
@@ -101,8 +101,8 @@
 		Outils
 		<div class="col-md-12">
                     <ul class="social-network social-circle">
-                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Imprimer les resultats" ><i class="" ><input name ="action" value="imprimer" style="max-width: 40px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/print.png') }}" border="0" class="img-responsive"  /></i></a></li>
-                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Demander les CV"><i class="" ><input name ="action" value="demandeCV"  style="max-width: 45px; float: right; " type="image" src="{{ asset('bundles/sos/global/img/cv.png') }}" border="0" class="img-responsive" alt="Submit" /></i></a></li>
+                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Imprimer les resultats" ><i class="" ><input name ="action" value="imprimer" style="background-image: url({{ asset('bundles/sos/global/img/print.png') }}); color: transparent; max-width: 40px; float: right; border:none;background-color: transparent; background-repeat:no-repeat;background-size:100% 100%;" type="submit" border="0"   /></i></a></li>
+                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Demander les CV" ><i class="" ><input name ="action" value="demandeCV" style="background-image: url({{ asset('bundles/sos/global/img/cv.png') }}); color: transparent; max-width: 45px; float: right; border:none;background-color: transparent; background-repeat:no-repeat;background-size:100% 100%;" type="submit" border="0"   /></i></a></li>
                         <br>
                        <input type="hidden" name="form" value="resultat">
                        </form>
