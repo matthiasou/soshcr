@@ -13,6 +13,9 @@ $(document).ready(function(){
         if (error == "resultat") {
             sweetAlert("Erreur :", "Veuillez sélectionner au moins un candidat !", "error")
         }
+        if (error == "recommandation") {
+            sweetAlert("Erreur :", "Vous avez déjà effectué une demande de recommandation aujourd'hui !", "error")
+        }
     }
 
     if (typeof validation != "undefined") {
