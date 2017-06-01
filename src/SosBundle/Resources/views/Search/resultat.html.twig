@@ -81,13 +81,14 @@
 					    	<p>{{ employe.email }}</p>
 					    	<p>{{ employe.telephone }}</p>
 					    </div>
-					    {% if employe.nbRecommandation == 0 %}
+					    {% if employe.getRecommandations()|length == 0 %}
                             <p>0 recommandation</p>
-                        {% elseif employe.nbRecommandation  > 1 %}
-                            <p><a href="#" class="icoTwitter" data-toggle="tooltip" title='{% for reco in data.recommandations %} {{ reco.nomEtablissement }}; {% endfor %}' >{{ employe.nbRecommandation  }} recommandations</p>
-                        {% elseif employe.nbRecommandation  == 1 %}
-                            <p><a href="#" class="icoTwitter" data-toggle="tooltip" title='{% for reco in data.recommandations %} {{ reco.nomEtablissement }}{% endfor %}' >{{ employe.nbRecommandation  }} recommandation</p>
+                        {% elseif employe.getRecommandations()|length > 1 %}
+                            <p><a href="#" class="icoTwitter" data-toggle="tooltip" title='{% for reco in employe.getRecommandations() %} {{ reco.nomEtablissement }}; {% endfor %}' >{{ employe.getRecommandations()|length  }} recommandations</p>
+                        {% elseif employe.getRecommandations()|length  == 1 %}
+                            <p><a href="#" class="icoTwitter" data-toggle="tooltip" title='{% for reco in employe.getRecommandations() %} {{ reco.nomEtablissement }}{% endfor %}' >{{ employe.getRecommandations()|length  }} recommandation</p>
                         {% endif %}
+
 					  </div>
 					</div>
 				{% endfor %}
