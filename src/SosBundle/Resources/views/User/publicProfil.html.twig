@@ -24,24 +24,14 @@
             </div>
 
             {% else %}
-            
 
             <div class="col-sm-6">
-                <h4 style="color:#555;font-weight:bold">Recommandations</h4>
+                <h4 style="color:#555;font-weight:bold">Formation</h4>
                 <ul>
-                {% set nbAttenteRecommandation = 0 %}
-                {% for recommandation in recommandations %}
-                  {% if recommandation.valide %}
-                    <li>
-                      {{ recommandation.nomEtablissement }}, {{ recommandation.ville }}
-                    </li>
-                  {% else %}
-                      {% set nbAttenteRecommandation =  nbAttenteRecommandation + 1 %}
-                  {% endif %}
-                  {% if nbAttenteRecommandation == recommandation|length %}
-                    (Pas encore de recommandations)
-                  {% endif %}
-                {% endfor %}
+                    {% for formation in userCriteres.formations %}
+                        <li>{{ formation|raw }}</li>
+                    {% endfor %}
+                </ul>
             </div>
             
             <div class="clearfix"></div>
@@ -105,14 +95,23 @@
 
               <div class="clearfix"></div>
 
-              <div class="col-sm-6">
-                <h4 style="color:#555;font-weight:bold">Formation</h4>
+             <div class="col-sm-6">
+                <h4 style="color:#555;font-weight:bold">Recommandations</h4>
                 <ul>
-                  {% for formation in userCriteres.formations %}
-                    <li>{{ formation|raw }}</li>
-                  {% endfor %}
-                </ul>
-              </div>
+                    {% set nbAttenteRecommandation = 0 %}
+                    {% for recommandation in recommandations %}
+                        {% if recommandation.valide %}
+                            <li>
+                                {{ recommandation.nomEtablissement }}, {{ recommandation.ville }}
+                            </li>
+                        {% else %}
+                            {% set nbAttenteRecommandation =  nbAttenteRecommandation + 1 %}
+                        {% endif %}
+                        {% if nbAttenteRecommandation == recommandation|length %}
+                            (Pas encore de recommandations)
+                        {% endif %}
+                    {% endfor %}
+             </div>
 
               <div class="col-sm-6">
                 <h4 style="color:#555;font-weight:bold">Anglais</h4>
