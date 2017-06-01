@@ -8,13 +8,13 @@
 {% block sos_body %}
 
 		<div id="poste_hotellerie" class="col-xs-12 sos-form">
-		<h3 class="title-heading">Quel postes recherches-tu ?</h3>
+		<h3 class="title-heading">Quels postes recherches-tu ?</h3>
 		<p>(Indique ton expérience sur chaque poste sélectionné)</p>
 		<br>
 		<ul class="col-lg-8 col-lg-offset-2">
 			<form class="informations user-critere-form" method="post" action="{{ path('usercriteres_step_8') }}">
 				<input type="hidden" name="form" value="step_5">
-				<h3 class="title-heading">Hotellerie</h3><br><br>
+				<h3 class="title-heading">Hôtellerie</h3><br><br>
 				{% for poste in postes %}
 					{% if poste.getSecteur().id == 1 %}
 					<li class="col-sm-2 text-center">
