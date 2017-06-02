@@ -107,7 +107,7 @@
                         {% else %}
                             {% set nbAttenteRecommandation =  nbAttenteRecommandation + 1 %}
                         {% endif %}
-                        {% if nbAttenteRecommandation == recommandation|length %}
+                        {% if nbAttenteRecommandation == recommandations|length %}
                             (Pas encore de recommandations)
                         {% endif %}
                     {% endfor %}

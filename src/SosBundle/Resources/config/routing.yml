@@ -164,6 +164,8 @@ public_profil:
 delete_user:
     path: /delete
     defaults: { _controller: SosBundle:User:deleteUser}
+    options:
+        expose: true
 
 mesrecommandations:
     path:     /mesrecommandations

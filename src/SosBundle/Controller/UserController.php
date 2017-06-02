@@ -23,6 +23,7 @@ class UserController extends Controller
  
     /**
      * @Route("/delete")
+     * options = { "expose" = true },
      */
     public function deleteUserAction()
     {

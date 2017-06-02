@@ -127,6 +127,7 @@ class UserCriteresController extends Controller
                 $json = $result->results[0];
                 // store into the session
                 $session = $request->getSession();
+                $session->set('ville', $json->formatted_address);
                 $session->set('latitude', $json->geometry->location->lat);
                 $session->set('longitude', $json->geometry->location->lng);
                 $session->set('rayon_emploi', $request->get('rayon_emploi'));
@@ -261,7 +262,7 @@ class UserCriteresController extends Controller
         $data = array();
         $em = $this->getDoctrine()->getManager();
         // Validation contrat
-        if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "step_8" )
+        if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "step_8" || $request->get('form') == "step_5")
         {
 
             $alreadyCriteresRepo = $em->getRepository('SosBundle:UserCritere');
@@ -281,6 +282,7 @@ class UserCriteresController extends Controller
             $resultat = array(
                 'contrats' => $session->get('contrats'),
                 'etablissements' => $session->get('etablissements'),
+                'ville' => $session->get('ville'),
                 'latitude' => $session->get('latitude'),
                 'longitude' => $session->get('longitude'),
                 'rayon_emploi' => $session->get('rayon_emploi'),
@@ -339,13 +341,18 @@ class UserCriteresController extends Controller
                     }
                     $usercritere->setPoste($repoPoste->find($poste['poste']));
                     $usercritere->setExperience($repoExperience->find($poste['experience']));
+                    $usercritere->setVille($resultat['ville']);
                     $usercritere->setLatitude($resultat['latitude']);
                     $usercritere->setLatitude($resultat['latitude']);
                     $usercritere->setLongitude($resultat['longitude']);
                     $usercritere->setRayonEmploi($resultat['rayon_emploi']);
                     $usercritere->setNiveauAnglais($repoAnglais->find($resultat['anglais']));
                     $usercritere->setScore($pointsTotal);
-                    $usercritere->setDisponibilites(json_encode($resultat['disponibilites']));
+                    if (!empty($resultat['disponibilites']))
+                    {
+                        $usercritere->setDisponibilites(json_encode($resultat['disponibilites']));
+                    }
+                    
                     foreach ($resultat['formations'] as $key => $value)
                     {
                         $formation = $repoFormation->find($value['id']);

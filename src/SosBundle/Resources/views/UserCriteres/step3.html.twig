@@ -19,8 +19,20 @@
 			<div class="row">
 			    <div class="input-group">
 					<input type="hidden" name="form" value="step_3">
-					<input required class="form-control" style="width:70%!important" placeholder="Nom de rue, ville..." name="ville" id="ville">
-					<input type="number" max="500" required class="form-control" style="width:30%!important" placeholder="Rayon (en km)" name="rayon_emploi" id="rayon_emploi">
+					<input 
+					{% for criteres in app.user.getCriteres() %}
+						placeholder="{{ criteres.getVille() }}" value="{{ criteres.getVille() }}"
+					{% else %}
+						placeholder="Nom de rue, ville..."
+					{% endfor %}
+					required class="form-control" style="width:70%!important"  name="ville" id="ville">
+					<input 
+					{% for criteres in app.user.getCriteres() %}
+						placeholder="{{ criteres.getRayonEmploi() }}" value="{{ criteres.getRayonEmploi() }}"
+					{% else %}
+						placeholder="Nom de rue, ville..."
+					{% endfor %}
+					type="number" max="500" required class="form-control" style="width:30%!important" placeholder="Rayon (en km)" name="rayon_emploi" id="rayon_emploi">
 					<span class="input-group-btn">
 						<button class="btn btn-default" id="seach-btn" type="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
 					</span>
