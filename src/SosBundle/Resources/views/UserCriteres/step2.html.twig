@@ -25,7 +25,13 @@
 				        	{% endif %} text-center">
 						<label style="cursor:pointer">
 							<i class="fa fa-check validate" aria-hidden="true"></i>
-							<input type="checkbox" class="solo-input hidden" data-name="etablissement" name="etablissements[][id]" value="{{ etablissement.id }}">
+							<input 
+							{% for criteres in app.user.getCriteres() %}
+								{% for userEtablissement in criteres.getEtablissement() %}
+									{% if userEtablissement.id ==  etablissement.id %}checked{% endif %}
+								{% endfor %}
+							{% endfor %}
+							type="checkbox" class="solo-input hidden" data-name="etablissement" name="etablissements[][id]" value="{{ etablissement.id }}">
 							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/rating/' ~ etablissement.id ~ '-stars.png') }} " alt="" class="img-responsive form-img"><br>
 							{{ etablissement.libelle|raw}}
 						</label>

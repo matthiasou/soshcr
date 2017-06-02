@@ -34,7 +34,7 @@ $(document).ready(function(){
                   closeOnConfirm: false
                 },
                 function(){
-                  swal("A bientôt !", "Nous te remercions d’avoir participé à l’aventure Soshcr et te souhaitons une très bonne continuation", "success");
+                  Routing.generate('delete_user');
                 });
     });
 

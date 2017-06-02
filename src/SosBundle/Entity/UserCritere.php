@@ -91,6 +91,11 @@ class UserCritere
     private $longitude;
 
     /**
+     * @ORM\Column(name="ville", type="text")
+     */
+    private $ville;
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="Anglais")
      */
@@ -200,6 +205,30 @@ class UserCritere
     public function getLongitude()
     {
         return $this->longitude;
+    }
+
+    /**
+     * Set ville
+     *
+     * @param string $ville
+     *
+     * @return UserCritere
+     */
+    public function setVille($ville)
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * Get ville
+     *
+     * @return string
+     */
+    public function getVille()
+    {
+        return $this->ville;
     }
 
     /**
