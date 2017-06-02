@@ -181,110 +181,7 @@ class UserCriteresController extends Controller
             return $this->redirectToRoute('usercriteres_'.$request->get('form'));
         }
     }
-    // /**
-    //  * @Route("/usercriteres/step6")
-    //  */
-    // public function step6Action(Request $request)
-    // {
-    //     $data = array();
-    //     $em = $this->getDoctrine()->getManager();
-    //   // Validation contrat
-    //   if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "step_5" )
-    //   {
-    //     $postesHotellerie = $request->get('data');
-    //     die(dump($request->get('data')));
-    //     foreach ($postesHotellerie as $key => $value) {
-    //       if (isset($value['poste']) && !empty($value['poste']) && isset($value['experience']) && !empty($value['experience']))
-    //       {
-    //         $data['postes'][] = array(
-    //           'poste' => $key,
-    //           'experience' => $value['experience']
-    //         );
-    //       }
 
-    //     }
-    //     $session = $request->getSession();
-    //     if (isset($data['postes']))
-    //     {
-    //       $session->set('postes', $data['postes']);
-    //     }
-    //     $qb = $em->createQueryBuilder();
-    //     $postesRestauration = $qb->select('p')
-    //             ->from('SosBundle:PosteRecherche','p')
-    //             ->where('p.secteur = :secteur_activite')
-    //             ->andWhere('p.service = :service_activite')
-    //             ->setParameters(array('secteur_activite' => 2, 'service_activite' => 1))
-    //             ->getQuery()
-    //             ->getResult();
-    //     dump($session->get('contrats'));
-    //     dump($session->get('etablissements'));
-    //     dump($session->get('ville'));
-    //     dump($session->get('rayon_emploi'));
-    //     dump($session->get('formation'));
-    //     dump($session->get('anglais'));
-    //     dump($session->get('postes'));
-    //     $repoExperiences = $em->getRepository('SosBundle:Experience');
-    //     $experiences = $repoExperiences->findAll();
-    //     return $this->render('SosBundle:UserCriteres:step6.html.twig', array('postesRestauration' => $postesRestauration, 'experiences' => $experiences));
-    //   }
-    //   else
-    //   {
-    //     return $this->redirectToRoute('usercriteres_'.$request->get('form'));
-    //   }
-    // }
-    // *
-    //  * @Route("/usercriteres/step7")
-
-    // public function step7Action(Request $request)
-    // {
-    //     $data = array();
-    //     $em = $this->getDoctrine()->getManager();
-    //   // Validation contrat
-    //   if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "step_6" )
-    //   {
-    //     $postesRestauration1 = $request->get('data');
-    //     foreach ($postesRestauration1 as $key => $value) {
-    //       if (isset($value['poste']) && !empty($value['poste']) && isset($value['experience']) && !empty($value['experience']))
-    //       {
-    //         $data['postes'][] = array(
-    //           'poste' => $key,
-    //           'experience' => $value['experience']
-    //         );
-    //       }
-
-    //     }
-    //     $session = $request->getSession();
-    //     if (isset($data['postes']))
-    //     {
-    //       foreach($session->get('postes') as $value){
-    //         array_push($data['postes'], $value);
-    //       }
-    //       $session->set('postes', $data['postes']);
-    //     }
-    //     $qb = $em->createQueryBuilder();
-    //     $postesRestauration = $qb->select('p')
-    //             ->from('SosBundle:PosteRecherche','p')
-    //             ->where('p.secteur = :secteur_activite')
-    //             ->andWhere('p.service = :service_activite')
-    //             ->setParameters(array('secteur_activite' => 2, 'service_activite' => 2))
-    //             ->getQuery()
-    //             ->getResult();
-    //     dump($session->get('contrats'));
-    //     dump($session->get('etablissements'));
-    //     dump($session->get('ville'));
-    //     dump($session->get('rayon_emploi'));
-    //     dump($session->get('formation'));
-    //     dump($session->get('anglais'));
-    //     dump($session->get('postes'));
-    //     $repoExperiences = $em->getRepository('SosBundle:Experience');
-    //     $experiences = $repoExperiences->findAll();
-    //     return $this->render('SosBundle:UserCriteres:step7.html.twig', array('postesRestauration' => $postesRestauration, 'experiences' => $experiences));
-    //   }
-    //   else
-    //   {
-    //     return $this->redirectToRoute('usercriteres_'.$request->get('form'));
-    //   }
-    // }
     /**
      * @Route("/usercriteres/step8")
      */
@@ -323,6 +220,39 @@ class UserCriteresController extends Controller
             return $this->redirectToRoute('usercriteres_'.$request->get('form'));
         }
     }
+
+    /**
+     * @Route("/usercriteres/edit/disponibilite")
+     */
+    public function disponibiliteModificationAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $criteres = $user->getCriteres();
+        $dispos = array();
+        foreach ($criteres as $key => $value) {
+            $dispos = json_decode($value->getDisponibilites());
+        }
+        $dispos = array_unique($dispos);
+        
+        if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "step_8" )
+        {
+            $dispos = $request->get('disponibilite');
+            if (!empty($dispos))
+            {
+                foreach ($criteres as $key => $value) {
+                    $value->setDisponibilites(json_encode($dispos));
+                    $em->persist($value);
+                }
+                $em->flush();
+            }
+            
+            return $this->redirectToRoute('dashboard');
+
+        }
+        return $this->render('SosBundle:UserCriteres:disponibilite_modification.html.twig', array('disponibilites' => $dispos));
+    }
+
     /**
      * @Route("/usercriteres/step9")
      */
