@@ -24,7 +24,7 @@
 
      <div class="col-xs-2" id="user-nav">
       {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <a href="#" id="user-icon">{{ app.user.prenom }}&nbsp;&nbsp;<i style="font-size:10px" class="fa fa-chevron-right" aria-hidden="true"></i></a>
+        <a href="#" id="user-icon">{{ app.user.prenom|capitalize }}&nbsp;&nbsp;<i style="font-size:10px" class="fa fa-chevron-right" aria-hidden="true"></i></a>
         <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-power-off" aria-hidden="true"></i></a>
       {% else %}
         <a class="launch-modal hidden-xs hidden-sm" id="login" href="#" data-modal-id="modal-login">Espace candidat</a>
@@ -33,6 +33,7 @@
 
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
   <ul id="user-menu">
+    <li><a href="{{ path('public_profil', {'id' : app.user.id}) }}">Mon Profil</a></li>
     <li><a href="{{ path('dashboard') }}">Tableau de bord</a></li>
   </ul>
 {% endif %}
