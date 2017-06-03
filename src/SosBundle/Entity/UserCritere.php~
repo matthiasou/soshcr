@@ -91,6 +91,11 @@ class UserCritere
     private $longitude;
 
     /**
+     * @ORM\Column(name="ville", type="text")
+     */
+    private $ville;
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="Anglais")
      */
