@@ -1,7 +1,7 @@
 <?php
-// src/SosBundle/Controller/RegistrationController.php
+// src/UserController/Controller/RegistrationController.php
 
-namespace SosBundle\Controller;
+namespace UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
