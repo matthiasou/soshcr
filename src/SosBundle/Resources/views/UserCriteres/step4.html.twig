@@ -17,12 +17,15 @@
 					<li class="col-sm-3 text-center">
 						<label>
 							<i class="fa fa-check validate" aria-hidden="true"></i>
-							<input 
+							{% set formationChecked = false %}
 							{% for criteres in app.user.getCriteres() %}
-								{% for userFormation in criteres.getFormation()  %}
-									{% if userFormation.getId() == formation.id %}checked{% endif %}
+								{% for f in criteres.getFormation() %}
+									{% if f.getId() == formation.id %}
+										{% set formationChecked = true %}
+									{% endif %}
 								{% endfor %}
 							{% endfor %}
+							<input {% if formationChecked %}checked{% endif %}
 							type="checkbox" class="solo-input hidden" data-name="formation" name="formation[][id]" value="{{ formation.id }}">
 							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/formation/' ~ formation.id ~ '.png') }}" alt="">
 						</label>

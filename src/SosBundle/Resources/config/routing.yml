@@ -144,6 +144,9 @@ edit_disponibilite:
     path: /usercriteres/edit/disponibilites
     defaults: { _controller: SosBundle:UserCriteres:step9}
 
+modification_usercriteres:
+    path: /usercriteres/edit
+    defaults: { _controller: SosBundle:UserCriteres:userCriteresModification}
 
 modification_disponibilites:
     path: /usercriteres/disponibilites
