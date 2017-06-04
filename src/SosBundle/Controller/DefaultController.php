@@ -62,7 +62,7 @@ class DefaultController extends Controller
     {
         if(isset($_POST['envoyer'])){
             if (($_POST['C_FirstName'] != "") && ($_POST['C_LastName'] != "") && ($_POST['C_EmailAddress'] != "") && ($_POST['C_Company'] != "")){
-                $validation = "Votre demande de contact a été envoyé avec succès";
+                $validation = "Message envoyé avec succès";
                 $nom = $_POST['C_FirstName'];
                 $prenom = $_POST['C_LastName'];
                 $email = $_POST['C_EmailAddress'];
