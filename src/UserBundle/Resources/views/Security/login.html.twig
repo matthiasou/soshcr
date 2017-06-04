@@ -59,7 +59,8 @@
                         <h1 class="page-header">Connexion</h1>
 
                         {% if error %}
-                            <span class="register-error">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                            <span class="register-error col-xs-4 col-xs-offset-4">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                            <br><br>
                         {% endif %}
                         
 
