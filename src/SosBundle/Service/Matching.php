@@ -85,10 +85,6 @@ class Matching {
             $niveau_anglais =  "AND uc.niveau_anglais_id >= ".$data['niveau_anglais'];
         }
 
-        if (isset($data['date'])) {
-            $date =  "AND uc.disponibilite >= ".$data['niveau_anglais'];
-        }
-
         $query = "SELECT DISTINCT u.id
             FROM utilisateur u
             JOIN user_critere uc
@@ -122,53 +118,61 @@ class Matching {
 
         $employesDateMatch = array();
         foreach ($listeEmployes as $key => $value) {
-            $criteres = $value->getCriteres();
-            foreach ($criteres as $k => $v) {
-                $disponibilites = json_decode($v->getDisponibilites());
-                foreach ($disponibilites as $cle => $dispo) {
+            if ($data['date_debut'] == null)
+            {
+                $employesDateMatch[] = $value->getId();
+            }
+            else
+            {
+                $criteres = $value->getCriteres();
+                foreach ($criteres as $k => $v) {
+                    $disponibilites = json_decode($v->getDisponibilites());
+                    foreach ($disponibilites as $cle => $dispo) {
 
-                    // Si range de dates
-                    if (preg_match('/([0-9]{2}\/[0-9]{2}\/[0-9]{4}) - ([0-9]{2}\/[0-9]{2}\/[0-9]{4})/', $dispo))
-                    {
-                        $dateDebut = preg_replace('/([0-9]{2}\-[0-9]{2}\-[0-9]{4}) - [0-9]{2}\-[0-9]{2}\-[0-9]{4}/', '$1', str_replace('/', '-', $dispo));
-                        $dateFin = preg_replace('/[0-9]{2}\-[0-9]{2}\-[0-9]{4} - ([0-9]{2}\-[0-9]{2}\-[0-9]{4})/', '$1', str_replace('/', '-', $dispo));
-                        $dispo1 = new \DateTime($dateDebut);
-                        $dispo2 = new \DateTime($dateFin);
-                        $dispo2->modify('+1 day'); // permet d'inclure la derniere date de disponibilité
-                        $period = new \DatePeriod(
-                             $dispo1,
-                             new \DateInterval('P1D'),
-                             $dispo2
-                        );
+                        // Si range de dates
+                        if (preg_match('/([0-9]{2}\/[0-9]{2}\/[0-9]{4}) - ([0-9]{2}\/[0-9]{2}\/[0-9]{4})/', $dispo))
+                        {
+                            $dateDebut = preg_replace('/([0-9]{2}\-[0-9]{2}\-[0-9]{4}) - [0-9]{2}\-[0-9]{2}\-[0-9]{4}/', '$1', str_replace('/', '-', $dispo));
+                            $dateFin = preg_replace('/[0-9]{2}\-[0-9]{2}\-[0-9]{4} - ([0-9]{2}\-[0-9]{2}\-[0-9]{4})/', '$1', str_replace('/', '-', $dispo));
+                            $dispo1 = new \DateTime($dateDebut);
+                            $dispo2 = new \DateTime($dateFin);
+                            $dispo2->modify('+1 day'); // permet d'inclure la derniere date de disponibilité
+                            $period = new \DatePeriod(
+                                 $dispo1,
+                                 new \DateInterval('P1D'),
+                                 $dispo2
+                            );
 
-                        $range = array();
-                        foreach ($period as $p) {
-                            $range[] = $p;
+                            $range = array();
+                            foreach ($period as $p) {
+                                $range[] = $p;
+                            }
+
+                            $dateCheck = new \DateTime(str_replace('/', '-', $data['date_debut']));
+                            foreach ($range as $dateRange) {
+
+                                if ($dateRange == $dateCheck)
+                                {
+                                    $employesDateMatch[] = $value->getId();
+                                }
+                            }
+
                         }
-
-                        $dateCheck = new \DateTime(str_replace('/', '-', $data['date_debut']));
-                        foreach ($range as $dateRange) {
-
-                            if ($dateRange == $dateCheck)
+                        else
+                        {
+                            $dateCheck = new \DateTime(str_replace('/', '-', $data['date_debut']));
+                            $date = new \DateTime(preg_replace('/([0-9]{2}\-[0-9]{2}\-[0-9]{4}\/).*/', '$1', str_replace('/', '-', $dispo)));
+                            
+                            if ($date == $dateCheck)
                             {
                                 $employesDateMatch[] = $value->getId();
                             }
                         }
 
                     }
-                    else
-                    {
-                        $dateCheck = new \DateTime(str_replace('/', '-', $data['date_debut']));
-                        $date = new \DateTime(preg_replace('/([0-9]{2}\-[0-9]{2}\-[0-9]{4}\/).*/', '$1', str_replace('/', '-', $dispo)));
-                        
-                        if ($date == $dateCheck)
-                        {
-                            $employesDateMatch[] = $value->getId();
-                        }
-                    }
-
-                }
+                }                
             }
+
         }
 
         $employesDateMatch = array_unique($employesDateMatch);
