@@ -2,97 +2,136 @@
 {% block sos_body %}
 <h3>Statistiques</h3>
 
-<ul>
-<li>Candidat actuel</li>
-<li>Candidat actuel > 6mois</li>
-<li>Prolongation achetée 
-	<ol>
-		<li>Total Global : 
+<table class="table table-striped " >
+
+<tr></td><td></td><td><b>Prolongation achetée</b><td></td><td></td></tr>
+<tr>
+<td>Total Global : 
 {% for result in results %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li>Mois en cours 
+</td>
+<td>
+Mois en cours 
 {% for result in result1 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li>Le mois dernier 
+</td>
+<td>
+Le mois dernier 
 {% for result in result2 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-</ol>
-<li>Profil créé
-	<ol>
-		<li>Total Global : 
+</td>
+<td></td>
+</tr>
+<tr></td><td></td><td><b>Profil créé</b><td></td><td></td></tr>
+<tr>
+<td>
+		Total Global : 
 {% for result in result3 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li>Mois en cours 
- 
-</li>
-<li>Profil supprimé
-	<ol>
-		<li>Travail trouvé avec SOSHCR : 
+</td>
+<td>
+Mois en cours
+{% for result in result19 %}
+	{{result.nb}}
+{% endfor %}
+</td> 
+<td>
+Le mois dernier 
+{% for result in result18 %}
+	{{result.nb}}
+{% endfor %}
+</td>
+<td></td>
+</tr>
+<tr><td>
+</td><td><b>Profil supprimé</b><td><td></td><td></td></tr>
+<tr>
+	<td>
+		Travail trouvé avec SOSHCR : 
 {% for result in result14 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li>Mois en cours 
+</td>
+<td>
+Mois en cours 
  {% for result in result4 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li> Le mois dernier
+</td>
+<td>
+Le mois dernier
 	{% for result in result5 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li>Travail trouvé sans SOSHCR : 
+</td>
+<td></td>
+</tr>
+<tr><td>
+Travail trouvé sans SOSHCR : 
 {% for result in result15 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li>Mois en cours 
+</td>
+<td>
+Mois en cours 
  {% for result in result6 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li> Le mois dernier
+</td>
+<td>
+Le mois dernier
 	{% for result in result7 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li>Création d'un compte gratuit : 
+</td>
+<td></td>
+
+</tr>
+<tr><td>
+Création d'un compte gratuit : 
  {% for result in result16 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li>Mois en cours 
+</td>
+<td>
+Mois en cours 
  {% for result in result8 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li> Le mois dernier
+</td>
+<td>
+Le mois dernier
 	{% for result in result9 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li>Autres raisons : 
+</td>
+<td></td>
+
+</tr>
+<tr>
+	<td>
+Autres raisons : 
 {% for result in result17 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li>Mois en cours 
+</td>
+<td>
+Mois en cours 
  {% for result in result10 %}
 	{{result.nb}}
 {% endfor %}
-</li>
-<li> Le mois dernier
+</td>
+<td>
+Le mois dernier
 	{% for result in result11 %}
 	{{result.nb}}
 {% endfor %}
-</li>
+</td>
+<td></td>
+</tr>
+</table>
 {% endblock %}

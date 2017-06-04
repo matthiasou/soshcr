@@ -70,6 +70,18 @@ class User extends BaseUser
      */
     private $message5J;
 
+    /**
+     * @ORM\Column(name="validation", type="boolean", nullable=true)
+     */
+    private $validation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date_inscription", type="date")
+     */
+    public $dateInscription;
+
 
     public function setEmail($email){
         parent::setEmail($email);
@@ -175,6 +187,30 @@ class User extends BaseUser
     }
 
     /**
+     * Set dateInscription
+     *
+     * @param \DateTime $dateInscription
+     *
+     * @return User
+     */
+    public function setDateInscription($dateInscription)
+    {      
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+
+    /**
+     * Get dateInscription
+     *
+     * @return \DateTime
+     */
+    public function getDateInscription()
+    {
+        return $this->dateInscription;
+    }
+
+    /**
      * Set dateAbonnement
      *
      * @param \DateTime $dateAbonnement
@@ -220,6 +256,30 @@ class User extends BaseUser
     public function getMessage5J()
     {
         return $this->message5J;
+    }
+
+    /**
+     * Set validation
+     *
+     * @param boolean $validation
+     *
+     * @return User
+     */
+    public function setValidation($validation)
+    {
+        $this->validation = $validation;
+
+        return $this;
+    }
+
+    /**
+     * Get validation
+     *
+     * @return boolean
+     */
+    public function getValidation()
+    {
+        return $this->validation;
     }
 
     /**
