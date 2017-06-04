@@ -248,15 +248,18 @@ class AdminController extends Controller
     public function validationAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('SosBundle:User')->findBy(array('enabled' => 1));
+        $users = $em->getRepository('SosBundle:User')->findBy(array('enabled' => 1, 'validation' => 0));
         if (isset($_POST['valider'])){
-                foreach($users as $value)
+            if (is_array($_POST['id_utilisateur'])) 
+            {
+                foreach($_POST['id_utilisateur'] as $value)
                 {
                     $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
-                    $user->setEnabled(1);
+                    $user->setValidation(1);
                     $em->flush();
-                    return $this->redirectToRoute('validation');
                 }
+                return $this->redirectToRoute('validation');
+            }
         }
         if (isset($_POST['supprimerprofil'])){
             if (is_array($_POST['id_utilisateur'])) 
@@ -264,10 +267,21 @@ class AdminController extends Controller
                 foreach($_POST['id_utilisateur'] as $value)
                 {
                     $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
+                    $message = \Swift_Message::newInstance()
+                    ->setSubject('Suppression de votre compte')
+                    ->setFrom('soshcr@contact.fr')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'SosBundle:Admin:suppression_compte.html.twig'
+                        ),
+                        'text/html'
+                    );
+                    $this->get('mailer')->send($message);
                     $em->remove($user);
                     $em->flush();
-                    return $this->redirectToRoute('validation');
                 }
+                return $this->redirectToRoute('validation');
             }
         }
         return $this->render('SosBundle:Admin:validation.html.twig', array("users" => $users));

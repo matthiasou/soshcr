@@ -4,7 +4,7 @@
     <link href="{{ asset('bundles/sos/tablesorter/themes/blue/style.css') }}" rel="stylesheet">
 {% endblock %}
 {% block javascripts %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	{{ parent() }}
 <script src="{{ asset('bundles/sos/tablesorter/jquery.tablesorter.js') }}"></script>
     <script>
 	$(document).ready(function() 
