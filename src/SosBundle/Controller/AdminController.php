@@ -141,11 +141,18 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $utilisateurs = $em->getRepository('SosBundle:User')->findAll();
+        $reco = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => $utilisateurs));
         if(isset($_POST['rechercher']) || isset($_POST['rechercherAll']))
         {
             if(isset($_POST['rechercherAll']))
-            {
-                return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs));
+            {   
+                foreach ($utilisateurs as $u){
+                    $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $u));
+                    $id = $user->getId();
+                    $nbRecommandation = count($user->getRecommandations());
+                    $items[$id]=$nbRecommandation;
+                }
+                return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, 'items' => $items));
             }
             if(isset($_POST['rechercher']) && ((!empty($_POST['nom'])) || !empty($_POST['prenom']) || !empty($_POST['telephone'])))
             {   
@@ -184,15 +191,16 @@ class AdminController extends Controller
                     $statement->execute();
                     $result1 = $statement->fetchAll();
                     foreach ($result1 as $res){
+                        $u = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $res));
                         $datenaissance = $res['date_naissance'];
                         $date = new \DateTime($datenaissance);
                         $today = new \DateTime('NOW');
                         $dateInterval = $date->diff($today);
                         $age = $dateInterval->y;
-
-                        $nbRecommandation = 0;
+                        $nbRecommandation = count($u->getRecommandations());
                     }
-                    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, "nbRecommandation" => $nbRecommandation));
+
+                    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation));
 
             }
         }
@@ -221,15 +229,16 @@ class AdminController extends Controller
             }
             return $this->redirectToRoute('utilisateurs'); 
         }
-
-        foreach ($utilisateurs as $utilisateur){
-            $u = $utilisateur->getId();
-            $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $utilisateur,'valide'=> 1));
-            $nbRecommandation = count($recommandation);
-            
-            //$recommandations = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => $u);
+        $items = array();
+        $count = 1;
+        foreach ($utilisateurs as $u){
+            $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $u));
+            $id = $user->getId();
+            $nbRecommandation = count($user->getRecommandations());
+            $items[$id]=$nbRecommandation;
         }
-    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, "nbRecommandation" => $nbRecommandation));
+
+    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, 'items' => $items));
 
     }
 
@@ -325,8 +334,14 @@ class AdminController extends Controller
         $statement = $connection->prepare("SELECT COUNT(*) as nb FROM suppression_compte, raison_suppression WHERE suppression_compte.raison_suppression_id = raison_suppression.id AND raison_suppression.id = 4 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()- INTERVAL 1 MONTH) ");
         $statement->execute();
         $result11 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM utilisateur WHERE YEAR(date_inscription) = YEAR(CURDATE()) AND MONTH(date_inscription) = MONTH(CURDATE()- INTERVAL 1 MONTH) ");
+        $statement->execute();
+        $result18 = $statement->fetchAll();
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM utilisateur WHERE YEAR(date_inscription) = YEAR(CURDATE()) AND MONTH(date_inscription) = MONTH(CURDATE()) ");
+        $statement->execute();
+        $result19 = $statement->fetchAll();
        
-        return $this->render('SosBundle:Admin:statistiques.html.twig', array('results' => $results, 'result1' => $result1, 'result2' => $result2, 'result3' => $result3, 'result4' => $result4, 'result5' => $result5, 'result6' => $result6, 'result7' => $result7, 'result8' => $result8, 'result9' => $result9, 'result10' => $result10, 'result11' => $result11, 'result12' => $result12, 'result13' => $result13, 'result14' => $result14, 'result15' => $result15, 'result16' => $result16, 'result17' => $result17));
+        return $this->render('SosBundle:Admin:statistiques.html.twig', array('results' => $results, 'result1' => $result1, 'result2' => $result2, 'result3' => $result3, 'result4' => $result4, 'result5' => $result5, 'result6' => $result6, 'result7' => $result7, 'result8' => $result8, 'result9' => $result9, 'result10' => $result10, 'result11' => $result11, 'result12' => $result12, 'result13' => $result13, 'result14' => $result14, 'result15' => $result15, 'result16' => $result16, 'result17' => $result17, 'result18' => $result18, 'result19' => $result19));
     }
     /**
      * @Route("admin/signalements")

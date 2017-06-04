@@ -47,7 +47,9 @@
 					<td>{{age}}</td>
 					<td>{{result.telephone}}</td>
 					<td>{{result.email}}</td>
-					<td></td>
+					<td>
+					{{nbRecommandation}}
+					</td>
 					<td>
 						<input type="checkbox" name="id_utilisateur[]" value="{{result.id}}" />
 					</td>
@@ -60,6 +62,7 @@
 	</div>
 {% endif %}
 {% if utilisateurs is defined %}
+	
 <form class="form-horizontal" method="POST" action="{{ path('utilisateurs') }}">
     <div class="table-responsive">
 		<table id="myTable" class="table text-center table-striped tablesorter">
@@ -71,20 +74,25 @@
 					<th class="text-center">Telephone</th>
 					<th class="text-center">Email</th>
 					<th class="text-center">Recommandation</th>
-					<th class="text-center">Region</th>
 					<th class="text-center">Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for utilisateur in utilisateurs %}
+
 				<tr>
 					<td><a href="{{ path('public_profil', {'id': utilisateur.id}) }}">{{utilisateur.nom}}</a></td>
 					<td><a href="{{ path('public_profil', {'id': utilisateur.id}) }}">{{utilisateur.prenom}}</a></td>
 					<td>{{utilisateur.getage()}}</td>
 					<td>{{utilisateur.telephone}}</td>
 					<td>{{utilisateur.email}}</td>
-					<td></td>
-					<td>Region</td>
+					<td>
+					{% for key,value in items %}
+						{% if key == utilisateur.id %}
+    					{{ value }}
+    					{% endif %}
+					{% endfor %}
+					</td>
 					<td>
 						<input type="checkbox" name="id_utilisateur[]" value="{{utilisateur.id}}" />
 					</td>
