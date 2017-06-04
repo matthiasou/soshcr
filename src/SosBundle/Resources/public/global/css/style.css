@@ -41,6 +41,8 @@ img.img-responsive.form-img{
     color: #394076;
 }
 
+.poste-libelle{max-width:100px;}
+
 #modal-login-label .btn-yellow{
     font-size: 22px;
 }
