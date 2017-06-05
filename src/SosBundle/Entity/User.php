@@ -195,8 +195,8 @@ class User extends BaseUser
      */
     public function setDateInscription($dateInscription)
     {      
-        $this->dateInscription = $dateInscription;
-
+        $date = new \DateTime('now');
+        $this->dateInscription = $date;
         return $this;
     }
 
