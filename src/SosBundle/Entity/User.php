@@ -78,7 +78,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="date_inscription", type="date", nullable="true")
+     * @ORM\Column(name="date_inscription", type="date", nullable=true)
      */
     public $dateInscription;
 
