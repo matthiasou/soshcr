@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SosBundle\Entity\UserCritere;
 use SosBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
 use SosBundle\Entity\Signalement;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 
@@ -23,8 +24,19 @@ class DefaultController extends Controller
     /**
      * @Route("/profil")
      */
-    public function profilAction()
+    public function profilAction(Request $request)
     {
+
+        if ($request->get('telephone') && $request->get('email'))
+        {
+            $em = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $user->setTelephone($request->get('telephone'));
+            $user->setEmail($request->get('email'));
+            $em->persist($user);
+            $em->flush();
+        }
+
         return $this->render('SosBundle:Default:profil.html.twig');
     }
 
