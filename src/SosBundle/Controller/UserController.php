@@ -79,7 +79,9 @@ class UserController extends Controller
         $recommandation->setValide(2);
         $em->persist($recommandation);
         $em->flush();
-        return $this->redirectToRoute('index', array('validation' => 'Recommandation validée !'));
+        $validation= 'Recommandation effectuée';
+        return $this->render('SosBundle:Default:index.html.twig', array("validation"=>$validation));
+
     }
  
     /**
