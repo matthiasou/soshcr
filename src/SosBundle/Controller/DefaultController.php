@@ -204,7 +204,7 @@ class DefaultController extends Controller
         $today = new \DateTime('NOW');
         foreach($users as $user){
              $age = $today->diff($user->getDateAbonnement());
-             dump($age->days);
+             
 
              if(($age->days)+1 == 0 || $age->invert == 1){
                  $em->remove($user);
