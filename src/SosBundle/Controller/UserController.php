@@ -52,7 +52,7 @@ class UserController extends Controller
         $recommandation->setValide(2);
         $em->persist($recommandation);
         $em->flush();
-        return $this->redirectToRoute('index');
+        return $this->redirectToRoute('index', array('validation' => 'Recommandation validée !'));
     }
  
     /**
