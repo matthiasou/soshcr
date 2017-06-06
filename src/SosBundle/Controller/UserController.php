@@ -4,6 +4,9 @@ namespace SosBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use SosBundle\Entity\SuppressionCompte;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class UserController extends Controller
 {
@@ -19,20 +22,44 @@ class UserController extends Controller
         return $this->render('SosBundle:User:mesrecommandations.html.twig', array("recommandations" => $recommandations, "nbreco"=>$nbreco));
     }
 
-
+    /**
+     * @Route("/delete/confirmed")
+     */
+    public function deleteConfirmationUserAction(Request $request)
+    {
+        return $this->render('SosBundle:User:delete_confirmed.html.twig');
+    }
  
     /**
      * @Route("/delete")
      * options = { "expose" = true },
      */
-    public function deleteUserAction()
+    public function deleteUserAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $this->geUser();
-        $em->remove($user);
-        $em->flush();
-        
-        return $this->redirectToRoute('index', array('validation' => 'Ton compte à bien été supprimé'));
+        $raisons = $em->getRepository('SosBundle:RaisonSuppression')->findAll();
+
+        if ($request->get('raison'))
+        {
+            $raison = $em->getRepository('SosBundle:RaisonSuppression')->find($request->get('raison'));
+            $suppression = new SuppressionCompte();
+            // si selection "autre", on rempli avec le contenu
+            if ($request->get('raison') == 4)
+            {
+                $suppression->setContenu($request->get('contenu'));
+            }
+            $suppression->setRaisonSuppression($raison);
+            $suppression->setDate(new \DateTime('now'));
+            $em->persist($suppression);
+            $user = $this->getUser();
+            $em->remove($user);
+            $em->flush();
+
+           return $this->redirectToRoute('delete_confirmed'); 
+
+        }
+
+        return $this->render('SosBundle:User:delete.html.twig', array('raisons' => $raisons));
     }
 
     /**

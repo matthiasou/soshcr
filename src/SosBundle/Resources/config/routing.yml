@@ -170,6 +170,10 @@ delete_user:
     options:
         expose: true
 
+delete_confirmed:
+    path: /delete/confirmed
+    defaults: { _controller: SosBundle:User:deleteConfirmationUser}
+
 mesrecommandations:
     path:     /mesrecommandations
     defaults: { _controller: SosBundle:User:mesrecommandations}
