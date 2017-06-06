@@ -36,6 +36,7 @@
 					<th class="text-center">Telephone</th>
 					<th class="text-center">Email</th>
 					<th class="text-center">Recommandation</th>
+					<th class="text-center">Date d'inscription</th>
 					<th class="text-center sorter-false">Supprimer</th>
 				</tr>
 			</thead>
@@ -49,6 +50,11 @@
 					<td>{{result.email}}</td>
 					<td>
 					{{nbRecommandation}}
+					</td>
+					<td>
+					{% if result.date_inscription is not empty %}
+					{{result.date_inscription|date("m/d/Y")}}
+					{% endif %}
 					</td>
 					<td>
 						<input type="checkbox" name="id_utilisateur[]" value="{{result.id}}" />
@@ -74,6 +80,7 @@
 					<th class="text-center">Telephone</th>
 					<th class="text-center">Email</th>
 					<th class="text-center">Recommandation</th>
+				    <th class="text-center">Date d'inscription</th>
 					<th class="text-center">Supprimer</th>
 				</tr>
 			</thead>
@@ -93,6 +100,7 @@
     					{% endif %}
 					{% endfor %}
 					</td>
+					<td>{{utilisateur.dateInscription|date("m/d/Y")}}</td>
 					<td>
 						<input type="checkbox" name="id_utilisateur[]" value="{{utilisateur.id}}" />
 					</td>
