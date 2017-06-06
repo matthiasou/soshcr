@@ -88,7 +88,11 @@
 					<li class="col-sm-2 text-center">
 						<label>
 							<i class="fa fa-check validate" aria-hidden="true"></i>
-							<input type="checkbox" class="main-input select-usercritere hidden" data-name="poste" name="data[{{ poste.id }}][poste]" value="{{ poste.id }}">
+							<input 
+							{% for criteres in app.user.getCriteres() %}
+								{% if criteres.getPoste().getId() == poste.id %}checked{% endif %}
+							{% endfor %}
+							type="checkbox" class="main-input select-usercritere hidden" data-name="poste" name="data[{{ poste.id }}][poste]" value="{{ poste.id }}">
 							<img style="max-height:75px; width:auto;" src="{{ asset('bundles/sos/global/img/poste/' ~ poste.id ~ '.png') }}" alt=""><br>
 							{{ poste.libelle|raw }}
 						</label>
@@ -97,7 +101,11 @@
 							<option value="0">--</option>
 							{% for experience in experiences %}
 								{# <label class="col-sm-12"><input type="radio" class="text-left sub-input" data-name="experience" name="data[{{ experience.id }}][experience]" value="{{ experience.id }}">&nbsp;{{ experience.libelle }}</label> #}
-								<option value="{{ experience.id }}">{{ experience.libelle|raw }}</option>
+								<option
+								{% for criteres in app.user.getCriteres() %}
+										{% if criteres.getExperience().getId() == experience.id and criteres.getPoste().getId() == poste.getId() %}selected{% endif %}
+								{% endfor %}
+								 value="{{ experience.id }}">{{ experience.libelle|raw }}</option>
 							{% endfor %}
 						</select>
 					</li>
