@@ -35,7 +35,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=255, unique=true)
+     * @ORM\Column(name="telephone", type="string", length=255)
      */
     public $telephone;
 
