@@ -3,7 +3,6 @@
 {% block sos_body %}
 
     <div class="container" id="imprimer">
-      <a href="javascript:imprime_bloc('titre', 'imprimer')" class='pull-right'><i class="fa fa-print prim-color" aria-hidden="true"></i>&nbsp;Imprimer le profil</a>
       
       <h1 class="page-header">{{ user.prenom|upper ~ ' ' ~ user.nom|upper }} ({{ userAge }} ans)</h1>
       <div class="row">
