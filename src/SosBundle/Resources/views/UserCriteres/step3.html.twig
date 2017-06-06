@@ -30,7 +30,7 @@
 					{% for criteres in app.user.getCriteres() %}
 						placeholder="{{ criteres.getRayonEmploi() }}" value="{{ criteres.getRayonEmploi() }}"
 					{% else %}
-						placeholder="Nom de rue, ville..."
+						placeholder="Rayon (en km)"
 					{% endfor %}
 					type="number" max="500" required class="form-control" style="width:30%!important" placeholder="Rayon (en km)" name="rayon_emploi" id="rayon_emploi">
 					<span class="input-group-btn">
