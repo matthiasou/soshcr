@@ -53,7 +53,7 @@
 					</td>
 					<td>
 					{% if result.date_inscription is not empty %}
-					{{result.date_inscription|date("m/d/Y")}}
+					{{result.date_inscription|date("d/m/Y")}}
 					{% endif %}
 					</td>
 					<td>
@@ -100,7 +100,7 @@
     					{% endif %}
 					{% endfor %}
 					</td>
-					<td>{{utilisateur.dateInscription|date("m/d/Y")}}</td>
+					<td>{{utilisateur.dateInscription|date("d/m/Y")}}</td>
 					<td>
 						<input type="checkbox" name="id_utilisateur[]" value="{{utilisateur.id}}" />
 					</td>
