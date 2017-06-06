@@ -39,7 +39,7 @@ class Matching {
         if (isset($data['ville'])) {
             // Recherche de l'employé
             $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians(uc.latitude))*cos(radians(uc.longitude)-radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians(uc.latitude))))";
-            dump($formule);
+            
         }
 
         if (isset($data['classification'])) {
@@ -213,7 +213,7 @@ class Matching {
         if (isset($data['ville'])) {
             // Recherche de l'employé
             $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians(uc.latitude))*cos(radians(uc.longitude)-radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians(uc.latitude))))";
-            dump($formule);
+            
         }
 
         if (isset($data['classification'])) {
@@ -317,7 +317,7 @@ class Matching {
         if (isset($data['ville'])) {
             // Recherche de l'employé
             $formule="(6366*acos(cos(radians(".$data['ville']['latitude']."))*cos(radians(uc.latitude))*cos(radians(uc.longitude)-radians(".$data['ville']['longitude']."))+sin(radians(".$data['ville']['latitude']."))*sin(radians(uc.latitude))))";
-            dump($formule);
+            
         }
 
         if (isset($data['classification'])) {
@@ -395,7 +395,7 @@ class Matching {
             $user = $this->entityManager->getRepository("SosBundle:User")->find($value);
             $pointsAnglais = $this->entityManager->getRepository("SosBundle:UserCritere")->findOneBy(array("user"=>$user->getId()))->getNiveauAnglais()->getPoints();
             $criters = $this->entityManager->getRepository("SosBundle:UserCritere")->findAll(array("user"=>$user->getId()));
-            dump($criters);
+            
             //$pointsExperience = $this->entityManager->getRepository("SosBundle:Experience")->find($criters->getExperience())->getPoints();
             //$pointsPoste = $this->entityManager->getRepository("SosBundle:PosteRecherche")->find($criters->getPoste())->getCoefficient();
 
