@@ -199,9 +199,14 @@ class AdminController extends Controller
                         $age = $dateInterval->y;
                         $nbRecommandation = count($u->getRecommandations());
                     }
-
-                    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation));
-
+                    if (empty($result1)){
+                        $nbRecommandation = 0;
+                        $age = "";
+                        return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation));
+                    }
+                    else {
+                        return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation));
+                    }
             }
         }
         if (isset($_POST['supprimer'])) 
