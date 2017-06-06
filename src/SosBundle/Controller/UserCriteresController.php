@@ -76,7 +76,7 @@ class UserCriteresController extends Controller
             $repoEtablissement = $em->getRepository('SosBundle:Etablissement');
             $etablissements = $repoEtablissement->findAll();
 
-            dump($session->get('contrats'));
+            
             return $this->render('SosBundle:UserCriteres:step2.html.twig', array('etablissements' => $etablissements));
         }
         else
@@ -97,8 +97,8 @@ class UserCriteresController extends Controller
             // store into the session
             $session = $request->getSession();
             $session->set('etablissements', $request->get('etablissements'));
-            dump($session->get('contrats'));
-            dump($session->get('etablissements'));
+            
+            
             return $this->render('SosBundle:UserCriteres:step3.html.twig');
         }
         else
@@ -120,7 +120,7 @@ class UserCriteresController extends Controller
             $geocoder = 'http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false';
             $query = sprintf($geocoder, urlencode($_POST['ville']));
             $result = json_decode(file_get_contents($query));
-            dump($result);
+            
             if ($result == NULL || $result == "" ||  $result->status == "ZERO_RESULTS" || $result->status == "INVALID_REQUEST"  || $result->status == "REQUEST_DENIED" ){
                 return $this->render('SosBundle:UserCriteres:step3.html.twig', array('error' => 'ville'));
             }else{
@@ -138,11 +138,11 @@ class UserCriteresController extends Controller
             $formations = $repoFormations->findAll();
             $repoAnglais = $em->getRepository('SosBundle:Anglais');
             $niveauAnglais = $repoAnglais->findAll();
-            dump($session->get('contrats'));
-            dump($session->get('etablissements'));
-            dump($session->get('latitude'));
-            dump($session->get('longitude'));
-            dump($session->get('rayon_emploi'));
+            
+            
+            
+            
+            
             return $this->render('SosBundle:UserCriteres:step4.html.twig', array('formations' => $formations, 'niveauAnglais' => $niveauAnglais));
         }
         else
@@ -166,13 +166,13 @@ class UserCriteresController extends Controller
             $session->set('anglais', $request->get('anglais'));
             $postesRepository = $em->getRepository('SosBundle:PosteRecherche');
             $postes = $postesRepository->findAll();
-            dump($session->get('contrats'));
-            dump($session->get('etablissements'));
-            dump($session->get('latitude'));
-            dump($session->get('longitude'));
-            dump($session->get('rayon_emploi'));
-            dump($session->get('formation'));
-            dump($session->get('anglais'));
+            
+            
+            
+            
+            
+            
+            
             $repoExperiences = $em->getRepository('SosBundle:Experience');
             $experiences = $repoExperiences->findAll();
             return $this->render('SosBundle:UserCriteres:step5.html.twig', array('postes' => $postes, 'experiences' => $experiences));
@@ -206,14 +206,14 @@ class UserCriteresController extends Controller
             }
             $session = $request->getSession();
             $session->set('postes', $data['postes']);
-            dump($session->get('contrats'));
-            dump($session->get('etablissements'));
-            dump($session->get('latitude'));
-            dump($session->get('longitude'));
-            dump($session->get('rayon_emploi'));
-            dump($session->get('formation'));
-            dump($session->get('anglais'));
-            dump($session->get('postes'));
+            
+            
+            
+            
+            
+            
+            
+            
             return $this->render('SosBundle:UserCriteres:step8.html.twig');
         }
         else
