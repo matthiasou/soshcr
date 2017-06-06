@@ -10,7 +10,7 @@
 	$(document).ready(function() 
     { 
         $("#myTable").tablesorter({
-    headers: {7: {sorter: false}}
+    headers: {8: {sorter: false}}
 }); 
     } 
 	); 
@@ -37,6 +37,7 @@
 					<th class="text-center">Email</th>
 					<th class="text-center">Recommandation</th>
 					<th class="text-center">Date d'inscription</th>
+					<th class="text-center">Score</th>
 					<th class="text-center sorter-false">Supprimer</th>
 				</tr>
 			</thead>
@@ -55,6 +56,13 @@
 					{% if result.date_inscription is not empty %}
 					{{result.date_inscription|date("d/m/Y")}}
 					{% endif %}
+					</td>
+					<td>
+						{% for s in score%}
+						{% if s.user.id == result.id %}
+							{{s.score}}
+						{% endif %}
+						{% endfor %}
 					</td>
 					<td>
 						<input type="checkbox" name="id_utilisateur[]" value="{{result.id}}" />
@@ -81,6 +89,7 @@
 					<th class="text-center">Email</th>
 					<th class="text-center">Recommandation</th>
 				    <th class="text-center">Date d'inscription</th>
+				    <th class="text-center">Score</th>
 					<th class="text-center">Supprimer</th>
 				</tr>
 			</thead>
@@ -101,6 +110,13 @@
 					{% endfor %}
 					</td>
 					<td>{{utilisateur.dateInscription|date("d/m/Y")}}</td>
+					<td>
+						{% for s in score%}
+						{% if s.user.id == utilisateur.id %}
+							{{s.score}}
+						{% endif %}
+						{% endfor %}
+					</td>
 					<td>
 						<input type="checkbox" name="id_utilisateur[]" value="{{utilisateur.id}}" />
 					</td>

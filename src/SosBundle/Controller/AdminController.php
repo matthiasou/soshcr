@@ -148,11 +148,12 @@ class AdminController extends Controller
             {   
                 foreach ($utilisateurs as $u){
                     $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $u));
-                    $id = $user->getId();
+                    $score = $em->getRepository('SosBundle:UserCritere')->findAll();
+                    $id = $user->getId(); 
                     $nbRecommandation = count($user->getRecommandations());
                     $items[$id]=$nbRecommandation;
                 }
-                return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, 'items' => $items));
+                return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, 'items' => $items,'score' => $score));
             }
             if(isset($_POST['rechercher']) && ((!empty($_POST['nom'])) || !empty($_POST['prenom']) || !empty($_POST['telephone'])))
             {   
@@ -192,6 +193,7 @@ class AdminController extends Controller
                     $result1 = $statement->fetchAll();
                     foreach ($result1 as $res){
                         $u = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $res));
+                        $score = $em->getRepository('SosBundle:UserCritere')->findAll();
                         $datenaissance = $res['date_naissance'];
                         $date = new \DateTime($datenaissance);
                         $today = new \DateTime('NOW');
@@ -202,10 +204,11 @@ class AdminController extends Controller
                     if (empty($result1)){
                         $nbRecommandation = 0;
                         $age = "";
-                        return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation));
+                        $score = "";
+                        return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation, 'score' => $score));
                     }
                     else {
-                        return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation));
+                        return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation, 'score' => $score));
                     }
             }
         }
@@ -239,11 +242,12 @@ class AdminController extends Controller
         foreach ($utilisateurs as $u){
             $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $u));
             $id = $user->getId();
+            $score = $em->getRepository('SosBundle:UserCritere')->findAll();
             $nbRecommandation = count($user->getRecommandations());
             $items[$id]=$nbRecommandation;
         }
 
-    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, 'items' => $items));
+    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, 'items' => $items, 'score' => $score));
 
     }
 
