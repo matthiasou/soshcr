@@ -58,10 +58,10 @@
 					{% endif %}
 					</td>
 					<td>
-						{% for s in score%}
-						{% if s.user.id == result.id %}
-							{{s.score}}
-						{% endif %}
+						{% for key,value in item %}
+							{% if result.id == key %}
+								{{value.score}}
+							{% endif %}
 						{% endfor %}
 					</td>
 					<td>
@@ -111,10 +111,10 @@
 					</td>
 					<td>{{utilisateur.dateInscription|date("d/m/Y")}}</td>
 					<td>
-						{% for s in score%}
-						{% if s.user.id == utilisateur.id %}
-							{{s.score}}
-						{% endif %}
+						{% for key,value in item %}
+							{% if utilisateur.id == key %}
+								{{value.score}}
+							{% endif %}
 						{% endfor %}
 					</td>
 					<td>
