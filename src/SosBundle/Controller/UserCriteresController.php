@@ -117,7 +117,7 @@ class UserCriteresController extends Controller
         if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "step_3" )
         {
 
-            $geocoder = 'http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false';
+            $geocoder = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBKuX3xaOa5tYT7bKs8jyEUL3eSiLgUs6M&address=%s&sensor=false';
             $query = sprintf($geocoder, urlencode($_POST['ville']));
             $result = json_decode(file_get_contents($query));
             dump($result);
