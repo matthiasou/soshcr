@@ -5,20 +5,20 @@
 {% endblock %}
 {% block javascripts %}
 	{{ parent() }}
-<script src="{{ asset('bundles/sos/tablesorter/jquery.tablesorter.js') }}"></script>
+	<script src="{{ asset('bundles/sos/tablesorter/jquery.tablesorter.js') }}"></script>
     <script>
-	$(document).ready(function() 
-    { 
-        $("#myTable").tablesorter({
-    headers: {7: {sorter: false}}
-}); 
-    } 
-	); 
-</script>
+		$(document).ready(function() 
+	    { 
+	        $("#myTable").tablesorter({
+	    		headers: {8: {sorter: false}}
+			}); 
+	    } 
+		); 
+	</script>
 {% endblock %}
 {% block sos_body %}
 	<h3>Recherche de profils</h3>
-<form method="POST" action="{{ path('utilisateurs') }}">
+	<form method="POST" action="{{ path('utilisateurs') }}">
 	Nom : <input type="text" name="nom">
 	Prénom : <input type="text" name="prenom">
 	Téléphone : <input type="text" name="telephone">	
@@ -37,6 +37,7 @@
 					<th class="text-center">Email</th>
 					<th class="text-center">Recommandation</th>
 					<th class="text-center">Date d'inscription</th>
+					<th class="text-center">Score</th>
 					<th class="text-center sorter-false">Supprimer</th>
 				</tr>
 			</thead>
@@ -52,9 +53,20 @@
 					{{nbRecommandation}}
 					</td>
 					<td>
-					{% if result.date_inscription is not empty %}
-					{{result.date_inscription|date("d/m/Y")}}
-					{% endif %}
+						{% if result.date_inscription is not empty %}
+							{{result.date_inscription|date("d/m/Y")}}
+						{% endif %}
+					</td>
+					<td>
+						{% for key,value in item %}
+							{% if result.id == key %}
+								{% if value is null %}
+									0
+									{% else %}
+									{{value.score}}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
 					</td>
 					<td>
 						<input type="checkbox" name="id_utilisateur[]" value="{{result.id}}" />
@@ -81,12 +93,12 @@
 					<th class="text-center">Email</th>
 					<th class="text-center">Recommandation</th>
 				    <th class="text-center">Date d'inscription</th>
+				    <th class="text-center">Score</th>
 					<th class="text-center">Supprimer</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for utilisateur in utilisateurs %}
-
 				<tr>
 					<td><a href="{{ path('public_profil', {'id': utilisateur.id}) }}">{{utilisateur.nom}}</a></td>
 					<td><a href="{{ path('public_profil', {'id': utilisateur.id}) }}">{{utilisateur.prenom}}</a></td>
@@ -96,11 +108,22 @@
 					<td>
 					{% for key,value in items %}
 						{% if key == utilisateur.id %}
-    					{{ value }}
+    						{{ value }}
     					{% endif %}
 					{% endfor %}
 					</td>
 					<td>{{utilisateur.dateInscription|date("d/m/Y")}}</td>
+					<td>
+						{% for key,value in item %}
+							{% if utilisateur.id == key %}
+								{% if value is null %}
+									0
+									{% else %}
+									{{value.score}}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+					</td>
 					<td>
 						<input type="checkbox" name="id_utilisateur[]" value="{{utilisateur.id}}" />
 					</td>

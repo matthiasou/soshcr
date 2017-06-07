@@ -142,17 +142,20 @@ class AdminController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $utilisateurs = $em->getRepository('SosBundle:User')->findAll();
         $reco = $em->getRepository('SosBundle:Recommandation')->findBy(array('user' => $utilisateurs));
+        $item = array();
         if(isset($_POST['rechercher']) || isset($_POST['rechercherAll']))
         {
             if(isset($_POST['rechercherAll']))
             {   
                 foreach ($utilisateurs as $u){
                     $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $u));
+                    $score = $em->getRepository('SosBundle:UserCritere')->findOneBy(array('user' => $u));
                     $id = $user->getId();
+                    $item[$id] = $score; 
                     $nbRecommandation = count($user->getRecommandations());
                     $items[$id]=$nbRecommandation;
                 }
-                return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, 'items' => $items));
+                return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, 'items' => $items,'item' => $item));
             }
             if(isset($_POST['rechercher']) && ((!empty($_POST['nom'])) || !empty($_POST['prenom']) || !empty($_POST['telephone'])))
             {   
@@ -190,8 +193,12 @@ class AdminController extends Controller
                     $statement = $connection->prepare($requete);
                     $statement->execute();
                     $result1 = $statement->fetchAll();
+                    $item = array();
                     foreach ($result1 as $res){
                         $u = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $res));
+                        $score = $em->getRepository('SosBundle:UserCritere')->findOneBy(array('user' => $u));
+                        $id = $u->getId();
+                        $item[$id] = $score; 
                         $datenaissance = $res['date_naissance'];
                         $date = new \DateTime($datenaissance);
                         $today = new \DateTime('NOW');
@@ -202,10 +209,11 @@ class AdminController extends Controller
                     if (empty($result1)){
                         $nbRecommandation = 0;
                         $age = "";
-                        return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation));
+                        $item = "";
+                        return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation, 'item' => $item));
                     }
                     else {
-                        return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation));
+                        return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("result1" => $result1, "age" => $age, 'nbRecommandation' => $nbRecommandation, 'item' => $item));
                     }
             }
         }
@@ -236,14 +244,17 @@ class AdminController extends Controller
         }
         $items = array();
         $count = 1;
+        $item = array();
         foreach ($utilisateurs as $u){
             $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $u));
+            $score = $em->getRepository('SosBundle:UserCritere')->findOneBy(array('user' => $u));
             $id = $user->getId();
+            $item[$id] = $score; 
             $nbRecommandation = count($user->getRecommandations());
             $items[$id]=$nbRecommandation;
         }
 
-    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, 'items' => $items));
+    return $this->render('SosBundle:Admin:utilisateurs.html.twig', array("utilisateurs" => $utilisateurs, 'items' => $items, 'item' => $item));
 
     }
 
