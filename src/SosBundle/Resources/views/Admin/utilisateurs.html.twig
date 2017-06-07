@@ -5,20 +5,20 @@
 {% endblock %}
 {% block javascripts %}
 	{{ parent() }}
-<script src="{{ asset('bundles/sos/tablesorter/jquery.tablesorter.js') }}"></script>
+	<script src="{{ asset('bundles/sos/tablesorter/jquery.tablesorter.js') }}"></script>
     <script>
-	$(document).ready(function() 
-    { 
-        $("#myTable").tablesorter({
-    headers: {8: {sorter: false}}
-}); 
-    } 
-	); 
-</script>
+		$(document).ready(function() 
+	    { 
+	        $("#myTable").tablesorter({
+	    		headers: {8: {sorter: false}}
+			}); 
+	    } 
+		); 
+	</script>
 {% endblock %}
 {% block sos_body %}
 	<h3>Recherche de profils</h3>
-<form method="POST" action="{{ path('utilisateurs') }}">
+	<form method="POST" action="{{ path('utilisateurs') }}">
 	Nom : <input type="text" name="nom">
 	Prénom : <input type="text" name="prenom">
 	Téléphone : <input type="text" name="telephone">	
@@ -53,14 +53,18 @@
 					{{nbRecommandation}}
 					</td>
 					<td>
-					{% if result.date_inscription is not empty %}
-					{{result.date_inscription|date("d/m/Y")}}
-					{% endif %}
+						{% if result.date_inscription is not empty %}
+							{{result.date_inscription|date("d/m/Y")}}
+						{% endif %}
 					</td>
 					<td>
 						{% for key,value in item %}
 							{% if result.id == key %}
-								{{value.score}}
+								{% if value is null %}
+									0
+									{% else %}
+									{{value.score}}
+								{% endif %}
 							{% endif %}
 						{% endfor %}
 					</td>
@@ -95,7 +99,6 @@
 			</thead>
 			<tbody>
 				{% for utilisateur in utilisateurs %}
-
 				<tr>
 					<td><a href="{{ path('public_profil', {'id': utilisateur.id}) }}">{{utilisateur.nom}}</a></td>
 					<td><a href="{{ path('public_profil', {'id': utilisateur.id}) }}">{{utilisateur.prenom}}</a></td>
@@ -105,7 +108,7 @@
 					<td>
 					{% for key,value in items %}
 						{% if key == utilisateur.id %}
-    					{{ value }}
+    						{{ value }}
     					{% endif %}
 					{% endfor %}
 					</td>
@@ -113,7 +116,11 @@
 					<td>
 						{% for key,value in item %}
 							{% if utilisateur.id == key %}
-								{{value.score}}
+								{% if value is null %}
+									0
+									{% else %}
+									{{value.score}}
+								{% endif %}
 							{% endif %}
 						{% endfor %}
 					</td>
