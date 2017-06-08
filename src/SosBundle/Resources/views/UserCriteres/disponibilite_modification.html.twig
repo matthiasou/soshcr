@@ -1,0 +1,74 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/sos/global/js/usercriteres.js') }}"></script>
+	<script>
+	$('.disponibilites').on('submit', function(e){
+		if ($('input[name="disponibilite[]"]').length == 0)
+		{
+			e.preventDefault();
+			sweetAlert('Oups!', 'Ajouter au moins une date !', 'error');
+		}
+	});
+	</script>
+{% endblock %}
+
+{% block sos_body %}
+
+	<div id="poste_hotellerie" class="col-xs-12 sos-form">
+		<h3 class="title-heading">Quand es-tu disponible ?</h3>
+		<p>(Choisis 1 ou plusieures intervalles différentes, tu peux même sélectionner un seul jour !)</p>
+		<br>
+			<form class="disponibilites col-sm-6 col-sm-offset-3" method="post" action="{{ path('modification_disponibilites') }}">
+				<input type="hidden" name="form" value="step_8">
+				<br>
+				{% for dispo in disponibilites %}
+
+					{% if dispo matches '{^[0-9]{2}\/[0-9]{2}\/[0-9]{4} - [0-9]{2}\/[0-9]{2}\/[0-9]{4}$}' %}
+						<div class="input-group" style="width:100%">
+							<input type="hidden" name="disponibilite[]" value="{{ dispo }}">
+		                    <input type="text" data-range="true" disabled placeholder="{{ dispo }}" value="{{ dispo }}" data-multiple-dates-separator=" - " class="form-control datepicker-here">
+		                    <div class="input-group-btn">
+		                        <button class="btn btn-default remove-disponibilite" type="button">
+		                            <i class="fa fa-minus" ></i>
+		                        </button>
+		                    </div>
+		                </div>
+					{% else %}
+						<div class="input-group" style="width:100%">
+							<input type="hidden" name="disponibilite[]" value="{{ dispo }}">
+		                    <input type="text" placeholder="{{ dispo }}" disabled value="{{ dispo }}" data-range="false" data-multiple-dates-separator=" - " class="form-control datepicker-here">
+		                    <div class="input-group-btn">
+		                        <button class="btn btn-default remove-disponibilite" type="button">
+		                            <i class="fa fa-minus" ></i>
+		                        </button>
+		                    </div>
+		                </div>
+					{% endif %}
+
+				{% endfor %}
+				<br>
+				<div class="input-group-btn">
+				    <button class="btn btn-default" id="add-disponibilite-periode" type="button">
+						Ajouter une période&nbsp;&nbsp;<i class="fa fa-plus" ></i>
+					</button>	
+			  	</div>
+				<div class="input-group-btn">
+				    <button class="btn btn-default" id="add-disponibilite-jour" type="button">
+						Ajouter un jour&nbsp;&nbsp;<i class="fa fa-plus" ></i>
+					</button>	
+			  	</div>
+
+				<div class="clearfix"></div>
+				<br><br><br>
+				<a href="{{ path('dashboard') }}" class="btn btn-soshcr">Annuler</a>
+				<button type="submit" class="btn btn-soshcr text-center">Suivant</button>
+			</form>
+
+
+
+	   	<div class="clearfix spacer"></div>
+	</div>
+
+{% endblock %}

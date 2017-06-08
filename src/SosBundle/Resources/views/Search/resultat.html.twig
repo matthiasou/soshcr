@@ -67,7 +67,9 @@
 
 				<br/><br>
                     {% if data.employes == null %}
-                           AUCUN CANDIDAT :(
+                           <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/loupeRes.png') }}" alt="" class="img-responsive form-img">
+                           <br>
+                           AUCUN CANDIDAT
                         {% endif %}
 
                     {% for employe in data.employes %}
