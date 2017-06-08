@@ -39,6 +39,24 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/abonnement")
+     */
+    public function abonnementAction()
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if(isset($_POST['4'])){
+            $amount = 0.01;
+            return $this->redirectToRoute('new', array('amount' => $amount));
+
+        }
+        if(isset($_POST['7'])){
+            $amount = 7;            
+            return $this->redirectToRoute('new', array('amount' => $amount));
+        }
+        return $this->render('SosBundle:Dashboard:abonnement.html.twig', array("user" => $user));
+    }
+
+    /**
      * @Route("/dashboard_admin")
      */
     public function dashboardAdminAction()
