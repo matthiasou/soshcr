@@ -84,4 +84,13 @@ fos_user:
             enabled: true
 
         form:
-            type: UserBundle\Form\RegistrationType
+            type: SosBundle\Form\RegistrationType
+jms_payment_core:
+    encryption:
+        secret: def0000004db11ad3ac4d3da6e410bd2292b3c5cb97557b35f10445ab526d686bd91ec45a4930f8bb89d89b90cb6f820bfc4bf0c91156513534b6ef39f25c431002ad507
+jms_payment_paypal:
+    username: contact_api1.soshcr.fr
+    password: 367KCNPLP6AC3TM5
+    signature: AFcWxV21C7fd0v3bYYYRCpSSRl31AfRJsTxmedDPX7UMO31tp1gSQSaG
+    debug: false
+
