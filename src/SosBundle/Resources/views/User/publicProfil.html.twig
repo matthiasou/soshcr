@@ -176,7 +176,9 @@
   {% endfor %}
 
   var $picker = $('.datepicker-public-profil');
+
   $picker.datepicker({
+      startDate: new Date(),
       language: 'fr',
       inline: true,
       multipleDates: true,
@@ -191,7 +193,6 @@
       }
   });
   $picker.data('datepicker').selectDate(dateArr);
-   
 
 </script>
 {% endblock %}
