@@ -6,80 +6,102 @@
 <div id="containers" class="col-sm-3">
 <!-- Text input-->
 <div class="form-group">
+	<div class="input-group">
 	<label for="nom_prenom">Nom</label>  
 	<div>
-		<input id="nom" name="nom" value="{{result.nom}}"/>
+		<input id="nom" name="nom" value="{{result.nom}}" size="25"/>
 	</div>
+</div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
+	<div class="input-group">
 	<label for="nom_prenom">Prénom</label>  
 	<div>
-		<input id="prenom" name="prenom" value="{{result.prenom}}"/>
+		<input id="prenom" name="prenom" value="{{result.prenom}}" size="25"/>
 	</div>
+</div>
 </div>
 <!-- Text input-->
 <div class="form-group">
+	<div class="input-group">
 	<label for="telephone">Téléphone</label>  
 	<div>
-		<input id="telephone" name="telephone" value="{{result.telephone}}" />
+		<input id="telephone" name="telephone" value="{{result.telephone}}" size="25"/>
 	</div>
+</div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
+	<div class="input-group">
 	<label for="email">Email</label>  
 	<div>
-		<input id="email" name="email" value="{{result.email}}" />
+		<input id="email" name="email" value="{{result.email}}" size="25"/>
 	</div>
+</div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
+	<div class="input-group">
 	<label for="raison">Que s'est il passé</label>  
 	<div>
-		<input id="raison" name="raison" value="{{result.raison}}" />
+				<textarea style="width:215px" rows="4">{{result.raison}}</textarea>
+	</div>
 	</div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
+	<div class="input-group">
 	<label for="propostion">Proposition</label>  
 	<div>
-		<input id="propostion" name="propostion" value="{{result.proposition}}" />
+		<textarea style="width:215px"rows="4">{{result.proposition}}</textarea>	
+	</div>
 	</div>
 </div>
 
-<h3>Coordonnées du signaleur</h3>
+	<div class="input-group">
+		<h3>Signaleur</h3>
+	</div>
 <!-- Text input-->
 <div class="form-group">
+	<div class="input-group">
 	<label for="nomsignaleur">Nom</label>  
 	<div>
-		<input id="nomsignaleur" name="nomsignaleur" value="{{result.nomsignaleur}}"/>
+		<input id="nomsignaleur" name="nomsignaleur" value="{{result.nomsignaleur}}" size="25"/>
+	</div>
 	</div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
+	<div class="input-group">
 	<label for="prenomsignaleur">Prénom</label>  
 	<div>
-		<input id="prenomsignaleur" name="prenomsignaleur" value="{{result.prenomsignaleur}}"/>
+		<input id="prenomsignaleur" name="prenomsignaleur" value="{{result.prenomsignaleur}}" size="25"/>
+	</div>
 	</div>
 </div>
 <!-- Text input-->
 <div class="form-group">
+	<div class="input-group">
 	<label for="telephonesignaleur">Téléphone</label>  
 	<div>
-		<input id="telephonesignaleur" name="telephonesignaleur" value="{{result.telephonesignaleur}}" />
+		<input id="telephonesignaleur" name="telephonesignaleur" value="{{result.telephonesignaleur}}" size="25"/>
+	</div>
 	</div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
+	<div class="input-group">
 	<label for="emailsignaleur">Email</label>  
 	<div>
-		<input id="emailsignaleur" name="emailsignaleur" value="{{result.emailsignaleur}}" />
+		<input id="emailsignaleur" name="emailsignaleur" value="{{result.emailsignaleur}}" size="25"/>
+	</div>
 	</div>
 </div>
 
@@ -87,10 +109,12 @@
 
 <!-- Button -->
 <div class="form-group">
+	<div class="input-group">
 	<label for="valider"></label>
 	<div>
 		<input type="submit" name="supprimer" value="Supprimer signalement" class="btn btn-primary">
 	</div>
+</div>
 </div>
 
 </form>
