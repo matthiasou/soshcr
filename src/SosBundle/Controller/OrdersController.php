@@ -41,8 +41,8 @@ public function showAction(Request $request, Order $order)
 {
 	$config = [
     'paypal_express_checkout' => [
-        'return_url' => "http://localhost:8888/soshcr2/web/app_dev.php/".$order->getId()."/payment/complete",
-        'cancel_url' => "http://localhost:8888/soshcr2/web/app_dev.php/".$order->getId()."/payment/cancel"
+        'return_url' => "https://soshcr.fr/dev/soshcr2/web/app_dev.php/".$order->getId()."/payment/complete",
+        'cancel_url' => "https://soshcr.fr/dev/soshcr2/web/app_dev.php/".$order->getId()."/payment/cancel"
     ],
 ];
 	$form = $this->createForm(ChoosePaymentMethodType::class, null, [
