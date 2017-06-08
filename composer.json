@@ -32,7 +32,9 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "knplabs/knp-snappy-bundle": "^1.4",
-        "h4cc/wkhtmltopdf-amd64": "^0.12.3"
+        "h4cc/wkhtmltopdf-amd64": "^0.12.3",
+        "jms/payment-core-bundle": "master-dev",
+        "jms/payment-paypal-bundle": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
