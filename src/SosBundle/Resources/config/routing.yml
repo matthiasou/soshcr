@@ -86,6 +86,10 @@ dashboard:
     path:     /dashboard
     defaults: { _controller: SosBundle:Default:dashboard }
 
+abonnement:
+    path:     /abonnement
+    defaults: { _controller: SosBundle:Default:abonnement }
+
 dashboard_admin:
     path:     /dashboard_admin
     defaults: { _controller: SosBundle:Default:dashboardAdmin }
@@ -206,3 +210,22 @@ recommandationsutilisateurs:
 medaille:
     path:     /medaille/{id}
     defaults: { _controller: SosBundle:Admin:medaille}
+
+#Paiement
+show:
+    path:    /{id}/show
+    defaults: { _controller: SosBundle:Orders:show }
+new:
+    path:    /new/{amount}
+    defaults: { _controller: SosBundle:Orders:new }
+paymentCreate:
+    path:    /{id}/payment/create
+    defaults: { _controller: SosBundle:Orders:paymentCreate }
+
+paymentComplete:
+    path:    /{id}/payment/complete
+    defaults: { _controller: SosBundle:Orders:paymentComplete }
+
+paymentCancel:
+    path:    /{id}/payment/cancel
+    defaults: { _controller: SosBundle:Orders:paymentCancel }

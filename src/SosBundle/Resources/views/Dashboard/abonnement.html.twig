@@ -1,0 +1,42 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+    <form method="POST">
+<div class="sub_table">
+  <div class="container">
+    <h3>Quel abonnement veux-tu ?</h3>
+    <div class="row">
+      <div class="table_title">
+      </div>
+      <div class="col-sm-6 col-md-6 col-xs-12">
+        <div class="box-1 center">
+          <div class="panel  panel-pricing">
+            <div class="panel-heading" style="background-color:#394076" >
+              <h3 style="color:#fff">12 Mois</h3>
+            </div>
+            <div class="panel-body text-center">
+              <p><strong>4€</strong></p>
+            </div>
+
+                <input type="submit" name="4" class="btn btn-lg btn-block btn-soshcr" value="Payer">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6 col-xs-12">
+        <div class="box-1 center">
+          <div class="panel  panel-pricing">
+            <div class="panel-heading" style="background-color:#394076" >
+              <h3 style="color:#fff">36 Mois</h3>
+            </div>
+            <div class="panel-body text-center">
+              <p><strong>7€</strong></p>
+            </div>
+                <input type="submit" name="7" class="btn btn-lg btn-block btn-soshcr" value="Payer">
+        </div>
+      </div>
+</div>
+    </div>
+  </div>
+</div>
+</form>
+{% endblock %}
