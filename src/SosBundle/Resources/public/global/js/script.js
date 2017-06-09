@@ -22,6 +22,15 @@ $(document).ready(function(){
         sweetAlert("", validation, "success");
     }
 
+    $('#burger-button').click(function(e){
+        $('.mobile-menu').slideToggle();
+    });
+
+    $('#close-mobile-menu').click(function(e){
+        $('.mobile-menu').slideToggle();
+    });
+
+
     // Afficher les postes recherche en cliquant sur les secteurs
     $('.secteur-button').click(function(){
         var ul = $('.'+$(this).attr('data-target'));
