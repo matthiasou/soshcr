@@ -1,8 +1,0 @@
-{# src/SosBundle/Resources/views/Orders/show.html.twig #}
-
-{% form_theme form 'SosBundle:Orders:theme.html.twig' %}
-
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" value="Pay € {{ order.amount }}" />
-{{ form_end(form) }}
