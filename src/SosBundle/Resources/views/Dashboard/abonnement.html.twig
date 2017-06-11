@@ -1,7 +1,7 @@
 {% extends 'SosBundle::layout.html.twig' %}
 
 {% block sos_body %}
-    <form method="POST">
+    <form method="POST" action ="{{path('payment')}}">
 <div class="sub_table">
   <div class="container">
     <h3>Quel abonnement veux-tu ?</h3>
@@ -15,9 +15,9 @@
               <h3 style="color:#fff">12 Mois</h3>
             </div>
             <div class="panel-body text-center">
-              <p><strong>4€</strong></p>
+              <p><strong>15€</strong></p>
             </div>
-
+                <input type="hidden" name="id_utilisateur" value="{{user.id}}">
                 <input type="submit" name="4" class="btn btn-lg btn-block btn-soshcr" value="Payer">
           </div>
         </div>
@@ -29,7 +29,7 @@
               <h3 style="color:#fff">36 Mois</h3>
             </div>
             <div class="panel-body text-center">
-              <p><strong>7€</strong></p>
+              <p><strong>30€</strong></p>
             </div>
                 <input type="submit" name="7" class="btn btn-lg btn-block btn-soshcr" value="Payer">
         </div>

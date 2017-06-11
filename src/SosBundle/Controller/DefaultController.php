@@ -46,12 +46,12 @@ class DefaultController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         if(isset($_POST['4'])){
             $amount = 0.01;
-            return $this->redirectToRoute('new', array('amount' => $amount));
+            return $this->redirectToRoute('payment', array('amount' => $amount, 'user' => $user));
 
         }
         if(isset($_POST['7'])){
             $amount = 7;            
-            return $this->redirectToRoute('new', array('amount' => $amount));
+            return $this->redirectToRoute('payment', array('amount' => $amount, 'user' => $user));
         }
         return $this->render('SosBundle:Dashboard:abonnement.html.twig', array("user" => $user));
     }
