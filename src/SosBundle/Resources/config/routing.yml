@@ -212,20 +212,12 @@ medaille:
     defaults: { _controller: SosBundle:Admin:medaille}
 
 #Paiement
-show:
-    path:    /{id}/show
-    defaults: { _controller: SosBundle:Orders:show }
-new:
-    path:    /new/{amount}
-    defaults: { _controller: SosBundle:Orders:new }
-paymentCreate:
-    path:    /{id}/payment/create
-    defaults: { _controller: SosBundle:Orders:paymentCreate }
-
-paymentComplete:
-    path:    /{id}/payment/complete
-    defaults: { _controller: SosBundle:Orders:paymentComplete }
-
-paymentCancel:
-    path:    /{id}/payment/cancel
-    defaults: { _controller: SosBundle:Orders:paymentCancel }
+payment:
+    path:    /payment
+    defaults: { _controller: SosBundle:Orders:payment }
+sucess:
+    path:    /payment/success/{id}
+    defaults: { _controller: SosBundle:Orders:sucess }
+error:
+    path:    /payment/error/{id}
+    defaults: { _controller: SosBundle:Orders:error }
