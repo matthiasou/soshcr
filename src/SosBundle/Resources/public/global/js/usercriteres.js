@@ -1,5 +1,25 @@
 $(document).ready(function(){
         
+    $('.disponibilite').submit(function(event){
+        error = 0;
+        if ($('input[name="disponibilite[]"]').length == 0)
+        {
+            error++;
+        }
+        $('input[name="disponibilite[]"]').each(function(){
+            if ($(this).val() == "")
+            {
+                error++;
+            }
+        });
+
+        if (error > 0)
+        {
+           sweetAlert("Erreur :", "Sélectionne au moins une date de disponibilité", "error");
+           event.preventDefault();
+        }
+    });
+
     // Check a la validation du formulaire si tout est checké
     $('.user-critere-form').submit(function(event){
 

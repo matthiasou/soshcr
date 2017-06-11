@@ -3,7 +3,6 @@
 {% block sos_body %}
 
     <div class="container" id="imprimer">
-      <a href="javascript:imprime_bloc('titre', 'imprimer')" class='pull-right'><i class="fa fa-print prim-color" aria-hidden="true"></i>&nbsp;Imprimer le profil</a>
       
       <h1 class="page-header">{{ user.prenom|upper ~ ' ' ~ user.nom|upper }} ({{ userAge }} ans)</h1>
       <div class="row">
@@ -107,7 +106,7 @@
                         {% else %}
                             {% set nbAttenteRecommandation =  nbAttenteRecommandation + 1 %}
                         {% endif %}
-                        {% if nbAttenteRecommandation == recommandation|length %}
+                        {% if nbAttenteRecommandation == recommandations|length %}
                             (Pas encore de recommandations)
                         {% endif %}
                     {% endfor %}
@@ -177,7 +176,9 @@
   {% endfor %}
 
   var $picker = $('.datepicker-public-profil');
+
   $picker.datepicker({
+     
       language: 'fr',
       inline: true,
       multipleDates: true,
@@ -192,7 +193,6 @@
       }
   });
   $picker.data('datepicker').selectDate(dateArr);
-   
-
+  $picker.data('datepicker').date = new Date();
 </script>
 {% endblock %}

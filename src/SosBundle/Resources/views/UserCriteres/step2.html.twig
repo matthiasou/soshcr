@@ -9,7 +9,7 @@
 {% block sos_body %}
 
 	<div id="poste_hotellerie" class="col-xs-12 sos-form user-critere-form">
-		<h3 class="title-heading">Quels etablissements ?</h3>
+		<h3 class="title-heading">Quels établissements t'intéressent ?</h3>
 		<p>(Plusieurs choix possibles)</p>
 		<br>
 		<ul class="col-lg-8 col-lg-offset-2">
@@ -25,7 +25,16 @@
 				        	{% endif %} text-center">
 						<label style="cursor:pointer">
 							<i class="fa fa-check validate" aria-hidden="true"></i>
-							<input type="checkbox" class="solo-input hidden" data-name="etablissement" name="etablissements[][id]" value="{{ etablissement.id }}">
+							{% set etablissementChecked = false %}
+							{% for criteres in app.user.getCriteres() %}
+								{% for e in criteres.getEtablissement() %}
+									{% if e.getId() == etablissement.id %}
+										{% set etablissementChecked = true %}
+									{% endif %}
+								{% endfor %}
+							{% endfor %}
+							<input {% if etablissementChecked %}checked{% endif %}
+							type="checkbox" class="solo-input hidden" data-name="etablissement" name="etablissements[][id]" value="{{ etablissement.id }}">
 							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/rating/' ~ etablissement.id ~ '-stars.png') }} " alt="" class="img-responsive form-img"><br>
 							{{ etablissement.libelle|raw}}
 						</label>
