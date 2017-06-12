@@ -55,7 +55,6 @@ footer a, header a {
     #user-nav {
         margin-top: 0px!important;
     }
-
 }
 
 #close-mobile-menu{
@@ -549,6 +548,7 @@ header #login-icon {
 /***********************************************/
 
 footer {
+    position: relative;
     text-align: center;
     background-color: #9CA1B8;
     width: 100%;
@@ -560,8 +560,12 @@ footer {
 }
 
 footer ul {
+    position: absolute;
+    bottom: 50px;
     transform: rotate(-2.5deg);
-    font-size: 20px
+    font-size: 20px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 footer ul li {
@@ -572,23 +576,15 @@ footer ul li {
     font-family: "Stellar";
 }
 
-@media only screen and (max-width: 767px) {
-    #barre-jaune-footer {
-        position: absolute;
-        bottom: 15px;
-        height: 40px;
-        margin-top: -75px;
-        clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);
-        -webkit-clip-path: polygon(0% 86%, 100% 85%, 100% 95%, 0% 97%);
-        background-color: #FFE44B;
-        width: 0%
-    }
+@media only screen and (max-width: 768px) {
+
     footer {
         -webkit-clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);
         clip-path: polygon(0% 70%, 100% 40%, 100% 100%, 0% 100%);
     }
     footer ul {
-        margin: 95px auto 0px;
+        bottom: 20px;
+        transform: rotate(-2.8deg);
         font-size: 15px;
         padding: 0
     }
