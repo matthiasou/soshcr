@@ -52,6 +52,9 @@ footer a, header a {
     }
 
     #public_profil div h4, .contact-infos{text-align: center}
+    #user-nav {
+        margin-top: 0px!important;
+    }
 
 }
 
@@ -64,7 +67,6 @@ footer a, header a {
 #burger-button{
     cursor:pointer;
     font-size: 30px;
-    margin-top: 20px;
     display: block;
 }
 
@@ -268,6 +270,7 @@ header #login-icon {
 
 #user-nav {
     color: #fff!important;
+    margin-top: 50px;
 }
 
 #user-icon i {

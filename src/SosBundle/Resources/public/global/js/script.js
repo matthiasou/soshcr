@@ -30,7 +30,6 @@ $(document).ready(function(){
         $('.mobile-menu').slideToggle();
     });
 
-
     // Afficher les postes recherche en cliquant sur les secteurs
     $('.secteur-button').click(function(){
         var ul = $('.'+$(this).attr('data-target'));
