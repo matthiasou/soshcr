@@ -18,9 +18,11 @@ class OrdersController extends Controller
     {
         if(isset($_POST['15'])){
             $amount = 15;
+            $months = '+12 months';
         }
         if(isset($_POST['30'])){
             $amount = 30;
+            $months = '+36 months';
         }
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.token_storage')->getToken()->getUser();
@@ -56,10 +58,11 @@ class OrdersController extends Controller
     try {
         $payment = Payment::create($parameters);
         $pay = $payment->hosted_payment->payment_url;
+
         $order->setAmount($amount);
         $order->setUser($user);
         $order->setDate(new \DateTime('NOW'));
-        $dateabo = $utilisateur->getDateAbonnement()->modify('+6 months')->format('Y-m-d H:i:s');
+        $dateabo = $utilisateur->getDateAbonnement()->modify($months)->format('Y-m-d H:i:s');
         $utilisateur->setDateAbonnement(new \DateTime($dateabo));
         $em->persist($order);
         $em->persist($utilisateur);
