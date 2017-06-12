@@ -18,13 +18,14 @@
     
     <!-- Title desktop -->
      <div class="col-xs-8 col-xs-offset-2 col-md-offset-0 col-md-8 text-center">
-        <img class="title" src="{{ asset('bundles/sos/global/img/title.png') }}" class="img-responsive">  
+        <a href="{{ path('index') }}"><img class="title" src="{{ asset('bundles/sos/global/img/title.png') }}" class="img-responsive"></a>  
     </div>
     <!-- Title desktop -->
 
     <div class="col-xs-2" id="user-nav">
       {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <a href="#" id="user-icon" class="hidden-xs hidden-sm">{{ app.user.prenom|capitalize }}&nbsp;&nbsp;<i style="font-size:10px" class="fa fa-chevron-right" aria-hidden="true"></i></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
         <a href="{{path('fos_user_security_logout')}}" class="hidden-xs hidden-sm"><i class="fa fa-power-off" aria-hidden="true"></i></a>
         
         <a href="#" class="hidden-md hidden-lg" id="burger-button"><i class="fa fa-bars" aria-hidden="true"></i></a>
@@ -48,9 +49,9 @@
     <br>
     <a href="{{ path('index') }}" id="logo"> <img style="max-width:100px" src="{{ asset('bundles/sos/global/img/logo.png') }}" alt=""> </a>
     <br><br>
-    <ul>
-      <li><a href="{{ path('public_profil', {'id' : app.user.id}) }}"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mon Profil</a></li>
-      <li><a href="{{ path('dashboard') }}"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp;Tableau de bord</a></li>
+    <ul class="text-center">
+      <li class="label"><a href="{{ path('public_profil', {'id' : app.user.id}) }}">MON PROFIL</a></li>
+      <li class="label"><a href="{{ path('dashboard') }}">TABLEAU DE BORD</a></li>
     </ul>
   </div>
 {% endif %}
