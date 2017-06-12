@@ -215,9 +215,9 @@ medaille:
 payment:
     path:    /payment
     defaults: { _controller: SosBundle:Orders:payment }
-sucess:
+success:
     path:    /payment/success/{id}
-    defaults: { _controller: SosBundle:Orders:sucess }
+    defaults: { _controller: SosBundle:Orders:success }
 error:
     path:    /payment/error/{id}
     defaults: { _controller: SosBundle:Orders:error }
