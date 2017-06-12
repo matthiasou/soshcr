@@ -50,7 +50,7 @@ class OrdersController extends Controller
                'customer_id' => $user->getId(),
           ],
           'hosted_payment' => [
-               'return_url' => 'http://localhost:8888/soshcr2/web/app_dev.php/payment/sucess/'.$orderid,
+               'return_url' => 'https://soshcr.fr/payment/success/'.$orderid,
                'cancel_url' => 'https://soshcr.fr/payment/error/'.$orderid,
           ]
         ];
@@ -58,8 +58,6 @@ class OrdersController extends Controller
     try {
         $payment = Payment::create($parameters);
         $pay = $payment->hosted_payment->payment_url;
-        dump($payment);
-        die();
         $order->setAmount($amount);
         $order->setUser($user);
         $order->setDate(new \DateTime('NOW'));
@@ -84,10 +82,8 @@ class OrdersController extends Controller
     }
         return $this->render('SosBundle:Dashboard:payment.html.twig', array('user' => $user, 'pay' => $pay, 'payment' =>$payment));
     }
-    public function sucessAction()
+    public function successAction()
     {
-        dump($payment);
-        die();
         return $this->render('SosBundle:Orders:sucess.html.twig');
 
     }
