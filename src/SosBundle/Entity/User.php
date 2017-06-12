@@ -61,7 +61,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="date_abonnement", type="date", nullable=true)
+     * @ORM\Column(name="date_abonnement", type="datetime", nullable=true)
      */
     public $dateAbonnement;
 
@@ -81,6 +81,12 @@ class User extends BaseUser
      * @ORM\Column(name="date_inscription", type="date", nullable=true)
      */
     public $dateInscription;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="user",cascade={"remove"})
+     */
+    public $orders;
 
 
     public function setEmail($email){
