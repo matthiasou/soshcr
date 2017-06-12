@@ -52,6 +52,7 @@
     <ul class="text-center">
       <li class="label"><a href="{{ path('public_profil', {'id' : app.user.id}) }}">MON PROFIL</a></li>
       <li class="label"><a href="{{ path('dashboard') }}">TABLEAU DE BORD</a></li>
+      <li class="label"><a href="{{path('fos_user_security_logout')}}"><i class="fa fa-power-off" aria-hidden="true"></i></a></li>
     </ul>
   </div>
 {% endif %}
