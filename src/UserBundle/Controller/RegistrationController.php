@@ -44,7 +44,7 @@ class RegistrationController extends BaseController
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 
-                $today = new \DateTime('+6 months');
+                $today = new \DateTime('+4 months');
                 $datetoday = new \DateTime('now');
                 $user->setDateAbonnement($today);$event = new FormEvent($form, $request);
                 $user->setMessage5J(0);

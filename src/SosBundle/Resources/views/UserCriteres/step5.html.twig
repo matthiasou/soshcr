@@ -17,7 +17,7 @@
 				<h3 class="title-heading">Hôtellerie</h3><br><br>
 				{% for poste in postes %}
 					{% if poste.getSecteur().id == 1 %}
-					<li class="col-sm-2 text-center">
+					<li class="col-xs-6 col-sm-2 text-center">
 						<label>
 							<i class="fa fa-check validate" aria-hidden="true"></i>
 							{# Check si l'user a déjà des user criteres, si oui on check les checkbox #}
@@ -54,7 +54,7 @@
 				{% for poste in postes %}
 					{% if poste.getSecteur().id == 2 and poste.getService().id == 1 %}
 					
-					<li class="col-sm-2 text-center">
+					<li class="col-xs-6 col-sm-2 text-center">
 						<label>
 							<i class="fa fa-check validate" aria-hidden="true"></i>
 							<input 
@@ -80,12 +80,14 @@
 					</li>
 					{% endif %}
 				{% endfor %}
-
+				<div class="clearfix"></div>
+				<br><br>
 				<h4>(Cuisine)</h4>
+				<br><br>
 				{% for poste in postes %}
 					{% if poste.getSecteur().id == 2 and poste.getService().id == 2 %}
 	
-					<li class="col-sm-2 text-center">
+					<li class="col-xs-6 col-sm-2 text-center">
 						<label>
 							<i class="fa fa-check validate" aria-hidden="true"></i>
 							<input 
