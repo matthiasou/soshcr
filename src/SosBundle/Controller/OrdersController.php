@@ -9,35 +9,64 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Payplug\Resource\Payment;
 use Payplug\Payplug;
+use SosBundle\Entity\Order;
+
 
 class OrdersController extends Controller
 {
     public function paymentAction()
     {
+        if(isset($_POST['15'])){
+            $amount = 15;
+            $months = '+12 months';
+        }
+        if(isset($_POST['30'])){
+            $amount = 30;
+            $months = '+36 months';
+        }
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.token_storage')->getToken()->getUser();
+        $utilisateur = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $user));
+        $order = new Order();
+        $connection = $em->getConnection();
+        $repository = $em->getRepository('SosBundle:Order');
+        $query = $repository->createQueryBuilder('o')
+        ->select('MAX(o.id)')
+        ->getQuery();
+        $id = $query->getResult();
+        $idorder = $id['0']['1'];
+        $orderid = $idorder+1;
         Payplug::setSecretKey('sk_test_1Ku7CEQ0UC5sT5y4N2ZBR2');
         $parameters = [
-          'amount'   => 10 *10, 
+          'amount'   => $amount * 100, 
           'currency' => 'EUR',
-          'customer' => [ // optionnel
+          'customer' => [ 
                'email'      => $user->getEmail(),
                'first_name' => $user->getPrenom(),
                'last_name'  => $user->getNom(),
           ],
           'metadata' => [ 
-               'order_id' => 42,
+               'order_id' => $orderid,
                'customer_id' => $user->getId(),
           ],
           'hosted_payment' => [
-               'return_url' => 'https://soshcr.fr/dev/soshcr2/web/app_dev.php/payment/success/42',
-               'cancel_url' => 'https://soshcr.fr/dev/soshcr2/web/app_dev.php/payment/error/42',
+               'return_url' => 'https://soshcr.fr/payment/success/'.$orderid,
+               'cancel_url' => 'https://soshcr.fr/payment/error/'.$orderid,
           ]
         ];
         
-        try {
-    $payment = Payment::create($parameters);
-    $pay = $payment->hosted_payment->payment_url;
+    try {
+        $payment = Payment::create($parameters);
+        $pay = $payment->hosted_payment->payment_url;
+        $order->setAmount($amount);
+        $order->setUser($user);
+        $order->setDate(new \DateTime('NOW'));
+        $dateabo = $utilisateur->getDateAbonnement()->modify($months)->format('Y-m-d H:i:s');
+        $utilisateur->setDateAbonnement(new \DateTime($dateabo));
+        $em->persist($order);
+        $em->persist($utilisateur);
+        $em->flush();
+            
     } catch (ConnectionException $e) {
         $this->log("Connection  with the PayPlug API failed.");
     } catch (InvalidPaymentException $e) {
@@ -51,11 +80,11 @@ class OrdersController extends Controller
     } catch (\Exception $e) {
         $this->log($e->getMessage());
     }
-        return $this->render('SosBundle:Dashboard:payment.html.twig', array('user' => $user, 'pay' => $pay));
+        return $this->render('SosBundle:Dashboard:payment.html.twig', array('user' => $user, 'pay' => $pay, 'payment' =>$payment));
     }
-    public function sucessAction()
+    public function successAction()
     {
-        return $this->render('SosBundle:Orders:sucess.html.twig');
+        return $this->render('SosBundle:Orders:success.html.twig');
 
     }
     public function errorAction()

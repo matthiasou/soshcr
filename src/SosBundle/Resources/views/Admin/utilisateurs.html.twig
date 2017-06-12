@@ -1,8 +1,10 @@
 {% extends 'SosBundle::layout.html.twig' %}
+
 {% block stylesheets %}
 	{{ parent() }}
     <link href="{{ asset('bundles/sos/tablesorter/themes/blue/style.css') }}" rel="stylesheet">
 {% endblock %}
+
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('bundles/sos/tablesorter/jquery.tablesorter.js') }}"></script>
@@ -16,14 +18,20 @@
 		); 
 	</script>
 {% endblock %}
+
 {% block sos_body %}
-	<h3>Recherche de profils</h3>
+
+	<h3 class="page-header">Recherche de profils</h3>
 	<form method="POST" action="{{ path('utilisateurs') }}">
-	Nom : <input type="text" name="nom">
-	Prénom : <input type="text" name="prenom">
-	Téléphone : <input type="text" name="telephone">	
-	<input type="submit" name="rechercher" value="Rechercher">
-	<input type="submit" name="rechercherAll" value="Voir tous les profils">
+		<div class="form-group">
+			<label for="">Nom : <input type="text"  name="nom"></label>
+			<label for="">Prénom : <input type="text" name="prenom"></label>
+			<label for="">Téléphone : <input type="text"  name="telephone"></label>
+			<input type="submit" name="rechercher" value="Rechercher" class="btn btn-soshcr">
+			<input type="submit" name="rechercherAll" value="Voir tous les profils" class="btn btn-soshcr">
+		</div>
+	
+	
 </form>
 {% if result1 is defined %}
 <div class="table-responsive">
@@ -102,18 +110,18 @@
 				<tr>
 					<td><a href="{{ path('public_profil', {'id': utilisateur.id}) }}">{{utilisateur.nom}}</a></td>
 					<td><a href="{{ path('public_profil', {'id': utilisateur.id}) }}">{{utilisateur.prenom}}</a></td>
-					<td>{{utilisateur.getage()}}</td>
-					<td>{{utilisateur.telephone}}</td>
-					<td>{{utilisateur.email}}</td>
-					<td>
+					<td class="text-right">{{utilisateur.getage()}}</td>
+					<td class="text-center">{{utilisateur.telephone}}</td>
+					<td class="text-center">{{utilisateur.email}}</td>
+					<td class="text-center">
 					{% for key,value in items %}
 						{% if key == utilisateur.id %}
     						{{ value }}
     					{% endif %}
 					{% endfor %}
 					</td>
-					<td>{{utilisateur.dateInscription|date("d/m/Y")}}</td>
-					<td>
+					<td class="text-center">{{utilisateur.dateInscription|date("d/m/Y")}}</td>
+					<td class="text-center">
 						{% for key,value in item %}
 							{% if utilisateur.id == key %}
 								{% if value is null %}
@@ -124,7 +132,7 @@
 							{% endif %}
 						{% endfor %}
 					</td>
-					<td>
+					<td class="text-center">
 						<input type="checkbox" name="id_utilisateur[]" value="{{utilisateur.id}}" />
 					</td>
 				</tr>
@@ -132,7 +140,7 @@
 				
 			</tbody>
 		</table>
-<input type="submit" name="supprimer" value="Supprimer le profil">			
+		<input type="submit" class="btn btn-soshcr" name="supprimer" value="Supprimer le profil">			
 	</div>
 </form>
 {% endif %}

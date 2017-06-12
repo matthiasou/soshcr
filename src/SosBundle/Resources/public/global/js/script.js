@@ -23,11 +23,15 @@ $(document).ready(function(){
     }
 
     $('#burger-button').click(function(e){
-        $('.mobile-menu').slideToggle();
+        $('.mobile-menu').slideToggle(function(){
+            $('body').prepend('<div class="overlay"></div>');
+        });
     });
 
     $('#close-mobile-menu').click(function(e){
-        $('.mobile-menu').slideToggle();
+        $('.mobile-menu').slideToggle(function(){
+            $('.overlay').remove();
+        });
     });
 
     // Afficher les postes recherche en cliquant sur les secteurs
