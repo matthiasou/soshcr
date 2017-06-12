@@ -219,25 +219,29 @@ class AdminController extends Controller
         }
         if (isset($_POST['supprimer'])) 
         {
-            if (is_array($_POST['id_utilisateur'])) 
+            if(!empty($_POST['id_utilisateur']))
             {
-                foreach($_POST['id_utilisateur'] as $value)
-                {   
-                    $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
-                    $message = \Swift_Message::newInstance()
-                    ->setSubject('Suppression de votre compte')
-                    ->setFrom('soshcr@contact.fr')
-                    ->setTo($user->getEmail())
-                    ->setBody(
-                        $this->renderView(
-                            'SosBundle:Admin:suppression_compte.html.twig'
-                        ),
-                        'text/html'
-                    );
-                    $this->get('mailer')->send($message);
-                    $em->remove($user);
-                    $em->flush();
-                    
+                if (is_array($_POST['id_utilisateur'])) 
+                {
+                
+                    foreach($_POST['id_utilisateur'] as $value)
+                    {   
+                        $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
+                        $message = \Swift_Message::newInstance()
+                        ->setSubject('Suppression de votre compte')
+                        ->setFrom('soshcr@contact.fr')
+                        ->setTo($user->getEmail())
+                        ->setBody(
+                            $this->renderView(
+                                'SosBundle:Admin:suppression_compte.html.twig'
+                            ),
+                            'text/html'
+                        );
+                        $this->get('mailer')->send($message);
+                        $em->remove($user);
+                        $em->flush();
+                        
+                    }
                 }
             }
             return $this->redirectToRoute('utilisateurs'); 
@@ -266,38 +270,44 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('SosBundle:User')->findBy(array('enabled' => 1, 'validation' => 0));
         if (isset($_POST['valider'])){
-            if (is_array($_POST['id_utilisateur'])) 
+            if(!empty($_POST['id_utilisateur']))
             {
-                foreach($_POST['id_utilisateur'] as $value)
+                if (is_array($_POST['id_utilisateur']))
                 {
-                    $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
-                    $user->setValidation(1);
-                    $em->flush();
+                    foreach($_POST['id_utilisateur'] as $value)
+                    {
+                        $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
+                        $user->setValidation(1);
+                        $em->flush();
+                    }
+                    return $this->redirectToRoute('validation');
                 }
-                return $this->redirectToRoute('validation');
             }
         }
         if (isset($_POST['supprimerprofil'])){
-            if (is_array($_POST['id_utilisateur'])) 
+            if(!empty($_POST['id_utilisateur']))
             {
-                foreach($_POST['id_utilisateur'] as $value)
+                if (is_array($_POST['id_utilisateur'])) 
                 {
-                    $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
-                    $message = \Swift_Message::newInstance()
-                    ->setSubject('Suppression de votre compte')
-                    ->setFrom('soshcr@contact.fr')
-                    ->setTo($user->getEmail())
-                    ->setBody(
-                        $this->renderView(
-                            'SosBundle:Admin:suppression_compte.html.twig'
-                        ),
-                        'text/html'
-                    );
-                    $this->get('mailer')->send($message);
-                    $em->remove($user);
-                    $em->flush();
+                    foreach($_POST['id_utilisateur'] as $value)
+                    {
+                        $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
+                        $message = \Swift_Message::newInstance()
+                        ->setSubject('Suppression de votre compte')
+                        ->setFrom('soshcr@contact.fr')
+                        ->setTo($user->getEmail())
+                        ->setBody(
+                            $this->renderView(
+                                'SosBundle:Admin:suppression_compte.html.twig'
+                            ),
+                            'text/html'
+                        );
+                        $this->get('mailer')->send($message);
+                        $em->remove($user);
+                        $em->flush();
+                    }
+                    return $this->redirectToRoute('validation');
                 }
-                return $this->redirectToRoute('validation');
             }
         }
         return $this->render('SosBundle:Admin:validation.html.twig', array("users" => $users));
