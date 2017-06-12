@@ -84,7 +84,7 @@ class OrdersController extends Controller
     }
     public function successAction()
     {
-        return $this->render('SosBundle:Orders:sucess.html.twig');
+        return $this->render('SosBundle:Orders:success.html.twig');
 
     }
     public function errorAction()
