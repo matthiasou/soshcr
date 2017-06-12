@@ -7,7 +7,7 @@
 			<h3 class="title-heading">Contrat à temps partiel ou temps plein ?</h3>
 		{% elseif data.contrat == 5 %}
 			<h3 class="title-heading">Quelle est la durée requise ?</h3>
-		{% endif %}"
+		{% endif %}
 		<ul class="col-lg-8 col-lg-offset-2">
 
 			{% if data.match_employe.nb == 0 %}
@@ -21,7 +21,7 @@
 
 		{% for duree in contrat_duree %}
 
-		        <li class="
+		        <li class="col-xs-6
 		        	{% if contrat_duree|length == 5 %}
 		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
 					{% else %}

@@ -14,10 +14,19 @@
 			<ul>
 				<input type="hidden" name="form" value="step_4">
 				{% for formation in formations %}
-					<li class="col-sm-3 text-center">
+					<li class="col-xs-6 col-sm-3 text-center">
 						<label>
 							<i class="fa fa-check validate" aria-hidden="true"></i>
-							<input type="checkbox" class="solo-input hidden" data-name="formation" name="formation[][id]" value="{{ formation.id }}">
+							{% set formationChecked = false %}
+							{% for criteres in app.user.getCriteres() %}
+								{% for f in criteres.getFormation() %}
+									{% if f.getId() == formation.id %}
+										{% set formationChecked = true %}
+									{% endif %}
+								{% endfor %}
+							{% endfor %}
+							<input {% if formationChecked %}checked{% endif %}
+							type="checkbox" class="solo-input hidden" data-name="formation" name="formation[][id]" value="{{ formation.id }}">
 							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/formation/' ~ formation.id ~ '.png') }}" alt="">
 						</label>
 						<br>
@@ -30,10 +39,16 @@
 			<br>
 			<ul>
 				{% for anglais in niveauAnglais %}
-					<li class="col-sm-4 text-center">
+					<li class="col-xs-4 col-sm-4 text-center">
 						<label>
 							<i class="fa fa-check validate" aria-hidden="true"></i>
-							<input type="radio" class="solo-input hidden" data-name="anglais" name="anglais" value="{{ anglais.id }}">	<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/anglais/' ~ anglais.id ~ '.png') }}" alt="">
+							<input 
+							{% for criteres in app.user.getCriteres() %}
+
+									{% if criteres.getNiveauAnglais().getId() == anglais.id %}checked{% endif %}
+
+							{% endfor %}
+							type="radio" class="solo-input hidden" data-name="anglais" name="anglais" value="{{ anglais.id }}">	<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/anglais/' ~ anglais.id ~ '.png') }}" alt="">
 							<br>
 							{{anglais.libelle}}
 						</label>
