@@ -16,17 +16,14 @@
                         <div class="info">
                             <h3 class="title">Demander des recommandations</h3>
                             <p>
-                                Il n'y a rien de mieux pour <b>être contacté le premier et pour faire bonne impression</b>
+                                Il n'y a rien de mieux pour <b>être contacté le premier et pour faire bonne impression</b>, fais appel à tes anciens employeurs :
                             </p>
-                            <p>
-                                Fais appel à tes anciens employeurs
-                            </p>
-                            <div style="color: white" class="more">
-                                <a href="{{ path('demandeRecommandation') }}" title="Title Link">
-                                    J'envoie une demande <i class="fa fa-angle-double-right"></i>
-                                </a>
-                                <br> <br>
-                            </div>
+
+                            <a href="{{ path('demandeRecommandation') }}" class="btn btn-soshcr" title="Title Link">
+                                J'envoie une demande&nbsp;&nbsp;<i class="fa fa-share-square" aria-hidden="true"></i>
+                            </a>
+                            <br>
+                            <br>
                             <a href="{{ path('mesrecommandations') }}">Je consulte mes recommandations</a>
                         </div>
                     </div>
@@ -50,7 +47,7 @@
                                     <li><a href="{{ path('usercriteres_step_1') }}">Mes critères de recherche</a></li>
                                     <li><a href="{{ path('profil') }}">Mes coordonnées</a></li>
 
-                                    <li><a href="{{ path('delete_user') }}">Supprimer mon compte</a></li>
+                                    <li><a href="{{ path('delete_user') }}" class="label label-danger">Supprimer mon compte</a></li>
 
                                 </ul>
                             </p>
@@ -71,11 +68,11 @@
                             <p>
                             Les comptes sont automatiquement supprimés 6 mois après leurs création
                             </p>
-                            <div style="color: white" class="more">
-                                <a href="{{ path('abonnement') }}" title="Title Link">
-                                    Je conserve mon profil <i class="fa fa-angle-double-right"></i>
-                                </a>
-                            </div>
+
+                            <a href="{{ path('abonnement') }}" title="Title Link" class="btn btn-soshcr">
+                                Je conserve mon profil&nbsp;&nbsp;<i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                            </a>
+
                             <p>
                              <b>   12 mois de plus = 15 € <br> ou <br> 36 mois de plus = 30 €</b>
                             </p>
@@ -90,35 +87,29 @@
 
 
     <div class="container">
-        <div class="well well-sm quick-contact">
+        <div style="background: rgba(0, 0, 0, 0.04);padding: 15px;border-radius: 10px;" class="quick-contact">
 
-            <a href="https://www.facebook.com/SOSHCR" class="btn btn-yellow"><i class="fa fa-lightbulb-o" aria-hidden="true"> Conseils</i></a>
-
+            <a href="https://www.facebook.com/SOSHCR" class="btn btn-yellow"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>&nbsp;&nbsp;Conseils</a>
+            <br>
+            <br>
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row contact row-first">
-                                <div class="col-md-4">
-                                    <a>répondre rapidement aux offres</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a>se renseigner sur l'entreprise</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a>faire attention aux arnaques</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a>avoir un CV à jour</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a>honorer ses engagements</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a>être sois même</a>
-                                </div>
                             </div>
-
+                                <ul class="col-sm-4" style="list-style-type:none">
+                                    <li>Répondre rapidement aux offres</li>
+                                    <li>Se renseigner sur l'entreprise</li>
+                                </ul>
+                                <ul class="col-sm-4" style="list-style-type:none">
+                                    <li>Faire attention aux arnaques</li>
+                                    <li>Avoir un CV à jour</li>
+                                </ul>
+                                <ul class="col-sm-4" style="list-style-type:none">
+                                    <li>Honorer ses engagements</li>
+                                    <li>Être sois même</li>
+                                </ul>
                         </div>
                     </div>
                 </div>
