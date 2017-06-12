@@ -25,6 +25,14 @@ footer a, header a {
     font-weight: 300
 }
 
+.overlay{
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    position: fixed;
+    background: rgba(0,0,0,0.5);
+}
+
 @media screen and (min-width: 1500px) {
     
     .content-container{
@@ -69,6 +77,7 @@ footer a, header a {
 }
 
 .mobile-menu{
+    box-shadow: 0px 0px 10px black;
     z-index: 999999999;
     display: none;
     background-color: #394076;
