@@ -1,7 +1,7 @@
 {% extends 'SosBundle::layout.html.twig' %}
 
 {% block sos_body %}
-<title>PayPlug Lightbox example</title>
+<title>Paiement de votre abonnement</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -12,31 +12,38 @@
 <script type="text/javascript" src="https://api.payplug.com/js/1.0/form.js"></script>
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
-    [].forEach.call(document.querySelectorAll("#signupForm"), function(el) {
+            [].every.call(document.querySelectorAll("#signupForm"), function(el) {
       el.addEventListener('submit', function(event) {
+        if($('#accepter').is(':checked')) {
         var payplug_url = '{{pay}}';
-        console.log(payplug_url);
         Payplug.showPayment(payplug_url);
         event.preventDefault();
-      })
+        }
+      else {
+          sweetAlert('Veuillez accepter les conditions générales de vente');
+          return false;
+        }
+        })
     })
   })
+
 </script>
 </head>
 <body>
   <div class="container">
     <div class="row">
-      <div class='col-md-12'>
+      <div class="col-md-12 text-center">
         <h1><i class="fa fa-flask"></i>Paiement de votre abonnement</h1>
         <hr />
       </div>
-      <div class='col-md-4'>
           <form action="" method="post" id="signupForm" class="formulaire" novalidate>
             <p>
-              <button type="submit" class="btn btn-soshcr">Payer</button>
+              <input type="radio" name="accepter" id="accepter" required> J'ai lu et j'accepte les conditions générales de vente
+            </p>
+            <p>
+              <input type="submit" id="submit-button" class="btn  btn-soshcr" value="Payer">
             </p>
           </form>
-      </div>
     </div>
   </div>
 </body>

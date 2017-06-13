@@ -32,6 +32,13 @@ class Order
      */
     public $date;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="idpayplug", type="string", length=255, unique=true)
+     */
+    public $idpayplug;
+
 
     public function getId()
     {
@@ -93,6 +100,29 @@ class Order
     public function getDate()
     {
         return $this->date;
+    }
+    /**
+     * Set idpayplug
+     *
+     * @param string $idpayplug
+     *
+     * @return Order
+     */
+    public function setIdpayplug($idpayplug)
+    {
+        $this->idpayplug = $idpayplug;
+
+        return $this;
+    }
+
+    /**
+     * Get idpayplug
+     *
+     * @return string
+     */
+    public function getIdpayplug()
+    {
+        return $this->idpayplug;
     }
 
 }
