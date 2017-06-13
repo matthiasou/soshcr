@@ -1,0 +1,12 @@
+{% extends "layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+	<div class="content-container">
+		<div class="content-middle">
+			<p>Un e-mail a été envoyé. Il contient un lien sur lequel il te faudra cliquer pour réinitialiser ton mot de passe. <br>
+        Remarque : Tu ne peux demander un nouveau mot de passe que toutes les {{tokenLifetime}} heures.</p>
+		</div>
+	</div>
+{% endblock %}

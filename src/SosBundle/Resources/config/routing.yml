@@ -137,17 +137,24 @@ usercriteres_step_7:
     defaults: { _controller: SosBundle:UserCriteres:step7}
 
 usercriteres_step_8:
-    path: /usercriteres/step8  
+    path: /usercriteres/step8
     defaults: { _controller: SosBundle:UserCriteres:step8}
 
 usercriteres_step_9:
     path: /usercriteres/step9  
     defaults: { _controller: SosBundle:UserCriteres:step9}
 
+edit_disponibilite:
+    path: /usercriteres/edit/disponibilites
+    defaults: { _controller: SosBundle:UserCriteres:step9}
+
+modification_usercriteres:
+    path: /usercriteres/edit
+    defaults: { _controller: SosBundle:UserCriteres:userCriteresModification}
 
 modification_disponibilites:
     path: /usercriteres/disponibilites
-    defaults: { _controller: SosBundle:UserCriteres:modificationDisponibilites}
+    defaults: { _controller: SosBundle:UserCriteres:disponibiliteModification}
 
 modification_contrat:
     path: /usercriteres/contrats
@@ -164,6 +171,12 @@ public_profil:
 delete_user:
     path: /delete
     defaults: { _controller: SosBundle:User:deleteUser}
+    options:
+        expose: true
+
+delete_confirmed:
+    path: /delete/confirmed
+    defaults: { _controller: SosBundle:User:deleteConfirmationUser}
 
 mesrecommandations:
     path:     /mesrecommandations
