@@ -211,12 +211,11 @@ header #loginDesktop {
     text-decoration: underline!important;
     color: #fff!important;
     float: right;
-    margin: 20px;
+    margin: 0px 50px 0px 0px;    
     text-transform: uppercase;
     display: block;
     width: 100%;
     text-align: right;
-    margin-top: 50px;
 }
 
 header #loginMobile {
