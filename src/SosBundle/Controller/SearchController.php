@@ -37,7 +37,7 @@ class SearchController extends Controller
 
             $alreadyVille = $request->get('ville');
             if (empty($alreadyVille['latitude'])) {
-                $geocoder = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBKuX3xaOa5tYT7bKs8jyEUL3eSiLgUs6M&address=%s&sensor=false';
+                $geocoder = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBvtLKkt2MEgUKvIat-0wBT4Hg4wQ9HkqQ&address=%s&sensor=false';
                 $query = sprintf($geocoder, urlencode($_POST['ville']));
                 $result = json_decode(file_get_contents($query));
 
@@ -58,7 +58,7 @@ class SearchController extends Controller
 
             $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
-            dump($data);
+            
             return $this->render('SosBundle:Search:classification.html.twig', array('etablissements' => $etablissements, 'data' => $data, 'step' => '2'));
 
 
@@ -89,7 +89,7 @@ class SearchController extends Controller
 
     //       $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
-    //  		dump($data);
+    //  		
     //  		return $this->render('SosBundle:Search:secteur.html.twig', array('secteurs' => $secteurs, 'data' => $data, 'step' => '3'));
 
     //  	}else{
@@ -113,7 +113,7 @@ class SearchController extends Controller
     //  		$data['classification'] = $request->get('classification');
     //  		$data['secteur_activite'] = $request->get('secteur_activite');
 
-    //  		dump($data);
+    //  		
 
     //  		$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
@@ -170,7 +170,7 @@ class SearchController extends Controller
             $services = $repoServices->findAll();
 
 
-            dump($data);
+            
             return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'secteurs' => $secteurs, 'services' => $services, 'data' => $data, 'step' => '5'));
 
         } else {
@@ -200,7 +200,7 @@ class SearchController extends Controller
             $repo = $em->getRepository("SosBundle:Contrat");
             $contrats = $repo->findBy(array(), array('id' => 'desc'));
 
-            dump($data);
+            
             return $this->render('SosBundle:Search:contrat.html.twig', array('contrats' => $contrats, 'data' => $data, 'step' => '6'));
 
         } else {
@@ -230,7 +230,7 @@ class SearchController extends Controller
             $repo = $em->getRepository("SosBundle:Contrat");
             $contrat = $repo->find($data['contrat']);
 
-            dump($data);
+            
             $contrat_duree = $contrat->getDuree();
             return $this->render('SosBundle:Search:contrat_duree.html.twig', array('contrat_duree' => $contrat_duree, 'data' => $data, 'step' => '7'));
 
@@ -262,7 +262,7 @@ class SearchController extends Controller
             $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
 
-            dump($data);
+            
             $cursus_scolaire_repo = $em->getRepository("SosBundle:CursusScolaire");
             $cursus_scolaire = $cursus_scolaire_repo->findBy(array(), array('id' => 'desc'));
             return $this->render('SosBundle:Search:cursus_scolaire.html.twig', array('cursus_scolaire' => $cursus_scolaire, 'data' => $data, 'step' => '8'));
@@ -295,7 +295,7 @@ class SearchController extends Controller
 
 
             $formation_minimum = $em->getRepository("SosBundle:Formation")->findAll();
-            dump($data);
+            
             return $this->render('SosBundle:Search:formation_minimum.html.twig', array('formation_minimum' => $formation_minimum, 'data' => $data, 'step' => '8'));
 
         } else {
@@ -335,7 +335,7 @@ class SearchController extends Controller
             $repo = $em->getRepository("SosBundle:Experience");
             $experience_minimum = $repo->findAll();
 
-            dump($data);
+            
             return $this->render('SosBundle:Search:experience_minimum.html.twig', array('experience_minimum' => $experience_minimum, 'data' => $data, 'step' => '9'));
 
         } else {
@@ -382,7 +382,7 @@ class SearchController extends Controller
             $repo = $em->getRepository("SosBundle:Anglais");
             $niveau_anglais = $repo->findAll();
 
-            dump($data);
+            
             return $this->render('SosBundle:Search:anglais.html.twig', array('niveau_anglais' => $niveau_anglais, 'data' => $data, 'step' => '9'));
 
         } else {
@@ -425,7 +425,7 @@ class SearchController extends Controller
 
             $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
-            dump($data);
+            
             return $this->render('SosBundle:Search:date_debut.hml.twig', array('data' => $data, 'step' => '10'));
 
         } else {
@@ -482,7 +482,7 @@ class SearchController extends Controller
                 $data['recommandations'] = $recommandation;
             }
 
-            dump($data);
+            
             return $this->render('SosBundle:Search:resultat.html.twig', array('data' => $data));
 
         } else {

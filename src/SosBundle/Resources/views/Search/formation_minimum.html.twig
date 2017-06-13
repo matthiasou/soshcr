@@ -17,7 +17,7 @@
 
 		{% for formation in formation_minimum %}
 
-		        <li class="
+		        <li class="col-xs-6
 		        	{% if formation_minimum|length == 5 %}
 		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
 					{% else %}
@@ -26,7 +26,7 @@
 		        	
 		            <form method="post" action="{{ path('experience') }}">
 		                <button>
-		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/formation/' ~ formation.id ~ '.png') }}" alt="">
+		                    <img style="max-width:110px" src="{{ asset('bundles/sos/global/img/formation/' ~ formation.id ~ '-search.png') }}" alt="">
 		                    <p></p>
 		                </button>
 		                <input type="hidden" value="{{ formation.id }}" name="formation_minimum">

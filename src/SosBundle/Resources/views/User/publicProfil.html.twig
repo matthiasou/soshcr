@@ -2,8 +2,7 @@
 
 {% block sos_body %}
 
-    <div class="container" id="imprimer">
-      <a href="javascript:imprime_bloc('titre', 'imprimer')" class='pull-right'><i class="fa fa-print prim-color" aria-hidden="true"></i>&nbsp;Imprimer le profil</a>
+    <div class="container" id="public_profil">
       
       <h1 class="page-header">{{ user.prenom|upper ~ ' ' ~ user.nom|upper }} ({{ userAge }} ans)</h1>
       <div class="row">
@@ -11,7 +10,7 @@
         <!-- edit form column -->
         <div class="personal-info">
           <div class="col-sm-8 text-left">
-            <div class="col-sm-6">
+            <div class="col-sm-6 contact-infos">
               <a href="mailto:{{ user.email }}"><i class="fa fa-envelope prim-color" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{ user.email }}</a> <br>
               <a href="tel:{{ user.telephone }}"><i class="fa fa-phone" aria-hidden="true"></i></i>&nbsp;&nbsp;&nbsp;{{ user.telephone }}</a> <br><br>
             </div>
@@ -24,8 +23,7 @@
             </div>
 
             {% else %}
-
-            <div class="col-sm-6">
+            <div class="col-xs-12 col-sm-6">
                 <h4 style="color:#555;font-weight:bold">Formation</h4>
                 <ul>
                     {% for formation in userCriteres.formations %}
@@ -35,8 +33,7 @@
             </div>
             
             <div class="clearfix"></div>
-
-              <div class="col-sm-6">
+              <div class="col-xs-12 col-sm-6">
                 <h4 style="color:#555;font-weight:bold">Experience</h4>
                 <ul>
                   {% for poste in userCriteres.postes %}
@@ -46,8 +43,7 @@
                   {% endfor %}
                 </ul>
               </div>
-
-              <div class="col-sm-6">
+              <div class="col-xs-12 col-sm-6">
                 <h4 style="color:#555;font-weight:bold">Recherche</h4>
                 <ul>
                   {% for contrat in userCriteres.contrats %}
@@ -94,8 +90,7 @@
               </div>
 
               <div class="clearfix"></div>
-
-             <div class="col-sm-6">
+             <div class="col-xs-12 col-sm-6">
                 <h4 style="color:#555;font-weight:bold">Recommandations</h4>
                 <ul>
                     {% set nbAttenteRecommandation = 0 %}
@@ -107,13 +102,12 @@
                         {% else %}
                             {% set nbAttenteRecommandation =  nbAttenteRecommandation + 1 %}
                         {% endif %}
-                        {% if nbAttenteRecommandation == recommandation|length %}
-                            (Pas encore de recommandations)
-                        {% endif %}
                     {% endfor %}
+                    {% if nbAttenteRecommandation == recommandations|length or recommandations|length == 0 %}
+                        (Pas encore de recommandations)
+                    {% endif %}
              </div>
-
-              <div class="col-sm-6">
+              <div class="col-xs-12 col-sm-6">
                 <h4 style="color:#555;font-weight:bold">Anglais</h4>
                 <ul>
                   <li>{{ userCriteres.anglais|raw}}</li>
@@ -123,9 +117,11 @@
             {% endif %}
 
           </div>
-          <div class="col-sm-4">
+
+          <div class="col-xs-12 col-sm-4">
+                <h4 style="color:#555;font-weight:bold">Disponibilités</h4>
             <input type='hidden' id="datepicker" name="date_debut" data-language='fr' class="datepicker-public-profil form-control" data-position="left top" /><br>
-            <span class="bage-disponible col-sm-1 col-sm-offset-4"></span><p class="col-sm-4 text-left">Disponible</p>
+            <p class="col-sm-12 text-center"><span class="bage-disponible"></span>&nbsp;Disponible</p>
           </div>
         </div>
       </div>
@@ -177,7 +173,9 @@
   {% endfor %}
 
   var $picker = $('.datepicker-public-profil');
+
   $picker.datepicker({
+     
       language: 'fr',
       inline: true,
       multipleDates: true,
@@ -192,7 +190,6 @@
       }
   });
   $picker.data('datepicker').selectDate(dateArr);
-   
-
+  $picker.data('datepicker').date = new Date();
 </script>
 {% endblock %}

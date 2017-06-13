@@ -24,7 +24,7 @@ class SuppressionCompte
     /**
      * @var string
      *
-     * @ORM\Column(name="contenu", type="string", length=255)
+     * @ORM\Column(name="contenu", type="string", length=255, nullable=true)
      */
     private $contenu;
 
@@ -38,23 +38,14 @@ class SuppressionCompte
     /**
      * @var string
      *
-     *    @ORM\OneToOne(targetEntity="User", cascade={"persist"})
-     */
-
-    private $utilisateur;
-
-    /**
-     * @var string
-     *
-     *    @ORM\OneToOne(targetEntity="RaisonSuppression", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="RaisonSuppression")
      */
     private $raisonSuppression;
-
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -110,37 +101,13 @@ class SuppressionCompte
     }
 
     /**
-     * Set utilisateur
-     *
-     * @param string $utilisateur
-     *
-     * @return SuppressionCompte
-     */
-    public function setUtilisateur($utilisateur)
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
-
-    /**
-     * Get utilisateur
-     *
-     * @return string
-     */
-    public function getUtilisateur()
-    {
-        return $this->utilisateur;
-    }
-
-    /**
      * Set raisonSuppression
      *
-     * @param string $raisonSuppression
+     * @param \SosBundle\Entity\RaisonSuppression $raisonSuppression
      *
      * @return SuppressionCompte
      */
-    public function setRaisonSuppression($raisonSuppression)
+    public function setRaisonSuppression(\SosBundle\Entity\RaisonSuppression $raisonSuppression = null)
     {
         $this->raisonSuppression = $raisonSuppression;
 
@@ -150,11 +117,10 @@ class SuppressionCompte
     /**
      * Get raisonSuppression
      *
-     * @return string
+     * @return \SosBundle\Entity\RaisonSuppression
      */
     public function getRaisonSuppression()
     {
         return $this->raisonSuppression;
     }
 }
-
