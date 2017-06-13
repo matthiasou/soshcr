@@ -32,3 +32,4 @@ security:
         - { path: ^/usercriteres/, role: ROLE_USER }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/dashboard, role: ROLE_USER }
+        - { path: ^/payment, role: ROLE_USER }
