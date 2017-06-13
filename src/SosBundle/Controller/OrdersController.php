@@ -18,11 +18,9 @@ class OrdersController extends Controller
     {
         if(isset($_POST['15'])){
             $amount = 15;
-            $months = '+12 months';
         }
         if(isset($_POST['30'])){
             $amount = 30;
-            $months = '+36 months';
         }
         $em = $this->getDoctrine()->getManager();
         $user = $this->get('security.token_storage')->getToken()->getUser();
@@ -61,12 +59,10 @@ class OrdersController extends Controller
         $order->setAmount($amount);
         $order->setUser($user);
         $order->setDate(new \DateTime('NOW'));
-        $dateabo = $utilisateur->getDateAbonnement()->modify($months)->format('Y-m-d H:i:s');
-        $utilisateur->setDateAbonnement(new \DateTime($dateabo));
+        $idpay = $payment->id;
+        $order->setIdpayplug($idpay);
         $em->persist($order);
-        $em->persist($utilisateur);
         $em->flush();
-            
     } catch (ConnectionException $e) {
         $this->log("Connection  with the PayPlug API failed.");
     } catch (InvalidPaymentException $e) {
@@ -82,10 +78,41 @@ class OrdersController extends Controller
     }
         return $this->render('SosBundle:Dashboard:payment.html.twig', array('user' => $user, 'pay' => $pay, 'payment' =>$payment));
     }
+    
     public function successAction()
-    {
-        return $this->render('SosBundle:Orders:success.html.twig');
-
+    {   
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $iduser = $user->getId();
+        $utilisateur = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $user));
+        $connection = $em->getConnection();
+        $repository = $em->getRepository('SosBundle:Order');
+        $query = $repository->createQueryBuilder('o')
+        ->select('MAX(o.id)')
+        ->where('o.user = :id')
+        ->setParameter('id', $iduser)
+        ->getQuery()
+        ->getSingleResult();
+        $id = $query[1];
+        $order = $em->getRepository('SosBundle:Order')->findOneBy(array('id' => $id));
+        Payplug::setSecretKey('sk_test_1Ku7CEQ0UC5sT5y4N2ZBR2');
+        $payplugid = $order->getIdpayplug();
+        $payment = Payment::retrieve($payplugid);
+        if($payment->is_paid)
+        {
+            if($order->getAmount() == 15){
+                $months = '+12 months';
+            }
+            if($order->getAmount() == 30){
+                $months = '+36 months';
+            }
+            $dateabo = $utilisateur->getDateAbonnement()->modify($months)->format('Y-m-d H:i:s');
+            $utilisateur->setDateAbonnement(new \DateTime($dateabo));
+            $em->persist($utilisateur);
+            $em->flush();
+        $validation = "Merci d avoir prolongé votre compte";
+        }
+        return $this->render('SosBundle:Dashboard:dashboard.html.twig', array('validation' => $validation, 'user' =>$user));
     }
     public function errorAction()
     {
