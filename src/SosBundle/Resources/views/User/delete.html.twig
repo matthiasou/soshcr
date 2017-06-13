@@ -3,30 +3,30 @@
 {% block sos_body %}
 	
 	<div class="container">
-	<h1 class="page-header">Pour quelle raison souhaites tu supprimer ton compte ?</h1>
-	<form action="{{ path('delete_user') }}">
-		<div class="form-group">
-			{% for raison in raisons %}
-	          <label style="width:100%">
-	          	<div class="col-xs-4 text-right">
-	          		<input type="radio" name="raison" value="{{raison.id}}">	
-	          	</div>
-	          	<div class="col-xs-5 text-left">
-	          		{% if raison.id == 4 %}
-		          		{{ raison.libelle }} :	
-						<textarea class="form-control" rows="3" name="contenu"></textarea>
-					{% else %}
-		          		{{ raison.libelle }}	
-	          		{% endif %}
-	          	</div>
-	          	
-	          </label>
-		{% endfor %}		
-	        </div>
-		<p class="text-center">Es tu sûr de vouloir supprimer ton compte candidat ?</p>
-		<p class="text-center">(tes recommandations seront aussi perdues)</p>
-		<button id="button" class="btn btn-soshcr" type="submit">Supprimer mon compte</button>
-	</form>
+		<h1 class="page-header">Pour quelle raison souhaites tu supprimer ton compte ?</h1>
+		<form action="{{ path('delete_user') }}">
+			<div class="form-group">
+				{% for raison in raisons %}
+		          <label style="width:100%">
+		          	<div class="col-xs-2 col-sm-4 text-right">
+		          		<input type="radio" name="raison" value="{{raison.id}}">	
+		          	</div>
+		          	<div class="col-xs-10 col-sm-5 text-left">
+		          		{% if raison.id == 4 %}
+			          		{{ raison.libelle }} :	
+							<textarea class="form-control" rows="3" name="contenu"></textarea>
+						{% else %}
+			          		{{ raison.libelle }}	
+		          		{% endif %}
+		          	</div>
+		          	
+		          </label>
+			{% endfor %}		
+		        </div>
+			<p class="text-center">Es tu sûr de vouloir supprimer ton compte candidat ?</p>
+			<p class="text-center">(tes recommandations seront aussi perdues)</p>
+			<button id="button" class="btn btn-soshcr" type="submit">Supprimer mon compte</button>
+		</form>
 	</div>
 
 {% endblock %}
