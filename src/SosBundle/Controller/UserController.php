@@ -68,6 +68,11 @@ class UserController extends Controller
     public function validationAction($code, $id)
     {
         $em = $this->getDoctrine()->getManager();
+        $testcode = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('code' => $code));
+        if(empty($testcode)){
+            return $this->render('SosBundle:Default:index.html.twig', array("error"=> 'code'));
+        }
+        else {
         $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $id));
         $usercritere = $em->getRepository('SosBundle:userCritere')->findAll(array('user' => $user));
         $recommandation = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('code' => $code, 'user' => $id));
@@ -82,6 +87,7 @@ class UserController extends Controller
         $em->flush();
         $validation= 'Recommandation effectuée';
         return $this->render('SosBundle:Default:index.html.twig', array("validation"=>$validation));
+        }
     }
  
     /**
