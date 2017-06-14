@@ -13,31 +13,49 @@
 
 <header class="header-small">
     <div class="col-xs-2">
-        <a href="{{ path('index') }}" id="logo"> <img class="img-responsive" src="{{ asset('bundles/sos/global/img/logo.png') }}" alt=""> </a>
+        <a href="{{ path('index') }}" id="logo" class="text-center"> <img class="img-responsive" src="{{ asset('bundles/sos/global/img/logo.png') }}" alt=""> </a>
     </div> 
     
     <!-- Title desktop -->
-     <div class="col-xs-8 text-center">
-        <img class="title" src="{{ asset('bundles/sos/global/img/title.png') }}" class="img-responsive">  
+     <div class="col-xs-8 col-md-8 text-center">
+        <a href="{{ path('index') }}"><img class="title" src="{{ asset('bundles/sos/global/img/title.png') }}" class="img-responsive"></a>  
     </div>
     <!-- Title desktop -->
 
-     <div class="col-xs-2" id="user-nav">
+    <div class="col-xs-2" id="user-nav">
       {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <a href="#" id="user-icon">{{ app.user.prenom }}&nbsp;&nbsp;<i style="font-size:10px" class="fa fa-chevron-right" aria-hidden="true"></i></a>
-        <a href="{{path('fos_user_security_logout')}}"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+        <a href="#" id="user-icon" class="hidden-xs hidden-sm">{{ app.user.prenom|capitalize }}&nbsp;&nbsp;<i style="font-size:10px" class="fa fa-chevron-right" aria-hidden="true"></i></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{path('fos_user_security_logout')}}" class="hidden-xs hidden-sm"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+        
+        <a href="#" class="hidden-md hidden-lg" id="burger-button"><i class="fa fa-bars" aria-hidden="true"></i></a>
+
       {% else %}
-        <a class="launch-modal hidden-xs hidden-sm" id="login" href="#" data-modal-id="modal-login">Espace candidat</a>
+        <a class="hidden-xs hidden-sm launch-modal" id="loginDesktop" href="#" data-modal-id="modal-login">Espace candidat</a>
+        <a class="launch-modal hidden-md hidden-lg" id="loginMobile" href="#" data-modal-id="modal-login"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
       {% endif %} 
     </div>  
-
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
   <ul id="user-menu">
+    <li><a href="{{ path('public_profil', {'id' : app.user.id}) }}">Mon Profil</a></li>
     <li><a href="{{ path('dashboard') }}">Tableau de bord</a></li>
   </ul>
 {% endif %}
 </header>
 <div id="barre-jaune-header"></div>
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+  <div class="mobile-menu">
+    <a href="#" id="close-mobile-menu"><i class="fa fa-times" aria-hidden="true"></i></a>
+    <br>
+    <a href="{{ path('index') }}" id="logo"> <img style="max-width:100px" src="{{ asset('bundles/sos/global/img/logo.png') }}" alt=""> </a>
+    <br><br>
+    <ul class="text-center">
+      <li class="label"><a href="{{ path('public_profil', {'id' : app.user.id}) }}">MON PROFIL</a></li>
+      <li class="label"><a href="{{ path('dashboard') }}">TABLEAU DE BORD</a></li>
+      <li class="label"><a href="{{path('fos_user_security_logout')}}"><i class="fa fa-power-off" aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+{% endif %}
 <!-- MODAL -->
 <div class="modal fade" id="modal-login"  role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">
   <div class="modal-dialog">
