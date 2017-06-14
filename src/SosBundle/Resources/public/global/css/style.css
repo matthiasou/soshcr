@@ -253,11 +253,11 @@ header .title {
 header #logo {
     width: 100%;
     display: block;
-    margin-top: 50px;
+    margin-top: 45px;
 }
 
 header #logo img {
-    width: 80px
+    width: 70px
 }
 
 header #login-icon {
