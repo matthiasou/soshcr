@@ -18,6 +18,38 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        //Suppression des comptes avec abonnement expiré
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository("SosBundle:User")->findAll();
+        $today = new \DateTime('NOW');
+        foreach($users as $user){
+            $age = $today->diff($user->getDateAbonnement());
+
+
+            if(($age->days)+1 == 0 || $age->invert == 1){
+                $em->remove($user);
+                $em->flush();
+            }
+            if(($age->days <= 5) && ($age->invert == 0) && ($user->getMessage5J() == 0) ){
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Expiration dans 5 jours !')
+                    ->setFrom('soshcr@contact.fr')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'SosBundle:Search:message5J.html.twig',
+                            array('prenom' => $user->getPrenom())
+                        ),
+                        'text/html'
+                    );
+                $this->get('mailer')->send($message);
+
+                $user->setMessage5J(1);
+                $em->persist($user);
+                $em->flush($user);
+            }
+
+        }
         return $this->render('SosBundle:Default:index.html.twig');
     }
 
@@ -239,7 +271,7 @@ class DefaultController extends Controller
              }
 
          }
-        return $this->render('SosBundle:Default:contact.html.twig');
+        return $this->render('SosBundle:Default:index.html.twig');
 
     }
 }
