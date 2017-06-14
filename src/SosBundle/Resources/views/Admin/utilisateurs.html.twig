@@ -26,6 +26,7 @@
 	<input type="submit" name="rechercherAll" value="Voir tous les profils">
 </form>
 {% if result1 is defined %}
+	<div class="col-xs-12">
 <div class="table-responsive">
 		<table id="myTable" class="table text-center table-striped tablesorter">
 			<thead>
@@ -69,7 +70,9 @@
 						{% endfor %}
 					</td>
 					<td>
-						<input type="checkbox" name="id_utilisateur[]" value="{{result.id}}" />
+						{% if result.roles == "a:0:{}" %}
+							<input type="checkbox" name="id_utilisateur[]" value="{{result.id}}" />
+						{% endif %}					
 					</td>
 				</tr>
 				{% endfor %}	
@@ -78,6 +81,7 @@
 		</table>
 <input type="submit" name="supprimer" value="Supprimer le profil">			
 	</div>
+</div>
 {% endif %}
 {% if utilisateurs is defined %}
 	
@@ -124,8 +128,11 @@
 							{% endif %}
 						{% endfor %}
 					</td>
+
 					<td>
-						<input type="checkbox" name="id_utilisateur[]" value="{{utilisateur.id}}" />
+						{% if utilisateur.roles[0] != "ROLE_ADMIN" %}
+							<input type="checkbox" name="id_utilisateur[]" value="{{utilisateur.id}}" />
+						{% endif %}
 					</td>
 				</tr>
 				{% endfor %}	
