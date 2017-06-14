@@ -4,7 +4,6 @@
 	{{ parent() }}
     <link href="{{ asset('bundles/sos/tablesorter/themes/blue/style.css') }}" rel="stylesheet">
 {% endblock %}
-
 {% block javascripts %}
 	{{ parent() }}
 	<script src="{{ asset('bundles/sos/tablesorter/jquery.tablesorter.js') }}"></script>
@@ -18,24 +17,28 @@
 		); 
 	</script>
 {% endblock %}
-
 {% block sos_body %}
-
+<div class="container">
 	<h3 class="page-header">Recherche de profils</h3>
-	<form method="POST" action="{{ path('utilisateurs') }}">
+	<form method="POST" class="form-inline" action="{{ path('utilisateurs') }}">
 		<div class="form-group">
-			<label for="">Nom : <input type="text"  name="nom"></label>
-			<label for="">Prénom : <input type="text" name="prenom"></label>
-			<label for="">Téléphone : <input type="text"  name="telephone"></label>
+			<div class="form-group">
+				<label for="">Nom : <input type="text" class="form-control" name="nom"></label>
+			</div>
+			<div class="form-group">
+				<label for="">Prénom : <input type="text" class="form-control" name="prenom"></label>
+			</div>
+			<div class="form-group">
+				<label for="">Téléphone : <input type="text" class="form-control" name="telephone"></label>
+			</div>
 			<input type="submit" name="rechercher" value="Rechercher" class="btn btn-soshcr">
 			<input type="submit" name="rechercherAll" value="Voir tous les profils" class="btn btn-soshcr">
 		</div>
-	
-	
+</div>
 </form>
 {% if result1 is defined %}
 	<div class="col-xs-12">
-<div class="table-responsive">
+	<div class="table-responsive">
 		<table id="myTable" class="table text-center table-striped tablesorter">
 			<thead>
 				<tr>
