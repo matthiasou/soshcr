@@ -320,13 +320,13 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $connection = $em->getConnection();
-        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM utilisateur where date_abonnement is not null");
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM orders WHERE isvalide = 1");
         $statement->execute();
         $results = $statement->fetchAll();
-        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM paiement WHERE YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE())");
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM orders WHERE isvalide = 1 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE())");
         $statement->execute();
         $result1 = $statement->fetchAll();
-        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM paiement WHERE YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()- INTERVAL 1 MONTH)");
+        $statement = $connection->prepare("SELECT COUNT(*) as nb FROM orders WHERE isvalide = 1 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE()- INTERVAL 1 MONTH)");
         $statement->execute();
         $result2 = $statement->fetchAll();
         $statement = $connection->prepare("SELECT COUNT(*) as nb FROM utilisateur ");

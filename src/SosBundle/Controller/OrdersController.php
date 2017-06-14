@@ -100,6 +100,7 @@ class OrdersController extends Controller
         $payment = Payment::retrieve($payplugid);
         if($payment->is_paid)
         {
+            $order->setIsvalide(1);
             if($order->getAmount() == 15){
                 $months = '+12 months';
             }
