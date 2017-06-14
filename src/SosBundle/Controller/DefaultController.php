@@ -33,7 +33,7 @@ class DefaultController extends Controller
             if(($age->days <= 5) && ($age->invert == 0) && ($user->getMessage5J() == 0) ){
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Expiration dans 5 jours !')
-                    ->setFrom('soshcr@contact.fr')
+                    ->setFrom('no-reply@soshcr.fr')
                     ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(
