@@ -39,6 +39,11 @@ class Order
      */
     public $idpayplug;
 
+    /**
+     * @ORM\Column(name="isvalide", type="boolean", nullable=true)
+     */
+    private $isvalide;
+
 
     public function getId()
     {
@@ -123,6 +128,30 @@ class Order
     public function getIdpayplug()
     {
         return $this->idpayplug;
+    }
+
+    /**
+     * Set isvalide
+     *
+     * @param boolean $isvalide
+     *
+     * @return Order
+     */
+    public function setIsvalide($isvalide)
+    {
+        $this->isvalide = $isvalide;
+
+        return $this;
+    }
+
+    /**
+     * Get isvalide
+     *
+     * @return boolean
+     */
+    public function getIsvalide()
+    {
+        return $this->isvalide;
     }
 
 }
