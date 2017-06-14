@@ -16,6 +16,9 @@ $(document).ready(function(){
         if (error == "recommandation") {
             sweetAlert("Erreur :", "Vous avez déjà effectué une demande de recommandation aujourd'hui !", "error")
         }
+        if (error == "code") {
+            sweetAlert("Erreur :", "Le code validation n'est pas valide !", "error")
+        }
     }
 
     if (typeof validation != "undefined") {
