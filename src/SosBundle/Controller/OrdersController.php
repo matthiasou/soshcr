@@ -110,7 +110,7 @@ class OrdersController extends Controller
             $utilisateur->setDateAbonnement(new \DateTime($dateabo));
             $em->persist($utilisateur);
             $em->flush();
-        $validation = "Merci d avoir prolongé votre compte";
+        $validation = "Merci d avoir prolongé ton compte";
         }
         return $this->render('SosBundle:Dashboard:dashboard.html.twig', array('validation' => $validation, 'user' =>$user));
     }
