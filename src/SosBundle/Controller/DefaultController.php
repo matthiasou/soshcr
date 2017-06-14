@@ -239,7 +239,7 @@ class DefaultController extends Controller
              }
 
          }
-        return $this->render('SosBundle:Default:index.html.twig');
+        return $this->render('SosBundle:Default:contact.html.twig');
 
     }
 }
