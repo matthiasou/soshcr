@@ -47,7 +47,7 @@ class AdminController extends Controller
 
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Demande de recommandation envoyée')
-                    ->setFrom('soshcr@contact.fr')
+                    ->setFrom('no-reply@soshcr.fr')
                     ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(

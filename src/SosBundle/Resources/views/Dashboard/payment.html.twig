@@ -12,7 +12,7 @@
 <script type="text/javascript" src="https://api.payplug.com/js/1.0/form.js"></script>
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
-            [].every.call(document.querySelectorAll("#signupForm"), function(el) {
+            [].forEach.call(document.querySelectorAll("#signupForm"), function(el) {
       el.addEventListener('submit', function(event) {
         if($('#accepter').is(':checked')) {
         var payplug_url = '{{pay}}';
@@ -21,7 +21,7 @@
         }
       else {
           sweetAlert('Veuillez accepter les conditions générales de vente');
-          return false;
+          event.preventDefault();
         }
         })
     })
@@ -38,7 +38,7 @@
       </div>
           <form action="" method="post" id="signupForm" class="formulaire" novalidate>
             <p>
-              <input type="radio" name="accepter" id="accepter" required> J'ai lu et j'accepte les conditions générales de vente
+              <input type="checkbox" name="accepter" id="accepter" required> J'ai lu et j'accepte les conditions générales de vente
             </p>
             <p>
               <input type="submit" id="submit-button" class="btn  btn-soshcr" value="Payer">
