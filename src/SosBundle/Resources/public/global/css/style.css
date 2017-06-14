@@ -258,12 +258,12 @@ header #logo {
 
 @media (max-width: 768px){
     header #logo img{
-        width: 50px
+        width: 50px!important;
     }
 }
 
 header #logo img {
-    width: 70px
+    width: 70px;
 }
 
 header #login-icon {
