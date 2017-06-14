@@ -34,6 +34,7 @@
 	
 </form>
 {% if result1 is defined %}
+	<div class="col-xs-12">
 <div class="table-responsive">
 		<table id="myTable" class="table text-center table-striped tablesorter">
 			<thead>
@@ -52,20 +53,20 @@
 			<tbody>
 				{% for result in result1 %}
 				<tr>
-					<td><a href="{{ path('public_profil', {'id': result.id}) }}">{{result.nom}}</a></td>
-					<td><a href="{{ path('public_profil', {'id': result.id}) }}">{{result.prenom}}</a></td>
-					<td>{{age}}</td>
-					<td>{{result.telephone}}</td>
-					<td>{{result.email}}</td>
-					<td>
+					<td class="text-center"><a href="{{ path('public_profil', {'id': result.id}) }}">{{result.nom}}</a></td>
+					<td class="text-center"><a href="{{ path('public_profil', {'id': result.id}) }}">{{result.prenom}}</a></td>
+					<td class="text-center">{{age}}</td>
+					<td class="text-center">{{result.telephone}}</td>
+					<td class="text-center">{{result.email}}</td>
+					<td class="text-center">
 					{{nbRecommandation}}
 					</td>
-					<td>
+					<td class="text-center">
 						{% if result.date_inscription is not empty %}
 							{{result.date_inscription|date("d/m/Y")}}
 						{% endif %}
 					</td>
-					<td>
+					<td class="text-center">
 						{% for key,value in item %}
 							{% if result.id == key %}
 								{% if value is null %}
@@ -76,8 +77,10 @@
 							{% endif %}
 						{% endfor %}
 					</td>
-					<td>
-						<input type="checkbox" name="id_utilisateur[]" value="{{result.id}}" />
+					<td class="text-center">
+						{% if result.roles == "a:0:{}" %}
+							<input type="checkbox" name="id_utilisateur[]" value="{{result.id}}" />
+						{% endif %}					
 					</td>
 				</tr>
 				{% endfor %}	
@@ -86,6 +89,7 @@
 		</table>
 <input type="submit" name="supprimer" value="Supprimer le profil">			
 	</div>
+</div>
 {% endif %}
 {% if utilisateurs is defined %}
 	
@@ -100,8 +104,8 @@
 					<th class="text-center">Telephone</th>
 					<th class="text-center">Email</th>
 					<th class="text-center">Recommandation</th>
-				    <th class="text-center">Date d'inscription</th>
-				    <th class="text-center">Score</th>
+				  <th class="text-center">Date d'inscription</th>
+				  <th class="text-center">Score</th>
 					<th class="text-center">Supprimer</th>
 				</tr>
 			</thead>
@@ -133,7 +137,9 @@
 						{% endfor %}
 					</td>
 					<td class="text-center">
-						<input type="checkbox" name="id_utilisateur[]" value="{{utilisateur.id}}" />
+						{% if utilisateur.roles[0] != "ROLE_ADMIN" %}
+							<input type="checkbox" name="id_utilisateur[]" value="{{utilisateur.id}}" />
+						{% endif %}
 					</td>
 				</tr>
 				{% endfor %}	

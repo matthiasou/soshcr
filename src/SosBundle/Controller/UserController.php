@@ -71,6 +71,7 @@ class UserController extends Controller
         $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $id));
         $usercritere = $em->getRepository('SosBundle:userCritere')->findAll(array('user' => $user));
         $recommandation = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('code' => $code, 'user' => $id));
+
             foreach ($usercritere as $u){
                 $score = $u->setScore($u->getScore()+10);
                 $em->persist($score);
@@ -81,7 +82,6 @@ class UserController extends Controller
         $em->flush();
         $validation= 'Recommandation effectuée';
         return $this->render('SosBundle:Default:index.html.twig', array("validation"=>$validation));
-
     }
  
     /**
