@@ -123,7 +123,7 @@ class DefaultController extends Controller
                 $message = \Swift_Message::newInstance()
                         ->setSubject('Demande de contact SOSHCR')
                         ->setFrom($_POST['C_EmailAddress'])
-                        ->setTo('contact@soshcr.fr')
+                        ->setTo('no-reply@soshcr.fr')
                         ->setBody(
                             $this->renderView(
                                 'SosBundle:Default:demande_contact.html.twig',
@@ -182,7 +182,7 @@ class DefaultController extends Controller
                 $em->flush();
                 $message = \Swift_Message::newInstance()
                         ->setSubject('Signalement d un profil')
-                        ->setFrom('contact@soshcr.fr')
+                        ->setFrom('no-reply@soshcr.fr')
                         ->setTo('contact@soshcr.fr')
                         ->setBody(
                             $this->renderView(
@@ -254,7 +254,7 @@ class DefaultController extends Controller
              if(($age->days <= 5) && ($age->invert == 0) && ($user->getMessage5J() == 0) ){
                  $message = \Swift_Message::newInstance()
                      ->setSubject('Expiration dans 5 jours !')
-                     ->setFrom('soshcr@contact.fr')
+                     ->setFrom('no-reply@soshcr.fr')
                      ->setTo($user->getEmail())
                      ->setBody(
                          $this->renderView(

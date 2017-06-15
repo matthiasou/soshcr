@@ -78,21 +78,21 @@ class SearchController extends Controller
     //      $data = array();
     //      $em = $this->getDoctrine()->getManager();
 
-    //  	// Validation classification
-    //  	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "classification" ) {
+    //      // Validation classification
+    //      if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "classification" ) {
 
     // $data['ville'] = $request->get('ville');
-    //  		$data['classification'] = $request->get('classification');
+    //          $data['classification'] = $request->get('classification');
 
     //       $repo = $em->getRepository("SosBundle:Secteur");
     //       $secteurs = $repo->findAll();
 
     //       $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
-    //  		
-    //  		return $this->render('SosBundle:Search:secteur.html.twig', array('secteurs' => $secteurs, 'data' => $data, 'step' => '3'));
+    //          
+    //          return $this->render('SosBundle:Search:secteur.html.twig', array('secteurs' => $secteurs, 'data' => $data, 'step' => '3'));
 
-    //  	}else{
+    //      }else{
     //          return $this->redirectToRoute($request->get('form'));
     //      }
     //  }
@@ -106,39 +106,39 @@ class SearchController extends Controller
     //      $data = array();
     //      $em = $this->getDoctrine()->getManager();
 
-    // 		// Validation secteur activité
-    //  	if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "secteur" ) {
+    //      // Validation secteur activité
+    //      if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "secteur" ) {
 
     // $data['ville'] = $request->get('ville');
-    //  		$data['classification'] = $request->get('classification');
-    //  		$data['secteur_activite'] = $request->get('secteur_activite');
+    //          $data['classification'] = $request->get('classification');
+    //          $data['secteur_activite'] = $request->get('secteur_activite');
 
-    //  		
+    //          
 
-    //  		$data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
+    //          $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
     // if ($data['secteur_activite'] == 1) {
 
-    // 	$qb = $em->createQueryBuilder();
-    // 	$postes = $qb->select('p')
+    //  $qb = $em->createQueryBuilder();
+    //  $postes = $qb->select('p')
     //             ->from('SosBundle:PosteRecherche','p')
     //             ->where('p.secteur = :secteur_activite')
     //             ->setParameter('secteur_activite', $data['secteur_activite'])
     //             ->getQuery()
     //             ->getResult();
 
-    // 	return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'data' => $data, 'step' => '5'));
+    //  return $this->render('SosBundle:Search:poste.html.twig', array('postes' => $postes, 'data' => $data, 'step' => '5'));
 
     // }else if($data['secteur_activite'] == 2){
 
     //        $repo = $em->getRepository("SosBundle:Service");
     //        $services = $repo->findAll();
 
-    // 	return $this->render('SosBundle:Search:service.html.twig', array('services' => $services, 'data' => $data, 'step' => '4'));
+    //  return $this->render('SosBundle:Search:service.html.twig', array('services' => $services, 'data' => $data, 'step' => '4'));
 
     // }
 
-    //  	}else{
+    //      }else{
     //          return $this->redirectToRoute($request->get('form'));
     //      }
     //  }
@@ -704,7 +704,7 @@ class SearchController extends Controller
             foreach ($_POST['mail_demande_utilisateur'] as $user) {
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Nouvelle demande sur SOSHCR')
-                    ->setFrom('soshcr@contact.fr')
+                    ->setFrom('no-reply@soshcr.fr')
                     ->setTo($user)
                     ->setBody(
                         $this->renderView(
