@@ -34,7 +34,7 @@ class OrdersController extends Controller
         $id = $query->getResult();
         $idorder = $id['0']['1'];
         $orderid = $idorder+1;
-        Payplug::setSecretKey('sk_test_1Ku7CEQ0UC5sT5y4N2ZBR2');
+        Payplug::setSecretKey('sk_live_7QP8tOqTgqIRIbm7zDzCCs');
         $parameters = [
           'amount'   => $amount * 100, 
           'currency' => 'EUR',
@@ -95,7 +95,7 @@ class OrdersController extends Controller
         ->getSingleResult();
         $id = $query[1];
         $order = $em->getRepository('SosBundle:Order')->findOneBy(array('id' => $id));
-        Payplug::setSecretKey('sk_test_1Ku7CEQ0UC5sT5y4N2ZBR2');
+        Payplug::setSecretKey('sk_live_7QP8tOqTgqIRIbm7zDzCCs');
         $payplugid = $order->getIdpayplug();
         $payment = Payment::retrieve($payplugid);
         if($payment->is_paid)
