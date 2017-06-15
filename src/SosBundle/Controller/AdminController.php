@@ -89,7 +89,7 @@ class AdminController extends Controller
                     $em->flush();
                     $message = \Swift_Message::newInstance()
                         ->setSubject('Demande de recommandation')
-                        ->setFrom('soshcr@contact.fr')
+                        ->setFrom('no-reply@soshcr.fr')
                         ->setTo($recommandation->getEmail())
                         ->setBody(
                             $this->renderView(
@@ -116,7 +116,7 @@ class AdminController extends Controller
                     $reco = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('id' => $value));
                     $message = \Swift_Message::newInstance()
                     ->setSubject('Suppression de votre recommandation')
-                    ->setFrom('soshcr@contact.fr')
+                    ->setFrom('no-reply@soshcr.fr')
                     ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(
@@ -229,7 +229,7 @@ class AdminController extends Controller
                         $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
                         $message = \Swift_Message::newInstance()
                         ->setSubject('Suppression de votre compte')
-                        ->setFrom('soshcr@contact.fr')
+                        ->setFrom('no-reply@soshcr.fr')
                         ->setTo($user->getEmail())
                         ->setBody(
                             $this->renderView(
@@ -294,7 +294,7 @@ class AdminController extends Controller
                         $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $value));
                         $message = \Swift_Message::newInstance()
                         ->setSubject('Suppression de votre compte')
-                        ->setFrom('soshcr@contact.fr')
+                        ->setFrom('no-reply@soshcr.fr')
                         ->setTo($user->getEmail())
                         ->setBody(
                             $this->renderView(
