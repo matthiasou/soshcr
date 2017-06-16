@@ -99,7 +99,7 @@
 										{% if reco.valide == 2 %}
 											{{ reco.nomEtablissement }}; 
 										{% endif %}
-									{% endfor %}'>{{ employe.getRecommandations()|length  }} recommandations
+									{% endfor %}'>{{ nbReco }} recommandations
 									</a>
 								</p>
                             {% else %}
@@ -119,7 +119,7 @@
 										{% if reco.valide == 2 %}
 											{{ reco.nomEtablissement }}; 
 										{% endif %}
-									{% endfor %}' >{{ employe.getRecommandations()|length  }} recommandation</a>
+									{% endfor %}' >{{ nbReco }} recommandation</a>
 								</p>
                             {% else %}
                             	<p>0 recommandation</p>
