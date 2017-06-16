@@ -95,7 +95,7 @@
                 <ul>
                     {% set nbAttenteRecommandation = 0 %}
                     {% for recommandation in recommandations %}
-                        {% if recommandation.valide %}
+                        {% if recommandation.valide == 2 %}
                             <li>
                                 {{ recommandation.nomEtablissement }}, {{ recommandation.ville }}
                             </li>
