@@ -84,11 +84,47 @@
 					    	<p>{{ employe.telephone }}</p>
 					    </div>
 					    {% if employe.getRecommandations()|length == 0 %}
-                            <p>0 recommandation</p>
+                            
                         {% elseif employe.getRecommandations()|length > 1 %}
-                            <p><a href="#" class="icoTwitter" data-toggle="tooltip" title='{% for reco in employe.getRecommandations() %} {{ reco.nomEtablissement }}; {% endfor %}' >{{ employe.getRecommandations()|length  }} recommandations</a></p>
+                        	{% set nbReco = 0 %}
+                        	{% for reco in employe.getRecommandations() %}
+								{% if reco.valide == 2 %}
+									{% set nbReco = nbReco + 1 %}
+								{% endif %}
+                        	{% endfor %}
+                            {% if nbReco > 0 %}
+								<p>
+									<a href="#" class="icoTwitter" data-toggle="tooltip" title='
+									{% for reco in employe.getRecommandations() %}
+										{% if reco.valide == 2 %}
+											{{ reco.nomEtablissement }}; 
+										{% endif %}
+									{% endfor %}'>{{ employe.getRecommandations()|length  }} recommandations
+									</a>
+								</p>
+                            {% else %}
+                            	<p>0 recommandation</p>
+                            {% endif %}
                         {% elseif employe.getRecommandations()|length  == 1 %}
-                            <p> <a href="#" class="icoTwitter" data-toggle="tooltip" title='{% for reco in employe.getRecommandations() %} {{ reco.nomEtablissement }}{% endfor %}' >{{ employe.getRecommandations()|length  }} recommandation</a></p>
+                        	{% set nbReco = 0 %}
+                        	{% for reco in employe.getRecommandations() %}
+								{% if reco.valide == 2 %}
+									{% set nbReco = nbReco + 1 %}
+								{% endif %}
+                        	{% endfor %}
+                            {% if nbReco > 0 %}
+								<p>
+									<a href="#" class="icoTwitter" data-toggle="tooltip" title='
+									{% for reco in employe.getRecommandations() %}
+										{% if reco.valide == 2 %}
+											{{ reco.nomEtablissement }}; 
+										{% endif %}
+									{% endfor %}' >{{ employe.getRecommandations()|length  }} recommandation</a>
+								</p>
+                            {% else %}
+                            	<p>0 recommandation</p>
+                            {% endif %}
+                            
                         {% endif %}
 
 					  </div>
