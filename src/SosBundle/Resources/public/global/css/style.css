@@ -896,7 +896,8 @@ section {
     margin-top: -24px;
     background: rgba(0, 0, 0, 0.04);
     padding: 15px;
-    border-radius: 10px
+    border-radius: 10px;
+    height: 290px;
 }
 
 .box > .icon > .info > h3.title {
