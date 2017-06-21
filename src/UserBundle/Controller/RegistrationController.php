@@ -14,6 +14,22 @@ use FOS\UserBundle\Event\FilterUserResponseEvent;
 
 class RegistrationController extends BaseController
 {
+    
+    /**
+     * Overwrite default FOS action with difference that we redirect to login page
+     * in case the token is expired/invalid.
+     *
+     * => if users click the confirm link twice...
+     */
+    public function confirmAction(Request $request, $token)
+    {
+        try {
+            return parent::confirmAction($request, $token);
+        } catch (NotFoundHttpException $e) {
+            return $this->redirectToRoute('fos_user_security_login');
+        }
+    }
+    
     public function registerAction(Request $request)
     {
 
