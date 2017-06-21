@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 
-class RegistrationController extends BaseController
+class RegistrationController extends \FOS\UserBundle\Controller\RegistrationController
 {
     
     /**
@@ -62,7 +62,8 @@ class RegistrationController extends BaseController
                 
                 $today = new \DateTime('+3 months');
                 $datetoday = new \DateTime('now');
-                $user->setDateAbonnement($today);$event = new FormEvent($form, $request);
+                $user->setDateAbonnement($today);
+                $event = new FormEvent($form, $request);
                 $user->setMessage5J(0);
                 $user->setDateInscription($datetoday);
                 $user->setValidation(0);
