@@ -140,11 +140,9 @@
 		<div class="col-md-12">
                     <ul class="social-network social-circle">
                         <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Imprimer les resultats" ><i class="" ><input name ="action" value="imprimer" style="background-image: url({{ asset('bundles/sos/global/img/print.png') }}); color: transparent; max-width: 40px; float: right; border:none;background-color: transparent; background-repeat:no-repeat;background-size:100% 100%;" type="submit" border="0"   /></i></a></li>
-                        <li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Demander les CV" ><i class="" ><input name ="action" value="demandeCV" style="background-image: url({{ asset('bundles/sos/global/img/cv.png') }}); color: transparent; max-width: 45px; float: right; border:none;background-color: transparent; background-repeat:no-repeat;background-size:100% 100%;" type="submit" border="0"   /></i></a></li>
-                        <br>
                        <input type="hidden" name="form" value="resultat">
                        </form>
-                        <form action="{{ path('poste')}}" method="post">
+                        <form style="display: inline;" action="{{ path('poste')}}" method="post">
                         <input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
                         <input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
                         <input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
