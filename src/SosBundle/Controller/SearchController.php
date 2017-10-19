@@ -399,29 +399,13 @@ class SearchController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         // Validation anglais
-        if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "anglais") {
+        if ($request->isMethod('POST') && null !== $request->get('form') && $request->get('form') == "contrat") {
 
             $data['ville'] = $request->get('ville');
             $data['classification'] = $request->get('classification');
             $data['poste'] = $request->get('poste');
             $data['contrat'] = $request->get('contrat');
-            $data['niveau_anglais'] = $request->get('niveau_anglais');
 
-            if (null !== $request->get('cursus_scolaire')) {
-                $data['cursus_scolaire'] = $request->get('cursus_scolaire');
-            }
-
-            if (null !== $request->get('contrat_duree')) {
-                $data['contrat_duree'] = $request->get('contrat_duree');
-            }
-
-            if (null !== $request->get('formation_minimum')) {
-                $data['formation_minimum'] = $request->get('formation_minimum');
-            }
-
-            if (null !== $request->get('experience_minimum')) {
-                $data['experience_minimum'] = $request->get('experience_minimum');
-            }
 
             $data['match_employe'] = $this->get('sos.matching')->getNumberOfEmploye($data, $request->get('form'));
 
@@ -448,24 +432,7 @@ class SearchController extends Controller
             $data['classification'] = $request->get('classification');
             $data['poste'] = $request->get('poste');
             $data['contrat'] = $request->get('contrat');
-            $data['niveau_anglais'] = $request->get('niveau_anglais');
             $data['date_debut'] = $request->get('date_debut');
-
-            if (null !== $request->get('cursus_scolaire')) {
-                $data['cursus_scolaire'] = $request->get('cursus_scolaire');
-            }
-
-            if (null !== $request->get('contrat_duree')) {
-                $data['contrat_duree'] = $request->get('contrat_duree');
-            }
-
-            if (null !== $request->get('formation_minimum')) {
-                $data['formation_minimum'] = $request->get('formation_minimum');
-            }
-
-            if (null !== $request->get('experience_minimum')) {
-                $data['experience_minimum'] = $request->get('experience_minimum');
-            }
 
             //$this->get('sos.matching')->setScoreEmploye($data);
             $data['employes'] = $this->get('sos.matching')->getEmploye($data);
@@ -475,10 +442,16 @@ class SearchController extends Controller
                 $today = new \DateTime('NOW');
                 $age = $today->diff($dateNaisssance);
 
+                $userCriteres = $employee->getCriteres();
+                $longitude = $userCriteres[0]->getLongitude();
+                $latitude = $userCriteres[0]->getLatitude();
+
                 $employee->age = (int)($age->days / 365);
                 $recommandation = $em->getRepository("SosBundle:Recommandation")->findby(array('user' => $employee, 'valide' => 2));
                 $nbRecommandation = count($recommandation);
                 $employee->nbRecommandation = $nbRecommandation;
+                $employee->distance =round((6366*acos(cos(deg2rad($data['ville']['latitude']))*cos(deg2rad($latitude))*cos(deg2rad($longitude)-deg2rad($data['ville']['longitude']))+sin(deg2rad($data['ville']['latitude']))*sin(deg2rad($latitude)))),1);
+
                 $data['recommandations'] = $recommandation;
             }
 
