@@ -16,52 +16,45 @@
 
 		<ul class="col-lg-8 col-lg-offset-2">
 
-		{% for contrat in contrats %}
-			
-		        <li class="col-xs-6
+			{% for contrat in contrats %}
+
+				<li class="col-xs-6
 		        	{% if contrats|length == 5 %}
 		        		col-sm-2 {% if loop.first %} col-sm-offset-1 {% endif %}
 					{% else %}
 						col-sm-{{ 12 / contrats|length }}
 		        	{% endif %} text-center">
-		        	
-		            <form method="post" action="
-		            {% if contrat.libelle == "CDD" or contrat.libelle == "CDI" or contrat.libelle == "Stage" %}
-		            	{{ path('duree') }}
-		            {% elseif contrat.libelle == "Extra" %}
-		            	{{ path('experience') }}
-		            {% elseif contrat.libelle == "Apprentissage" %}
-		            	{{ path('cursus') }}
-		            {% endif %}">
-		                <button>
+
+					<form method="post" action="{{ path('date') }}">
+						<button>
 							<img style="max-width:110px" src="{{ asset('bundles/sos/global/img/contrat/' ~ contrat.id ~ '.png') }} " alt="" class="img-responsive form-img">
-		                    {# <p>{{ contrat.libelle }}</p> #}
-		                </button>
-		                <input type="hidden" value="{{ contrat.id }}" name="contrat">
+							{# <p>{{ contrat.libelle }}</p> #}
+						</button>
+						<input type="hidden" value="{{ contrat.id }}" name="contrat">
 						<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
 						<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 						<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 						<input type="hidden" name="classification" value="{{ data.classification }}">
 						<input type="hidden" name="poste" value="{{ data.poste }}">
 						<input type="hidden" name="form" value="contrat">
-		            </form>
-		        </li>
+					</form>
+				</li>
 
-		{% endfor %}
+			{% endfor %}
 
 		</ul>
-	
 
-   	<div class="clearfix spacer"></div>
 
-    <form action="{{ path('poste')}}" method="post">
-		<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
-		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
-		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
-		<input type="hidden" name="classification" value="{{ data.classification }}">
-		<input type="hidden" name="form" value="classification">
-		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
-	</form>
-</div>
+		<div class="clearfix spacer"></div>
+
+		<form action="{{ path('poste')}}" method="post">
+			<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
+			<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
+			<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
+			<input type="hidden" name="classification" value="{{ data.classification }}">
+			<input type="hidden" name="form" value="classification">
+			<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
+		</form>
+	</div>
 
 {% endblock %}

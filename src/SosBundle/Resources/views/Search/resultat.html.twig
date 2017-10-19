@@ -31,7 +31,7 @@
 			<input type="hidden" name="cursus_scolaire" value="{{ data.cursus_scolaire }}">
 		{% endif %}
 
-		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
+
 
 
 	    <div id="poste_hotellerie" class="col-xs-12 sos-form">
@@ -56,7 +56,7 @@
                        	{% if data.contrat_duree is defined %}
                        	<li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Durée du contrat" ><i class="" ><input name ="action" value="contrat_duree" style=" height:50px; background-image: url({{ asset('bundles/sos/global/img/duree_contrat/' ~ data.contrat_duree  ~ '.png') }}); width: 90%; color: transparent; float: right; border:none; background-color: transparent; background-repeat:no-repeat;background-size:contain;" class="img-responsive" type="submit" border="0"   /></i></a></li>
                        	{% endif %}
-                       	<li><a href="#" class="icoTwitter" data-toggle="tooltip" title="Niveau d'anglais" ><i class="" ><input name ="action" value="niveau_anglais" style=" height:50px; background-image: url({{ asset('bundles/sos/global/img/anglais/' ~ data.niveau_anglais  ~ '.png') }}); color: transparent; float: right; border:none; background-color: transparent; background-repeat:no-repeat;background-size:contain;" class="img-responsive" type="submit" border="0"   /></i></a></li>
+
 
                     </ul>
         </div>
@@ -77,14 +77,14 @@
 					  <div class="panel result-panel">
 					    <div class="panel-heading result-panel-heading">
 							<input  style="position: absolute; left: 30px; top: 15px;" type="checkbox" value="{{employe.email}}" name="mail_demande_utilisateur[]">
-							<a style="color: white;" href="{{ path('public_profil', {'id' : employe.id}) }}">{{ employe.prenom ~ ' ' ~ employe.nom ~ ' (' ~ employe.age ~' ans)'}} <i style="position: absolute; right: 30px; top: 15px;" class="fa fa-search" ></i></a>
+							<a style="color: white;" href="{{ path('public_profil', {'id' : employe.id}) }}">{{ employe.prenom ~ ' ' ~ employe.nom ~ ' (' ~ employe.age ~' ans)'}} &nbsp &nbsp &nbsp{{'à '~ employe.distance ~' km' }} <i style="position: absolute; right: 30px; top: 15px;" class="fa fa-search" ></i></a>
 						    </div>
 					    <div class="panel-body">
 					    	<p>{{ employe.email }}</p>
 					    	<p>{{ employe.telephone }}</p>
 					    </div>
 					    {% if employe.getRecommandations()|length == 0 %}
-                            
+
                         {% elseif employe.getRecommandations()|length > 1 %}
                         	{% set nbReco = 0 %}
                         	{% for reco in employe.getRecommandations() %}
@@ -97,7 +97,7 @@
 									<a href="#" class="icoTwitter" data-toggle="tooltip" title='
 									{% for reco in employe.getRecommandations() %}
 										{% if reco.valide == 2 %}
-											{{ reco.nomEtablissement }}; 
+											{{ reco.nomEtablissement }};
 										{% endif %}
 									{% endfor %}'>{{ nbReco }} recommandations
 									</a>
@@ -117,14 +117,14 @@
 									<a href="#" class="icoTwitter" data-toggle="tooltip" title='
 									{% for reco in employe.getRecommandations() %}
 										{% if reco.valide == 2 %}
-											{{ reco.nomEtablissement }}; 
+											{{ reco.nomEtablissement }};
 										{% endif %}
 									{% endfor %}' >{{ nbReco }} recommandation</a>
 								</p>
                             {% else %}
                             	<p>0 recommandation</p>
                             {% endif %}
-                            
+
                         {% endif %}
 
 					  </div>
@@ -175,11 +175,9 @@
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 		<input type="hidden" name="classification" value="{{ data.classification }}">
-		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
 
 		<input type="hidden" name="poste" value="{{ data.poste }}">
 		<input type="hidden" name="contrat" value="{{ data.contrat }}">
-		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
 
 		{% if data.contrat_duree is defined %}
 			<input type="hidden" name="contrat_duree" value="{{ data.contrat_duree }}">
