@@ -2,11 +2,15 @@
 
 {% block sos_body %}
 
-	<div class="container">
+	<div class="container col-sm-6">
 	    <a href="{{ path('ville') }}"  id="container-btn" class="col-xs-12">
-	        <span id="find-btn">TROUVER</span>
-	        <p id="text-btn">l' employé idéal.</p>
+	        <span id="find-btn">Employeur</span>
 	    </a>
+	</div>
+	<div class="container2 col-sm-6">
+		<a href="#"  id="container2-btn" class="col-xs-12 launch-modal" data-modal-id="modal-login">
+			<span id="find-btn">Candidat</span>
+		</a>
 	</div>
 
 {% endblock %}

@@ -114,10 +114,13 @@ class AdminController extends Controller
                 foreach($_POST['id_recommandation'] as $value)
                 {
                     $reco = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('id' => $value));
+                    $em->remove($reco);
+                    $em->flush();
+                    $utilisateur2 = $reco->getUser();
                     $message = \Swift_Message::newInstance()
                     ->setSubject('Suppression de votre recommandation')
                     ->setFrom('no-reply@soshcr.fr')
-                    ->setTo($user->getEmail())
+                    ->setTo($utilisateur2->getEmail())
                     ->setBody(
                         $this->renderView(
                             'SosBundle:Admin:suppression_recommandation.html.twig'
@@ -125,9 +128,8 @@ class AdminController extends Controller
                         'text/html'
                     );
                     $this->get('mailer')->send($message);
-                    $em->remove($reco);  
+
                 }
-                $em->flush();
                 return $this->redirectToRoute('recommandations');
             }
         }

@@ -62,7 +62,7 @@ class UserController extends Controller
         return $this->render('SosBundle:User:delete.html.twig', array('raisons' => $raisons));
     }
 
-    /**
+     /**
      * @Route("/validation/{code}/{id}")
      */
     public function validationAction($code, $id)
@@ -74,14 +74,14 @@ class UserController extends Controller
         }
         else {
         $user = $em->getRepository('SosBundle:User')->findOneBy(array('id' => $id));
-        $usercritere = $em->getRepository('SosBundle:userCritere')->findAll(array('user' => $user));
+        $usercritere = $em->getRepository('SosBundle:userCritere')->findOneBy(array('user' => $user));
         $recommandation = $em->getRepository('SosBundle:Recommandation')->findOneBy(array('code' => $code, 'user' => $id));
 
-            foreach ($usercritere as $u){
-                $score = $u->setScore($u->getScore()+10);
+            
+                $score = $usercritere->setScore($usercritere->getScore()+10);
                 $em->persist($score);
                 $em->flush();
-            }
+            
         $recommandation->setValide(2);
         $em->persist($recommandation);
         $em->flush();

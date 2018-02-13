@@ -14,13 +14,13 @@
                     <div class="icon">
                         <div class="image"><i class="fa fa-thumbs-o-up"></i></div>
                         <div class="info">
-                            <h3 class="title">Demander des recommandations</h3>
+                            <h3 class="title">Demander une recommandation</h3>
                             <p>
-                                Il n'y a rien de mieux pour <b>être contacté le premier et pour faire bonne impression</b>, fais appel à tes anciens employeurs :
+                                C'est idéal pour <b>rassurer les recruteurs et être contacté le premier</b>, fais appel à tes anciens employeurs :
                             </p>
 
                             <a href="{{ path('demandeRecommandation') }}" class="btn btn-soshcr" title="Title Link">
-                                J'envoie une demande&nbsp;&nbsp;<i class="fa fa-share-square" aria-hidden="true"></i>
+                                Je demande 1 recommandation&nbsp;&nbsp;<i class="fa fa-share-square" aria-hidden="true"></i>
                             </a>
                             <br>
                             <br>
@@ -43,6 +43,7 @@
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <li><a href="{{ path('dashboard_admin') }}">Administration</a></li>
                                     {% endif %}
+                                    <li><a href="{{ path('information') }}">Mon complément d'info</a></li>
                                     <li><a href="{{ path('modification_disponibilites') }}">Mes disponibilités</a></li>
                                     <li><a href="{{ path('usercriteres_step_1') }}">Mes critères de recherche</a></li>
                                     <li><a href="{{ path('profil') }}">Mes coordonnées</a></li>
@@ -108,7 +109,7 @@
                                 </ul>
                                 <ul class="col-sm-4" style="list-style-type:none">
                                     <li>Honorer ses engagements</li>
-                                    <li>Être sois même</li>
+                                    <li>Avoir des recommandations</li>
                                 </ul>
                         </div>
                     </div>

@@ -9,6 +9,10 @@ cgv:
 contact:
     path:     /contact
     defaults: { _controller: SosBundle:Default:contact }
+
+information:
+    path:     /information
+    defaults: { _controller: SosBundle:Default:information }
   
 profil:
     path:     /profil

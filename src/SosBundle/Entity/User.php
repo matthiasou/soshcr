@@ -33,6 +33,11 @@ class User extends BaseUser
     public $prenom;
 
     /**
+     * @ORM\Column(name="information", type="string", length=255, nullable=true)
+     */
+    private $information;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="telephone", type="string", length=255)
@@ -128,6 +133,30 @@ class User extends BaseUser
     public function setPrenom($prenom)
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get information
+     *
+     * @return string
+     */
+    public function getInformation()
+    {
+        return $this->information;
+    }
+
+     /**
+     * Set information
+     *
+     * @param string $information
+     *
+     * @return User
+     */
+    public function setInformation($information)
+    {
+        $this->information = $information;
 
         return $this;
     }

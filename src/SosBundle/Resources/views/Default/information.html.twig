@@ -1,0 +1,39 @@
+{% extends 'SosBundle::layout.html.twig' %}
+
+{% block sos_body %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"> </div>
+			<div class="col-md-8">
+				<h1>Mon complément d'information</h1>
+				<p class="lead">Indique tes spécialités, préférences ou autres informations utiles pour l'employeur</p>
+
+				<div class="panel panel-default well">
+					<div class="panel-body">
+						<form action="{{ path('information') }}" class="form-horizontal track-event-form" method="post" id="contact-us-all">
+
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="fa fa-comment fa-2"></i>
+										</div>
+										<textarea class="form-control" name="information" maxlength="50" id="Comments" rows="5" style="width:99.9%" placeholder="Dispo que le WE, de 18h à 20h, cuisine asiatique..." required>{% if user.information != null %}{{user.information}}{% endif %}</textarea>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-12">
+									<button type="submit" name="envoyer" style="background-color: #394076; border-color: #394076" class="btn btn-block btn-warning">Enregistrer</button>
+								</div>
+							</div>
+					</div><!-- end panel-body -->
+				</div><!-- end panel -->
+				<!-- END DOWNLOAD PANEL -->
+			</div><!-- end col-md-8 -->
+		</div>
+	</div>
+
+{% endblock %}

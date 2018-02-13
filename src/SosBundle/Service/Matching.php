@@ -161,7 +161,8 @@ class Matching {
                         else
                         {
                             $dateCheck = new \DateTime(str_replace('/', '-', $data['date_debut']));
-                            $date = new \DateTime(preg_replace('/([0-9]{2}\-[0-9]{2}\-[0-9]{4}\/).*/', '$1', str_replace('/', '-', $dispo)));
+                            $dateNew = preg_replace('/([0-9]{2}\-[0-9]{2}\-[0-9]{4}\/).*/', '$1', str_replace('/', '-', $dispo));
+                            $date = \DateTime::createFromFormat("d/m/Y",$dateNew);
                             
                             if ($date == $dateCheck)
                             {

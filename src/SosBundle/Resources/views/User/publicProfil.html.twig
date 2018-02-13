@@ -91,7 +91,7 @@
 
               <div class="clearfix"></div>
              <div class="col-xs-12 col-sm-6">
-                <h4 style="color:#555;font-weight:bold">Recommandations</h4>
+                <h4 style="color:#555;font-weight:bold">Recommandé par :</h4>
                 <ul>
                     {% set nbAttenteRecommandation = 0 %}
                     {% for recommandation in recommandations %}
@@ -113,6 +113,14 @@
                   <li>{{ userCriteres.anglais|raw}}</li>
                 </ul>
               </div>
+              {% if user.information != null %}
+              <div class="col-xs-12 col-sm-6">
+                <h4 style="color:#555;font-weight:bold">Autres informations</h4>
+                <ul>
+                  <li>{{ user.information }}</li>
+                </ul>
+              </div>
+              {% endif %}
 
             {% endif %}
 

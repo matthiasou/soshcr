@@ -148,6 +148,25 @@ class DefaultController extends Controller
         
     }
     /**
+     * @Route("/information")
+     */
+    public function informationAction()
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        if(isset($_POST['information'])){
+            $validation = "Information ajouté avec succès";
+            $em = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $user->setInformation($_POST['information']);;
+            $em->persist($user);
+            $em->flush();
+            return $this->render('SosBundle:Default:information.html.twig', array("validation" => $validation, "user" => $user));
+        }
+            
+        return $this->render('SosBundle:Default:information.html.twig', array("user" => $user));
+        
+    }
+    /**
      * @Route("/signalement_profil")
      */
     public function signalementProfilAction()

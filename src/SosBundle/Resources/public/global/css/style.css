@@ -442,11 +442,11 @@ header #login-icon {
 
 .container #find-btn {
     line-height: 50px;
-    width: 250px;
+    width: 270px;
     display: block;
     border-radius: 30px;
     background-color: #fee359;
-    background-image: url(../img/loupe.png);
+    /*background-image: url(../img/loupe.png);*/
     background-repeat: no-repeat;
     background-position: center right;
     background-size: 50px;
@@ -455,7 +455,7 @@ header #login-icon {
     color: #394173;
     margin: 0 auto;
     font-size: 40px;
-    border-right: 10px solid #FEE459;
+    border-left: 20px solid #FEE459;
     padding: 15px 50px 15px 25px;
     text-decoration: none;
     position: absolute;
@@ -466,7 +466,7 @@ header #login-icon {
 }
 
 .container #container-btn {
-    background-image: url(../img/people.png);
+    background-image: url(../img/employeur.png);
     display: block;
     position: relative;
     height: 225px;
@@ -553,6 +553,127 @@ header #login-icon {
         font-size: 50px!important
     }
 }
+
+
+.container2 {
+    text-align: center;
+    /*height: 60vh;*/
+}
+
+.container2 #find-btn {
+    line-height: 50px;
+    width: 270px;
+    display: block;
+    border-radius: 30px;
+    background-color: #fee359;
+    /*background-image: url(../img/loupe.png);*/
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: 50px;
+    border: none;
+    font-family: "stellar";
+    color: #394173;
+    margin: 0 auto;
+    font-size: 40px;
+    border-left: 25px solid #FEE459;
+    padding: 15px 50px 15px 25px;
+    text-decoration: none;
+    position: absolute;
+    bottom: 60px;
+    height: 70px;
+    left: 0;
+    right: 0;
+}
+
+.container2 #container2-btn {
+    background-image: url(../img/people.png);
+    display: block;
+    position: relative;
+    height: 225px;
+    background-position: center -15px;
+    background-size: 225px;
+    background-repeat: no-repeat;
+}
+
+.container2 #text-btn {
+    font-family: "Crunchy";
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 70px;
+    margin: 0;
+    letter-spacing: 5px;
+    color: #394173;
+    margin-bottom: 30px;
+}
+
+.container2 #find-btn:hover {
+    opacity: 0.7
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+    #accueil .container2 #container2-btn {
+        background-size: 205px!important;
+        background-position: center -5px!important;
+        margin: 200px auto;
+    }
+    #accueil .container2 #find-btn {
+        width: 200px!important;
+        font-size: 30px!important;
+        background-size: 40px!important
+    }
+    #accueil .container2 #text-btn {
+        bottom: 20px!important;
+        font-size: 50px!important
+    }
+
+    .content-container2{
+        min-height: 72vh!important;
+    }
+
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+    #accueil .container2 #container2-btn {
+        background-size: 205px!important;
+        background-position: center -5px!important;
+        margin: 140px auto;
+    }
+    #accueil .container2 #find-btn {
+        width: 200px!important;
+        font-size: 30px!important;
+        background-size: 40px!important
+    }
+    #accueil .container2 #text-btn {
+        bottom: 20px!important;
+        font-size: 50px!important
+    }
+
+    .content-container2{
+        min-height: 52vh!important;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    #accueil .container2 #container-btn {
+        background-size: 205px!important;
+        background-position: center -5px!important;
+        margin: 100px auto;
+    }
+    #accueil .container2 #find-btn {
+        width: 200px!important;
+        font-size: 30px!important;
+        background-size: 40px!important
+    }
+    #accueil .container2 #text-btn {
+        bottom: 20px!important;
+        font-size: 50px!important
+    }
+}
+
 
 
 /***********************************************
