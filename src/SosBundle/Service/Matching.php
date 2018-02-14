@@ -48,7 +48,10 @@ class Matching {
         }
 
         if (isset($data['poste'])) {
-            $poste =  "AND uc.poste_id = ".$data['poste'];
+            if ($data['poste'] > 1)
+                $poste =  "AND uc.poste_id IN (".implode(',',$data['poste']).")";
+            else
+                $poste =  "AND uc.poste_id = ".$data['poste'][0];
         }
 
         if (isset($data['contrat'])) {
@@ -188,7 +191,6 @@ class Matching {
 
     public function getNumberOfEmploye($data, $form){
 
-
         $secteur_join = "";
         $service_join = "";
         $formation = "";
@@ -223,7 +225,10 @@ class Matching {
         }
 
         if (isset($data['poste'])) {
-            $poste =  "AND uc.poste_id = ".$data['poste'];
+            if ($data['poste'] > 1)
+                $poste =  "AND uc.poste_id IN (".implode(',',$data['poste']).")";
+            else
+                $poste =  "AND uc.poste_id = ".$data['poste'][0];
         }
 
         if (isset($data['contrat'])) {
@@ -327,7 +332,10 @@ class Matching {
         }
 
         if (isset($data['poste'])) {
-            $poste =  "AND uc.poste_id = ".$data['poste'];
+            if ($data['poste'] > 1)
+                $poste =  "AND uc.poste_id IN (".implode(',',$data['poste']).")";
+            else
+                $poste =  "AND uc.poste_id = ".$data['poste'][0];
         }
 
         if (isset($data['contrat'])) {

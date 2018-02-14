@@ -25,7 +25,9 @@
 							<input type="hidden" name="mail_demande_utilisateur[]" value="{{ utilisateur }}">
 						{% endfor %}
 
-						<input type="hidden" name="poste" value="{{ data.poste }}">
+                        {% for poste in data.poste %}
+							<input type="hidden" name="poste[]" value="{{ poste }}">
+                        {% endfor %}
 						<input type="hidden" name="contrat" value="{{ data.contrat }}">
 						<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
 
@@ -73,7 +75,9 @@ Cordialement,
 		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
 		<input type="hidden" name="date_debut" value="{{ data.date_debut }}">
 
-		<input type="hidden" name="poste" value="{{ data.poste }}">
+        {% for poste in data.poste %}
+			<input type="hidden" name="poste[]" value="{{ poste }}">
+        {% endfor %}
 		<input type="hidden" name="contrat" value="{{ data.contrat }}">
 		<input type="hidden" name="niveau_anglais" value="{{ data.niveau_anglais }}">
 

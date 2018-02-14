@@ -35,7 +35,9 @@
 						<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 						<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 						<input type="hidden" name="classification" value="{{ data.classification }}">
-						<input type="hidden" name="poste" value="{{ data.poste }}">
+                        {% for poste in data.poste %}
+							<input type="hidden" name="poste[]" value="{{ poste }}">
+                        {% endfor %}
 						<input type="hidden" name="form" value="contrat">
 					</form>
 				</li>
