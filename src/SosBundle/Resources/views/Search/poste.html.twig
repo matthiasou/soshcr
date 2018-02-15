@@ -22,18 +22,18 @@
 				</a> <br>
 			</div>
 		{% endfor %}
-		
+
 		{% for secteur in secteurs %}
 			<form method="post" action="{{ path('contrat') }}">
 				<ul class="col-lg-8 col-lg-offset-2 postes-secteur-{{ secteur.id }}" style="display:none">
 					{% for poste in postes %}
 						{% if secteur == poste.secteur %}
 
-							<li class="col-xs-6 col-sm-2 text-center">
+							<li class="col-xs-6 col-sm-2 text-center poste">
 								<label>
 									<img style="max-height:75px; width:auto; " src="{{ asset('bundles/sos/global/img/poste/' ~ poste.id ~ '.png') }} " alt="" class="img-responsive form-img">
 									<p class="poste-libelle">{{ poste.libelle | raw }}</p>
-									<input type="checkbox" {% if data.poste is defined and poste.id in data.poste %}checked="checked"{% endif %}  name="poste[]" value="{{ poste.id }}"/>
+									<input style="display:none" type="checkbox" name="poste[]" value="{{ poste.id }}"/>
 								</label>
 
 								<input type="hidden" name="ville[libelle]" value="{{ data.ville.libelle }}">
@@ -45,12 +45,12 @@
 
 						{% endif %}
 					{% endfor %}
-					<li><button type="submit">Suivant</button></li>
+					<li><button class="btn-soshcr-poste" type="submit">Suivant</button></li>
 				</ul>
 			</form>
 		{% endfor %}
-		
-	
+
+
 
     <div class="clearfix spacer"></div>
 
@@ -59,7 +59,7 @@
 		<input type="hidden" name="ville[latitude]" value="{{ data.ville.latitude }}">
 		<input type="hidden" name="ville[longitude]" value="{{ data.ville.longitude }}">
 		<input type="hidden" name="form" value="ville">
-		
+
 		<button type="submit" class="pull-left back col-sm-offset-2"><i class="fa fa-caret-left" aria-hidden="true"></i> Précédent</button>
 	</form>
 </div>

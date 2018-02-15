@@ -37,6 +37,17 @@ $(document).ready(function(){
         });
     });
 
+    $('.poste').on('click', function(){
+        var checkbox = $(this).children('label').find('input[type="checkbox"]');
+        if(checkbox.prop('checked')){
+            $(this).removeClass('selected');
+            checkbox.prop('checked', false);
+        }else{
+            $(this).addClass('selected');
+            checkbox.prop('checked', true);
+        }
+    });
+
     // Afficher les postes recherche en cliquant sur les secteurs
     $('.secteur-button').click(function(){
         var ul = $('.'+$(this).attr('data-target'));
