@@ -292,6 +292,35 @@ header #login-icon {
     font-size: 15px
 }
 
+li.poste > label{
+    cursor: pointer;
+}
+
+.poste.selected{
+    background-image: url(../img/checked.png);
+    background-repeat: no-repeat;
+    background-position: 80% 0%;
+}
+
+.btn-soshcr-poste {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    text-align: center;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 4px;
+    background-color: #394076!important;
+    color: #fff;
+    font-weight: bold
+}
+
 .btn-soshcr {
     display: inline-block;
     padding: 6px 12px;
