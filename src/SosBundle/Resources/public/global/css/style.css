@@ -299,18 +299,15 @@ li.poste > label{
 .poste.selected{
     background-image: url(../img/checked.png);
     background-repeat: no-repeat;
-    background-position: 130px 10px;
+    background-position: 80% 0%;
 }
 
 .btn-soshcr-poste {
     display: inline-block;
     padding: 6px 12px;
-    margin-bottom: 0;
     font-size: 14px;
     line-height: 1.42857143;
     text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
     cursor: pointer;
@@ -318,10 +315,7 @@ li.poste > label{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
     border-radius: 4px;
-    /*height: 50px;*/
     background-color: #394076!important;
     color: #fff;
     font-weight: bold

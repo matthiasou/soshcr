@@ -46,6 +46,10 @@ $(document).ready(function(){
             $(this).addClass('selected');
             checkbox.prop('checked', true);
         }
+        if ($('.poste input[type="checkbox"]:checked').length > 0)
+            $('.btn-soshcr-poste').show().prop('disabled', false);
+        else
+            $('.btn-soshcr-poste').hide().prop('disabled', true);
     });
 
     // Afficher les postes recherche en cliquant sur les secteurs
